@@ -9,4 +9,6 @@
 module.exports = [
   { text: "Home", link: "/" },
   { text: "Vue2源码学习", link: "/vue2-source-code/prepare/" },
+  { text: "笔记", link: "/notes/" },
+  { text: "博客", link: "/blogs/" },
 ];
