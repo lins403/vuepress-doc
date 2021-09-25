@@ -30,6 +30,7 @@ module.exports = {
                 'tools/git-skills',
                 'tools/github-guide',
                 'tools/mac-operations',
+                'tools/online-coding',
               ]
             },
             {
