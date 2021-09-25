@@ -116,3 +116,20 @@ jobs:
           FOLDER: public # The folder the action should deploy.
 ```
 
+
+
+## 五、自建图床
+
+PicGo: <https://molunerfinn.com/PicGo/>
+
+配置：[GitHub图床](https://picgo.github.io/PicGo-Doc/zh/guide/config.html#github%E5%9B%BE%E5%BA%8A)
+
+jsDelivr CDN : <https://www.jsdelivr.com/?docs=gh>
+
+```sh
+# 访问路径
+https://cdn.jsdelivr.net/gh/<user_name>/>repo_name>/<file_name>
+# 🌰
+https://cdn.jsdelivr.net/gh/lins403/assetsSpace/vuepress/img/Klose.jpg
+```
+
