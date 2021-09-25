@@ -16,9 +16,6 @@ git diff commit-id [<path>...]
 git diff [<commit-id>] [<commit-id>]
 ```
 
-- 创建本地dev分支：`git checkout -b dev origin/dev`（本地和远程分支的名称最好一致）
-- 设置 dev 和 origin/dev 的链接关系：`git branch --set-upstream-to=origin/dev dev`
-
 ### git checkout
 
 git commit 保存快照，而 checkout 本质上是去操作HEAD指针，用快照内容覆盖工作目录和暂存区。

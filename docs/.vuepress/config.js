@@ -40,6 +40,15 @@ module.exports = {
             },
           ],
           '/blogs/': [],
+          '/plans/': [
+            {
+              title: '学习计划',
+              collapsable: false,
+              children: [
+                ['', '复习计划'],
+              ]
+            },
+          ],
         },
         lastUpdated: 'Last Updated', // string | boolean
     }

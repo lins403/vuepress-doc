@@ -40,7 +40,7 @@ ssh -p 22 root@101.132.124.236
 
 ### 软件&工具
 
-屏保 Google Trends：[预览](https://trends.google.com/trends/hottrends/visualize?nrow=5&ncol=5)，[下载](http://dl.google.com/dl/trends/screensaver/GoogleTrendsScreensaver.dmg)
+屏保：[ Google Trends](https://trends.google.com/trends/hottrends/visualize?nrow=5&ncol=5)
 
 ins风格静态壁纸：[par.er](http://paper.meiyuan.in/)
 
