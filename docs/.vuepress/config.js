@@ -9,7 +9,8 @@ module.exports = {
       ['@vuepress/back-to-top'],
       ['@vuepress/nprogress'],
       ['@vuepress/active-header-links'],
-      ['@vuepress/search', {searchMaxSuggestions: 10 }]
+      ['@vuepress/search', {searchMaxSuggestions: 10 }],
+      ['@vuepress/google-analytics',{'ga': 'UA-197628886-1'}]
     ],
     themeConfig: {
         repo: 'https://github.com/lins403/vuepress-doc',
