@@ -145,7 +145,7 @@ npx mrm lint-staged
 
 #### plugins 
 
-<https://eslint.org/docs/user-guide/configuring/plugins>
+[eslint > plugins](https://eslint.org/docs/user-guide/configuring/plugins)
 
 -  指定 Parser（词法、语法分析的工具，解析结果类似于 AST，默认使用 Espree ）
 - 指定 Processor（用于从特殊文件如 .vue 中提取 js 代码，也可以在预处理中转换 js 代码）
@@ -153,7 +153,7 @@ npx mrm lint-staged
 
 #### extends
 
-<https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files>
+[eslint > extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
 
 - 相当于使用第三方的eslint配置文件，有三种配置来源：文件路径、eslint-config- 、eslint-plugin-
 - 配置多个时，后者继承且会覆盖前者规则

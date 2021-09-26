@@ -1,15 +1,42 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: lins14
  * @Date: 2021-09-19 22:14:49
  * @FilePath: /vuepress-doc/docs/.vuepress/nav.js
  * @LastEditors: lins14
- * @LastEditTime: 2021-09-25 09:47:42
+ * @LastEditTime: 2021-09-26 09:56:36
  */
 module.exports = [
   { text: "Home", link: "/" },
-  { text: "Vue2源码学习", link: "/vue2-source-code/prepare/" },
   { text: "笔记", link: "/notes/" },
   { text: "博客", link: "/blogs/" },
   { text: "计划", link: "/plans/" },
+  {
+    text: "系列笔记",
+    ariaLabel: "系列笔记",
+    items: [
+      {
+        text: "JavaScript",
+        items: [
+          {
+            text: "学习笔记",
+            link: "/notesList/javascript/",
+          },
+        ],
+      },
+      {
+        text: "Vue",
+        items: [
+          {
+            text: "学习笔记",
+            link: "/notesList/vue/",
+          },
+          {
+            text: "Vue2源码学习",
+            link: "/vue2-source-code/prepare/",
+          },
+        ],
+      }
+    ],
+  },
 ];

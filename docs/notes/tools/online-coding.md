@@ -10,11 +10,13 @@
 
 <https://codesandbox.io/>
 
-redux文档的demo也用的这个
+官方Demo：redux
 
 ## CodePen
 
 CodePen Trending: <https://codepen.io/trending>
+
+官方Demo：vuejs cookbook、Animate.css
 
 ## JSFiddle
 

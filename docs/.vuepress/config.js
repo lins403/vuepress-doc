@@ -19,6 +19,7 @@ module.exports = {
         // sidebar: 'auto',
         sidebar: {
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
+          '/notesList/javascript/': JavaScriptSidebar('总览', '基础', '进阶'),
           '/notes/': [
             {
               title: '开发工具',
@@ -31,13 +32,6 @@ module.exports = {
                 'tools/github-guide',
                 'tools/mac-operations',
                 'tools/online-coding',
-              ]
-            },
-            {
-              title: 'JavaScript',
-              collapsable: false,
-              children: [
-                ['javascript/', '总览'],
               ]
             },
           ],
@@ -83,6 +77,32 @@ function sourceCodeSidebar (groupA, groupB, groupC) {
       collapsable: false,
       children: [
         'Q&A/',
+      ]
+    },
+  ]
+}
+
+function JavaScriptSidebar (groupA, groupB, groupC) {
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      children: [
+        '',
+      ]
+    },
+    {
+      title: groupB,
+      collapsable: false,
+      children: [
+        'basic/',
+      ]
+    },
+    {
+      title: groupC,
+      collapsable: false,
+      children: [
+        'advanced/',
       ]
     },
   ]
