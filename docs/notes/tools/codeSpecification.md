@@ -56,10 +56,10 @@ npm install -D --save-exact prettier
 npm install -D eslint-plugin-prettier eslint-config-prettier
 ```
 
-- `eslint-config-prettier`  用于关闭那些不需要或与 Prettier 冲突的 ESLint 规则，但只是关闭rules，需要配合其它配置（.prettierrc）来使用。
+- `eslint-config-prettier`  用于关闭那些不需要或与 Prettier 冲突的 ESLint 规则，但只是关闭rules，需要配合其它配置来使用。
 
 - `eslint-plugin-prettier`  将 Prettier 作为 ESLint 规则运行，并将差异报告为单个 ESLint 问题。
-- 二者结合使用最佳，效果相当于把 ESLint 中与 Prettier 冲突的规则disable掉，这部分转而使用 prettier 做校验
+- 二者结合使用最佳，效果相当于把 ESLint 中与 Prettier 冲突的规则disable掉，这部分转而使用 prettier 的规则做校验。
 
 ```js
 // .eslintrc.js
@@ -112,10 +112,12 @@ module.exports = {
 - 只对本次提交的代码（staged git files）做代码检查
 
 ```sh
+# 方式一：手动
 npm install -D husky lint-staged
 
-# 快速安装 husky 和 lint-staged
-npx mrm lint-staged
+# 方式二，基于prettier（https://prettier.io/docs/en/precommit.html）
+# 自动安装 husky 和 lint-staged，并在package.json中添加配置
+npx mrm@2 lint-staged
 ```
 
 ```json
@@ -149,13 +151,13 @@ npx mrm lint-staged
 
 -  指定 Parser（词法、语法分析的工具，解析结果类似于 AST，默认使用 Espree ）
 - 指定 Processor（用于从特殊文件如 .vue 中提取 js 代码，也可以在预处理中转换 js 代码）
-- 单指配置文件中的plugins属性：which third-party plugins define additional rules, environments, configs, etc. for ESLint to use.
+- 单指配置文件中的plugins属性：define additional rules, environments, configs, etc. for ESLint to use.
 
 #### extends
 
 [eslint > extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
 
-- 相当于使用第三方的eslint配置文件，有三种配置来源：文件路径、eslint-config- 、eslint-plugin-
+- 相当于使用第三方配置好的的 .eslintrc.js，有三种配置来源：文件路径、eslint-config- 、eslint-plugin-
 - 配置多个时，后者继承且会覆盖前者规则
 
 🌰
