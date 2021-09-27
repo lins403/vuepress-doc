@@ -49,7 +49,7 @@ git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不�
 --no-commit	合并后不自动commit
 ```
 
-> 个人而言，单个分支用 `git fetch & git merge`，多个分支合并中，自己的分支同步主分支使用 `git rebase`，主分支合并pull request 用常规的 no-off
+> 个人而言，单个分支用 `git fetch & git merge`，多个分支合并中，自己的分支同步主分支使用 `git rebase`，主分支合并pull request 用常规的 no-ff
 
 ### git rebase
 
@@ -64,8 +64,8 @@ git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不�
 
    ```sh
    # 🌰:同步dev的commit至dev-lin
-   git checkout dev
-   git rebase dev-lin		# 交互式：git rebase -i master
+   git checkout dev-lin
+   git rebase dev		# 交互式：git rebase -i master
    git push
    ```
 
