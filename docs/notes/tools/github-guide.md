@@ -133,3 +133,8 @@ https://cdn.jsdelivr.net/gh/<user_name>/>repo_name>/<file_name>
 https://cdn.jsdelivr.net/gh/lins403/assetsSpace/vuepress/img/Klose.jpg
 ```
 
+
+
+## 六、开源 license
+
+![开元许可证](http://www.ruanyifeng.com/blogimg/asset/201105/bg2011050101.png)

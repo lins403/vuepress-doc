@@ -12,6 +12,11 @@ module.exports = {
       ['@vuepress/search', {searchMaxSuggestions: 10 }],
       ['@vuepress/google-analytics',{'ga': 'UA-197628886-1'}]
     ],
+    markdown: {
+      extendMarkdown: md => {
+        md.use(require('markdown-it-mark'))
+      }
+    },
     themeConfig: {
         repo: 'https://github.com/lins403/vuepress-doc',
         repoLabel: 'GitHub',

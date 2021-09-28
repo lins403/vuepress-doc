@@ -147,7 +147,7 @@ console.log(sort('typescript'))
 
 ### 类型断言
 
-```TypeScript
+```TypeScript {5,7,9}
 // 上面的例子可以改写为
 function sort(item: string|Array<any>|plainObj): any{
     const type = Object.prototype.toString.call(item).slice(8, -1)
