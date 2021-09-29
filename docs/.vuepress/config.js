@@ -26,6 +26,15 @@ module.exports = {
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
           '/notesList/javascript/': JavaScriptSidebar('总览', '基础', '进阶'),
           '/notesList/typescript/': 'auto',
+          '/notesList/vue/': [
+            {
+              title: 'Vue.js',
+              collapsable: false,
+              children: [
+                'doc-guide',
+              ]
+            },
+          ],
           '/notes/': [
             {
               title: '开发工具',
