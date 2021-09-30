@@ -136,7 +136,25 @@ git push origin --delete <tagname>	# 远端
 
 
 
-## 二、心得
+## 二、Git commit 规范
+
+```js
+// Git Commit Message Convention
+/^(revert: )?(feat|fix|polish|docs|style|refactor|perf|test|workflow|ci|chore|types)(\(.+\))?: .{1,50}/
+```
+
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **test**: Adding missing tests or correcting existing tests
+
+
+
+## 三、心得
 
 - 结合使用GUI客户端（github desktop 、VSCode 插件）
 - 用 git restore、git switch 等新命令取代 checkout
@@ -153,4 +171,8 @@ git push origin --delete <tagname>	# 远端
 [彻底搞懂 Git-Rebase](http://jartto.wang/2018/12/11/git-rebase/)
 
 [Git恢复之前版本的两种方法reset、revert（图文详解）](https://blog.csdn.net/yxlshk/article/details/79944535)
+
+[Git Commit Message Convention](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
+
+[Angular > commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
 

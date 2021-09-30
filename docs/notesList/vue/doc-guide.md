@@ -1,8 +1,10 @@
-# 文档学习笔记
+# 基础
 
-## 一、基础
+::: danger warning
+临时笔记，搬运工，没有自己的整理
+:::
 
-### computed & watch
+## computed & watch
 
 computed 有缓存，watch 支持异步
 
@@ -10,11 +12,19 @@ computed 有缓存，watch 支持异步
 computed: {
   aDouble: vm => vm.a * 2	// 如果不用this
 }
+
+watch: {
+  someObj: {
+    handler: function (val, oldVal) { /* ... */ },
+    deep: true,			// 只针对对象的deep监听，数组并不需要
+    immediate: true	// 初始化时就会触发
+  },
+},
 ```
 
-### 指令
+## 指令
 
-#### v-for
+### v-for
 
 ```vue
 <div>
@@ -42,7 +52,7 @@ computed: {
 </ul>
 ```
 
-#### v-on
+### v-on
 
 ```vue
 <!-- 内联语句 -->
@@ -60,7 +70,7 @@ computed: {
 
 modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, .{keyCode | keyAlias}, ...
 
-#### v-model
+### v-model
 
 ```vue
 <input v-model="searchText">
@@ -79,7 +89,7 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 .trim		// 首尾空格过滤
 ```
 
-#### v-bind
+### v-bind
 
 ```vue
 <text-document v-bind:title.sync="doc.title"></text-document>
@@ -100,27 +110,103 @@ this.$emit('update:title', newTitle)
 <text-document v-bind.sync="post"></text-document>
 ```
 
-### 组件
+## 组件
 
-#### 全局注册
+### 注册
 
-#### 局部注册
+- 全局注册
+
+- 局部注册
 
 #### 异步组件
 
-#### 组件通信
+将异步组件和 <u>webpack 的 code-splitting</u> 功能一起配合使用，
 
-
-
-## 二、技巧
-
-### 组件批量自动化注册
-
-`require.context`
+webpack 自动将你的构建代码切割成多个包，这些包会通过 Ajax 请求加载
 
 ```js
-// TODO: Demo(router)
+// 全局注册
+Vue.component(
+  'async-webpack-example',
+  // 这个动态导入会返回一个 `Promise` 对象。
+  () => import('./my-async-component')
+)
+
+// 局部注册
+new Vue({
+  // ...
+  components: {
+    'my-component': () => import('./my-async-component')
+  }
+})
+
+// 工厂函数
+const AsyncComponent = () => ({
+  component: import('./MyComponent.vue'),
+  loading: LoadingComponent,
+  error: ErrorComponent,
+  delay: 200,
+  timeout: 3000
+})
 ```
 
-- **参考**：[基础组件的自动化全局注册](https://cn.vuejs.org/v2/guide/components-registration.html#基础组件的自动化全局注册)
+- **参考**：[异步组件](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6)
+
+### 组件通信
+
+```js
+1. props , events( $emit, $on, .sync )
+2. $refs , $parent , $children
+3. $attrs , $listeners
+4. provide/inject
+5. webStorage
+6. eventbus
+7. vuex
+8. Vue.observable
+```
+
+#### props
+
+> 单向数据流：父级 prop 的更新会向下流动到子组件中，但是反过来则不行
+
+```js
+// 子组件
+props: ['initialCounter'],
+//
+data: function () {
+  return {
+    counter: this.initialCounter
+  }
+},
+//
+computed: {
+  normalizedCounter: function () {
+    return this.initialCounter.trim().toLowerCase()
+  }
+}
+```
+
+传值
+
+```vue
+<!-- 传入一个对象的所有 property -->
+<blog-post v-bind="postData"></blog-post>
+```
+
+非 Prop 的 Attribute
+
+```js
+// attribute会自动添加到子组件的根元素上
+// 已有的 Attribute 会被覆盖，class 和 style attribute 会被合并
+Vue.component('my-component', {
+  inheritAttrs: true, // 默认值
+})
+
+inheritAttrs: false, // 默认行为将会被去掉，但不影响 class 和 style 绑定
+```
+
+
+
+- **参考**： [基础 > Props](https://cn.vuejs.org/v2/guide/components-props.html)
+- **参考**： [API > props](https://cn.vuejs.org/v2/api/#props)
 

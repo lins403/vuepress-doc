@@ -4,19 +4,27 @@
 >
 > If it is a Vue 2 bug or cannot be reproduced in the playground, you can use [CodePen](https://codepen.io/pen/), [CodeSandbox](https://codesandbox.io/s/vue) or provide a GitHub repo.
 >
-> > 暂时用CodePen练习HTML&CSS，包含Vue/React的demo则用CodeSandbox，js的调试一般在本地
+> > 目前简易demo用CodePen，project用CodeSandbox，js的调试一般在本地
 
 ## CodeSandbox
 
 <https://codesandbox.io/>
 
-官方Demo：redux
+`Vue-Cli` template: Templates > Create Sandbox > Vue / Vue3 / nuxt
+
+`React` template: React / React Typescript / Next.js
+
+官方Demo：redux、vuejs examples
 
 ## CodePen
 
 CodePen Trending: <https://codepen.io/trending>
 
-官方Demo：vuejs cookbook、Animate.css
+`Vue` Pen: <https://codepen.io/pen/editor/vue>
+
+`React` Demo Template: <https://codepen.io/reactjs/pen/VrEbjE>
+
+官方Demo：vuejs cookbook、Animate.css、reactjs.org
 
 ## JSFiddle
 

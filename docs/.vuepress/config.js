@@ -28,10 +28,12 @@ module.exports = {
           '/notesList/typescript/': 'auto',
           '/notesList/vue/': [
             {
-              title: 'Vue.js',
+              title: '文档学习笔记',
               collapsable: false,
               children: [
                 'doc-guide',
+                'doc-style-guide',
+                'doc-skills',
               ]
             },
           ],
