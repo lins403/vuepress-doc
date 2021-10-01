@@ -61,7 +61,7 @@ components/
    |- Item/
       |- index.vue
       |- Button.vue
-   |- index.vu
+   |- index.vue
 
 components/
 |- TodoList.vue
