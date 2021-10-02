@@ -120,6 +120,20 @@ computed: {
 
 
 
+## 事件名
+
+不同于组件和 prop，事件名不会被用作一个 JavaScript 变量名或 property 名，所以就没有理由使用 camelCase 或 PascalCase 了。并且 `v-on` 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 `v-on:myEvent` 将会变成 `v-on:myevent`——导致 `myEvent` 不可能被监听到。
+
+因此，我们推荐你**始终使用 kebab-case 的事件名**。
+
+```vue
+<my-component v-on:my-event="doSomething"></my-component>
+```
+
+
+
+
+
 ## option的属性顺序
 
 ==温故而知新==
@@ -206,13 +220,26 @@ computed: {
 
 ## 补充
 
-### js 文件
+所有的`.js`文件都遵循横线连接 (kebab-case) 
 
-所有的`.js`文件都遵循横线连接 (kebab-case)
+```js
+@/src/utils/open-window.js
+@/src/views/svg-icons/require-icons.js
+@/src/components/MarkdownEditor/default-options.js
+```
+
+在`views`文件下，代表路由的`.vue`文件都使用横线连接 (kebab-case)，代表路由的文件夹也是使用同样的规则。
+
+```js
+@/src/views/svg-icons/index.vue
+@/src/views/svg-icons/require-icons.js
+```
 
 
 
 # 参考
 
 [Vue.js 风格指南](https://cn.vuejs.org/v2/style-guide/)
+
+[vue-element-admin > 命名规范](https://juejin.cn/post/6844903840626507784#heading-9)
 
