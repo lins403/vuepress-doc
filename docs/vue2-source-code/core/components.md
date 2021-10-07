@@ -18,7 +18,12 @@
 6. 动态组件&异步组件
 7. 处理边界情况
 
+## 指令
 
+1. parse > preTransformNode > processElement > processAttrs > addDirective > el.directives.push({ name, rawName, value, arg, modifiers })
+
+2. generate > genElement > genData > genDirectives
+3. patch > createPatchFunction / baseModules > updateDirectives , unbindDirectives > _update(oldVnode, vnode)
 
 
 

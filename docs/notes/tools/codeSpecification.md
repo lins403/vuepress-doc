@@ -143,17 +143,19 @@ npx mrm@2 lint-staged
 
 ## 延伸问题
 
-### 1. eslint 中 plugins 和 extends 的区别是什么？
+::: details eslint 中 plugins 和 extends 的区别是什么？
 
-#### plugins 
+<br />
+
+#### 1. plugins 
 
 [eslint > plugins](https://eslint.org/docs/user-guide/configuring/plugins)
 
 -  指定 Parser（词法、语法分析的工具，解析结果类似于 AST，默认使用 Espree ）
 - 指定 Processor（用于从特殊文件如 .vue 中提取 js 代码，也可以在预处理中转换 js 代码）
-- 单指配置文件中的plugins属性：define additional rules, environments, configs, etc. for ESLint to use.
+- 单指配置文件中的 plugins 属性：<u>define additional rules, environments, configs, etc. for ESLint to use.</u>
 
-#### extends
+#### 2. extends
 
 [eslint > extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
 
@@ -185,7 +187,7 @@ npx mrm@2 lint-staged
 }
 ```
 
-
+:::
 
 # 参考
 

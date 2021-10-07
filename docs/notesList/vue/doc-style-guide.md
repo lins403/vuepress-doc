@@ -56,6 +56,7 @@ components/
 
 ```js{9-12}
 // 和父组件紧密耦合的子组件应该以父组件名作为前缀命名
+// 组件名称应该倾向于完整的单词，而不是缩写。
 components/
 |- TodoList/
    |- Item/
@@ -183,7 +184,13 @@ computed: {
 
 [组件/实例的选项的顺序](https://cn.vuejs.org/v2/style-guide/#组件-实例的选项的顺序推荐)
 
-
+> 记忆：越早影响组件的越靠前，组件的扩展比组件内部状态方法更靠前，data、computed 比 watch、lifecycle 靠前，template和render方法最后。
+>
+> 
+>
+> initLifecycle > initEvents > initRender > initInjections > initState > initProvide
+>
+> initProps > initMethods > initData > initComputed > initWatch
 
 ## 元素 attribute 的顺序
 
@@ -216,7 +223,7 @@ computed: {
 
 [元素 attribute 的顺序](https://cn.vuejs.org/v2/style-guide/#元素-attribute-的顺序推荐)
 
-
+> 记忆：影响组件渲染方式的属性优先，跟元素节点相关的 id、ref、key 次之，然后是状态相关的属性，依次是双向绑定的 v-model ，其他属性，事件，内容渲染等等。
 
 ## 补充
 

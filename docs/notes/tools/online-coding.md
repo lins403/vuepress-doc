@@ -26,13 +26,25 @@ CodePen Trending: <https://codepen.io/trending>
 
 官方Demo：vuejs cookbook、Animate.css、reactjs.org
 
+> 会卡，自动补全功能鸡肋，而且需要调用自己的控制台来调试，使用体验不如 codesandbox
+
 ## JSFiddle
 
 <https://jsfiddle.net/>
 
+
+
 ## Vue SFC Playground
 
 <https://sfc.vuejs.org/>
+
+
+
+## Vue Template to AST
+
+<https://vue-next-template-explorer.netlify.app/>
+
+
 
 ## Babel
 

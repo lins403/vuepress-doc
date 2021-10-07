@@ -142,7 +142,7 @@ function sort(item: string|Array<any>|plainObj): any{
 }
 console.log(sort('typescript'))
 
-// 好处，特定参数类型返回对应的参数类型，不会因为union而混淆输出
+// 特定参数类型返回对应的参数类型，不会因为union而混淆输出
 ```
 
 ### 类型断言
