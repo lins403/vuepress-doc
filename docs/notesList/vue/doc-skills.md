@@ -5,8 +5,21 @@
 `require.context`
 
 ```js
-// TODO: Demo(router)
+require.context(/*要搜索的目录*/, /*是否搜索其子目录*/, /*匹配的正则*/)
+// return
+ƒ webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
 ```
+
+```js
+const req = require.context('./svg', false, /\.svg$/)
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+requireAll(req)
+```
+
+
 
 - **参考**：[基础组件的自动化全局注册](https://cn.vuejs.org/v2/guide/components-registration.html#基础组件的自动化全局注册)
 
@@ -49,4 +62,10 @@ Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
   }
 }
 ```
+
+
+
+
+
+- [手摸手，带你用vue撸后台 系列五(v4.0新版本)](https://juejin.cn/post/6844903840626507784#heading-16)
 

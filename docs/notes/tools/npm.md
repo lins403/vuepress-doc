@@ -29,3 +29,10 @@
 </script>
 ```
 
+
+
+## package
+
+fuse.js 模糊搜索
+
+vue-pdf 基于pdf.js的展示PDF

@@ -16,7 +16,7 @@ computed: {
 watch: {
   someObj: {
     handler: function (val, oldVal) { /* ... */ },
-    deep: true,			// 只针对对象的deep监听，数组并不需要
+    deep: true,		// 只针对对象的deep监听，数组并不需要
     immediate: true	// 初始化时就会触发
   },
 },
@@ -76,7 +76,7 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 
 `v-on` 的 `.native` 修饰符已被移除。
 
-新增 `emits` 选项
+新增 `emits` 选项，强烈建议使用 `emits` 记录每个组件所触发的所有事件。
 
 ```vue
 <my-component
@@ -116,7 +116,7 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
   - prop：`value` -> `modelValue`；
   - 事件：`input` -> `update:modelValue`；
 
-```vue
+```vue{7}
 <ChildComponent v-model="pageTitle" />
 
 <!-- 是以下的简写: -->
@@ -220,7 +220,25 @@ unbind
   const {name, value, oldValue, expression, arg, modifiers} = binding
 ```
 
+::: warning Vue3
 
+指令的钩子函数已经被重命名，以更好地与组件的生命周期保持一致。
+
+最终的 API 如下：
+
+```js
+const MyDirective = {
+  created(el, binding, vnode, prevVnode) {}, // 新增
+  beforeMount() {},
+  mounted() {},
+  beforeUpdate() {}, // 新增
+  updated() {},
+  beforeUnmount() {}, // 新增
+  unmounted() {}
+}
+```
+
+:::
 
 ## 组件
 
@@ -277,11 +295,28 @@ const AsyncComponent = () => ({
 8. Vue.observable
 ```
 
+```vue{4,5}
+<template>
+  <label>
+    <input type="text" v-bind="$attrs" v-on="$listeners" />
+		<!-- Vue3 -->
+		<input type="text" v-bind="$attrs" />
+  </label>
+</template>
+<script>
+  export default {
+    inheritAttrs: false
+  }
+</script>
+```
+
 ::: warning Vue3
 
 `$children` 实例 property 已从 Vue 3.0 中移除，不再支持。如果你需要访问子组件实例，我们建议使用 `$refs`。
 
 Vue3从实例中完全移除了 `$on`、`$off` 和 `$once` 方法。`$emit` 仍然包含于现有的 API 中，因为它用于触发由父组件声明式添加的事件处理函数。
+
+在 Vue 3 的虚拟 DOM 中，事件监听器现在只是以 `on` 为前缀的 attribute，这样它就成为了 `$attrs` 对象的一部分，因此 `$listeners` 被移除了。
 
 :::
 
@@ -371,8 +406,8 @@ inheritAttrs: false, // 默认行为将会被去掉，但不影响 class 和 sty
 <navigation-link url="/profile">
   Clicking here will send you to: {{ url }}
   <!--
-  这里的 `url` 会是 undefined，因为其 (指该插槽的) 内容是_传递给_ <navigation-link> 的，
-	而不是在 <navigation-link> 组件*内部*定义的。
+	这里的 `url` 会是 undefined，因为其 (指该插槽的) 内容是传递给 <navigation-link> 的，
+	而不是在 <navigation-link> 组件内部定义的。
 	外部的 url 则根据 inheritAttrs 配置，被作为组件内部属性使用
   -->
 </navigation-link>
@@ -450,6 +485,10 @@ function (slotProps) {
 // this.$scopedSlots
 
 // scopedSlots field
+
+所有的 $slots 现在都会作为函数暴露在 $scopedSlots 中。
+如果你在使用渲染函数，不论当前插槽是否带有作用域，我们都推荐始终通过 $scopedSlots 访问它们。
+这不仅仅使得在未来添加作用域变得简单，也可以让你最终轻松迁移到所有插槽都是函数的 Vue 3。
 ```
 
 ```vue
@@ -595,9 +634,9 @@ this.$slots.header()
 - @keyframes
 - Animate.css
 
-显性的过渡时间 (`duration`)
+显性的过渡时间： `duration`
 
-JavaScript 钩子 (`before-enter` , `before-leave` , ...)
+JavaScript 钩子： before-enter , <u>enter</u>, afterEnter, enterCancelled, before-leave , <u>leave</u>, afterLeave, leaveCancelled...
 
 ```vue
 <transition

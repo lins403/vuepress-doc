@@ -66,6 +66,13 @@ npm install husky -D
     "pre-commit": "lint-staged" //在本地提交之前做 Lint。
   }
 },
+"lint-staged": {
+  "src/**/*.{js,vue}": [
+    "prettier --write",
+    "eslint --fix",
+    "git add"
+  ]
+},
 ```
 
 

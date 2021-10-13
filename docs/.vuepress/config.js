@@ -51,6 +51,14 @@ module.exports = {
                 'tools/online-coding',
               ]
             },
+            {
+              title: '前端工程化',
+              collapsable: false,
+              children: [
+                'engineering/vue-cli@4',
+                'engineering/modules',
+              ]
+            },
           ],
           '/blogs/': [],
           '/plans/': [
