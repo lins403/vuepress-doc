@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>正则表达式 | 小眯嘻的文档博客</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/vuepress-doc/assets/img/config/favicon.png">
+    <meta name="description" content="学习&思考&总结">
+    
+    <link rel="preload" href="/vuepress-doc/assets/css/0.styles.f01b7650.css" as="style"><link rel="preload" href="/vuepress-doc/assets/js/app.b6cf53a3.js" as="script"><link rel="preload" href="/vuepress-doc/assets/js/2.3f2e885f.js" as="script"><link rel="preload" href="/vuepress-doc/assets/js/22.568d32db.js" as="script"><link rel="prefetch" href="/vuepress-doc/assets/js/10.2cbe9bd1.js"><link rel="prefetch" href="/vuepress-doc/assets/js/11.cf236156.js"><link rel="prefetch" href="/vuepress-doc/assets/js/12.e1453156.js"><link rel="prefetch" href="/vuepress-doc/assets/js/13.28a31be8.js"><link rel="prefetch" href="/vuepress-doc/assets/js/14.d1539bcb.js"><link rel="prefetch" href="/vuepress-doc/assets/js/15.c2445dae.js"><link rel="prefetch" href="/vuepress-doc/assets/js/16.7074b149.js"><link rel="prefetch" href="/vuepress-doc/assets/js/17.e1636a1d.js"><link rel="prefetch" href="/vuepress-doc/assets/js/18.494b097f.js"><link rel="prefetch" href="/vuepress-doc/assets/js/19.f18e11d3.js"><link rel="prefetch" href="/vuepress-doc/assets/js/20.182f8b41.js"><link rel="prefetch" href="/vuepress-doc/assets/js/21.6f235b13.js"><link rel="prefetch" href="/vuepress-doc/assets/js/23.0fba6967.js"><link rel="prefetch" href="/vuepress-doc/assets/js/24.aa5f94e5.js"><link rel="prefetch" href="/vuepress-doc/assets/js/25.304da667.js"><link rel="prefetch" href="/vuepress-doc/assets/js/26.a69b2ecb.js"><link rel="prefetch" href="/vuepress-doc/assets/js/27.da89979d.js"><link rel="prefetch" href="/vuepress-doc/assets/js/28.deaf656c.js"><link rel="prefetch" href="/vuepress-doc/assets/js/29.7440f72b.js"><link rel="prefetch" href="/vuepress-doc/assets/js/3.9bc3b18b.js"><link rel="prefetch" href="/vuepress-doc/assets/js/30.214ef241.js"><link rel="prefetch" href="/vuepress-doc/assets/js/31.92f0a7c0.js"><link rel="prefetch" href="/vuepress-doc/assets/js/32.82eb0dee.js"><link rel="prefetch" href="/vuepress-doc/assets/js/33.a39a6567.js"><link rel="prefetch" href="/vuepress-doc/assets/js/34.f6926cc0.js"><link rel="prefetch" href="/vuepress-doc/assets/js/35.6b78b822.js"><link rel="prefetch" href="/vuepress-doc/assets/js/36.73cbbb6d.js"><link rel="prefetch" href="/vuepress-doc/assets/js/37.dac3c819.js"><link rel="prefetch" href="/vuepress-doc/assets/js/38.05c50df2.js"><link rel="prefetch" href="/vuepress-doc/assets/js/39.e8489f03.js"><link rel="prefetch" href="/vuepress-doc/assets/js/4.3a592b9d.js"><link rel="prefetch" href="/vuepress-doc/assets/js/40.1568dc28.js"><link rel="prefetch" href="/vuepress-doc/assets/js/41.74073417.js"><link rel="prefetch" href="/vuepress-doc/assets/js/42.7990d16b.js"><link rel="prefetch" href="/vuepress-doc/assets/js/43.095ffd1a.js"><link rel="prefetch" href="/vuepress-doc/assets/js/44.db542173.js"><link rel="prefetch" href="/vuepress-doc/assets/js/45.0cb4ff8c.js"><link rel="prefetch" href="/vuepress-doc/assets/js/46.be14cd82.js"><link rel="prefetch" href="/vuepress-doc/assets/js/5.b899e0bb.js"><link rel="prefetch" href="/vuepress-doc/assets/js/6.4b4d8370.js"><link rel="prefetch" href="/vuepress-doc/assets/js/7.eaaed703.js"><link rel="prefetch" href="/vuepress-doc/assets/js/8.752c7094.js"><link rel="prefetch" href="/vuepress-doc/assets/js/9.8b8f450f.js">
+    <link rel="stylesheet" href="/vuepress-doc/assets/css/0.styles.f01b7650.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vuepress-doc/" class="home-link router-link-active"><!----> <span class="site-name">小眯嘻的文档博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vuepress-doc/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/vuepress-doc/notes/" class="nav-link router-link-active">
+  笔记
+</a></div><div class="nav-item"><a href="/vuepress-doc/blogs/" class="nav-link">
+  博客
+</a></div><div class="nav-item"><a href="/vuepress-doc/plans/" class="nav-link">
+  计划
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="系列笔记" class="dropdown-title"><span class="title">系列笔记</span> <span class="arrow down"></span></button> <button type="button" aria-label="系列笔记" class="mobile-dropdown-title"><span class="title">系列笔记</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JavaScript
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/vuepress-doc/notesList/javascript/" class="nav-link">
+  学习笔记
+</a></li><li class="dropdown-subitem"><a href="/vuepress-doc/notesList/typescript/" class="nav-link">
+  TypeScript
+</a></li><li class="dropdown-subitem"><a href="/vuepress-doc/notesList/nodejs/" class="nav-link">
+  Node.js
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Vue
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/vuepress-doc/notesList/vue/" class="nav-link">
+  学习笔记
+</a></li><li class="dropdown-subitem"><a href="/vuepress-doc/vue2-source-code/prepare/" class="nav-link">
+  Vue2源码学习
+</a></li></ul></li></ul></div></div> <a href="https://github.com/lins403/vuepress-doc" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vuepress-doc/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/vuepress-doc/notes/" class="nav-link router-link-active">
+  笔记
+</a></div><div class="nav-item"><a href="/vuepress-doc/blogs/" class="nav-link">
+  博客
+</a></div><div class="nav-item"><a href="/vuepress-doc/plans/" class="nav-link">
+  计划
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="系列笔记" class="dropdown-title"><span class="title">系列笔记</span> <span class="arrow down"></span></button> <button type="button" aria-label="系列笔记" class="mobile-dropdown-title"><span class="title">系列笔记</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JavaScript
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/vuepress-doc/notesList/javascript/" class="nav-link">
+  学习笔记
+</a></li><li class="dropdown-subitem"><a href="/vuepress-doc/notesList/typescript/" class="nav-link">
+  TypeScript
+</a></li><li class="dropdown-subitem"><a href="/vuepress-doc/notesList/nodejs/" class="nav-link">
+  Node.js
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Vue
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/vuepress-doc/notesList/vue/" class="nav-link">
+  学习笔记
+</a></li><li class="dropdown-subitem"><a href="/vuepress-doc/vue2-source-code/prepare/" class="nav-link">
+  Vue2源码学习
+</a></li></ul></li></ul></div></div> <a href="https://github.com/lins403/vuepress-doc" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>开发工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vuepress-doc/notes/tools/codeSpecification.html" class="sidebar-link">编程规范</a></li><li><a href="/vuepress-doc/notes/tools/git-feature.html" class="sidebar-link">Git 特性</a></li><li><a href="/vuepress-doc/notes/tools/git-application.html" class="sidebar-link">Git 应用</a></li><li><a href="/vuepress-doc/notes/tools/git-skills.html" class="sidebar-link">Git 使用技巧</a></li><li><a href="/vuepress-doc/notes/tools/github-guide.html" class="sidebar-link">GitHub指南</a></li><li><a href="/vuepress-doc/notes/tools/mac-operations.html" class="sidebar-link">Mac 操作</a></li><li><a href="/vuepress-doc/notes/tools/online-coding.html" class="sidebar-link">在线代码编辑器</a></li><li><a href="/vuepress-doc/notes/tools/regular.html" aria-current="page" class="active sidebar-link">正则表达式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vuepress-doc/notes/tools/regular.html#规则" class="sidebar-link">规则</a></li><li class="sidebar-sub-header"><a href="/vuepress-doc/notes/tools/regular.html#api" class="sidebar-link">API</a></li><li class="sidebar-sub-header"><a href="/vuepress-doc/notes/tools/regular.html#🌰" class="sidebar-link">🌰</a></li><li class="sidebar-sub-header"><a href="/vuepress-doc/notes/tools/regular.html#易错" class="sidebar-link">易错</a></li></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>前端工程化</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vuepress-doc/notes/engineering/vue-cli@4.html" class="sidebar-link">VueCli4</a></li><li><a href="/vuepress-doc/notes/engineering/modules.html" class="sidebar-link">模块化</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="正则表达式"><a href="#正则表达式" class="header-anchor">#</a> 正则表达式</h1> <h2 id="规则"><a href="#规则" class="header-anchor">#</a> 规则</h2> <div class="language-javascript extra-class"><pre class="language-javascript"><code>\s	匹配一个空白字符，包括空格、制表符、换页符和换行符。
+\w	匹配一个单字字符（字母、数字或者下划线）。等价于 <span class="token punctuation">[</span><span class="token constant">A</span><span class="token operator">-</span>Za<span class="token operator">-</span>z0<span class="token operator">-</span><span class="token number">9</span>_<span class="token punctuation">]</span>
+\b	匹配一个词的边界
+\<span class="token constant">B</span>	匹配一个非单词边界
+\n	<span class="token function">在正则表达式中，它返回最后的第n个子捕获匹配的子字符串</span><span class="token punctuation">(</span>捕获的数目以左括号计数<span class="token punctuation">)</span>。
+<span class="token comment">// '厦门在福建，深圳在广东。福建的省会是福州，广东的省会是广州。'.replace(/厦门在(.*?)，.*?\1的省会是(.*?)，.*/,'$2')</span>
+<span class="token comment">// '桔子和柚子杂交得到橙子，柚子和香橼杂交得到青柠，橙子和青柠杂交得到柠檬，橙子和桔子杂交得到柑子，橙子和柚子杂交得到葡萄柚'</span>
+
+<span class="token operator">*</span>		等价于 <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">}</span>
+<span class="token operator">+</span>		等价于 <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">}</span>
+<span class="token operator">?</span>		等价于 <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">}</span>
+
+<span class="token punctuation">{</span>n<span class="token punctuation">}</span>		n 是一个正整数，匹配了前面一个字符刚好出现了 n 次。
+<span class="token punctuation">{</span>n<span class="token punctuation">,</span><span class="token punctuation">}</span>	至少出现了n次
+<span class="token punctuation">{</span>n<span class="token punctuation">,</span>m<span class="token punctuation">}</span>	<span class="token function">至少n次，最多m次</span>
+
+<span class="token punctuation">(</span>x<span class="token punctuation">)</span>		捕获括号，用 $<span class="token number">1</span><span class="token operator">/</span>$<span class="token number">2</span><span class="token operator">/</span><span class="token operator">...</span> 进行匹配
+
+<span class="token comment">// 断言</span>
+<span class="token punctuation">(</span><span class="token operator">?</span><span class="token operator">:</span>x<span class="token punctuation">)</span>			匹配 <span class="token string">'x'</span> 但是不记住匹配项。非捕获组，不返回该组匹配的内容
+<span class="token function">x</span><span class="token punctuation">(</span><span class="token operator">?</span><span class="token operator">=</span>y<span class="token punctuation">)</span>		匹配<span class="token string">'x'</span>仅当<span class="token string">'x'</span>后面着<span class="token string">'y'</span><span class="token function">，这种叫做先行断言。</span>
+<span class="token punctuation">(</span><span class="token operator">?</span><span class="token operator">&lt;=</span>y<span class="token punctuation">)</span>x		匹配<span class="token string">'x'</span>仅当<span class="token string">'x'</span>前面是<span class="token string">'y'</span>，这种叫做后行断言。
+<span class="token function">x</span><span class="token punctuation">(</span><span class="token operator">?</span><span class="token operator">!</span>y<span class="token punctuation">)</span>		匹配<span class="token string">'x'</span>仅当<span class="token string">'x'</span>后面不是<span class="token string">'y'</span><span class="token function">，这被称为正向否定查找。</span>
+<span class="token punctuation">(</span><span class="token operator">?</span><span class="token operator">&lt;</span><span class="token operator">!</span>y<span class="token punctuation">)</span>x		匹配<span class="token string">'x'</span>仅当<span class="token string">'x'</span>前面不是<span class="token string">'y'</span>，这被称为反向否定查找。
+</code></pre></div><h3 id="标志"><a href="#标志" class="header-anchor">#</a> 标志</h3> <div class="language-js extra-class"><pre class="language-js"><code>g
+i
+m
+s		<span class="token comment">// 允许 . 匹配换行符</span>
+u		<span class="token comment">// 使用unicode码的模式进行匹配</span>
+y		<span class="token comment">// 执行“粘性(sticky)”搜索,匹配从目标字符串的当前位置开始		//仅当 lastIndex 等于设定值时匹配成功</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 使用带 sticky 标志的正则表达式</span>
+<span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">'#foo#'</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> regex <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">foo</span><span class="token regex-delimiter">/</span><span class="token regex-flags">y</span></span><span class="token punctuation">;</span>
+
+regex<span class="token punctuation">.</span>lastIndex <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+regex<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true （译注：此例仅当 lastIndex = 1 时匹配成功，这就是 sticky 的作用）</span>
+regex<span class="token punctuation">.</span>lastIndex <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+regex<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false （lastIndex 被 sticky 标志考虑到，从而导致匹配失败）</span>
+regex<span class="token punctuation">.</span>lastIndex<span class="token punctuation">;</span> <span class="token comment">// 0 （匹配失败后重置）</span>
+</code></pre></div><h3 id="escaping"><a href="#escaping" class="header-anchor">#</a> Escaping</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 需要转义的字符</span>
+<span class="token keyword">function</span> <span class="token function">escapeRegExp</span><span class="token punctuation">(</span><span class="token parameter">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> string<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">[.*+?^${}()|[\]\\]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">&quot;\\$&amp;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// $&amp;表示整个被匹配的字符串</span>
+<span class="token punctuation">}</span>
+<span class="token function">escapeRegExp</span><span class="token punctuation">(</span><span class="token string">'/$1 equals ￥6.44/g'</span><span class="token punctuation">)</span>		<span class="token comment">// '/\$1 equals ￥6\.44/g'</span>
+
+<span class="token comment">// Escaping和分组没关系</span>
+<span class="token string">'a123b456'</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\D(\d+)\D(\d+)</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">'$&amp;'</span><span class="token punctuation">)</span>		<span class="token comment">// 'a123b456'</span>
+</code></pre></div><h2 id="api"><a href="#api" class="header-anchor">#</a> API</h2> <div class="language-javascript extra-class"><pre class="language-javascript"><code>RegExp 
+	<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>		<span class="token comment">// 返回一个数组，在未匹配到时会返回 null</span>
+	<span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span>		<span class="token comment">// 返回 true 或 false</span>
+
+String
+	<span class="token function">match</span><span class="token punctuation">(</span><span class="token punctuation">)</span>			<span class="token comment">// 返回一个数组，在未匹配到时会返回 null</span>
+	<span class="token function">matchAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>		<span class="token comment">// 返回一个迭代器（iterator）</span>
+	<span class="token function">replace</span><span class="token punctuation">(</span><span class="token punctuation">)</span>		<span class="token comment">// 返回匹配到的位置索引，或者在失败时返回-1</span>
+	<span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">search</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">split</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="🌰"><a href="#🌰" class="header-anchor">#</a> 🌰</h2> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// 中文</span>
+<span class="token operator">/</span><span class="token punctuation">[</span>\u4E00<span class="token operator">-</span>\u9FA5<span class="token punctuation">]</span><span class="token operator">/</span>g
+<span class="token comment">// no emoji</span>
+<span class="token operator">/</span><span class="token punctuation">[</span><span class="token operator">^</span>\u4E00<span class="token operator">-</span>\u9FA5<span class="token operator">|</span>\d<span class="token operator">|</span>\a<span class="token operator">-</span>zA<span class="token operator">-</span><span class="token constant">Z</span><span class="token operator">|</span>\r\n\s<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token operator">?</span><span class="token operator">!</span>，。？！…—<span class="token operator">&amp;</span>$<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">+</span><span class="token comment">/*{}[\]]|\s/g
+</span></code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// 动态变量</span>
+<span class="token keyword">const</span> maxLength <span class="token operator">=</span> <span class="token number">16</span>
+<span class="token keyword">const</span> reg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">(.{</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>maxLength<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">}).*</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token string">'g'</span><span class="token punctuation">)</span>
+value <span class="token operator">=</span> value<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>reg<span class="token punctuation">,</span> <span class="token string">'$1'</span><span class="token punctuation">)</span>	<span class="token comment">// 超过16位的字符被删除</span>
+</code></pre></div><h2 id="易错"><a href="#易错" class="header-anchor">#</a> 易错</h2> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">-</span><span class="token number">31</span><span class="token punctuation">]</span>	<span class="token comment">// 不代表1到31，只代表1到3。</span>
+
+<span class="token comment">// . 只是匹配单个字符，通常要结合其它匹配字符使用，例如 *?+</span>
+<span class="token string">'1234567890'</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">(.{5}).</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">'$1'</span><span class="token punctuation">)</span>		<span class="token comment">// '1234567890'</span>
+</code></pre></div><h1 id="参考"><a href="#参考" class="header-anchor">#</a> 参考</h1> <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener noreferrer">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">10/20/2021, 2:08:37 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vuepress-doc/notes/tools/online-coding.html" class="prev">
+        在线代码编辑器
+      </a></span> <span class="next"><a href="/vuepress-doc/notes/engineering/vue-cli@4.html">
+        VueCli4
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/vuepress-doc/assets/js/app.b6cf53a3.js" defer></script><script src="/vuepress-doc/assets/js/2.3f2e885f.js" defer></script><script src="/vuepress-doc/assets/js/22.568d32db.js" defer></script>
+  </body>
+</html>
