@@ -4,7 +4,7 @@
  * @Date: 2021-09-19 22:14:49
  * @FilePath: /vuepress-doc/docs/.vuepress/nav.js
  * @LastEditors: lins14
- * @LastEditTime: 2021-09-26 16:36:31
+ * @LastEditTime: 2021-10-19 10:16:13
  */
 module.exports = [
   { text: "Home", link: "/" },
@@ -26,6 +26,10 @@ module.exports = [
             text: "TypeScript",
             link: "/notesList/typescript/",
           },
+          {
+            text: "Node.js",
+            link: "/notesList/nodejs/",
+          },
         ],
       },
       {
@@ -40,7 +44,7 @@ module.exports = [
             link: "/vue2-source-code/prepare/",
           },
         ],
-      }
+      },
     ],
   },
 ];

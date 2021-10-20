@@ -218,6 +218,13 @@ unbind
 
 :function(el, binding, vnode, oldVnode){
   const {name, value, oldValue, expression, arg, modifiers} = binding
+  
+// <div id="hook-arguments-example" v-demo:foo.a.b="message"></div>
+// name: "demo"
+// value: "hello!"
+// expression: "message"
+// arg: "foo"
+// modifiers: {"a":true,"b":true}
 ```
 
 ::: warning Vue3

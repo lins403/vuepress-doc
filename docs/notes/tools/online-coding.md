@@ -26,7 +26,7 @@ CodePen Trending: <https://codepen.io/trending>
 
 官方Demo：vuejs cookbook、Animate.css、reactjs.org
 
-> 会卡，自动补全功能鸡肋，而且需要调用自己的控制台来调试，使用体验不如 codesandbox
+> 会卡，自动补全功能鸡肋
 
 ## JSFiddle
 

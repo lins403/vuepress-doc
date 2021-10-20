@@ -78,10 +78,10 @@ myModule.foo() 		// output: foo() other data
 
 ### 实现
 
-- 按照模块化规范封装模块，将这些模块组成一个复杂的应用
-- 模块内部的变量和方法是私有的，要和其他模块通信的，需要指定暴露给外部
-- 指定引入/导出方式，可以加载嵌套的依赖模块
-- 易于开发人员使用，且还要被有助于部署的优化工具所支持
+- 按照模块化规范封装模块，将这些模块组成一个复杂的应用（组成）
+- 模块内部的变量和方法是私有的，要和其他模块通信的，需要指定暴露给外部（私有）
+- 指定引入/导出方式，可以加载嵌套的依赖模块（引入/导出）
+- 易于开发人员使用，且还要被有助于部署的优化工具所支持（打包工具）
 
 
 
@@ -107,6 +107,10 @@ myModule.foo() 		// output: foo() other data
 
 - 暴露模块：`module.exports = value ` 或 `exports.xxx = value`
 - 引入模块：`require(xxx)` 或 `require('xxx.js')`
+
+```js
+let { stat, exists, readfile } = require('fs');
+```
 
 ```js
 // foo.js
@@ -171,6 +175,7 @@ function Module(id) {
 ```
 
 ```js
+// require > load > compile
 Module.prototype.require = function(id){
   return Module._load(id, this)  
 }
@@ -188,7 +193,7 @@ Module._load = function(request, parent, isMain) {
 
 Module.prototype.load = function(filename) {
   // ...
-	Module._extensions[extension](this, filename);
+  Module._extensions[extension](this, filename);
   this.loaded = true;
   // ...
 }
@@ -232,7 +237,7 @@ Module.prototype._compile = function(content, filename) {
 ```js{19-20}
 // webpack 打包后的大致核心代码 bundle.js
 // IIFE，立即执行然后自动加载入口模块
-
+/************************************************************************/
 (function(modules) {
   // 1、模块缓存对象
   var installedModules = {};
@@ -287,17 +292,17 @@ webpack 相当于去 hack (模拟) 了commonjs 的功能
 
 ### 特点
 
-1. 独立的**模块作用域**，不会污染全局作用域
-2. **同步**加载模块
+1. 独立的 ==模块作用域== ，不会污染全局作用域
+2. ==同步== 加载模块
 
-4. 模块加载 (require) 的**缓存**
+4. 模块加载 (require) 的 ==缓存==
 
 	- 第一次加载某个模块时，Node会缓存该模块。
 	- 以后再加载该模块，就直接从缓存取出该模块的`module.exports`属性。
 	- 所有缓存的模块保存在`require.cache`之中。
-	- 缓存只是根据<u>绝对路径</u>识别模块的
+	- 缓存只是根据 <u>绝对路径</u> 识别模块的
 
-5. 模块的加载机制是，输入的是被输出的值的**拷贝**，输出以后模块内的变化不会影响到输出的这个值
+5. 模块的加载机制是，输入的是被输出的值的 ==拷贝==，输出以后模块内的变化不会影响到输出的这个值
 
 ```js
 // lib.js
@@ -385,7 +390,7 @@ require(['module1', 'module2'], function(m1, m2){
    // ...
 })
 
-// require() 不需要导出东西，因此回调函数中不需要返回值，
+// require() 不需要导出东西，因此回调函数中不需要return值，
 // 也无法作为被依赖项被其他文件导入，因此一般用于入口文件.
 <script src="js/require.js" data-main="js/entry"></script>
 ```
@@ -402,7 +407,7 @@ SeaJS 是淘宝团队提供的一个模块开发的 JS 框架。
 
 ### 特点
 
-CMD 是 AMD 在基础上改进的一种规范，和 AMD 不同在于依赖模块的执行机制不同，CMD 是就近依赖，而 AMD 是前置依赖。所以模块代码就更像 commonjs 同步形式的代码书写风格.
+CMD 是 AMD 在基础上改进的一种规范，和 AMD 不同在于依赖模块的执行机制不同，CMD 是就近依赖，而 AMD 是前置依赖。所以模块代码就更<u>像 commonjs 同步形式的代码书写风格</u>.
 
 依赖 SPM 打包，模块的加载逻辑偏重。
 
@@ -436,7 +441,7 @@ define(function(require, exports, module) {
 
 UMD (Universal Module Definition)
 
-许多情况下，它使用 AMD 作为基础，并添加了特殊的外壳来处理 CommonJS 兼容性。<https://github.com/umdjs/umd>
+许多情况下，它使用 AMD 作为基础，并添加了特殊的外壳来处理 CommonJS 兼容性。[umd](https://github.com/umdjs/umd)
 
 **环境：** 服务器环境和浏览器端
 
@@ -450,7 +455,7 @@ function(e, t) {
 function() {
   // ...
 });
-
+/************************************************************************/
 // CommonJS > AMD > window/global/self
 if (("object" == typeof exports) && ("undefined" != typeof module))
   module.exports = t()
@@ -479,13 +484,84 @@ console.log(message)
 console.log('foo.js')
 export const message = 'hello foo~'
 
-// output(因为`import`在静态解析阶段执行，所以它是一个模块之中最早执行的):
+// output:
+// 因为`import`在静态解析阶段执行，所以它是一个模块之中最早执行的
 foo.js
 hello foo~
 bar.js
 ```
 
+除了静态加载带来的各种好处，ES6 模块还有以下好处。
 
+- 不再需要`UMD`模块格式了，将来服务器和浏览器都会支持 ES6 模块格式。
+- 将来浏览器的新 API 就能用模块格式提供，不再必须做成全局变量或者`navigator`对象的属性。
+- 不再需要对象作为命名空间（比如`Math`对象），未来这些功能可以通过模块提供。
+
+### 语法
+
+```javascript
+import
+export
+// 只能用于模块最外层，便于静态分析，所以不能用在代码块中
+// 或者说由于import是静态执行，所以不能使用需要运行才能得到结果的表达式和变量
+
+export default	
+// 一个模块只能用一次，对应的import不需要{}
+// 本质上就是输出一个叫做default的变量或方法，然后系统允许你为它取任意名字
+
+import()
+// import命令能够接受什么参数，import()函数就能接受什么参数，两者区别主要是后者为动态加载
+// 运行时执行，也就是说，什么时候运行到这一句，就会加载指定的模块
+// 可以用于实现 按需加载、条件加载、动态路径(路径为表达式或变量)
+```
+
+```javascript
+// import()返回一个 Promise 对象
+// 类似于 Node 的require方法，区别主要是前者是异步加载，后者是同步加载。
+
+const main = document.querySelector('main');
+
+import(`./section-modules/${someVariable}.js`)
+  .then(module => {
+    module.loadPageInto(main);
+  })
+  .catch(err => {
+    main.textContent = err.message;
+  });
+```
+
+
+
+```javascript
+// modules.js
+function add(x, y) {
+  return x * y;
+}
+export {add as default};
+// ===
+export default add;
+
+
+// app.js
+import { default as foo } from 'modules';
+// ===
+import foo from 'modules';
+```
+
+```js
+// demo.js
+export default function bar () {
+    return 1;
+};
+export function foo () {
+    return 2;
+}
+
+// index.js
+import bar, {foo} from './demo';
+bar();
+foo();
+```
 
 ### 特点
 
@@ -510,31 +586,15 @@ incCounter();
 console.log(counter);	// 4
 ```
 
-
-
-### 语法
-
-```javascript
-import
-export
-// 只能用于模块顶层，便于静态分析，所以不能用在条件代码块中
-
-export default	// 一个模块只能用一次，对应的import不需要{}
-```
+- `import`语句是 Singleton 模式
 
 ```js
-// demo.js
-export default function bar () {
-    return 1;
-};
-export function foo () {
-    return 2;
-}
+import { foo } from 'my_module';
+import { bar } from 'my_module';
+// 等同于
+import { foo, bar } from 'my_module';
 
-// index.js
-import bar, {foo} from './demo';
-bar();
-foo();
+// if(INSTANCE == null){ INSTANCE = new Singleton(); }
 ```
 
 
@@ -546,8 +606,7 @@ foo();
 ```js
 <script type="module" src="./main.js"></script>
 // ... has been blocked by CORS policy: 
-// Cross origin requests are only supported for protocol schemes: 
-// http, data, chrome, chrome-extension, chrome-untrusted, https.
+// Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, chrome-untrusted, https.
 // TODO: express, Babel, webpack
 ```
 
@@ -581,6 +640,14 @@ Construction (解析) -> Instantiation (实例化、建立链接) -> Evaluation 
 - CommonJS 模块输出的是一个值的拷贝，ES Modules 输出的是值的引用
 - import 在静态解析阶段执行，所以它是一个模块之中最早执行的
 - ES Modules 的加载、解析和执行都是异步的，而 require() 的过程是同步的
+
+```js
+// CommonJS模块
+let { stat, exists, readfile } = require('fs');
+
+// ES6模块
+import { stat, exists, readFile } from 'fs';
+```
 
 ### 混用
 
@@ -662,13 +729,27 @@ script 标签中的 `defer` 和 `async` 属性
 
 [2020年我们可以在Node中使用ES Modules了吗](https://zhuanlan.zhihu.com/p/337796076)
 
-
-
-
-
 [webpack模块化原理-ES module](https://segmentfault.com/a/1190000010955254)
+
+
+
+
 
 [前端科普系列-Babel：把 ES6 送上天的通天塔](https://zhuanlan.zhihu.com/p/129089156)
 
 [深入 CommonJs 与 ES6 Module](https://segmentfault.com/a/1190000017878394)
+
+
+
+
+
+
+
+```sh
+cd public
+npm init
+npm install express --save
+touch server.js
+node server.js
+```
 

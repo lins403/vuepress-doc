@@ -62,20 +62,41 @@ git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不�
 
 2. 分支合并，相比 merge 来说会减少分支合并的记录（但如果feature这个分支也有其他人在使用，则会造成一定困扰）
 
+   把分支的冲突在本地解决了以后，远端 pr 合并时管理员不需要在解决冲突
+   
    ```sh
    # 🌰:同步dev的commit至dev-lin
    git checkout dev-lin
    git rebase dev		# 交互式：git rebase -i master
    git push
    ```
-
+   
    ```sh
    # 更复杂的分支合并情况
    # 基于dev-lin分支创建feature分支，将feature分支上的commit直接应用在dev上
    git rebase --onto dev dev-lin feature
    ```
 
-   
+3. 同个分支的合并
+
+   ```sh
+   # 有本地的commit和远端已经fetch下来的commit
+   # 把本地的分支rebase到origin的这个分支上，然后再commit
+   # 就不会像merge那样多出一条commit信息
+   git rebase
+   ```
+
+4. 指定多个commit的分支合并（有点问题⚠️）
+
+   ```sh
+   # 如果不用cherry-pick
+   # 假如 master 落后 dev 5个提交，而只想要dev的前3个commit同步到master上
+   # 选中dev的第4条commit，新建分支 temp
+   git switch -c dev <commit-id>
+   git rebase --onto dev temp master
+   ```
+
+
 
 ### git revert
 

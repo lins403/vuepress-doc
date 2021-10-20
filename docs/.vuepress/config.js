@@ -26,6 +26,22 @@ module.exports = {
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
           '/notesList/javascript/': JavaScriptSidebar('总览', '基础', '进阶'),
           '/notesList/typescript/': 'auto',
+          '/notesList/nodejs/': [
+            {
+              title: '入门',
+              collapsable: false,
+              children: [
+                'basic/start',
+              ]
+            },
+            {
+              title: '进阶',
+              collapsable: false,
+              children: [
+                'advanced/express',
+              ]
+            },
+          ],
           '/notesList/vue/': [
             {
               title: '文档学习笔记',
@@ -49,6 +65,7 @@ module.exports = {
                 'tools/github-guide',
                 'tools/mac-operations',
                 'tools/online-coding',
+                'tools/regular',
               ]
             },
             {

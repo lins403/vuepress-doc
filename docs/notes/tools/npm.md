@@ -4,6 +4,16 @@
 
 `npm outdated`	# 列出所以可以更新的package
 
+npm install
+
+```
+--save
+-S
+--save--dev
+-D
+--no-save
+```
+
 
 
 ## CDN
