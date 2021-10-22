@@ -31,6 +31,7 @@ module.exports = {
               title: '入门',
               collapsable: false,
               children: [
+                '',
                 'basic/start',
               ]
             },

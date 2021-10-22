@@ -105,8 +105,8 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 <!-- 语法糖，等价于 -->
 
 <input
-  v-bind:value="searchText"
-  v-on:input="searchText = $event.target.value"
+  :value="searchText"
+  @input="searchText = $event.target.value"
 >
 ```
 
@@ -131,7 +131,7 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 
 
 
-修饰符
+#### 修饰符
 
 ```js
 .lazy		// 取代 input 监听 change 事件
@@ -144,7 +144,9 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 ### v-bind
 
 ```vue
-<blog-post v-bind="post"></blog-post>		// post: {id:1, title:'My Journey'}
+// post: {id:1, title:'My Journey'}
+
+<blog-post v-bind="post"></blog-post>
 
 <!-- 传入一个对象的所有 property，等价于 -->
 
@@ -255,7 +257,7 @@ const MyDirective = {
 
 - 局部注册
 
-#### 异步组件
+### 异步组件
 
 将异步组件和 <u>webpack 的 code-splitting</u> 功能一起配合使用，
 
@@ -364,7 +366,7 @@ Vue.component('my-component', {
   inheritAttrs: true, // 默认值
 })
 
-inheritAttrs: false, // 默认行为将会被去掉，但不影响 class 和 style 绑定
+inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不影响 class 和 style 绑定
 ```
 
 - **参考**： [基础 > Props](https://cn.vuejs.org/v2/guide/components-props.html)
@@ -425,7 +427,7 @@ inheritAttrs: false, // 默认行为将会被去掉，但不影响 class 和 sty
 ### 具名插槽
 
 ```vue
- <template v-slot:header>	// <template #header>
+ <template v-slot:header>		// <template #header>
  <template v-slot:default>	// <template v-slot> 或者 <template #default>
  
  <!--不可混用-->
@@ -606,7 +608,7 @@ this.$slots.header()
 
 ### 进入/离开 & 列表过渡
 
-#### 单元素/组件
+#### 1. 单元素/组件
 
 使用场景
 
@@ -664,7 +666,7 @@ methods: {
 
 
 
-#### 多个元素
+#### 2. 多个元素
 
 - v-if / v-else
 - 过渡模式 mode 
@@ -673,7 +675,7 @@ methods: {
 
 
 
-#### 多个组件
+#### 3. 多个组件
 
 ```vue
 <!--动态组件-->
@@ -684,7 +686,7 @@ methods: {
 
 
 
-#### 列表过渡
+#### 4. 列表过渡
 
 同一时间渲染整个列表，而非渲染多个节点中的一个
 
@@ -693,7 +695,7 @@ methods: {
 
 
 
-#### 可复用的过渡
+#### 5. 可复用的过渡
 
 ```js
 Vue.component('my-special-transition', {
@@ -720,7 +722,7 @@ Vue.component('my-special-transition', {
 
 
 
-#### 动态过渡
+#### 6. 动态过渡
 
 ```vue
 <transition v-bind:name="transitionName">

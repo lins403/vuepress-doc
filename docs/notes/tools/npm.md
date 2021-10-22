@@ -6,13 +6,14 @@
 
 npm install
 
-```
---save
--S
---save--dev
--D
+```sh
+--save		#-S
+--save--dev		#-D
+--global		#-g
 --no-save
 ```
+
+[npm-install > configuration](https://docs.npmjs.com/cli/v7/commands/npm-install#configuration)
 
 
 

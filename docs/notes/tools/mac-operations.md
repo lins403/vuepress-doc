@@ -28,6 +28,37 @@
 
 
 
+## Homebrew
+
+brew update 无响应
+
+```sh
+# 更换Git源（不推荐）
+cd "$(brew --repo)"
+# ls -all
+git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git
+# vi .git/config
+
+$ cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+$ git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
+```
+
+```sh
+brew doctor
+```
+
+
+
+## 环境变量
+
+```sh
+vi /etc/paths			#系统启动就会加载
+vi ~/.bash_profile		#当前用户级别的环境变量
+vi ~/.bashrc			#bash shell打开的时候载入的
+
+source <filename>
+```
+
 
 
 ## 其它
@@ -49,6 +80,23 @@ ins风格静态壁纸：[par.er](http://paper.meiyuan.in/)
 终端 iTerm2：`brew cask install iterm2`
 
 iTerm2+zsh
+
+离线开发文档：[Dash](https://kapeli.com/dash)
+
+## 技巧
+
+### Mac右键菜单
+
+#### google搜索
+
+方式一：将Safari的默认搜索引擎改为Google
+
+方式二：应用【自动操作】>>> 选取文稿类型【快速操作】>>>【运行Shell脚本】
+
+```sh
+open "http://www.google.com/search?q=$(ruby -rcgi -e 'print CGI.escape $<.read.chomp')"
+# 会被添加到右键菜单的【服务】中
+```
 
 
 
