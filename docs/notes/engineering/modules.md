@@ -565,12 +565,12 @@ foo();
 
 ### 特点
 
-- 编译时加载
+- ==编译时加载==
   - 静态分析，编译时就能确定模块间的依赖关系
   - import 提升
 
 - 自动采用严格模式
-- 被导出的值是引用，而非像commonjs那样的拷贝
+- 被导出的值是 ==引用==，而非像commonjs那样的拷贝
 
 ```js
 // lib.js
@@ -607,10 +607,19 @@ import { foo, bar } from 'my_module';
 <script type="module" src="./main.js"></script>
 // ... has been blocked by CORS policy: 
 // Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, chrome-untrusted, https.
-// TODO: express, Babel, webpack
 ```
 
-[Using ES6 modules in the browser](https://medium.com/ghostcoder/using-es6-modules-in-the-browser-5dce9ca9e911)
+[Using ES6 modules in the browser](https://medium.com/ghostcoder/using-es6-modules-in-the-browser-5dce9ca9e911)【自用express未解决】
+
+```sh
+cd public
+npm init
+npm install express --save
+touch server.js
+node server.js
+```
+
+
 
 #### Node
 
@@ -619,7 +628,59 @@ import { foo, bar } from 'my_module';
 
 #### Webpack
 
+[在线调试](https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/getting-started?terminal=)
 
+```js
+// "webpack": "^5.38.1", webpack-cli": "^4.7.2"
+
+// m.js
+'use strict';
+export default function bar() {
+  return 1;
+}
+export function foo() {
+  return 2;
+}
+
+
+// index.js
+'use strict';
+import bar, { foo } from './m';
+bar();
+foo();
+
+
+// webpack.config.js
+const path = require('path');
+module.exports = {
+  mode: 'development',
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+```
+
+```js
+// 打包后的文件main.js
+// 现在commonjs和esm混用的情况并没有额外的处理逻辑，都交由eval执行
+// TODO: 还要确认一下线下的webpack环境
+var __webpack_modules__ = ({
+  "./src/index.js": ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => { eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _m__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./m */ \"./src/m.js\");\n// index.js\n\n\n(0,_m__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n(0,_m__WEBPACK_IMPORTED_MODULE_0__.foo)();\n\n\n//# sourceURL=webpack://getting-started-using-a-configuration/./src/index.js?");}),
+  "./src/m.js": //...
+}),
+
+// The module cache
+var __webpack_module_cache__ = {};
+
+// The require function
+function __webpack_require__(moduleId) {
+  // ...
+}
+
+var __webpack_exports__ = __webpack_require__("./src/index.js");
+```
 
 #### 兼容性
 
@@ -731,25 +792,4 @@ script 标签中的 `defer` 和 `async` 属性
 
 [webpack模块化原理-ES module](https://segmentfault.com/a/1190000010955254)
 
-
-
-
-
-[前端科普系列-Babel：把 ES6 送上天的通天塔](https://zhuanlan.zhihu.com/p/129089156)
-
 [深入 CommonJs 与 ES6 Module](https://segmentfault.com/a/1190000017878394)
-
-
-
-
-
-
-
-```sh
-cd public
-npm init
-npm install express --save
-touch server.js
-node server.js
-```
-

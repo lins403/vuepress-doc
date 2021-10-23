@@ -6,6 +6,12 @@
 
 - 对未push的最近一条commit，使用 `git commit --amend` 命令修改提交消息。
 
+```sh
+<commit message>
+# 中间要隔开一行
+<description>
+```
+
 ### git diff
 
 ```sh
@@ -56,7 +62,7 @@ git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不�
 1. 合并多次提交纪录，减少了无用的提交信息，保持分支整洁
 
    ```sh
-   # 合并最近的 4 次提交纪录
+   # 合并最近的 4 次提交纪录，-i开启交互，还可以自定义合并，例如合并第2第3条
    git rebase -i HEAD~4
    ```
 

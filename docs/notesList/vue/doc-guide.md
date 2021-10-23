@@ -610,14 +610,14 @@ this.$slots.header()
 
 #### 1. 单元素/组件
 
-使用场景
+1）使用场景
 
 - 条件渲染 (使用 `v-if`)
 - 条件展示 (使用 `v-show`)
 - 动态组件 (`<component v-bind:is="view"></component>`)
 - 组件根节点
 
-类名和CSS
+2）类名和CSS
 
 ```css
 <transition name="slide-fade">
@@ -638,14 +638,14 @@ this.$slots.header()
 }
 ```
 
-结合动画
+3）结合动画
 
 - @keyframes
 - Animate.css
 
-显性的过渡时间： `duration`
+4）显性的过渡时间： `duration`
 
-JavaScript 钩子： before-enter , <u>enter</u>, afterEnter, enterCancelled, before-leave , <u>leave</u>, afterLeave, leaveCancelled...
+5）JavaScript 钩子： before-enter , <u>enter</u>, afterEnter, enterCancelled, before-leave , <u>leave</u>, afterLeave, leaveCancelled...
 
 ```vue
 <transition
@@ -662,14 +662,14 @@ methods: {
 }
 ```
 
-初始渲染的过渡 (`appear`)
+6）初始渲染的过渡 `appear`
 
 
 
 #### 2. 多个元素
 
 - v-if / v-else
-- 过渡模式 mode 
+- 过渡模式 **mode** 
   - `in-out` 新元素先 in 后当前元素 out
   -  `out-in`
 
@@ -692,6 +692,14 @@ methods: {
 
 - v-for
 - `<transition-group>`
+
+```vue
+<transition-group name="list" tag="p">
+  <span v-for="item in items" v-bind:key="item" class="list-item">
+  {{ item }}
+  </span>
+</transition-group>
+```
 
 
 

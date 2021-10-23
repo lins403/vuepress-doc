@@ -92,6 +92,22 @@ Distributed Version Control System，简称 DVCS
 
 detached 状态有利有弊，可以作临时分支，保存临时状态等，还是谨慎使用，及时切回其他分支HEAD。
 
+
+
+### HEAD^ and HEAD~
+
+> 1. `~n` 表示向上取到第 n 个祖先，`^n` 表示第 n 个 parent
+> 2. `HEAD~` 等价于 `HEAD^`，`~3` 等价于 `^1^1^1` 等价于 `^^^`
+> 3. `~` 适用于线性情况，`^` 适用于分叉情况，可以组合使用，例如 `HEAD~3^2`
+
+**有多个parent的分叉情况**
+
+- 创建新分支然后在新分支上提交
+- 分支落后，本地的commit与落下的commit直接使用`git merge`合并
+- ...
+
+<img src="https://i.stack.imgur.com/pDAzG.png" style="zoom:75%;" />
+
 ### 工作树 & 索引
 
 工作树（workspace，工作区）、索引（index，暂存区 / staging area）
@@ -135,6 +151,8 @@ HEAD指针保存的ref指向分支指针，分支指针保存的一个commit哈�
 [分布式版本控制](https://zh.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6)
 
 [Git三大特色之WorkFlow(工作流)](https://blog.csdn.net/qq_32452623/article/details/78905181)
+
+[What's the difference between HEAD^ and HEAD~ in Git?](https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git)
 
 [What's the difference between HEAD, working tree and index, in Git?](https://stackoverflow.com/questions/3689838/whats-the-difference-between-head-working-tree-and-index-in-git)
 

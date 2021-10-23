@@ -23,7 +23,7 @@ requireAll(req)
 
 - **参考**：[基础组件的自动化全局注册](https://cn.vuejs.org/v2/guide/components-registration.html#基础组件的自动化全局注册)
 
-批量创建子节点Vnode
+### 批量创建子节点Vnode
 
 ```js
 render: function (createElement) {

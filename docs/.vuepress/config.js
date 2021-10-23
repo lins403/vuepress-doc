@@ -56,25 +56,26 @@ module.exports = {
           ],
           '/notes/': [
             {
-              title: '开发工具',
-              collapsable: false,
-              children: [
-                'tools/codeSpecification',
-                'tools/git-feature',
-                'tools/git-application',
-                'tools/git-skills',
-                'tools/github-guide',
-                'tools/mac-operations',
-                'tools/online-coding',
-                'tools/regular',
-              ]
-            },
-            {
               title: '前端工程化',
               collapsable: false,
               children: [
                 'engineering/vue-cli@4',
                 'engineering/modules',
+              ]
+            },
+            {
+              title: '开发工具',
+              collapsable: false,
+              children: [
+                'tools/linux',
+                'tools/mac-operations',
+                'tools/codeSpecification',
+                'tools/git-feature',
+                'tools/git-application',
+                'tools/git-skills',
+                'tools/github-guide',
+                'tools/online-coding',
+                'tools/regular',
               ]
             },
           ],
