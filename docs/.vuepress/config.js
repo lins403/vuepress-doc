@@ -59,8 +59,22 @@ module.exports = {
               title: '前端工程化',
               collapsable: false,
               children: [
+                'engineering/webpack',
+                'engineering/rollup',
                 'engineering/vue-cli@4',
-                'engineering/modules',
+                'engineering/modules/',
+                'engineering/modules/esm',
+              ]
+            },
+            {
+              title: '前端工具',
+              collapsable: false,
+              children: [
+                'tools/regular',
+                'tools/npm',
+                'tools/yarn',
+                'tools/codeSpecification',
+                'tools/online-coding',
               ]
             },
             {
@@ -69,13 +83,10 @@ module.exports = {
               children: [
                 'tools/linux',
                 'tools/mac-operations',
-                'tools/codeSpecification',
                 'tools/git-feature',
                 'tools/git-application',
                 'tools/git-skills',
                 'tools/github-guide',
-                'tools/online-coding',
-                'tools/regular',
               ]
             },
           ],
