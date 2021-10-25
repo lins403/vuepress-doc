@@ -9,8 +9,22 @@
 ## 命令
 
 ```
+yarn
 yarn add
 yarn upgrade
+```
+
+
+
+## yarn 安装
+
+```sh
+yarn install v1.22.10
+[1/4] 🔍  Resolving packages...
+[2/4] 🚚  Fetching packages...
+[3/4] 🔗  Linking dependencies...
+warning " > img-loader@3.0.1" has incorrect peer dependency "imagemin@^5.0.0 || ^6.0.0".
+[4/4] 🔨  Building fresh packages...
 ```
 
 
@@ -40,3 +54,11 @@ yarn upgrade
 resolutions 可以突破版本限制
 
 **[resolutions](https://link.zhihu.com/?target=https%3A//classic.yarnpkg.com/en/docs/selective-version-resolutions/%23toc-how-to-use-it)**
+
+
+
+
+
+# 参考
+
+[yarn.lock 你锁明白了吗？](https://zhuanlan.zhihu.com/p/400193691)

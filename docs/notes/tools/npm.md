@@ -11,6 +11,7 @@
 --save--dev		#-D
 --global		#-g
 --no-save
+--force 	#Recommended protections disabled. overriding peer dependency
 ```
 
 [npm-install > configuration](https://docs.npmjs.com/cli/v7/commands/npm-install#configuration)

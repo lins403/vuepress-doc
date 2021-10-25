@@ -5,7 +5,8 @@
 `npm outdate`  查看可以更新的 npm packages
 
 - <https://github.com/PanJiaChen/vue-element-admin/pull/3028>
-- <https://cli.vuejs.org/migrating-from-v3/>
+- [Roadmap for Vue-cli4](https://github.com/vuejs/vue-cli/issues/3649)
+- [migrating-from-v3](https://cli.vuejs.org/migrating-from-v3/)
 
 
 
