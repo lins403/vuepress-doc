@@ -135,6 +135,38 @@ https://cdn.jsdelivr.net/gh/lins403/assetsSpace/vuepress/img/Klose.jpg
 
 
 
-## 六、开源 license
+## 六、GitHub badge
+
+工具1（推荐）: <https://shields.io/>
+
+工具2: <https://badge.fury.io/for/js>
+
+```js
+// npm
+
+// packageName(webpack)
+https://img.shields.io/npm/v/webpack
+
+// scope(@vue/cli)
+https://img.shields.io/npm/v/@vue/cli
+
+// tag(vue@next)
+https://img.shields.io/npm/v/vue/next
+```
+
+```html
+<a href="https://github.com/webpack/webpack/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/webpack/webpack"></a>
+<a href="https://www.npmjs.com/package/@vue/cli" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/@vue/cli"></a>
+```
+
+<a href="https://www.bilibili.com/" target="_blank"><img src="https://img.shields.io/badge/bilibili-%40%E5%B0%8F%E7%9C%AF%E5%98%BB-ff69b4"></a>
+
+<a href="https://github.com/webpack/webpack/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/webpack/webpack"></a>
+
+[150+ Badges for GitHub](https://dev.to/envoy_/150-badges-for-github-pnk)
+
+
+
+## 七、开源 license
 
 ![开元许可证](http://www.ruanyifeng.com/blogimg/asset/201105/bg2011050101.png)

@@ -16,6 +16,20 @@
 
 [npm-install > configuration](https://docs.npmjs.com/cli/v7/commands/npm-install#configuration)
 
+## 技巧
+
+### 更换镜像源
+
+```sh
+npm config set registry https://registry.npm.taobao.org/
+npm config get registry
+npm config set registry https://registry.npmjs.org
+
+# 临时
+npm install <package-name> --registry https://registry.npmjs.org
+npm outdated --registry https://skimdb.npmjs.com/registry
+```
+
 
 
 ## CDN
@@ -48,3 +62,4 @@
 fuse.js 模糊搜索
 
 vue-pdf 基于pdf.js的展示PDF
+
