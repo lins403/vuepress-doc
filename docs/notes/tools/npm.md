@@ -16,7 +16,56 @@
 
 [npm-install > configuration](https://docs.npmjs.com/cli/v7/commands/npm-install#configuration)
 
-## 技巧
+## 踩坑
+
+### 升级 npm7
+
+[npm 7 is now generally available!](https://github.blog/2021-02-02-npm-7-is-now-generally-available/)
+
+```sh
+# 回退版本
+npm install --global npm@6
+```
+
+
+
+#### 1）peerDependencies
+
+```sh
+npm ERR! Could not resolve dependency:
+npm ERR! peer eslint@">=7.0.0" from eslint-config-prettier@7.2.0
+# npm 7 will block installations if an upstream dependency conflict is present that cannot be automatically resolved.
+# You have the option to retry with --force to bypass the conflict or --legacy-peer-deps command to ignore peer dependencies entirely (this behavior is similar to versions 4-6).
+```
+
+```sh
+npm install --force
+npm install --legacy-peer-deps
+```
+
+[Dependencies类型](https://yarn.bootcss.com/docs/dependency-types/)
+
+[一文搞懂peerDependencies](https://juejin.cn/post/6844904134248759309)
+
+
+
+#### 2）node与node-sass的兼容性问题
+
+| NodeJS  | Supported node-sass version | Node Module |
+| ------- | --------------------------- | ----------- |
+| Node 14 | 4.14+                       | 83          |
+| Node 12 | 4.12+                       | 72          |
+| Node 10 | 4.9+, <6.0                  | 64          |
+
+[Node version support policy](https://github.com/sass/node-sass#node-version-support-policy)
+
+```json
+// 修改 node-sass 为 dart-sass
+-	"node-sass": "^4.9.0",
++	"sass": "1.30.0",
+```
+
+
 
 ### 更换镜像源
 
@@ -55,9 +104,16 @@ npm outdated --registry https://skimdb.npmjs.com/registry
 </script>
 ```
 
+### BootCDN
+
+```js
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+```
 
 
-## package
+
+## Package
 
 fuse.js 模糊搜索
 

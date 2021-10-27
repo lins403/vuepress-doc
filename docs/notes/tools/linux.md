@@ -22,6 +22,14 @@ wget http://www.Linuxcool.com/testfile.zip
 
 文件传输工具
 
+```sh
+curl -o response.txt https://catonmat.net		# -o参数将服务器的回应保存成文件，等同于wget命令
+curl -O https://www.example.com/foo/bar.html		# -O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名
+curl -X POST https://catonmat.net		# -X参数指定 HTTP 请求的方法
+```
+
+- [Curl Cookbook](https://catonmat.net/cookbooks/curl)
+
 
 
 ## Vim
