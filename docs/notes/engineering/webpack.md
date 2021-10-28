@@ -34,6 +34,8 @@ echo "/node_modules" > .gitignore
 
 ### loader
 
+webpack 默认只能解析 JavaScript 和 JSON 文件，但支持使用 loader 对其他类型的文件(扩展名)进行预处理，从而这些静态资源转换为模块，然后就可以被作为模块依赖引用
+
 ```js
 // test 和 use 属性
 module.exports = {
@@ -60,6 +62,8 @@ webpackConfig.module
 
 ### plugins
 
+插件可以改变webpack的工作方式，拓展webpack的能力
+
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');	// require插件
 const webpack = require('webpack'); // 用于访问内置插件
@@ -73,7 +77,7 @@ module.exports = {
 
 ## 配置
 
-### output
+### 1) output
 
 ```js
 module.exports = {
@@ -89,7 +93,7 @@ module.exports = {
 
 
 
-### module
+### 2) module
 
 决定了如何处理项目中的[不同类型的模块](https://webpack.docschina.org/concepts/modules)
 
@@ -105,7 +109,7 @@ module: {
 
 
 
-### resolve
+### 3) resolve
 
 ```js
 resolve: {
@@ -122,7 +126,7 @@ resolve: {
 
 
 
-### devServer
+### 4) devServer
 
 ==webpack-dev-server==
 
@@ -130,8 +134,15 @@ resolve: {
 - ws
 
 ```sh
-# 通过 CLI 调用 webpack-dev-server
-npx webpack serve 
+npm i webpack-dev-server -D
+
+# package.json
+{
+	"scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+	},
+}
 ```
 
 [@vue/cli-service > webpack-dev-server](https://github.com/vuejs/vue-cli/blob/967f948e1770f314a3d906c32d22d3909f71a04d/packages/%40vue/cli-service/lib/commands/serve.js#L183)
@@ -185,7 +196,7 @@ module.exports = {
 
 
 
-### optimization
+### 5) optimization
 
 webpack5内置支持 `terser-webpack-plugin`
 
@@ -223,9 +234,9 @@ module.exports = {
 > webpack 将根据以下条件自动拆分 chunks：
 >
 > - 新的 chunk 可以被共享，或者模块来自于 `node_modules` 文件夹
-> - 新的 chunk 体积大于 20kb（在进行 min+gz 之前的体积）
-> - 当按需加载 chunks 时，并行请求的最大数量小于或等于 30
-> - 当加载初始化页面时，并发请求的最大数量小于或等于 30
+> - 新的 chunk <u>体积大于 20kb</u>（在进行 min+gz 之前的体积）
+> - 当<u>按需加载 chunks 时</u>，并行请求的最大数量小于或等于 30
+> - 当<u>加载初始化页面时</u>，并发请求的最大数量小于或等于 30
 >
 > 当尝试满足最后两个条件时，最好使用较大的 chunks。
 
@@ -256,54 +267,6 @@ module.exports = {
   }
 }
 ```
-
-
-
-## VueCli
-
-### 配置
-
-https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config
-
-[base 配置](https://github.com/vuejs/vue-cli/blob/3f0b782bca7df17740b72509c42e5e2ea6562ac9/packages/%40vue/cli-service/lib/config/base.js)
-
-[dev 配置](https://github.com/vuejs/vue-cli/blob/f9863409739c8917b24c4844432f984d68877c63/packages/@vue/cli-service/lib/config/app.js)
-
-### 命令
-
-https://github.com/vuejs/vue-cli/blob/967f948e1770f314a3d906c32d22d3909f71a04d/packages/@vue/cli-service/lib/commands/serve.js
-
-
-
-### plugins
-
-https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-service/lib/webpack
-
-@vue/preload-webpack-plugin
-
-case-sensitive-paths-webpack-plugin
-
-copy-webpack-plugin
-
-html-webpack-plugin
-
-```js
-  plugins: [
-    // new HtmlWebpackPlugin()
-    new HtmlWebpackPlugin({
-      template: `./src/pages/index.html`,
-      filename: `hello.html`,
-    })
-  ],
-```
-
-pnp-webpack-plugin
-
-terser-webpack-plugin
-
-### webpack-chain
-
-https://github.com/neutrinojs/webpack-chain
 
 
 
@@ -361,3 +324,12 @@ loader 用于转换某些类型的模块，而插件则可以用于执行范围�
 
 [详细的 webpack4 多入口配置](https://segmentfault.com/a/1190000021555875)
 
+
+
+
+
+https://www.valentinog.com/blog/webpack/
+
+https://juejin.cn/post/6855129007785328653#heading-5
+
+https://webpack.toobug.net/zh-cn/

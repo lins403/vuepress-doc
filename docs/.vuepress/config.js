@@ -61,6 +61,7 @@ module.exports = {
               children: [
                 'engineering/webpack',
                 'engineering/rollup',
+                'engineering/vue-cli-config',
                 'engineering/vue-cli@4',
                 'engineering/modules/',
                 'engineering/modules/esm',

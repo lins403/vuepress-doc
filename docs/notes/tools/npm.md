@@ -59,6 +59,11 @@ npm install --legacy-peer-deps
 
 [Node version support policy](https://github.com/sass/node-sass#node-version-support-policy)
 
+```sh
+npm i node-sass@4.14.0
+# 然后把package.json和lock.json的更改取消掉，留着node_modules里的package就好
+```
+
 ```json
 // 修改 node-sass 为 dart-sass
 -	"node-sass": "^4.9.0",

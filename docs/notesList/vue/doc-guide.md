@@ -45,7 +45,8 @@ watch: {
 <!-- v-for、v-if 可以在 <template> 上使用，
 		 v-show 不支持 <template> 元素，也不支持 v-else -->
 <ul>
-  <template v-for="item in items">
+  <template v-for="item in items">		
+		<!--TODO：不需要key，为什么-->
     <li>{{ item.msg }}</li>
     <li class="divider" role="presentation"></li>
   </template>
