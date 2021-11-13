@@ -4,7 +4,7 @@
  * @Date: 2021-09-19 22:14:49
  * @FilePath: /vuepress-doc/docs/.vuepress/nav.js
  * @LastEditors: lins14
- * @LastEditTime: 2021-10-19 10:16:13
+ * @LastEditTime: 2021-11-13 10:41:38
  */
 module.exports = [
   { text: "Home", link: "/" },
@@ -42,6 +42,15 @@ module.exports = [
           {
             text: "Vue2源码学习",
             link: "/vue2-source-code/prepare/",
+          },
+        ],
+      },
+      {
+        text: "其它",
+        items: [
+          {
+            text: "可视化",
+            link: "/notesList/visualization/echarts",
           },
         ],
       },

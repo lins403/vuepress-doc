@@ -646,6 +646,11 @@ this.$slots.header()
 
 4）显性的过渡时间： `duration`
 
+```vue
+<transition :duration="1000">...</transition>
+<transition :duration="{ enter: 500, leave: 800 }">...</transition>
+```
+
 5）JavaScript 钩子： before-enter , <u>enter</u>, afterEnter, enterCancelled, before-leave , <u>leave</u>, afterLeave, leaveCancelled...
 
 ```vue
@@ -669,7 +674,47 @@ methods: {
 
 #### 2. 多个元素
 
-- v-if / v-else
+- v-if / v-else （标签名一样时就要用key）
+
+  ```vue
+        <!-- <transition :duration="200" mode="out-in">
+          <el-button @click="handleEdit" :key="blockStatus">
+            {{ blockStatus ? '编辑' : '编辑中..' }}
+          </el-button>
+        </transition> -->
+  
+  <template>
+    <transition :duration="2000" name="fade">
+      <el-button
+        @click="handleEdit"
+        :key="blockStatus"
+        style="position: absolute"
+      >
+        {{ blockStatus ? '编辑' : '编辑中' }}
+      </el-button>
+    </transition>
+  </template>
+  
+  <style lang="scss" scoped>
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: all 1s;
+    }
+    .fade-enter,
+    .fade-leave-active {
+      opacity: 0;
+    }
+    .fade-enter {
+      transform: translateX(100px);
+    }
+    .fade-leave-active {
+      transform: translateX(-100px);
+    }
+  </style>
+  ```
+
+  
+
 - 过渡模式 **mode** 
   - `in-out` 新元素先 in 后当前元素 out
   -  `out-in`
@@ -1007,9 +1052,9 @@ every component must have a single root element.
 > const Profile = Vue.extend({
 > template: '<p>hello {{name}}</p>',
 > data() {
->  return {
->    name: 'Aidan'
->  }
+> return {
+> 	name: 'Aidan'
+> }
 > }
 > })
 > // 创建一个 Profile 的实例，并将它挂载到一个元素上
@@ -1023,8 +1068,8 @@ every component must have a single root element.
 > 
 > // 在没有调用 `Vue.extend` 时候继承 CompA
 > var CompB = {
->   extends: CompA,
->   ...
+> extends: CompA,
+> ...
 > }
 > ```
 >
@@ -1035,7 +1080,7 @@ every component must have a single root element.
 > 	...
 > }
 > new Vue({
->   mixins: [myMixin],
+> mixins: [myMixin],
 > })
 > ```
 >
@@ -1043,7 +1088,14 @@ every component must have a single root element.
 >
 > ---
 >
-> **总结：** extends 和 mixins 实现方式几乎一致，都用同样的选项合并策略，只是 extends 被用于需要考虑继承的情况，mixins 则用于复用功能。
+> ```js
+> extends: Object | Function
+> mixins: Array<Object>
+> ```
+>
+> **总结：** extends 和 mixins 实现方式几乎一致，都用同样的选项合并策略，只是 extends 被用于需要考虑继承的情况，mixins 则用于复用功能，同时多个mixins时后面的会覆盖前面的。（早期版本vue中组件自身的options优先级比extends的高，比mixins的低，目前vue2.6中组件自身的options优先级最高）
+>
+> > 项目的图标统计分析中应用较多
 
 :::
 

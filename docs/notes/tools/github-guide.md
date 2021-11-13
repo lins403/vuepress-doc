@@ -1,6 +1,18 @@
 # GitHub指南
 
-## 一、fork贡献代码
+## 一、本地项目推送至github
+
+1. 本地项目 `git init`
+2. 到 github 上 `Create a new repository`
+3. 复制项目的线上 git 地址
+4. 本地终端 `cd ~/githubRespositories/lins-template` 
+5. `git remote add origin https://github.com/lins403/lins-template.git`
+6. 【如果远端新建了 README 】`git pull --rebase origin master`
+7. `git push -u origin master` （线上默认是main分支了，推送以后就被master分支覆盖了）
+
+
+
+## 二、fork贡献代码
 
 要贡献代码的repo称为上游仓库
 
@@ -64,13 +76,13 @@ git push
 - [远程仓库的使用](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)
 - [Syncing a fork](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/syncing-a-fork)
 
-## 二、GitHub Pages
+## 三、GitHub Pages
 
 > [如何使用Github Pages?](https://developer.mozilla.org/zh-CN/docs/Learn/Common_questions/Using_Github_pages)
 >
 > [新增 SSH 密钥到 GitHub 帐户](https://docs.github.com/cn/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
 
-## 三、Github API
+## 四、Github API
 
 基于 GraphQL
 
@@ -80,7 +92,7 @@ git push
 >
 > [Show off Github repos in your Gatsby site using Github GraphQL API](https://dev.to/lennythedev/show-off-your-github-repos-in-your-gatsby-site-using-graphql-421l)
 
-## 四、GitHub actions
+## 五、GitHub actions
 
 > [github actions 入门指南及实践](https://shanyue.tech/no-vps/github-action-guide.html#快速开始)
 
@@ -118,7 +130,7 @@ jobs:
 
 
 
-## 五、自建图床
+## 六、自建图床
 
 PicGo: <https://molunerfinn.com/PicGo/>
 
@@ -135,7 +147,7 @@ https://cdn.jsdelivr.net/gh/lins403/assetsSpace/vuepress/img/Klose.jpg
 
 
 
-## 六、GitHub badge
+## 七、GitHub badge
 
 工具1（推荐）: <https://shields.io/>
 
@@ -167,6 +179,11 @@ https://img.shields.io/npm/v/vue/next
 
 
 
-## 七、开源 license
+## 八、开源 license
 
 ![开元许可证](http://www.ruanyifeng.com/blogimg/asset/201105/bg2011050101.png)
+
+
+
+
+

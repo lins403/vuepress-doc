@@ -189,6 +189,20 @@ npx mrm@2 lint-staged
 
 :::
 
+
+
+## CSS — BEM 命名规范
+
+- Bem 是块（block）、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种前端 CSS 命名方法论。
+
+> \-  中划线 ：仅作为连字符使用，表示某个块或者某个子元素的多单词之间的连接记号。
+
+> __  双下划线：双下划线用来连接块和块的子元素
+
+> _   单下划线：单下划线用来描述一个块或者块的子元素的一种状态
+
+
+
 # 参考
 
 [[译] 以和为贵！让 ESlint、Prettier 和 EditorConfig 互不冲突](https://juejin.cn/post/6971783776221265927)
