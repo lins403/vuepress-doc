@@ -4,13 +4,14 @@
  * @Date: 2021-09-19 22:14:49
  * @FilePath: /vuepress-doc/docs/.vuepress/nav.js
  * @LastEditors: lins14
- * @LastEditTime: 2021-11-13 10:41:38
+ * @LastEditTime: 2021-11-19 21:38:42
  */
 module.exports = [
   { text: "Home", link: "/" },
   { text: "笔记", link: "/notes/" },
   { text: "博客", link: "/blogs/" },
-  { text: "计划", link: "/plans/" },
+  { text: "计划", link: "/plans/index2" },
+  { text: "面试知识点", link: "/interview/" },
   {
     text: "系列笔记",
     ariaLabel: "系列笔记",

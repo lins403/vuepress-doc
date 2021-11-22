@@ -91,7 +91,7 @@ String
 ```javascript
 // 中文
 /[\u4E00-\u9FA5]/g
-// [\u4E00-\u9FA5]{1,}
+/^[\u4E00-\u9FA5]+$/
 
 // no emoji
 /[^\u4E00-\u9FA5|\d|\a-zA-Z|\r\n\s,.?!，。？！…—&$=()-+/*{}[\]]|\s/g

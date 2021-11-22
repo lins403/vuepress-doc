@@ -23,6 +23,7 @@ module.exports = {
         nav: require('./nav'),
         // sidebar: 'auto',
         sidebar: {
+          '/interview/': interviewSidebar('前端基础', '进阶'),
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
           '/notesList/javascript/': JavaScriptSidebar('总览', '基础', '进阶'),
           '/notesList/typescript/': 'auto',
@@ -74,6 +75,7 @@ module.exports = {
               title: '前端工具',
               collapsable: false,
               children: [
+                'tools/website',
                 'tools/regular',
                 'tools/npm',
                 'tools/yarn',
@@ -155,6 +157,7 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
       collapsable: false,
       children: [
         'basic/',
+        'basic/utils',
       ]
     },
     {
@@ -162,7 +165,31 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
       collapsable: false,
       children: [
         'advanced/',
+        'advanced/design-pattern',
       ]
     },
   ]
+}
+
+function interviewSidebar(groupA,groupB){
+    return [
+      {
+        title: groupA,
+        collapsable: false,
+        children: [
+          'basic/network1',
+          'basic/network2',
+          'basic/network3',
+          'basic/html1',
+          'basic/css',
+        ]
+      },
+      {
+        title: groupB,
+        collapsable: false,
+        children: [
+          'advanced/performance',
+        ]
+      },
+    ]
 }

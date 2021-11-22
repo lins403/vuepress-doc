@@ -1,0 +1,70 @@
+# 浏览器
+
+## 渲染原理
+
+The pixel pipeline:  JavaScript > Style calculations > Layout > Paint > Composite
+
+**JavaScript**：使用 JavaScript 来实现一些视觉变化的效果
+
+**样式计算**：匹配selectors，应用css规则，计算每个元素的最终样式
+
+**布局**：计算它要占据的空间大小及其在屏幕的位置
+
+**绘制**：创建绘图调用的列表（a list of draw calls），填充像素（也叫“栅格化” (rasterize) ），绘制多个图层
+
+**合成**：合成多个图层
+
+为了确保平滑滚动和动画，占据**<u>主线程</u>**的所有内容，包括计算样式，以及reflow和paint，必须让浏览器在**<u>60帧（16.67毫秒）</u>**内完成。为了确保重绘repaint的速度比初始绘制的速度更快，屏幕上的绘图通常被分解成数层。如果发生这种情况，则需要进行合成。
+
+绘制可以将Layout tree中的元素分解为多个层。将内容提升到GPU上的层，可以提高绘制和重绘的性能。
+
+渲染进程：主线程、合成线程、栅格线程
+
+## 重排和重绘
+
+### 重排reflow
+
+> *Reflow* is any subsequent size and position determination of any part of the page or the entire document.
+>
+> The first time the size and position of nodes are determined is called *layout*. Subsequent recalculations of node size and locations are called *reflows*. 
+
+修改了元素的layout属性，影响到其它元素的布局，例如  width, height, position 等等
+
+Recalculate Style-->Layout-->Update Layer Tree-->以及之后各个流程
+
+### 重绘repaint
+
+修改了元素的“paint only”属性，不会影响到页面布局，例如 background, text color, shadows 等等，浏览器的渲染会掉过布局，直接进行绘制
+
+Recalculate Style-->Update Layer Tree-->以及之后各个流程
+
+### 特殊
+
+- 动画、滚动
+- <u>opacity、transform</u>（通过transform实现的动画不需要进行样式计算、布局和绘制等操作）
+
+既不要布局也不要绘制，浏览器会跳过布局和绘制，直接执行合成
+
+### 总结
+
+重排和重绘都是占用浏览器主线程，主线程JavaScript的执行可能就会给页面的重排和重绘造成影响，造成下一帧的画面不能按时渲染， 例如导致动画卡顿
+
+
+
+---
+
+我觉得有不少歧义，按MDN的解释加之我的理解，浏览器会解析css构建CSSOM，然后和DOM树一起合并（combined）生成render tree，随后执行layout布局，去遍历render tree，确定树中每个node的size和position，按照每个元素的盒模型（box model properties，就是content、padding、border、margin等）排列，这样子才得到了Layout tree。
+
+paint阶段就是将Layout tree上的每个box转换成页面上的实际像素。
+
+而为了保证能在60帧内完成渲染，需要确保重绘的性能比原始绘制时高，paint阶段会将layout tree的元素取出分成多个图层，不同图层相互重叠的时候就要合成（composite），按照绘制顺序合成多个图层，然后展示到屏幕上。
+
+把图层分块（tile），对每个块单独栅格化，填充像素到位图上，生成一帧，然后上传GPU。按MDN说的，图层当是将内容提升到GPU上的层。
+
+`<canvas>` 和 `<video>`，以及使用 `opacity` 和 `transform` 这些css属性的元素，可以实例化一个图层（instantiate a layer），这些元素和它们的后代节点，都会在这个图层上独立进行绘制，从而避开了主线程中的layout与paint环节。
+
+[Populating the page: how browsers work](https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work)
+
+
+
+requestAnimationFrame我看到别的博客提到节流效果，用节流解释太妙了。

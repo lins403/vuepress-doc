@@ -6,10 +6,12 @@
 
 ### 添加模板文件
 
+Code > 首选项 > 用户片段
+
 ```json
 // ~/Library/Application Support/Code/User/snippets/vue.json
 {
-  "Print to console": {
+  "Vue Init": {
     "prefix": "vue-lins",
     "body": [
       "<template>",
@@ -33,6 +35,32 @@
       "</style>"
     ],
     "description": "lin's vueInit"
+  }
+}
+
+```
+
+```js
+// ~/Library/Application Support/Code/User/snippets/javascript.json
+{
+	"Print to console": {
+    "prefix": "cl",
+    "body": ["console.log($1)"],
+    "description": "Log output to console"
+  },
+  "Long comments": {
+    "prefix": "br",
+    "body": [
+      "",
+      "//-------------------------------------/* $1 */-------------------------------------", 
+      "$2"
+    ],
+    "description": "Long comments for breaking lines"
+  },
+  "Eslint disable": {
+    "prefix": "ed",
+    "body": ["/* eslint-disable */"],
+    "description": "Eslint disable block"
   }
 }
 
@@ -97,6 +125,7 @@
 ### 扩展
 
 - **koroFileHeader**
+- Better Comments
 - **Window Colors**
 - Todo Tree
 - Dash
