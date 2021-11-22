@@ -131,6 +131,16 @@ openWindow(url, thirdpart, 540, 540)
 - localStorage
   - 保存在浏览器本地，数据不会过期也不会被清除，浏览器重启后依然还在
   - 和cookie一样在所有同源标签页和窗口之间共享
+- 都有容量大小限制，只支持字符串
+
+| Browser                                    | localStorage | sessionStorage |
+| ------------------------------------------ | ------------ | -------------- |
+| Mac Chrome                                 | 约5M         | 约5M           |
+| IOS WeChat                                 | 约2.5M       | 大于10M        |
+| Mac Safria                                 | 约2.5M       | 大于10M        |
+| https://juejin.cn/post/6933389518997291015 |              |                |
+
+TODO: 测试一下sessionStorage在不同标签页的共享和清理情况
 
 
 

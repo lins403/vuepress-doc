@@ -75,6 +75,7 @@ module.exports = {
               title: '前端工具',
               collapsable: false,
               children: [
+                'tools/browser',
                 'tools/website',
                 'tools/regular',
                 'tools/npm',
@@ -180,7 +181,6 @@ function interviewSidebar(groupA,groupB){
           'basic/network1',
           'basic/network2',
           'basic/network3',
-          'basic/browser',
           'basic/html1',
           'basic/css',
         ]

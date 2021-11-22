@@ -1,5 +1,63 @@
 # 浏览器
 
+## 离线存储
+
+localStorage
+
+- Chrome有5M大小限制
+- 只支持字符串
+
+indexDB
+
+- 资料：[HTML5 indexedDB前端本地存储数据库实例教程](https://www.zhangxinxu.com/wordpress/2017/07/html5-indexeddb-js-example/)
+
+其它
+
+- Web SQL Database（规范放弃支持，淘汰中）
+
+- CacheStorage（experimental）
+
+### indexDB 与 Web SQL Database
+
+- Web SQL Database
+  - 关系型数据库，类似SQLite
+  - 事务操作要写SQL
+- indexDB
+  - NoSQL数据库
+  - 写法对JS开发者更友好
+
+### indexDB 与 localStorage
+
+- localStorage兼容IE8+，indexDB兼容IE10+
+- localStorage仅支持存储字符串，而indexDB几乎可以任何格式，包括图片的Blob数据（IE需要考虑兼容性）
+- indexDB可以在service workers中使用
+
+
+
+> **数据库**
+>
+> ACID特性：原子性(Atomicity)、一致性(Consistemcy)、隔离性(Isolation)、持久性(Durability)
+>
+> 关系型数据库和非关系型数据库最大的理念区别在于，对数据一致性的要求。
+>
+> 前者非常严格，一个事务操作中只要有一条数据不合规则，前面的也会被放弃掉，整个事务回滚至原来状态，牺牲性能而追求一致性和稳定性；后者数据结构不固定，灵活，扩展性强
+>
+> 数据库中的“锁” lock，是保证数据库数据高并发时候数据一致性的一种机制
+>
+> 回滚rollback、提交commit
+
+
+
+### localForage
+
+- 根据浏览器的支持情况，依次选择 `IndexedDB` | `WebSQL` | `localStorage` 其中一种进行存储数据
+- 类似 localStorage 的API风格
+- 异步get和set，支持Promise和callback
+
+[localforage手册](https://localforage.docschina.org/#localforage)
+
+
+
 ## 渲染原理
 
 The pixel pipeline:  <u>JavaScript > Style calculations > Layout > Paint > Composite</u>
@@ -68,3 +126,4 @@ paint阶段就是将Layout tree上的每个box转换成页面上的实际像素�
 
 
 requestAnimationFrame我看到别的博客提到节流效果，用节流解释太妙了。
+

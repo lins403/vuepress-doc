@@ -107,7 +107,7 @@ xss（Cross-site scripting，跨站脚本攻击），是一种代码注入攻击
 #### 防御策略
 
 - 防止攻击者提交恶意代码（输入过滤）
-- 防止浏览器执行~（innerHTML、document.write()、v-html）
+- 防止浏览器执行~（开发者慎用 innerHTML、document.write()、v-html 等）
 - 启用 CSP (Content Security Policy，白名单机制，HTTP 头信息的`Content-Security-Policy`的字段）
 
 
@@ -116,14 +116,15 @@ xss（Cross-site scripting，跨站脚本攻击），是一种代码注入攻击
 
 CSRF（Cross-site request forgery, 跨站点请求伪造），黑客可以设法伪造带有正确 Cookie 的 HTTP 请求，就是利用用户的cookie骗过目标网站，让网站以为是用户自己的操作。
 
-所以xss骗取的是用户对网站的信任，csrf骗取的是网站对用户（网页浏览器）的信任
+- xss通过在网站植入恶意脚本，骗取的是用户对网站的信任；
+- csrf伪造真实用户的请求，骗取的是网站对用户（网页浏览器）的信任
 
 cookie本身不能跨域，但是请求可能是CORS请求（Access-Control-Allow-Origin），而允许跨域的情况下浏览器的请求都会带上cookie，所以cookie不是被获取，而是被使用
 
 #### 防御策略
 
 - 禁止外域使用cookie
-  - 同源检测
+  - 同源检测（Header中的Referer，来源URL地址，告诉服务器用户访问当前资源之前的位置）
   - 设置cookie的samesite属性（设置为Strict则禁止第三方使用该cookie，为Lax则禁止get以外的请求）
 
 - 添加校验token

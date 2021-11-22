@@ -270,6 +270,29 @@ import(“es6-modules.mjs”).then((module)=>{/*…*/}).catch((err)=>{/**…*/})
 
 :::
 
+#### 混用demo
+
+```js
+// events.mjs（只能是.mjs文件）
+export const sleep = interval => {
+  return new Promise(resolve => {
+    setTimeout(resolve, interval)
+  })
+}
+
+// runtime.js
+;(async () => {
+	// const module = await import('./event.mjs')
+  const { sleep } = await import('./event.mjs')
+  console.log('Do some thing, ' + new Date())
+  await sleep(2000)
+  console.log('Do other things, ' + new Date())
+})()
+
+
+> node runtime.js
+```
+
 
 
 ## Tree-Shaking
