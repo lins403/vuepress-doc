@@ -2,7 +2,7 @@
 
 ## 渲染原理
 
-The pixel pipeline:  JavaScript > Style calculations > Layout > Paint > Composite
+The pixel pipeline:  <u>JavaScript > Style calculations > Layout > Paint > Composite</u>
 
 **JavaScript**：使用 JavaScript 来实现一些视觉变化的效果
 
@@ -10,11 +10,11 @@ The pixel pipeline:  JavaScript > Style calculations > Layout > Paint > Composit
 
 **布局**：计算它要占据的空间大小及其在屏幕的位置
 
-**绘制**：创建绘图调用的列表（a list of draw calls），填充像素（也叫“栅格化” (rasterize) ），绘制多个图层
+**绘制**：创建绘图调用的列表（a list of draw calls），填充像素（栅格化rasterize），绘制多个图层
 
 **合成**：合成多个图层
 
-为了确保平滑滚动和动画，占据**<u>主线程</u>**的所有内容，包括计算样式，以及reflow和paint，必须让浏览器在**<u>60帧（16.67毫秒）</u>**内完成。为了确保重绘repaint的速度比初始绘制的速度更快，屏幕上的绘图通常被分解成数层。如果发生这种情况，则需要进行合成。
+为了确保平滑滚动和动画，占据<u>**主线程**</u>的所有内容，包括计算样式，以及reflow和paint，必须让浏览器在<u>**60帧（16.67毫秒）**</u>内完成。为了确保重绘repaint的速度比初始绘制的速度更快，屏幕上的绘图通常被分解成数层。如果发生这种情况，则需要进行合成。
 
 绘制可以将Layout tree中的元素分解为多个层。将内容提升到GPU上的层，可以提高绘制和重绘的性能。
 

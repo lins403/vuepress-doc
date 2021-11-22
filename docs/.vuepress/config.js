@@ -180,6 +180,7 @@ function interviewSidebar(groupA,groupB){
           'basic/network1',
           'basic/network2',
           'basic/network3',
+          'basic/browser',
           'basic/html1',
           'basic/css',
         ]
