@@ -1,5 +1,10 @@
 # 浏览器
 
+- 浏览器对象模型（Browser Object Model，简称 BOM），也就是 `window` 对象
+- 文档对象模型（Document Object Model，简称 DOM），也就是 `document` 对象
+
+
+
 ## 离线存储
 
 localStorage

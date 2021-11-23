@@ -58,6 +58,8 @@ webpackConfig.module
           .use('vue-loader')
 ```
 
+- babel-loader
+
 
 
 ### plugins

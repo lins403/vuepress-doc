@@ -1,12 +1,18 @@
 # CSS布局
 
+文档流：Normal flow，相对于盒子模型的概念
+
+文本流： Text flow，相对于文字段落的概念
+
 ### display
 
 - none
 - inline
   - 无法设置宽度和高度，只有文本流的真实尺寸
-  - 可以设置四个方向的padding，但是只能设置上下方向的margin
+  - 只能设置左右的padding和margin
+  - padding, margin, border 不会占据文本流，即不会推开其他元素，会发生重叠
 - block
+  - 会将父元素的width填充到100%
 - inline-block
 - contents
 
@@ -33,7 +39,11 @@
 
 float、absolute、fixed 属性可以使一个元素脱离标准文档流，但其中float不会脱离文本流，也就是后面的文本会跟在float的元素后面，而不是被覆盖。
 
-#### 清楚浮动
+float需要使用块布局，会将display为inline布局或table布局，转为**block**。
+
+
+
+#### 清除浮动
 
 
 
@@ -82,3 +92,11 @@ display: table-caption; column-count: 3;
 ### 居中布局
 
 ### 三列布局
+
+
+
+## 隐藏
+
+- opacity: 0;
+- visibility: hidden;
+- display: none;

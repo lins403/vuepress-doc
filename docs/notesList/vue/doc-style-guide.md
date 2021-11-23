@@ -242,11 +242,21 @@ computed: {
 @/src/views/svg-icons/require-icons.js
 ```
 
+ `.vue` 文件可以使用多个style，可以通过src引入外部的html、js、css等
+
+```vue
+<template src="./template.html"></template>
+<style src="./style.css"></style>
+<script src="./script.js"></script>
+```
+
 
 
 # 参考
 
 [Vue.js 风格指南](https://cn.vuejs.org/v2/style-guide/)
+
+[Vue 单文件组件 (SFC) 规范](https://vue-loader.vuejs.org/zh/spec.html#简介)
 
 [vue-element-admin > 命名规范](https://juejin.cn/post/6844903840626507784#heading-9)
 

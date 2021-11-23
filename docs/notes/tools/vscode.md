@@ -82,7 +82,8 @@ Code > 首选项 > 用户片段
 - **Vetur**
 - Vue Peek
 - **ES7 React/Redux/GraphQL/React-Native snippets**
-- **TSLint**
+- SCSS IntelliSense
+- SCSS Everywhere
 - SVG
 - lit-html ( for html inside of JavaScript and TypeScript tagged template strings )
 - Markdown Preview Enhanced
@@ -116,9 +117,10 @@ Code > 首选项 > 用户片段
 - EditorConfig for VS Code
 - Import Cost
 - Version Lens
-
 - **ESLint**
 - **Prettier - Code formatter**
+- **TSLint**
+- **stylelint** (stylelint-plus supports auto fix on save)
 
 
 
