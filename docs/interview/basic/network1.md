@@ -184,3 +184,25 @@ socket是应用层和传输层中间的一个抽象层，把tcp/ip抽象成一�
 - 没有实质性的区别，都属于HTTP协议的请求方式，都是基于TCP/IP的传输层协议
 
 https://blog.fundebug.com/2019/02/22/compare-http-method-get-and-post/
+
+```js
+const httpGet = (url, callback, err = console.error) => {
+  const request = new XMLHttpRequest()
+  request.open('GET', url, true)
+  request.onload = () => callback(request.responseText)
+  request.onerror = () => err(request)
+  request.send()
+}
+httpGet(url, console.log)
+// --------------------------------------------------------------------
+const httpPost = (url, data, callback, err = console.error) => {
+  const request = new XMLHttpRequest()
+  request.open('POST', url, true)
+  request.setRequestHeader('Content-type', 'application/json; charset=utf-8')
+  request.onload = () => callback(request.responseText)
+  request.onerror = () => err(request)
+  request.send(data)
+}
+httpPost(url, JSON.stringify(formData), console.log)
+```
+

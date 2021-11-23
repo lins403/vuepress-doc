@@ -32,7 +32,7 @@
 
 
 
-## cookie
+### cookie
 
 - **客户端**保持状态
 - 服务端通过HTTP响应头set-cookie，或客户端使用 JavaScript 设置
@@ -41,7 +41,14 @@
 - 移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
 - 除了用于认证授权，cookie还可用于存放用户的操作信息，改善用户体验，例如存放账号密码、用户偏好等等。使用github的cookie，有效期内访问授权登录的网站就不用重新授权登录
 - 使用Cookie需要防范XSS攻击（secure：只允许请求为https时发送cookie，httponly：禁止JS脚本访问cookie）
-- cookie设置的value值不能超过4k，而且浏览器一般对同个站点也有cookie数量的限制
+
+
+
+#### cookie和webStorage
+
+- cookie设置的value值不能超过4k，而且浏览器一般对同个站点也有cookie数量的限制；webStorage通常为5M
+- cookie会伴随着request一起发送，但webStorage并不会
+- server端也能使用cookie，但webStorage只能用在浏览器
 
 
 

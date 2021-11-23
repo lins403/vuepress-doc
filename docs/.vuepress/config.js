@@ -69,13 +69,13 @@ module.exports = {
                 'engineering/vue-cli@4',
                 'engineering/modules/',
                 'engineering/modules/esm',
+                'tools/browser',
               ]
             },
             {
               title: '前端工具',
               collapsable: false,
               children: [
-                'tools/browser',
                 'tools/website',
                 'tools/regular',
                 'tools/npm',
@@ -88,6 +88,7 @@ module.exports = {
               title: '开发工具',
               collapsable: false,
               children: [
+                'tools/vscode',
                 'tools/linux',
                 'tools/mac-operations',
                 'tools/git-feature',
