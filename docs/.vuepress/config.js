@@ -110,6 +110,9 @@ module.exports = {
           ],
         },
         lastUpdated: 'Last Updated', // string | boolean
+        docsDir: 'docs',
+        editLinks: true,
+        smoothScroll: true,
     }
   }
 
