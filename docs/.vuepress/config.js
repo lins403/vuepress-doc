@@ -63,13 +63,15 @@ module.exports = {
               title: '前端工程化',
               collapsable: false,
               children: [
+                'engineering/modules/',
+                'engineering/modules/esm',
+                'engineering/workflow',
                 'engineering/webpack',
                 'engineering/rollup',
                 'engineering/vue-cli-config',
                 'engineering/vue-cli@4',
-                'engineering/modules/',
-                'engineering/modules/esm',
                 'tools/browser',
+                'engineering/css-preprocessor',
               ]
             },
             {
@@ -182,11 +184,14 @@ function interviewSidebar(groupA,groupB){
         title: groupA,
         collapsable: false,
         children: [
+          'basic/network0',
           'basic/network1',
           'basic/network2',
           'basic/network3',
           'basic/html1',
-          'basic/css',
+          'basic/css1',
+          'basic/css2',
+          'basic/css3',
         ]
       },
       {
