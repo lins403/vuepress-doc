@@ -133,7 +133,9 @@ npx mrm@2 lint-staged
   },
   "lint-staged": {
     // 将每一个暂存区的 .js、.vue 文件作为参数，依次传给 eslint --fix 和 git add 执行
-    "*.{js,vue}": ["eslint --fix", "git add"]
+    // .eslintrc.js 、babel.config.js 等均不合匹配规则
+    "*.{js,vue}": ["eslint --fix", "git add"],
+    "*.{scss,less,styl,css}": ["stylelint --fix", "prettier --write", "git add ."]
   }
   // ...
 }

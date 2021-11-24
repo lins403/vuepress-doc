@@ -28,7 +28,13 @@
 
 ## 构建打包
 
-Vendor前缀
+Vendor prefixes
+
+- postcss > autofixer (browserslist)
+
+
+
+loaders
 
 - vue-loader > css-loader > vue-style-loader
 - style-loader：dynamically inject CSS into the document as style tags. (in header tags)

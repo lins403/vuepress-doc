@@ -101,6 +101,7 @@ Code > 首选项 > 用户片段
 
 ### 代码辅助工具
 
+- **npm Dependency Links**
 - npm Intellisense
 - Auto Rename Tag
 - **Color Highlight**
@@ -131,3 +132,4 @@ Code > 首选项 > 用户片段
 - **Window Colors**
 - Todo Tree
 - Dash
+- Sort lines

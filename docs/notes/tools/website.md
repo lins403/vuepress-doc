@@ -12,6 +12,8 @@
 
 ## UI
 
+emoji：[Emojipedia](https://emojipedia.org/)
+
 渐变色取色：[uiGradients](https://uigradients.com/)
 
 CSS clip-path 生成器：<https://www.html.cn/tool/css-clip-path/>
