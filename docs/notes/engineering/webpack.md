@@ -58,7 +58,7 @@ webpackConfig.module
           .use('vue-loader')
 ```
 
-- babel-loader
+[Webpack Loaders](https://webpack.docschina.org/loaders/)
 
 
 
@@ -74,6 +74,8 @@ module.exports = {
   plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
 };
 ```
+
+[Webpack Plugins](https://webpack.docschina.org/plugins/)
 
 
 
@@ -214,6 +216,8 @@ module.exports = {
     },
     // minimize: true,		// mode为production时自动启用(为development时不能生效？？)
     minimizer: [
+      // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`）
+      // `...`,
       new TerserPlugin({ // 去掉console
         terserOptions: {
           compress: {

@@ -2,7 +2,45 @@
 
 ## CSS Modules
 
-https://vue-loader.vuejs.org/zh/guide/css-modules.html
+把CSS视作一个独立的模块，在js中import使用
+
+规范：<https://github.com/css-modules/css-modules>
+
+基础用法：<http://www.ruanyifeng.com/blog/2016/06/css_modules.html>
+
+VueCLi的集成使用：<https://cli.vuejs.org/zh/guide/css.html#css-modules>
+
+```vue
+<template>
+  <div>
+    <p :class="{ [$style.red]: isRed }">
+      Am I red?
+    </p>
+    <p :class="[$style.red, $style.bold]">
+      Red and bold
+    </p>
+  </div>
+</template>
+
+<script>
+export default {
+  created () {
+    console.log(this.$style.red)
+  }
+}
+</script>
+
+<style module>
+.red {
+  color: red;
+}
+.bold {
+  font-weight: bold;
+}
+</style>
+```
+
+React直接使用 CSS-in-JS ：[styled-components](https://github.com/styled-components/styled-components)
 
 
 
@@ -16,7 +54,7 @@ https://vue-loader.vuejs.org/zh/guide/css-modules.html
 
 - Add vendor prefixes ([autoprefixer](https://github.com/postcss/autoprefixer))
 - convert future syntax ([postcss-preset-env](https://github.com/csstools/postcss-preset-env))
-- add suffix for selectors in a module to avoid global namespace conflicts ([css-modules](https://github.com/css-modules/css-modules))
+- add suffix for selectors in a <u>css module</u> to avoid global namespace conflicts ([css-modules](https://github.com/css-modules/css-modules))
 - lint your stylesheets ([stylelint](https://github.com/stylelint/stylelint))
 
 VueCli内置postcss、postcss-loader、postcss用于添加浏览器前缀的插件autoprefixer，以及browserslist
@@ -27,7 +65,13 @@ VueCli内置postcss、postcss-loader、postcss用于添加浏览器前缀的插�
 
 ## SCSS
 
+- LT3.0 `.sass`
+
+- GT3.0 `.scss`
+
 ### Dart Sass
+
+<https://sass-lang.com/dart-sass>
 
 [Node Sass to Dart Sass](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/sass.html#node-sass-to-dart-sass)
 
@@ -77,10 +121,11 @@ dist/*
 public/*
 ```
 
-命令行检测，可以配合 .stylelintignore 使用
+命令行检测和修复，可以配合 .stylelintignore 使用
 
 ```sh
 npx stylelint "**/*.scss"
+npx stylelint --fix "**/*.scss"
 ```
 
 disable complains：<https://stylelint.io/user-guide/ignore-code/>
@@ -125,3 +170,37 @@ p .sans
   font: Helvetica, /* Inline comments must be closed. Also won't be included in the CSS. */ sans-serif
 ```
 
+Basic
+
+- Variables
+- Nesting
+- Modules ( _partial.scss, @use partial, partial.$my-value )
+- Mixins
+- Extend/Inheritance
+- Math Operators
+
+Advanced	
+
+```scss
+@function
+  @return
+
+// flow control
+@if and @else
+@each
+@for
+@while
+```
+
+
+
+### less-vs-sass-vs-stylus
+
+[npm trends](https://www.npmtrends.com/less-vs-sass-vs-stylus)
+
+- 变量、嵌套、模块、mixins、继承、运算符、内建函数、控制流
+- Less和Stylus都是用JavaScript写的，能直接用在浏览器端和node，Sass用Dart写的，~~需要在服务端做处理，~~ 但npm发布的package是纯JavaScript的
+
+- Less不能使用条件语句、不能自定义function、不能使用带参数的mixins，SCSS的extend也更直观好用
+- stylus差异较大，采用缩进，其它特性的语法也偏简洁
+- 总之，SCSS更面向编程，less只能说是css的拓展，不喜欢Stylus的风格，趋势热度上亦或是语法功能上，都倾向于选择scss

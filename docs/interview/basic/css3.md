@@ -34,11 +34,24 @@ Vendor prefixes
 
 
 
-loaders
+### loaders
 
 - vue-loader > css-loader > vue-style-loader
-- style-loader：dynamically inject CSS into the document as style tags. (in header tags)
+- style-loader
+  - dynamically inject CSS into the document as style tags. (in header tags)
+  - 使用多个`<style>`将 CSS 插入到 DOM 中，反应会更快，适用于 `development` 模式。
 - vue-style-loader支持SSR，与style-loader功能一致
+
+
+
+### plugins
+
+- extract-text-webpack-plugin  <Badge text="deprecated" type="error"/>
+- mini-css-extract-plugin  <Badge text=">=webpack4" type="tip" />
+  - 对每个包含CSS的JS文件进行处理，将CSS提取出来创建一个独立的css文件
+  - 适用于 `production` 模式
+  - 不要同时使用 `style-loader` *与* `mini-css-extract-plugin`
+- css-minimizer-webpack-plugin
 
 
 

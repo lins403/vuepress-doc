@@ -87,6 +87,7 @@ Code > 首选项 > 用户片段
 - SVG
 - lit-html ( for html inside of JavaScript and TypeScript tagged template strings )
 - Markdown Preview Enhanced
+- CSS Modules
 
 
 
@@ -108,7 +109,7 @@ Code > 首选项 > 用户片段
 - Sort lines
 - Turbo Console Log
 - Path Intellisense
-- open in browser
+- **open in browser**
 - **Debugger for Chrome**
 
 
