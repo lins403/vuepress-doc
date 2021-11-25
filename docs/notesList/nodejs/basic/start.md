@@ -46,5 +46,7 @@
 - buffer缓冲区，处理二进制
 - crypto 加密
 - events事件触发器
-- process进程，`process.argv` 读取命令行参数
+- process进程
+  - `process.argv` 读取命令行参数
+  - `process.env` 环境变量
 - Stream流：处理流数据的抽象接口，流的读写要通过buffer缓冲来实现

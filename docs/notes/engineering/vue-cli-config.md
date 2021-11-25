@@ -6,11 +6,32 @@
 
 ```json
   "scripts": {
+    // development
     "serve": "vue-cli-service serve",
+    // production
     "build": "vue-cli-service build",
+    // test
+    "test": "vue-cli-service test:unit",
+    // eslint
     "lint": "vue-cli-service lint",
   },
 ```
+
+### 模式和环境变量
+
+node `process.env`
+
+- [dotenv](https://github.com/motdotla/dotenv)
+- [dotenv-expand](https://github.com/motdotla/dotenv-expand)
+
+源码：<https://github.com/vuejs/vue-cli/blob/e41ef41540802723eb146f2a630c460c95883c7e/packages/%40vue/cli-service/lib/Service.js#L58>
+
+文档：**[模式和环境变量](https://cli.vuejs.org/zh/guide/mode-and-env.html)**
+
+扩展：
+
+- [cross-env](https://www.npmjs.com/package/cross-env): Cross platform setting of environment scripts
+- [How is cross-env different from dotenv ?](https://github.com/kentcdodds/cross-env/issues/56#issuecomment-280095704)
 
 
 
