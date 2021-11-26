@@ -184,6 +184,3 @@ https://img.shields.io/npm/v/vue/next
 ![开元许可证](http://www.ruanyifeng.com/blogimg/asset/201105/bg2011050101.png)
 
 
-
-
-

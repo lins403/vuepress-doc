@@ -179,6 +179,14 @@ git push origin --delete <tagname>	# 远端
 - **refactor**: A code change that neither fixes a bug nor adds a feature
 - **test**: Adding missing tests or correcting existing tests
 
+### 工具
+
+[Commitizen](http://commitizen.github.io/cz-cli/)
+
+[@commitlint/cli](https://www.npmjs.com/package/@commitlint/cli)
+
+[npm trends](https://www.npmtrends.com/commitizen-vs-commitlint-vs-@commitlint/cli)
+
 
 
 ## 三、心得

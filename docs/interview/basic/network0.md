@@ -40,3 +40,27 @@
 - 2015年6月，ECMA 标准化组织正式批准了 **ECMAScript 6** 语言标准
 - 2015年6月，Mozilla 在 asm.js 的基础上发布 **WebAssembly** 项目
 - 2019年5月，Google发布 **Flutter**，正式宣布 Flutter 成为全平台框架
+
+
+
+---
+
+**Java Web**
+
+- 静态页面时代
+- CGI时代：通用网关接口，是一种Web应用规范，实现动态页面
+- Servlet时期
+  - 改进CGI，主要用于交互式地浏览和修改数据，生成动态Web内容。
+  - Tomcat也是一个Servlet容器
+- JSP时期：Servlet的升级，可以在HTML中写java代码
+- MVC时代：后端人员只写Servlet，前端人员只写JSP，提高开发效率
+- 框架时代：SSH、SSM
+
+
+
+# 参考
+
+[JavaScript 语言的历史](https://wangdoc.com/javascript/basic/history.html)
+
+[前端开发的历史和趋势](https://github.com/ruanyf/jstraining/blob/master/docs/history.md)
+

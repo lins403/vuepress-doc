@@ -16,6 +16,10 @@
 
 [npm-install > configuration](https://docs.npmjs.com/cli/v7/commands/npm-install#configuration)
 
+`npm shrinkwrap` npm-shrinkwrap.json （npm5以前用来lock版本的）
+
+
+
 ## 踩坑
 
 ### 升级 npm7

@@ -14,6 +14,10 @@
 
 [git commit规范](https://zhuanlan.zhihu.com/p/268051722)
 
+---
+
+[《前端科普系列-ESlint：守住优雅的护城河》](https://zhuanlan.zhihu.com/p/184951182)
+
 
 
 ## 一、EditorConfig
@@ -134,11 +138,18 @@ npx mrm@2 lint-staged
   "lint-staged": {
     // 将每一个暂存区的 .js、.vue 文件作为参数，依次传给 eslint --fix 和 git add 执行
     // .eslintrc.js 、babel.config.js 等均不合匹配规则
-    "*.{js,vue}": ["eslint --fix", "git add"],
-    "*.{scss,less,styl,css}": ["stylelint --fix", "prettier --write", "git add ."]
+    "*.{js,vue}": ["eslint --fix"],
+    "*.{scss,less,styl,css}": ["stylelint --fix", "prettier --write"]
   }
   // ...
 }
+```
+
+```sh
+# .husky/pre-commit (v7)
+npx --no-install lint-staged
+# or
+yarn lint-staged
 ```
 
 

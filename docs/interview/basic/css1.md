@@ -86,6 +86,11 @@ repeating-linear-gradient 重复渐变
 
 
 
+## 特殊属性
+
+- `all`: Reset all styles
+- `::selection`: Changes the styling of text selection.
+
 
 
 ## Q&A问题
@@ -109,3 +114,28 @@ div {
 }
 ```
 
+
+
+### 居中
+
+- [transform centering](https://www.30secondsofcode.org/css/s/transform-centering)
+  - transform相对自身盒模型的偏移
+- 
+
+
+
+
+
+### 扩展
+
+#### 条纹渐变
+
+- [Stripes background pattern](https://www.30secondsofcode.org/css/s/stripes-pattern)
+
+- [Zig zag background pattern](https://www.30secondsofcode.org/css/s/zig-zag-pattern)
+
+### 图片
+
+[Full-width image](https://www.30secondsofcode.org/css/s/full-width)
+
+- `margin-left: -50vw;margin-right: -50vw;` 可以使用 `transform: translateX(-50%)`
