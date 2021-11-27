@@ -181,9 +181,9 @@ git push origin --delete <tagname>	# 远端
 
 ### 工具
 
-[Commitizen](http://commitizen.github.io/cz-cli/)
+[Commitizen](http://commitizen.github.io/cz-cli/)：通过命令行交互的方式生成规范的commit message
 
-[@commitlint/cli](https://www.npmjs.com/package/@commitlint/cli)
+[@commitlint/cli](https://www.npmjs.com/package/@commitlint/cli)：lint commit message
 
 [npm trends](https://www.npmtrends.com/commitizen-vs-commitlint-vs-@commitlint/cli)
 

@@ -1,28 +1,41 @@
 # Cookie、Session、Token、Storage
 
-会话跟踪技术
+:::tip 摘要
+
+会话跟踪技术，还是比较紊乱和模糊，会持续改进这篇内容
+
+1. cookie
+2. session
+3. cookie和session的结合使用
+4. token：Access Token 和 Refresh Token
+5. jwt的结构，和token的区别
+6. oauth
+7. sessionStorage和localStorage的异同
+8. 浏览器强缓存、协商缓存
+
+:::
 
 
 
 ## 认证、授权和凭证
 
-- 认证（Authentication）
+认证（Authentication）
 
-  - 验证当前用户的身份，如用户登录、短信验证
+- 验证当前用户的身份，如用户登录、短信验证
 
-- 授权（Authorization）
+授权（Authorization）
 
-  - 实现授权的方式有：cookie、session、token、OAuth
-  - 请求头header中的Authorization通常存放的是jwt
+- 实现授权的方式有：cookie、session、token、OAuth
+- 请求头header中的Authorization通常存放的是jwt
 
-- 凭证（Credentials）
+凭证（Credentials）
 
-  - 实现认证和授权的前提
-  - 如银行办理手续，银行卡密码是认证，而身份证是凭证
+- 实现认证和授权的前提
+- 如银行办理手续，银行卡密码是认证，而身份证是凭证
 
-  
 
-常见的前后端鉴权方式
+
+### 常见的前后端鉴权方式
 
 - Session-Cookie
 - Token 验证（包括 JWT，SSO）
@@ -32,19 +45,24 @@
 
 
 
-### cookie
+## Cookie
+
+### 用途
 
 - **客户端**保持状态
+- cookie默认随着http请求一起发送，除了用于认证授权，cookie还可用于存放用户的操作信息，改善用户体验，例如存放账号密码、用户偏好等等。使用github的cookie，有效期内访问授权登录的网站就不用重新授权登录
+- 重要属性：domain、path、maxAgecookie、expires、**secure**、**httpOnly**
+
+### 特点
+
 - 服务端通过HTTP响应头set-cookie，或客户端使用 JavaScript 设置
 - 不可跨域，每个 cookie 都会绑定单一的域名，而一级域名和二级域名之间是允许共享使用的
-- 重要属性：domain、path、maxAgecookie、expires、**secure**、**httpOnly**
 - 移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
-- 除了用于认证授权，cookie还可用于存放用户的操作信息，改善用户体验，例如存放账号密码、用户偏好等等。使用github的cookie，有效期内访问授权登录的网站就不用重新授权登录
 - 使用Cookie需要防范XSS攻击（secure：只允许请求为https时发送cookie，httponly：禁止JS脚本访问cookie）
 
 
 
-#### cookie和webStorage
+### cookie和webStorage
 
 - cookie设置的value值不能超过4k，而且浏览器一般对同个站点也有cookie数量的限制；webStorage通常为5M
 - cookie会伴随着request一起发送，但webStorage并不会
@@ -52,7 +70,7 @@
 
 
 
-### session
+## Session
 
 - **服务端**保持状态
 
@@ -62,7 +80,7 @@
 
 
 
-## cookie和session认证
+### cookie和session认证
 
 用户认证的一般流程：
 
@@ -96,7 +114,7 @@
 - session_id跟token的作用比较类似
 - session使服务端有状态化，可以记录会话信息；而token是凭证，使服务端无状态化，不会存储会话信息。
 
-> 做的项目中session不清楚，但是存的是token，字段存的是前后端约定的字段名。在登录成功后，前端将获取到的accessToken和refreshToken存到cookie中，在之后的每次请求中添加到请求头header上，交由后端验证，验证成功则返回请求的数据。
+> 做的项目中存在本地（cookie）的是token而没用session_id，token值用的是前后端约定的字段名来传输。在登录成功后，前端将获取到的accessToken和refreshToken存到cookie中，在之后的每次请求中添加到请求头header上，交由后端验证，验证成功则返回请求的数据。
 
 
 
@@ -140,12 +158,11 @@ openWindow(url, thirdpart, 540, 540)
   - 和cookie一样在所有同源标签页和窗口之间共享
 - 都有容量大小限制，只支持字符串
 
-| Browser                                    | localStorage | sessionStorage |
-| ------------------------------------------ | ------------ | -------------- |
-| Mac Chrome                                 | 约5M         | 约5M           |
-| IOS WeChat                                 | 约2.5M       | 大于10M        |
-| Mac Safria                                 | 约2.5M       | 大于10M        |
-| https://juejin.cn/post/6933389518997291015 |              |                |
+| Browser    | localStorage | sessionStorage |
+| ---------- | ------------ | -------------- |
+| Mac Chrome | 约5M         | 约5M           |
+| IOS WeChat | 约2.5M       | 大于10M        |
+| Mac Safria | 约2.5M       | 大于10M        |
 
 TODO: 测试一下sessionStorage在不同标签页的共享和清理情况
 
@@ -158,13 +175,23 @@ TODO: 测试一下sessionStorage在不同标签页的共享和清理情况
 - 强缓存
 - 协商缓存
 
-根据response header中的**Cache-Control**和**Expires**判断缓存是否过期，同时记录header中的**etag**和**last-modified**，如果没有过期则直接使用浏览器缓存，如果过期，将etag值作为**If-None-Match**，last-modified值作为**if-modified-since**，添加到request header中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
+根据response header中的 `Cache-Control` 和 `Expires` 判断缓存是否过期，同时记录header中的 `etag` 和 `last-modified`，如果没有过期则直接使用浏览器缓存，如果过期，将etag值作为 `If-None-Match`，last-modified值作为 `if-modified-since`，添加到request header中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
 
 - Cache-Control: max-age=31536000（使用相对时间，同时使用时优先级更高）
 - Expires: Wed, 19 Oct 2022 04:54:02 GMT（使用基于服务器的绝对时间）
 
-精确度上：Etag要优于Last-Modified（后者只能精确到秒的颗粒度）
+精确度：Etag要优于Last-Modified（后者只能精确到秒的颗粒度）
 
-优先级上：服务器校验优先考虑Etag（例如适用于文件内容未修改但是修改时间变动的情况）
+优先级：服务器校验优先考虑Etag（例如适用于文件内容未修改但是修改时间变动的情况）
 
 性能上：Etag要逊于Last-Modified（etag需要每次服务端的读写，后者是个常量只要读取）
+
+
+
+
+
+# 参考
+
+[傻傻分不清之 Cookie、Session、Token、JWT](https://juejin.cn/post/6844904034181070861)
+
+[浏览器的localStorage/sessionStorage的大小](https://juejin.cn/post/6933389518997291015)
