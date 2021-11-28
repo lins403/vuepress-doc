@@ -1,7 +1,5 @@
 # 入门
 
-
-
 ## 全局变量
 
 <img src="https://raw.githubusercontent.com/lins403/assetsSpace/master/vuepress/img/global-objects.png" style="zoom:36%;" alt="https://tuture.co/2019/12/03/892fa12/"/>
@@ -14,8 +12,6 @@
 - module：对当前模块的引用
 - require()：用于导入模块、JSON 和本地文件
   - [CommonJS特点 > 文件加载机制](https://lins403.github.io/vuepress-doc/notes/engineering/modules/#%E7%89%B9%E7%82%B9)
-
-
 
 ## 核心模块
 
@@ -38,8 +34,6 @@
 ### url
 
 网址处理和解析
-
-
 
 ### 其它
 

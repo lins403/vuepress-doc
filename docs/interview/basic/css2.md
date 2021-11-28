@@ -16,8 +16,6 @@
 - inline-block
 - contents
 
-
-
 ### position
 
 - static
@@ -33,27 +31,17 @@
 - sticky
   - 需要指定 top, right, bottom 或 left 四个阈值其中之一，才可使粘性定位生效
 
-
-
 ### 浮动
 
 float、absolute、fixed 属性可以使一个元素脱离标准文档流，但其中float不会脱离文本流，也就是后面的文本会跟在float的元素后面，而不是被覆盖。
 
 float需要使用块布局，会将display为inline布局或table布局，转为**block**。
 
-
-
 #### 清除浮动
-
-
-
-
 
 ### Flex布局
 
 display: flex
-
-
 
 ### Grid布局
 
@@ -63,27 +51,19 @@ display: grid
 
 ```
 
-
-
 Flex 和 Grid
 
 - flex适合一维，适合对齐元素内的内容，比如说用在页面的header。弹性强，但行和列没有实质性关系。flex也可以实现grid实现不了的功能
 - grid适合多维，适合布局大画面，可以处理一些不规则和非对称的设计（flex应该实现不了）。
 - 不是二选一，而是二合一，可以混合使用
 
-
-
 ### 表格布局
 
 display：table、inline-table、table-caption、table-cell、table-row、table-row-group
 
-
-
 ### 多列布局
 
 display: table-caption; column-count: 3;
-
-
 
 ### 响应式布局
 
@@ -92,8 +72,6 @@ display: table-caption; column-count: 3;
 ### 居中布局
 
 ### 三列布局
-
-
 
 ## 隐藏
 

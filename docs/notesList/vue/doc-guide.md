@@ -10,14 +10,14 @@ computed 有缓存，watch 支持异步
 
 ```js
 computed: {
-  aDouble: vm => vm.a * 2	// 如果不用this
+  aDouble: vm => vm.a * 2    // 如果不用this
 }
 
 watch: {
   someObj: {
     handler: function (val, oldVal) { /* ... */ },
-    deep: true,		// 只针对对象的deep监听，数组并不需要
-    immediate: true	// 初始化时就会触发
+    deep: true,        // 只针对对象的deep监听，数组并不需要
+    immediate: true    // 初始化时就会触发
   },
 },
 ```
@@ -43,10 +43,10 @@ watch: {
 </ul>
 
 <!-- v-for、v-if 可以在 <template> 上使用，
-		 v-show 不支持 <template> 元素，也不支持 v-else -->
+         v-show 不支持 <template> 元素，也不支持 v-else -->
 <ul>
-  <template v-for="item in items">		
-		<!--TODO：不需要key，为什么-->
+  <template v-for="item in items">        
+        <!--TODO：不需要key，为什么-->
     <li>{{ item.msg }}</li>
     <li class="divider" role="presentation"></li>
   </template>
@@ -130,17 +130,13 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 
 :::
 
-
-
 #### 修饰符
 
 ```js
-.lazy		// 取代 input 监听 change 事件
-.number		// parseFloat()
-.trim		// 首尾空格过滤
+.lazy        // 取代 input 监听 change 事件
+.number        // parseFloat()
+.trim        // 首尾空格过滤
 ```
-
-
 
 ### v-bind
 
@@ -192,8 +188,8 @@ this.$emit('update:title', newTitle)
 ```vue
 <a v-bind:[attributeName]="url"> ... </a>
 <!--
-	值的约束: `字符串`，异常情况下值为 null	，null 值可以被显性地用于移除绑定
-	表达式的约束: 某些字符，如空格和引号，放在 HTML attribute 名里是无效的
+    值的约束: `字符串`，异常情况下值为 null    ，null 值可以被显性地用于移除绑定
+    表达式的约束: 某些字符，如空格和引号，放在 HTML attribute 名里是无效的
 -->
 ```
 
@@ -202,8 +198,6 @@ this.$emit('update:title', newTitle)
 <a :[key]="url"> ... </a>
 <a @[event]="doSomething"> ... </a>
 ```
-
-
 
 ### 自定义指令
 
@@ -221,7 +215,7 @@ unbind
 
 :function(el, binding, vnode, oldVnode){
   const {name, value, oldValue, expression, arg, modifiers} = binding
-  
+
 // <div id="hook-arguments-example" v-demo:foo.a.b="message"></div>
 // name: "demo"
 // value: "hello!"
@@ -300,7 +294,7 @@ const AsyncComponent = () => ({
 3. $attrs , $listeners
 4. provide/inject
 5. webStorage
-6. eventbus	❌
+6. eventbus    ❌
 7. vuex
 8. Vue.observable
 ```
@@ -309,8 +303,8 @@ const AsyncComponent = () => ({
 <template>
   <label>
     <input type="text" v-bind="$attrs" v-on="$listeners" />
-		<!-- Vue3 -->
-		<input type="text" v-bind="$attrs" />
+        <!-- Vue3 -->
+        <input type="text" v-bind="$attrs" />
   </label>
 </template>
 <script>
@@ -373,8 +367,6 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 - **参考**： [基础 > Props](https://cn.vuejs.org/v2/guide/components-props.html)
 - **参考**： [API > props](https://cn.vuejs.org/v2/api/#props)
 
-
-
 ### 函数式组件
 
 组件是比较简单，没有管理任何状态，也没有监听任何传递给它的状态，也没有生命周期方法。实际上，它只是一个接受一些 prop 的函数。用一个简单的 `render` 函数返回虚拟节点使它们渲染的代价更小。
@@ -391,8 +383,6 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 
 :::
 
-
-
 ::: warning Vue3
 
 在 Vue 2 中，函数式组件主要有两个应用场景：
@@ -408,17 +398,15 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 
 :::
 
-
-
-## 插槽 slot 
+## 插槽 slot
 
 ```vue
 <navigation-link url="/profile">
   Clicking here will send you to: {{ url }}
   <!--
-	这里的 `url` 会是 undefined，因为其 (指该插槽的) 内容是传递给 <navigation-link> 的，
-	而不是在 <navigation-link> 组件内部定义的。
-	外部的 url 则根据 inheritAttrs 配置，被作为组件内部属性使用
+    这里的 `url` 会是 undefined，因为其 (指该插槽的) 内容是传递给 <navigation-link> 的，
+    而不是在 <navigation-link> 组件内部定义的。
+    外部的 url 则根据 inheritAttrs 配置，被作为组件内部属性使用
   -->
 </navigation-link>
 ```
@@ -428,13 +416,13 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 ### 具名插槽
 
 ```vue
- <template v-slot:header>		// <template #header>
- <template v-slot:default>	// <template v-slot> 或者 <template #default>
- 
+ <template v-slot:header>        // <template #header>
+ <template v-slot:default>    // <template v-slot> 或者 <template #default>
+
  <!--不可混用-->
     <template v-slot:header>
     <template v-slot>
-      
+
 <!-- 除作用域插槽的使用以外，v-slot只能被用在<template>上 -->
 <current-user v-slot="slotProps">{{ slotProps.user.firstName }}</current-user>
 ```
@@ -519,7 +507,7 @@ Vue.component("my-component-name", {
   props: ["message"],
   render: function (createElement) {
     console.log(this.$slots, this.$scopedSlots);
-    
+
     return createElement("div", [
       createElement("div", this.$slots.default),
       createElement("div", this.$scopedSlots.default()),
@@ -622,7 +610,7 @@ this.$slots.header()
 
 ```css
 <transition name="slide-fade">
-	<p v-if="show">hello</p>
+    <p v-if="show">hello</p>
 </transition>
 
 /* 可以设置不同的进入和离开动画 */
@@ -670,12 +658,10 @@ methods: {
 
 6）初始渲染的过渡 `appear`
 
-
-
 #### 2. 多个元素
 
 - v-if / v-else （标签名一样时就要用key）
-
+  
   ```vue
         <!-- <transition :duration="200" mode="out-in">
           <el-button @click="handleEdit" :key="blockStatus">
@@ -713,13 +699,10 @@ methods: {
   </style>
   ```
 
-  
-
 - 过渡模式 **mode** 
+  
   - `in-out` 新元素先 in 后当前元素 out
-  -  `out-in`
-
-
+  - `out-in`
 
 #### 3. 多个组件
 
@@ -729,8 +712,6 @@ methods: {
   <component v-bind:is="view"></component>
 </transition>
 ```
-
-
 
 #### 4. 列表过渡
 
@@ -746,8 +727,6 @@ methods: {
   </span>
 </transition-group>
 ```
-
-
 
 #### 5. 可复用的过渡
 
@@ -774,8 +753,6 @@ Vue.component('my-special-transition', {
 })
 ```
 
-
-
 #### 6. 动态过渡
 
 ```vue
@@ -786,13 +763,9 @@ Vue.component('my-special-transition', {
 <!-- 事件钩子也可以获取上下文中的所有数据 -->
 ```
 
-
-
 ### 状态过渡
 
 集合侦听器 `watch` 使用
-
-
 
 ## 插件
 
@@ -857,8 +830,6 @@ if (inBrowser && window.Vue) {
 }
 ```
 
-
-
 ## JSX
 
 ### babel
@@ -886,8 +857,6 @@ module.exports = {
 ### 使用
 
 **[Babel Preset JSX](https://github.com/vuejs/jsx)**
-
-
 
 ## 深入响应式原理
 
@@ -974,7 +943,7 @@ Vue.component('example', {
     },
     // $nextTick() 返回一个 Promise 对象，用 async/await 改写
     $_updateMessage: async function () {
-    	this.message = '已更新'
+        this.message = '已更新'
       console.log(this.$el.textContent) // => '未更新'
       await this.$nextTick()
       console.log(this.$el.textContent) // => '已更新'
@@ -982,8 +951,6 @@ Vue.component('example', {
   }
 })
 ```
-
-
 
 ## 延伸问题
 
@@ -993,8 +960,6 @@ Vue.component('example', {
 
 :::
 
-
-
 ::: details 每个组件必须只有一个根元素
 
 every component must have a single root element.
@@ -1003,35 +968,27 @@ every component must have a single root element.
 
 :::
 
-
-
 ::: details 为什么Vue不支持IE8及以下版本？
 
 > 因为`Object.defineProperty` 是 ES5 中一个无法 shim 的特性.
 
 :::
 
-
-
 ::: details 不推荐挂载 root 实例到 < html> 或者 < body> 上
 
 > - 提供的元素el只能作为挂载点。不同于 Vue 1.x，所有的挂载元素会被 Vue 生成的 DOM 替换。
->
+> 
 > - 模板将会**替换**挂载的元素。挂载元素的内容都将被忽略，除非模板的内容有分发插槽。
 
 :::
 
-
-
 ::: details 为什么生命周期中可以使用this？
 
 > 所有的生命周期钩子自动绑定 `this` 上下文到实例中，因此你可以访问数据，对 property 和方法进行运算。
->
+> 
 > 这意味着你不能使用箭头函数来定义一个生命周期方法 。
 
 :::
-
-
 
 ::: details key的作用
 
@@ -1040,29 +997,27 @@ every component must have a single root element.
 
 :::
 
-
-
 ::: details extends 和 mixins 的区别
 
 > Vue.mixin(mixin) 会影响到所有组件，应该只在插件中使用
->
+> 
 > Vue.extend(options) 组件构造器，在 Vue3 中已被移除。
->
+> 
 > ```js
 > const Profile = Vue.extend({
 > template: '<p>hello {{name}}</p>',
 > data() {
 > return {
-> 	name: 'Aidan'
+>     name: 'Aidan'
 > }
 > }
 > })
 > // 创建一个 Profile 的实例，并将它挂载到一个元素上
 > new Profile().$mount('#app')
 > ```
->
+> 
 > extends 选项用于扩展另一个组件，且继承该组件的options
->
+> 
 > ```
 > var CompA = { ... }
 > 
@@ -1072,36 +1027,32 @@ every component must have a single root element.
 > ...
 > }
 > ```
->
+> 
 > mixins 可以用于dispatch组件间的可复用功能
->
+> 
 > ```
 > var myMixin = {
-> 	...
+>     ...
 > }
 > new Vue({
 > mixins: [myMixin],
 > })
 > ```
->
+> 
 > 在 Vue 3 中，我们强烈建议使用 `Composition API` 来替代继承与 mixin。如果因为某种原因仍然需要使用组件继承，你可以使用 `extends` 选项 来代替 `Vue.extend`。
->
+> 
 > ---
->
+> 
 > ```js
 > extends: Object | Function
 > mixins: Array<Object>
 > ```
->
+> 
 > **总结：** extends 和 mixins 实现方式几乎一致，都用同样的选项合并策略，只是 extends 被用于需要考虑继承的情况，mixins 则用于复用功能，同时多个mixins时后面的会覆盖前面的。（早期版本vue中组件自身的options优先级比extends的高，比mixins的低，目前vue2.6中组件自身的options优先级最高）
->
+> 
 > > 项目的图标统计分析中应用较多
 
 :::
-
-
-
-
 
 # 参考
 

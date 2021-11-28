@@ -4,11 +4,7 @@
 
 核心依赖
 
-- 
-
-
-
-## polyfill
+- ## polyfill
 
 ### presets
 
@@ -16,11 +12,8 @@
 
 [core-js@3带来的惊喜](https://www.cnblogs.com/sefaultment/p/11631314.html)
 
-
-
 ## 配置文件
 
 .baelrc
 
 babel.config.js
-

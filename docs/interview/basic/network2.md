@@ -15,8 +15,6 @@
 
 :::
 
-
-
 ## 认证、授权和凭证
 
 认证（Authentication）
@@ -33,8 +31,6 @@
 - 实现认证和授权的前提
 - 如银行办理手续，银行卡密码是认证，而身份证是凭证
 
-
-
 ### 常见的前后端鉴权方式
 
 - Session-Cookie
@@ -42,8 +38,6 @@
 - OAuth2.0（开放授权，如微信登录）
 
 （SSO，单点登录，在多个应用系统中，只需要登录一次，就可以访问其他相互信任的应用系统。）
-
-
 
 ## Cookie
 
@@ -60,54 +54,47 @@
 - 移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
 - 使用Cookie需要防范XSS攻击（secure：只允许请求为https时发送cookie，httponly：禁止JS脚本访问cookie）
 
-
-
 ### cookie和webStorage
 
 - cookie设置的value值不能超过4k，而且浏览器一般对同个站点也有cookie数量的限制；webStorage通常为5M
 - cookie会伴随着request一起发送，但webStorage并不会
 - server端也能使用cookie，但webStorage只能用在浏览器
 
-
-
 ## Session
 
 - **服务端**保持状态
 
 - Session存储在服务器上，可以放在文件、数据库、Redis或内存中，一般只将**session的id**存储在cookie中。
+
 - session 的运行依赖 session id，而 sessionid 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但可通过其它方式实现，比如**在 url 中传递** session_id「sid」）
+
 - session 需要手动删除，通常服务器会在用户退出登录时删除，或者会为 session 设置一个失效时间，以便把 session 删除，节省存储空间
-
-
 
 ### cookie和session认证
 
 用户认证的一般流程：
 
 > 1、用户向服务器发送用户名和密码。
->
+> 
 > 2、服务器验证通过后，在当前对话（session）里面保存相关数据，比如用户角色、登录时间等等。
->
+> 
 > 3、服务器向用户返回一个 session_id，写入用户的 Cookie。
->
+> 
 > 4、用户随后的每一次请求，都会通过 Cookie，将 session_id 传回服务器。
->
+> 
 > 5、服务器收到 session_id，找到前期保存的数据，由此得知用户的身份。
-
-
 
 ## token
 
 > 后端将token传给前端，前端保存在本地，以后需要权限才可以访问的时候，就可以在请求头上携带这个token
 
 - Access Token
+  
   - 服务端验证成功后，签发一个 token（将登录凭证做数字签名，加密之后得到token），把这个 token 发送给客户端。
   - 客户端收到 token 以后，将token保存在本地，比如cookie里或者 localStorage 里，以后每次请都携带这个token
   - 服务端验证请求里的token串（做解密和签名认证，判断其有效性），如果验证成功，就向客户端返回请求的数据
 
 - Refresh Token：用来刷新 access token
-
-
 
 ### token 和 session 的区别
 
@@ -115,8 +102,6 @@
 - session使服务端有状态化，可以记录会话信息；而token是凭证，使服务端无状态化，不会存储会话信息。
 
 > 做的项目中存在本地（cookie）的是token而没用session_id，token值用的是前后端约定的字段名来传输。在登录成功后，前端将获取到的accessToken和refreshToken存到cookie中，在之后的每次请求中添加到请求头header上，交由后端验证，验证成功则返回请求的数据。
-
-
 
 ## JWT
 
@@ -129,8 +114,6 @@ JSON Web Token（简称 JWT）是目前最流行的 **跨域认证** 解决方�
 - Signature：对前两部分的签名，防止数据篡改
 
 jwt与token不一样在于：JWT 自包含了用户信息和加密的数据，可以减少查询数据库
-
-
 
 ## Oauth
 
@@ -147,8 +130,6 @@ const url = 'https://open.weixin.qq.com/connect/qrconnect?appid=' + appid + '&re
 openWindow(url, thirdpart, 540, 540)
 ```
 
-
-
 ## sessionStorage 和 localStorage
 
 - sessionStorage
@@ -160,13 +141,11 @@ openWindow(url, thirdpart, 540, 540)
 
 | Browser    | localStorage | sessionStorage |
 | ---------- | ------------ | -------------- |
-| Mac Chrome | 约5M         | 约5M           |
-| IOS WeChat | 约2.5M       | 大于10M        |
-| Mac Safria | 约2.5M       | 大于10M        |
+| Mac Chrome | 约5M          | 约5M            |
+| IOS WeChat | 约2.5M        | 大于10M          |
+| Mac Safria | 约2.5M        | 大于10M          |
 
 TODO: 测试一下sessionStorage在不同标签页的共享和清理情况
-
-
 
 ## 浏览器缓存
 
@@ -185,10 +164,6 @@ TODO: 测试一下sessionStorage在不同标签页的共享和清理情况
 优先级：服务器校验优先考虑Etag（例如适用于文件内容未修改但是修改时间变动的情况）
 
 性能上：Etag要逊于Last-Modified（etag需要每次服务端的读写，后者是个常量只要读取）
-
-
-
-
 
 # 参考
 

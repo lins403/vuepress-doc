@@ -2,23 +2,21 @@
 
 ## 命令
 
-`npm outdated`	# 列出所以可以更新的package
+`npm outdated`    # 列出所以可以更新的package
 
 `npm install`
 
 ```sh
---save		#-S
---save--dev		#-D
---global		#-g
+--save        #-S
+--save--dev        #-D
+--global        #-g
 --no-save
---force 	#Recommended protections disabled. overriding peer dependency
+--force     #Recommended protections disabled. overriding peer dependency
 ```
 
 [npm-install > configuration](https://docs.npmjs.com/cli/v7/commands/npm-install#configuration)
 
 `npm shrinkwrap` npm-shrinkwrap.json （npm5以前用来lock版本的）
-
-
 
 ## 踩坑
 
@@ -30,8 +28,6 @@
 # 回退版本
 npm install --global npm@6
 ```
-
-
 
 #### 1）peerDependencies
 
@@ -51,8 +47,6 @@ npm install --legacy-peer-deps
 
 [一文搞懂peerDependencies](https://juejin.cn/post/6844904134248759309)
 
-
-
 #### 2）node与node-sass的兼容性问题
 
 | NodeJS  | Supported node-sass version | Node Module |
@@ -70,11 +64,9 @@ npm i node-sass@4.14.0
 
 ```json
 // 修改 node-sass 为 dart-sass
--	"node-sass": "^4.9.0",
-+	"sass": "1.30.0",
+-    "node-sass": "^4.9.0",
++    "sass": "1.30.0",
 ```
-
-
 
 ### 更换镜像源
 
@@ -87,8 +79,6 @@ npm config set registry https://registry.npmjs.org
 npm install <package-name> --registry https://registry.npmjs.org
 npm outdated --registry https://skimdb.npmjs.com/registry
 ```
-
-
 
 ## CDN
 
@@ -120,11 +110,8 @@ npm outdated --registry https://skimdb.npmjs.com/registry
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 ```
 
-
-
 ## Package
 
 fuse.js 模糊搜索
 
 vue-pdf 基于pdf.js的展示PDF
-

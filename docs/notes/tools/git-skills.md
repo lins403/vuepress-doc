@@ -31,10 +31,10 @@ git commit 保存快照，而 checkout 本质上是去操作HEAD指针，用快�
 ### git stash
 
 ```sh
-git stash	# 可以执行多次
+git stash    # 可以执行多次
 git stash list
-git stash pop [stash_id]	# 会把工作区和暂存区的改动都恢复到工作区
-git stash pop --index	# 会把工作区和暂存区的改动都恢复到工作区
+git stash pop [stash_id]    # 会把工作区和暂存区的改动都恢复到工作区
+git stash pop --index    # 会把工作区和暂存区的改动都恢复到工作区
 git stash drop [stash_id]
 git stash clear
 ```
@@ -42,17 +42,17 @@ git stash clear
 ### git cherry-pick
 
 ```bash
-git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不同分支的同步修改
+git cherry-pick <commit-id>    # 将指定commit应用于当前分支，用于不同分支的同步修改
 ```
 
 ### git merge
 
 ```sh
---ff		默认情况采用fast-forward模式【快进模式，不会产生新的merge commit】
---no-ff		即使可以使用fast-forward模式，也要创建一个新的合并节点
---squash	合并中间的commit【所有修改被保存到工作区，需要重新commit，导致原来commit的author信息会丢失】
---abort		终止产生冲突的合并
---no-commit	合并后不自动commit
+--ff        默认情况采用fast-forward模式【快进模式，不会产生新的merge commit】
+--no-ff        即使可以使用fast-forward模式，也要创建一个新的合并节点
+--squash    合并中间的commit【所有修改被保存到工作区，需要重新commit，导致原来commit的author信息会丢失】
+--abort        终止产生冲突的合并
+--no-commit    合并后不自动commit
 ```
 
 > 个人而言，单个分支用 `git fetch & git merge`，多个分支合并中，自己的分支同步主分支使用 `git rebase`，主分支合并pull request 用常规的 no-ff
@@ -60,20 +60,20 @@ git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不�
 ### git rebase
 
 1. 合并多次提交纪录，减少了无用的提交信息，保持分支整洁
-
+   
    ```sh
    # 合并最近的 4 次提交纪录，-i开启交互，还可以自定义合并，例如合并第2第3条
    git rebase -i HEAD~4
    ```
 
 2. 分支合并，相比 merge 来说会减少分支合并的记录（但如果feature这个分支也有其他人在使用，则会造成一定困扰）
-
+   
    把分支的冲突在本地解决了以后，远端 pr 合并时管理员不需要在解决冲突
    
    ```sh
    # 🌰:同步dev的commit至dev-lin
    git checkout dev-lin
-   git rebase dev		# 交互式：git rebase -i master
+   git rebase dev        # 交互式：git rebase -i master
    git push
    ```
    
@@ -84,7 +84,7 @@ git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不�
    ```
 
 3. 同个分支的合并
-
+   
    ```sh
    # 有本地的commit和远端已经fetch下来的commit
    # 把本地的分支rebase到origin的这个分支上，然后再commit
@@ -93,7 +93,7 @@ git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不�
    ```
 
 4. 指定多个commit的分支合并（有点问题⚠️）
-
+   
    ```sh
    # 如果不用cherry-pick
    # 假如 master 落后 dev 5个提交，而只想要dev的前3个commit同步到master上
@@ -101,8 +101,6 @@ git cherry-pick <commit-id>	# 将指定commit应用于当前分支，用于不�
    git switch -c dev <commit-id>
    git rebase --onto dev temp master
    ```
-
-
 
 ### git revert
 
@@ -156,12 +154,10 @@ git tag -a v1.2 <commit-id>
 
 # 删除标签
 git tag -d v1.4
-git push origin --delete <tagname>	# 远端
+git push origin --delete <tagname>    # 远端
 ```
 
 有更多的意义也可以考虑新建 stable 分支
-
-
 
 ## 二、Git commit 规范
 
@@ -187,17 +183,11 @@ git push origin --delete <tagname>	# 远端
 
 [npm trends](https://www.npmtrends.com/commitizen-vs-commitlint-vs-@commitlint/cli)
 
-
-
 ## 三、心得
 
 - 结合使用GUI客户端（github desktop 、VSCode 插件）
 - 用 git restore、git switch 等新命令取代 checkout
 - ...
-
-
-
-
 
 # 参考
 
@@ -210,4 +200,3 @@ git push origin --delete <tagname>	# 远端
 [Git Commit Message Convention](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
 
 [Angular > commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
-

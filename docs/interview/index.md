@@ -1,7 +1,5 @@
 # 面试知识点整理
 
-
-
 ## 大纲类
 
 [关于前端学习路线的一些建议](https://chinese.freecodecamp.org/news/map-of-learning-front-end/)
@@ -10,10 +8,6 @@
 
 [牛客网面试宝库](https://www.nowcoder.com/tutorial/96/6bc2c10079b245f6b8f02ddb6ca571cf)
 
-
-
-
-
 ## 真题类
 
 [web前端面试 - 面试官系列](https://vue3js.cn/interview/)
@@ -21,8 +15,6 @@
 [前端面试之道--汪图南](https://wangtunan.github.io/blog/interview/)
 
 [前端 100 问--木易杨](https://github.com/yygmind/blog/issues/43)
-
-
 
 ## 心得类
 

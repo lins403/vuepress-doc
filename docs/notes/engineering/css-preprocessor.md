@@ -42,13 +42,9 @@ export default {
 
 React直接使用 CSS-in-JS ：[styled-components](https://github.com/styled-components/styled-components)
 
-
-
 ## 预处理器
 
 [Vue Loader > 使用预处理器](https://vue-loader.vuejs.org/zh/guide/pre-processors.html#%E4%BD%BF%E7%94%A8%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8)
-
-
 
 ### PostCSS
 
@@ -61,8 +57,6 @@ VueCli内置postcss、postcss-loader、postcss用于添加浏览器前缀的插�
 
 [@vue/cli-service > postcss配置](https://github.com/vuejs/vue-cli/blob/e661a923751c2f49a24cb065b5dd5999169e86af/packages/%40vue/cli-service/lib/config/css.js#L50)
 
-
-
 ## SCSS
 
 - LT3.0 `.sass`
@@ -74,8 +68,6 @@ VueCli内置postcss、postcss-loader、postcss用于添加浏览器前缀的插�
 <https://sass-lang.com/dart-sass>
 
 [Node Sass to Dart Sass](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/sass.html#node-sass-to-dart-sass)
-
-
 
 ### SCSS Lint
 
@@ -154,8 +146,6 @@ disable complains：<https://stylelint.io/user-guide/ignore-code/>
 
 stylelint 插件的设置中，添加 `vue` 文件的支持很多时候，例如使用模板字符串、或者使用带$的私有变量，会带来多余的complains，所以 lint-staged 中 .vue 文件也不使用 `stylelint --fix`
 
-
-
 ### 使用
 
 注释
@@ -179,7 +169,7 @@ Basic
 - Extend/Inheritance
 - Math Operators
 
-Advanced	
+Advanced    
 
 ```scss
 @function
@@ -192,15 +182,16 @@ Advanced
 @while
 ```
 
-
-
 ### less-vs-sass-vs-stylus
 
 [npm trends](https://www.npmtrends.com/less-vs-sass-vs-stylus)
 
 - 变量、嵌套、模块、mixins、继承、运算符、内建函数、控制流
+
 - Less和Stylus都是用JavaScript写的，能直接用在浏览器端和node，Sass用Dart写的，~~需要在服务端做处理，~~ 但npm发布的package是纯JavaScript的
 
 - Less不能使用条件语句、不能自定义function、不能使用带参数的mixins，SCSS的extend也更直观好用
+
 - stylus差异较大，采用缩进，其它特性的语法也偏简洁
+
 - 总之，SCSS更面向编程，less只能说是css的拓展，不喜欢Stylus的风格，趋势热度上亦或是语法功能上，都倾向于选择scss

@@ -3,8 +3,6 @@
 - v4
 - v5
 
-
-
 ## 1. events
 
 ```js
@@ -13,16 +11,14 @@
 console.dir(/* echartsInstance */)
 ```
 
-
-
 ```js
 this.chart.on('click', params => {})
 // 等价于
 this.chart.on('click', 'series', params => {
-	console.log(params);
+  console.log(params);
 })
 
-// this.chart.on('click', 'title.text', params=>{})		//not work
+// this.chart.on('click', 'title.text', params=>{})        //not work
 // on的方法缺陷在于只能监听具体图形的事件，例如无法监听具体图形外的事件，标题、柱状图阴影部分的点击事件
 ```
 
@@ -43,8 +39,6 @@ this.chart.getZr().on('click', params => {
   }
 })
 ```
-
-
 
 ### 柱状图点击改变柱子颜色
 
@@ -78,30 +72,30 @@ const AreaBarLinkage = {
 }
 ```
 
-
 ## 2. action
+
 ### 饼图默认高亮
 
 ```js
 handleChartClick() {
   let selectedDataIndex = 1
-  
+
   this.chart.on('click', 'series', params => {
     selectedDataIndex = params.dataIndex
   })
-  
+
   this.chart.dispatchAction({
-    type: 'pieSelect',	// 效果并不好
+    type: 'pieSelect',    // 效果并不好
     dataIndex: this.selectedDataIndex
   })
-  
-  
+
+
   //设置默认选中高亮部分
   this.chart.dispatchAction({
     type: 'highlight',
     dataIndex: selectedDataIndex
   })
-  
+
   this.chart.on('mouseover', e => {
     //当检测到鼠标悬停事件，取消默认选中高亮
     this.chart.dispatchAction({
@@ -114,7 +108,7 @@ handleChartClick() {
       dataIndex: e.dataIndex
     })
   })
-  
+
   //检测鼠标移出后显示之前默认高亮的那块
   this.chart.on('mouseout', e => {
     this.chart.dispatchAction({
@@ -125,8 +119,8 @@ handleChartClick() {
 }
 ```
 
-
 ## 3. theme
+
 ### 使用渐变色
 
 ```js
@@ -164,8 +158,6 @@ import LinearGradient from 'zrender/src/graphic/LinearGradient';
   ]
 }
 ```
-
-
 
 # 参考
 

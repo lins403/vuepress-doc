@@ -6,14 +6,12 @@
 
 [Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN)
 
-
-
 ## 二、常用命令
 
 ![git命令操作图例](https://i.stack.imgur.com/cZkcV.jpg)
 
 ```sh
-git status	# 显示工作目录和暂存区的状态
+git status    # 显示工作目录和暂存区的状态
 
 # 创建+切换分支
 git checkout -b <name>
@@ -41,8 +39,6 @@ git push origin --delete <name>
 git branch -a
 ```
 
-
-
 ## 三、Git Hooks
 
 [all Git hooks](https://git-scm.com/docs/githooks)
@@ -51,7 +47,7 @@ Hook 就是在执行某个事件之前或之后进行一些其他额外的操作
 
 Git Hooks 的实现其实非常简单，就是就 `.git/hooks` 文件下，保存了一些 shell 脚本，然后在对应的钩子中执行这些脚本就行了。
 
-### Husky 
+### Husky
 
 通过配置项目（通常是根路径下的`.husky`）下存放可执行脚本
 
@@ -92,8 +88,6 @@ npx --no-install lint-staged
 yarn lint-staged
 ```
 
-
-
 ### commitlint
 
 ```sh
@@ -107,8 +101,6 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
 # test
 npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
-
-
 
 #### rule
 
@@ -131,8 +123,6 @@ module.exports = {
 }
 ```
 
-
-
 #### 规范
 
 [Git Commit Message Convention](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
@@ -151,8 +141,6 @@ module.exports = {
 // Commit Message Header
 <type>(<scope>): <short summary>
 ```
-
-
 
 # 参考
 

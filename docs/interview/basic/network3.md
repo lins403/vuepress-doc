@@ -1,7 +1,5 @@
 # 网络安全
 
-
-
 ## 一、跨域
 
 ### 域名
@@ -20,8 +18,6 @@ DNS，*Domain Name System*，基于 UDP 协议
 - CNAME记录（Canonical Name），把一个域名解析到另外一个域名，可应用于CDN服务
 - NS 记录（Name Server，域名服务器），返回保存下一级域名信息的服务器地址，只能设置为域名而非IP地址
 
-
-
 ### 同源策略
 
 只允许URL路径不同，端口、协议、主机不同，都算是跨域
@@ -29,8 +25,6 @@ DNS，*Domain Name System*，基于 UDP 协议
 [浏览器的同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
 
 cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止跨域可以保证cookie与用户信息的相对安全性
-
-
 
 ### JSONP
 
@@ -40,13 +34,9 @@ cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止�
 
 - 只能是get请求
 
-
-
 ### iframe
 
 使用 <u>空的 iframe + form 表单</u> 实现 POST 请求
-
-
 
 ### CORS
 
@@ -57,8 +47,6 @@ cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止�
 - 复杂请求会多一次预检请求，返回状态码204，通过预检请求后就像简单请求一样正常访问。
 
 [跨域资源共享 CORS 详解](https://www.ruanyifeng.com/blog/2016/04/cors.html)
-
-
 
 ### 代理
 
@@ -72,8 +60,6 @@ cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止�
 
 - 正向代理：客户端的代理，为客户端服务的，隐藏客户端，一般针对的是和所有的服务器，而不是特定的（所以我理解devServer也是反向代理，科学上网才是正向代理）
 - 反向代理：服务端的代理，隐藏服务器
-
-
 
 ## 二、XHR、Promise、Ajax、Axios、Fetch
 
@@ -106,8 +92,6 @@ cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止�
 
 - 基于Promise的http库，可以用在浏览器和nodejs中，底层实现还是基于XHR对象
 
-
-
 ## 三、网络攻击
 
 ### 类型
@@ -116,8 +100,6 @@ cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止�
 - DDOS
   - DDoS（distributed denial-of-service attack），攻击目标网站至瘫痪、资源耗尽
 - 钓鱼
-
-
 
 ### XSS
 
@@ -141,8 +123,6 @@ xss（Cross-site scripting，跨站脚本攻击），是一种代码注入攻击
 - 防止浏览器执行~（开发者慎用 innerHTML、document.write()、v-html 等）
 - 启用 CSP (Content Security Policy，白名单机制，HTTP 头信息的`Content-Security-Policy`的字段）
 
-
-
 ### CSRF
 
 CSRF（Cross-site request forgery, 跨站点请求伪造），黑客可以设法伪造带有正确 Cookie 的 HTTP 请求，就是利用用户的cookie骗过目标网站，让网站以为是用户自己的操作。
@@ -155,20 +135,17 @@ cookie本身不能跨域，但是请求可能是CORS请求（Access-Control-Allo
 #### 防御策略
 
 - 禁止外域使用cookie
+  
   - 同源检测（Header中的Referer，来源URL地址，告诉服务器用户访问当前资源之前的位置）
   - 设置cookie的samesite属性（设置为Strict则禁止第三方使用该cookie，为Lax则禁止get以外的请求）
 
 - 添加校验token
-
-
 
 ### 点击劫持
 
 click Jacking，通常是用iframe或图片覆盖，伪造骗取用户点击
 
 防御：限制iframe的跨域；设置cookie的samesite属性
-
-
 
 # 参考
 

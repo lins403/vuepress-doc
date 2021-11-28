@@ -2,8 +2,6 @@
 
 [前端科普系列-Node.js:换个角度看世界](https://zhuanlan.zhihu.com/p/91844181)
 
-
-
 ## 预备知识
 
 ### 计算机原理
@@ -46,16 +44,10 @@
 - 吞吐量 (Throughput)
   - 数据层的指标，指单位时间内系统传输的数据量，以MB/GB等为单位
 
-
-
 #### 高并发系统设计
 
 - 高并发、低延时
 - 高性能、高可用、高扩展
-
-
-
-
 
 ## 特点
 
@@ -64,18 +56,14 @@
 - 可扩展性
 
 > As an asynchronous event-driven JavaScript runtime, Node.js is designed to build scalable network applications. 
->
+> 
 >  It presents an [event loop](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) as a runtime construct instead of as a library. Node.js simply enters the event loop after executing the input script. Node.js exits the event loop when there are no more callbacks to perform. 【内置event loop，无需用户启用】
->
+> 
 > HTTP is a first-class citizen in Node.js, designed with streaming and low latency in mind.
->
+> 
 > Node.js being <u>designed without threads</u>【被设计成单线程】 doesn't mean you can't take advantage of multiple cores in your environment.【node也可以使用多进程】
 
-
-
 ## 基本原理
-
-
 
 <img src="https://image-static.segmentfault.com/234/648/2346487390-5ab46904a01be_fix732" style="zoom:50%;" />
 
@@ -85,20 +73,16 @@
   - 所以node的单线程指的是接收任务的时候，无需进程/线程切换上下文的成本，所以高效，但是执行任务时是在线程池中通过多线程执行
 - 在`Node.js Bindings`层做的事儿就是将 Chrome V8 等暴露的 `C/C++` 接口转成JavaScript Api，并且结合这些 Api 编写了 Node.js 标准库，所有这些 Api 统称为 Node.js SDK
 
-
-
 ## 应用场景
 
-| 分类                         | 相关模块                             |
-| ---------------------------- | ------------------------------------ |
-| 网站 / API代理 / [SSR & PWA] | Express、Koa                         |
-| HTTP Api 接口                | Restify、HApi                        |
-| 前端构建工具                 | Grunt / Gulp / Bower / Webpack / ... |
-| 跨平台打包工具               | electron、nw.js                      |
-| 编辑器                       | electron                             |
-| ...                          |                                      |
-
-
+| 分类                       | 相关模块                                 |
+| ------------------------ | ------------------------------------ |
+| 网站 / API代理 / [SSR & PWA] | Express、Koa                          |
+| HTTP Api 接口              | Restify、HApi                         |
+| 前端构建工具                   | Grunt / Gulp / Bower / Webpack / ... |
+| 跨平台打包工具                  | electron、nw.js                       |
+| 编辑器                      | electron                             |
+| ...                      |                                      |
 
 ## 安装配置
 
@@ -134,11 +118,9 @@ npm -v
 brew install node@14
 # brew list node@14
 brew link node@14
-node -v		# v14.16.1
-npm -v		# 6.14.12
+node -v        # v14.16.1
+npm -v        # 6.14.12
 ```
-
-
 
 ## 学习核心
 
@@ -151,10 +133,6 @@ Node.js的API都是异步的，同步的函数是奢求，要查API文档，在�
 - Api写法：Error-first Callback 和 EventEmitter 
 - Promise 
 - async/await
-
-
-
-
 
 # 参考
 

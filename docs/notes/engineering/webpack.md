@@ -20,8 +20,6 @@ echo "/node_modules" > .gitignore
 4. [官方在线demo](https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/getting-started?terminal=)
 5. npm i webpack-dev-server -D
 
-
-
 ## 核心概念
 
 > 本质上，**webpack** 是一个用于现代 JavaScript 应用程序的 *静态模块打包工具*。当 webpack 处理应用程序时，它会在内部从一个或多个入口点构建一个 [依赖图(dependency graph)](https://webpack.docschina.org/concepts/dependency-graph/)，然后将你项目中所需的每一个模块组合成一个或多个 *bundles*，它们均为静态资源，用于展示你的内容。
@@ -60,14 +58,12 @@ webpackConfig.module
 
 [Webpack Loaders](https://webpack.docschina.org/loaders/)
 
-
-
 ### plugins
 
 插件可以改变webpack的工作方式，拓展webpack的能力
 
 ```js
-const HtmlWebpackPlugin = require('html-webpack-plugin');	// require插件
+const HtmlWebpackPlugin = require('html-webpack-plugin');    // require插件
 const webpack = require('webpack'); // 用于访问内置插件
 
 module.exports = {
@@ -76,8 +72,6 @@ module.exports = {
 ```
 
 [Webpack Plugins](https://webpack.docschina.org/plugins/)
-
-
 
 ## 配置
 
@@ -95,8 +89,6 @@ module.exports = {
 }
 ```
 
-
-
 ### 2) module
 
 决定了如何处理项目中的[不同类型的模块](https://webpack.docschina.org/concepts/modules)
@@ -111,13 +103,11 @@ module: {
 },
 ```
 
-
-
 ### 3) resolve
 
 ```js
 resolve: {
-  extensions: ['.mjs', '.js', '.jsx', '.vue', '.json', '.wasm'], 	// ['.js', '.json', '.wasm']
+  extensions: ['.mjs', '.js', '.jsx', '.vue', '.json', '.wasm'],     // ['.js', '.json', '.wasm']
     // import模块时就不带上后缀名，按顺序依次解析查找，找到时就跳过后面的
   alias: {
     '@': path.resolve(__dirname, 'src'),
@@ -127,8 +117,6 @@ resolve: {
   }
 }
 ```
-
-
 
 ### 4) devServer
 
@@ -142,10 +130,10 @@ npm i webpack-dev-server -D
 
 # package.json
 {
-	"scripts": {
+    "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server"
-	},
+    },
 }
 ```
 
@@ -158,36 +146,34 @@ module.exports = {
   //...
   externals: {
     // 防止import的依赖包被打包进bundle，而在运行时再去从<script>标签获取依赖，比如CDN
-    jquery: 'jQuery',		// key: global variable（依赖包暴露的全局变量）
+    jquery: 'jQuery',        // key: global variable（依赖包暴露的全局变量）
   },
   devServer: {
     static: {
       // 参考Express中static(root, [options])的配置
-      directory: path.join(__dirname, 'public'),	// webpack4的contentBase，监听静态资源的目录(index.html所在位置)
-      publicPath: '/assets',		// 告诉服务器在哪个 URL 上提供 static.directory 的内容（拦截资源路径，相当于directory的访问路径的前缀）
-      watch: process.env.NODE_ENV === 'development',		// 文件更改时触发整个页面重新加载
+      directory: path.join(__dirname, 'public'),    // webpack4的contentBase，监听静态资源的目录(index.html所在位置)
+      publicPath: '/assets',        // 告诉服务器在哪个 URL 上提供 static.directory 的内容（拦截资源路径，相当于directory的访问路径的前缀）
+      watch: process.env.NODE_ENV === 'development',        // 文件更改时触发整个页面重新加载
     },
-    compress: true,		// gzip compression
+    compress: true,        // gzip compression
     port: 9000,
-    open: true,		// 启动后打开浏览器
-    // open: ['/login'],		// 启动后打开设置页面
+    open: true,        // 启动后打开浏览器
+    // open: ['/login'],        // 启动后打开设置页面
     client: {
-      overlay: true,		// 浏览器页面上显示错误
+      overlay: true,        // 浏览器页面上显示错误
     },
-    hot: true,		// 热更新
+    hot: true,        // 热更新
     devtool: 'cheap-eval-source-map',
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
         pathRewrite: { '^/api': '' },
-        changeOrigin: false,		// 默认是true时，request header中的host会被替换为target
+        changeOrigin: false,        // 默认是true时，request header中的host会被替换为target
       },
     },
   },
 };
 ```
-
-
 
 #### compress
 
@@ -197,8 +183,6 @@ module.exports = {
 - nginx 有静态压缩和实时压缩(always)两种方式，如果 `gzip_static` 设置为 on 以后，检查本地是否有 precompressed files( `.gz` 文件)，如果有就直接作为压缩结果使用，而不再进行实时压缩
 
 [webpack gzip 和 nginx gzip的区别](https://blog.csdn.net/sd4015700/article/details/118650050)
-
-
 
 ### 5) optimization
 
@@ -211,10 +195,10 @@ module.exports = {
   //...
   optimization: {
     runtimeChunk: {
-      name: 'runtime',		// 为每个entry添加一个 只含有runtime 的额外chunk，也会被自动引入到index.html
+      name: 'runtime',        // 为每个entry添加一个 只含有runtime 的额外chunk，也会被自动引入到index.html
       // 重复打包哈希值不变，可以充分利用浏览器缓存
     },
-    // minimize: true,		// mode为production时自动启用(为development时不能生效？？)
+    // minimize: true,        // mode为production时自动启用(为development时不能生效？？)
     minimizer: [
       // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`）
       // `...`,
@@ -238,12 +222,12 @@ module.exports = {
 通用分块策略(common chunk strategy)
 
 > webpack 将根据以下条件自动拆分 chunks：
->
+> 
 > - 新的 chunk 可以被共享，或者模块来自于 `node_modules` 文件夹
 > - 新的 chunk <u>体积大于 20kb</u>（在进行 min+gz 之前的体积）
 > - 当<u>按需加载 chunks 时</u>，并行请求的最大数量小于或等于 30
 > - 当<u>加载初始化页面时</u>，并发请求的最大数量小于或等于 30
->
+> 
 > 当尝试满足最后两个条件时，最好使用较大的 chunks。
 
 ```js
@@ -274,8 +258,6 @@ module.exports = {
 }
 ```
 
-
-
 ## 技巧
 
 ### 多页面应用程序
@@ -302,15 +284,11 @@ build
 
 ### mock和proxy
 
-
-
 因为webpack-dev-server启动了一个服务器，所以在开发时，前端去请求真正的后台接口，是存在跨域问题的。webpack提供了跨域的解决方案，原理就是让服务器反向代理请求真正的接口
 
 ### webpack & HTTP/2
 
 https://medium.com/webpack/webpack-http-2-7083ec3f3ce6
-
-
 
 ## 延伸问题
 
@@ -320,8 +298,6 @@ loader 用于转换某些类型的模块，而插件则可以用于执行范围�
 
 :::
 
-
-
 # 参考
 
 [webpack5 中文文档](https://webpack.docschina.org/)
@@ -329,10 +305,6 @@ loader 用于转换某些类型的模块，而插件则可以用于执行范围�
 [webpack多页面打包实践](https://juejin.cn/post/6844904074421207047)
 
 [详细的 webpack4 多入口配置](https://segmentfault.com/a/1190000021555875)
-
-
-
-
 
 https://www.valentinog.com/blog/webpack/
 

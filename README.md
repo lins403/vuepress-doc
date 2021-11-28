@@ -2,12 +2,10 @@
 
 <https://lins403.github.io/vuepress-doc/>
 
-
-
 # 搭建与部署
 
 >  [官方指南](https://vuepress.vuejs.org/zh/guide/)
->
+> 
 > [跟着这篇文章做完，你就会搭建个人博客了！](https://www.jianshu.com/p/6e8c608f24c8)
 
 ## 本地部署
@@ -56,10 +54,6 @@ jobs:
           FOLDER: docs/.vuepress/dist
 ```
 
-
-
-
-
 # 配置
 
 > [默认主题配置](https://vuepress.vuejs.org/zh/theme/default-theme-config.html#%E9%A6%96%E9%A1%B5)
@@ -86,15 +80,11 @@ module.exports = {
   }
 ```
 
-
-
 # 技巧
 
 ## 写作规范
 
 <https://github.com/ruanyf/document-style-guide>
-
-
 
 ## 英文单词左右空格
 
@@ -112,4 +102,3 @@ vscode > 替换 > 在选定内容中查找
 \b([a-zA-Z]+)\b ([%，；、。！？【】])
 $1$2
 ```
-

@@ -1,7 +1,5 @@
 # Utils
 
-
-
 ## window
 
 ### Size
@@ -37,8 +35,6 @@ const height =
    - Screen.width
    - Screen.availWidth
 
-
-
 ## Navigator
 
 ### userAgent
@@ -54,11 +50,6 @@ if (/mobi/.test(ua)) {
 }
 ```
 
-
-
-
-
 # 参考
 
 [W3Schools How To](https://www.w3schools.com/howto/default.asp)
-

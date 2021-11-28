@@ -23,4 +23,3 @@
 - 增加了保留字（比如`protected`、`static`和`interface`）
 
 [ECMAScript 6 入门 > Module > 严格模式](https://es6.ruanyifeng.com/#docs/module#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F)
-

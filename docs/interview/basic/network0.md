@@ -52,8 +52,6 @@
 - 2019年12月，**WebAssembly**成为W3C的推荐，与 HTML，CSS 和 JavaScript 一起，成为 Web 的第四种语言
 - 2020年9月，Vuejs 3.0 正式版发布，代号：One Piece
 
-
-
 ---
 
 **Java Web**
@@ -67,18 +65,13 @@
 - MVC时代：后端人员只写Servlet，前端人员只写JSP，提高开发效率
 - 框架时代：SSH、SSM
 
-
-
 ---
 
 - web1.0，网站单向消息推送，门户网站
 - web2.0，用户与网站的可交互行为，博客网站
-
-
 
 # 参考
 
 [JavaScript 语言的历史](https://wangdoc.com/javascript/basic/history.html)
 
 [前端开发的历史和趋势](https://github.com/ruanyf/jstraining/blob/master/docs/history.md)
-

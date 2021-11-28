@@ -29,8 +29,6 @@ bar.js
 - 将来浏览器的新 API 就能用模块格式提供，不再必须做成全局变量或者`navigator`对象的属性。
 - 不再需要对象作为命名空间（比如`Math`对象），未来这些功能可以通过模块提供。
 
-
-
 ## 语法
 
 ```javascript
@@ -39,7 +37,7 @@ export
 // 只能用于模块最外层，便于静态分析，所以不能用在代码块中
 // 或者说由于import是静态执行，所以不能使用需要运行才能得到结果的表达式和变量
 
-export default	
+export default    
 // 一个模块只能用一次，对应的import不需要{}
 // 本质上就是输出一个叫做default的变量或方法，然后系统允许你为它取任意名字
 
@@ -63,8 +61,6 @@ import(`./section-modules/${someVariable}.js`)
     main.textContent = err.message;
   });
 ```
-
-
 
 ```javascript
 // modules.js
@@ -97,15 +93,15 @@ bar();
 foo();
 ```
 
-
-
 ## 特点
 
 - ==编译时加载==
+  
   - 静态分析，编译时就能确定模块间的依赖关系
   - import 提升
 
 - 自动采用严格模式
+
 - 被导出的值是 ==引用==，而非像commonjs那样的拷贝
 
 ```js
@@ -117,9 +113,9 @@ export function incCounter() {
 
 // main.js
 import { counter, incCounter } from './lib'
-console.log(counter);	// 3
+console.log(counter);    // 3
 incCounter();
-console.log(counter);	// 4
+console.log(counter);    // 4
 ```
 
 - `import`语句是 Singleton 模式
@@ -132,8 +128,6 @@ import { foo, bar } from 'my_module';
 
 // if(INSTANCE == null){ INSTANCE = new Singleton(); }
 ```
-
-
 
 ## 应用
 
@@ -154,8 +148,6 @@ npm install express --save
 touch server.js
 node server.js
 ```
-
-
 
 #### Node
 
@@ -224,8 +216,6 @@ webpack 2 支持原生的 ES6 模块语法，意味着你无须额外引入 babe
 
 Rollup 对代码模块使用新的标准化格式，这些标准都包含在 JavaScript 的 ES6 版本中，而不是以前的特殊解决方案，如 CommonJS 和 AMD。
 
-
-
 ## ES Module 与 Commonjs
 
 ### 原理
@@ -282,7 +272,7 @@ export const sleep = interval => {
 
 // runtime.js
 ;(async () => {
-	// const module = await import('./event.mjs')
+// const module = await import('./event.mjs')
   const { sleep } = await import('./event.mjs')
   console.log('Do some thing, ' + new Date())
   await sleep(2000)
@@ -293,15 +283,9 @@ export const sleep = interval => {
 > node runtime.js
 ```
 
-
-
 ## Tree-Shaking
 
 TODO
-
-
-
-
 
 # 参考
 

@@ -1,7 +1,5 @@
 # 设计模式
 
-
-
 ## 单例模式
 
 ```js
@@ -20,4 +18,3 @@ const p2 = new Person('chen')
 console.log(p1.name) // lin
 console.log(p2.name) // lin
 ```
-

@@ -51,8 +51,6 @@ Distributed Version Control System，简称 DVCS
 - 占据的存储空间较大
 - 太复杂的二进制或XML文件处理效果不如集中式
 
-
-
 ## 二、workflow工作流
 
 工作流，即分支管理策略，制定分支模型，更好的管理版本迭代、版本发布等
@@ -72,8 +70,6 @@ Distributed Version Control System，简称 DVCS
 - Environment Branches，每个环境，都对应一个分支。prodution 分支专门用来发布版本，pre-production预发、test-production测试。
 - Upstream First。代码合并的顺序，要按环境依次推送，确保代码被充分测试过，才会从上游分支合并到下游分支。（🌰: feature=>dev=>production）
 
-
-
 ## 三、HEAD、工作树、索引
 
 打开 `.git` 文件来看
@@ -81,9 +77,9 @@ Distributed Version Control System，简称 DVCS
 ### HEAD
 
 > ref: refs/heads/branch_name
->
+> 
 > > 指向 `.git/refs/heads/branch_name` ，其中保存了最新的提交即 commitId
->
+> 
 > HEAD指针 => 分支指针 => 最新提交
 
 #### detached head
@@ -91,8 +87,6 @@ Distributed Version Control System，简称 DVCS
 如果使用的是 `git checkout < commit id>`，即切换到指定的某一次提交，HEAD 就会处于 detached 状态（游离状态）
 
 detached 状态有利有弊，可以作临时分支，保存临时状态等，还是谨慎使用，及时切回其他分支HEAD。
-
-
 
 ### HEAD^ and HEAD~
 
@@ -118,8 +112,6 @@ detached 状态有利有弊，可以作临时分支，保存临时状态等，�
 2. The **index** is a single, large, binary file in `<baseOfRepo>/.git/index`, which lists all files in the current branch, their *sha1* checksums, time stamps and the file name -- it is not another directory with a copy of files in it.
 3. The **local repository** is a hidden directory (`.git`) including an `objects` directory containing all versions of every file in the repo (local branches and copies of remote branches) as a compressed "blob" file.
 
-
-
 ## 延伸问题
 
 ::: details 一、集中式 VS 分布式
@@ -140,8 +132,6 @@ HEAD指针保存的ref指向分支指针，分支指针保存的一个commit哈�
 
 :::
 
-
-
 # 参考
 
 [起步 - 关于版本控制](http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6)
@@ -155,4 +145,3 @@ HEAD指针保存的ref指向分支指针，分支指针保存的一个commit哈�
 [What's the difference between HEAD^ and HEAD~ in Git?](https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git)
 
 [What's the difference between HEAD, working tree and index, in Git?](https://stackoverflow.com/questions/3689838/whats-the-difference-between-head-working-tree-and-index-in-git)
-

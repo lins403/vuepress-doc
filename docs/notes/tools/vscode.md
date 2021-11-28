@@ -1,7 +1,5 @@
 # VSCode
 
-
-
 ## 配置
 
 ### 添加模板文件
@@ -17,16 +15,16 @@ Code > 首选项 > 用户片段
       "<template>",
       "  $2",
       "</template>",
-			"",
+            "",
       "<script>",
       "",
       "export default {",
       "  name: '$1',",
-			"  data(){",
-			"    return {",
-			"      $2",
-			"    }",
-			"  }",
+            "  data(){",
+            "    return {",
+            "      $2",
+            "    }",
+            "  }",
       "}",
       "</script>",
       "",
@@ -37,13 +35,12 @@ Code > 首选项 > 用户片段
     "description": "lin's vueInit"
   }
 }
-
 ```
 
 ```js
 // ~/Library/Application Support/Code/User/snippets/javascript.json
 {
-	"Print to console": {
+    "Print to console": {
     "prefix": "cl",
     "body": ["console.log($1)"],
     "description": "Log output to console"
@@ -63,10 +60,7 @@ Code > 首选项 > 用户片段
     "description": "Eslint disable block"
   }
 }
-
 ```
-
-
 
 ## 插件库
 
@@ -89,16 +83,12 @@ Code > 首选项 > 用户片段
 - Markdown Preview Enhanced
 - CSS Modules
 
-
-
 ### Git
 
 - **Git Graph**
 - Git History
 - **GitLens — Git supercharged**
 - Annotator
-
-
 
 ### 代码辅助工具
 
@@ -112,8 +102,6 @@ Code > 首选项 > 用户片段
 - **open in browser**
 - **Debugger for Chrome**
 
-
-
 ### 代码规范工具
 
 - EditorConfig for VS Code
@@ -123,8 +111,6 @@ Code > 首选项 > 用户片段
 - **Prettier - Code formatter**
 - **TSLint**
 - **stylelint** (stylelint-plus supports auto fix on save)
-
-
 
 ### 扩展
 

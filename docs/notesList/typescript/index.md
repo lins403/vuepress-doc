@@ -52,7 +52,7 @@ class Man{
 }
 
 const lisi:Man = new Man('lisi', 25)
-const zhangsan:Person = new Man('zhangsan', 20)		// no errors
+const zhangsan:Person = new Man('zhangsan', 20)        // no errors
 ```
 
 > 类型之间的对比，只会比较最终的结构，而忽略它们定义时的关系
@@ -73,7 +73,7 @@ interface Person{
 interface Person{
     name: string,
     age?: number,
-    [anyName: string]: number|undefined|string	// 或者any
+    [anyName: string]: number|undefined|string    // 或者any
 }
 
 let p1: Person = {
@@ -147,7 +147,7 @@ console.log(sort('typescript'))
 
 ### 类型断言
 
-```TypeScript {5,7,9}
+```TypeScript
 // 上面的例子可以改写为
 function sort(item: string|Array<any>|plainObj): any{
     const type = Object.prototype.toString.call(item).slice(8, -1)
@@ -238,4 +238,3 @@ namespace 是 ES moudle 以前的解决方案，是历史遗留方案，但 `dec
 [TypeScript for JavaScript Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
 [TypeScript 入门教程 > 基础](https://ts.xcatliu.com/basics/index.html)
-

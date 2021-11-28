@@ -3,8 +3,6 @@
 - 浏览器对象模型（Browser Object Model，简称 BOM），也就是 `window` 对象
 - 文档对象模型（Document Object Model，简称 DOM），也就是 `document` 对象
 
-
-
 ## 离线存储
 
 localStorage
@@ -37,21 +35,17 @@ indexDB
 - localStorage仅支持存储字符串，而indexDB几乎可以任何格式，包括图片的Blob数据（IE需要考虑兼容性）
 - indexDB可以在service workers中使用
 
-
-
 > **数据库**
->
+> 
 > ACID特性：原子性(Atomicity)、一致性(Consistemcy)、隔离性(Isolation)、持久性(Durability)
->
+> 
 > 关系型数据库和非关系型数据库最大的理念区别在于，对数据一致性的要求。
->
+> 
 > 前者非常严格，一个事务操作中只要有一条数据不合规则，前面的也会被放弃掉，整个事务回滚至原来状态，牺牲性能而追求一致性和稳定性；后者数据结构不固定，灵活，扩展性强
->
+> 
 > 数据库中的“锁” lock，是保证数据库数据高并发时候数据一致性的一种机制
->
+> 
 > 回滚rollback、提交commit
-
-
 
 ### localForage
 
@@ -60,8 +54,6 @@ indexDB
 - 异步get和set，支持Promise和callback
 
 [localforage手册](https://localforage.docschina.org/#localforage)
-
-
 
 ## 渲染原理
 
@@ -88,7 +80,7 @@ The pixel pipeline:  <u>JavaScript > Style calculations > Layout > Paint > Compo
 ### 重排reflow
 
 > *Reflow* is any subsequent size and position determination of any part of the page or the entire document.
->
+> 
 > The first time the size and position of nodes are determined is called *layout*. Subsequent recalculations of node size and locations are called *reflows*. 
 
 修改了元素的layout属性，影响到其它元素的布局，例如  width, height, position 等等
@@ -112,8 +104,6 @@ Recalculate Style-->Update Layer Tree-->以及之后各个流程
 
 重排和重绘都是占用浏览器主线程，主线程JavaScript的执行可能就会给页面的重排和重绘造成影响，造成下一帧的画面不能按时渲染， 例如导致动画卡顿
 
-
-
 ---
 
 我觉得有不少歧义，按MDN的解释加之我的理解，浏览器会解析css构建CSSOM，然后和DOM树一起合并（combined）生成render tree，随后执行layout布局，去遍历render tree，确定树中每个node的size和position，按照每个元素的盒模型（box model properties，就是content、padding、border、margin等）排列，这样子才得到了Layout tree。
@@ -128,13 +118,9 @@ paint阶段就是将Layout tree上的每个box转换成页面上的实际像素�
 
 [Populating the page: how browsers work](https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work)
 
-
-
 requestAnimationFrame我看到别的博客提到节流效果，用节流解释太妙了。
 
 ---
-
-
 
 # browserslist
 
@@ -185,7 +171,7 @@ not ie < 11
 
 ```json
 {
-	"browserslist": {
+    "browserslist": {
     "development": [
       "chrome 92-96"
     ],
@@ -200,7 +186,5 @@ not ie < 11
   },
 }
 ```
-
-
 
 > 在生产环境构建中，Vue CLI 会优化 CSS 并基于目标浏览器抛弃不必要的浏览器前缀规则。因为默认开启了 `autoprefixer`，你只使用无前缀的 CSS 规则即可。

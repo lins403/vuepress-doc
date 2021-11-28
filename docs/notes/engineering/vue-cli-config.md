@@ -33,8 +33,6 @@ node `process.env`
 - [cross-env](https://www.npmjs.com/package/cross-env): Cross platform setting of environment scripts
 - [How is cross-env different from dotenv ?](https://github.com/kentcdodds/cross-env/issues/56#issuecomment-280095704)
 
-
-
 ## 配置
 
 https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config
@@ -42,8 +40,6 @@ https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config
 [base 配置](https://github.com/vuejs/vue-cli/blob/3f0b782bca7df17740b72509c42e5e2ea6562ac9/packages/%40vue/cli-service/lib/config/base.js)
 
 [dev 配置](https://github.com/vuejs/vue-cli/blob/f9863409739c8917b24c4844432f984d68877c63/packages/@vue/cli-service/lib/config/app.js)
-
-
 
 ## plugins
 

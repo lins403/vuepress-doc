@@ -11,7 +11,4 @@ https://juejin.cn/post/6844903887162310669
 - provide：`Object | () => Object`
 - inject：`Array<string> | { [key: string]: string | Symbol | Object }`
 
-
-
 ### EventBus
-

@@ -1,7 +1,5 @@
 # CSS基础
 
-
-
 ## 盒模型
 
 #### box-sizing
@@ -22,8 +20,6 @@
 // 是相对**父元素的宽度**，没有的话接着往上找
 ```
 
-
-
 ## transition 和 animation
 
 transition：为一个元素在不同状态之间切换的时候定义不同的过渡效果
@@ -36,10 +32,6 @@ animation：用来指定一组或多组动画，每组之间用逗号相隔
 
 - transition更强调状态的变化，开始到结束两种状态，通常需要外部触发，例如伪元素（:hover）之间的切换；
 - animation更强调帧的变化，可以自动触发，且可以被设置成无限次播放
-
-
-
-
 
 ## 选择器
 
@@ -61,8 +53,6 @@ animation：用来指定一组或多组动画，每组之间用逗号相隔
 
 *从0开始，一个行内样式+1000，一个id选择器+100，一个属性选择器、class或者伪类+10，一个元素选择器，或者伪元素+1，通配符+0。* !important无限大
 
-
-
 ### selector
 
 css_selector
@@ -74,8 +64,6 @@ xpath
 
 - 控制台下使用 `$x()`进行测试
 
-
-
 ## 渐变
 
 linear-gradirent线性渐变
@@ -84,16 +72,12 @@ radial-gradirent 径向渐变
 
 repeating-linear-gradient 重复渐变
 
-
-
 ## 特殊属性
 
 - `all`: Reset all styles
 - `::selection`: Changes the styling of text selection.
 
-
-
-## Q&A问题
+## FAQ
 
 ### 画一个三角形
 
@@ -101,12 +85,12 @@ repeating-linear-gradient 重复渐变
 div {
   width:0px;
   height:0px;
-  
+
   /*下三角形*/
   border-top:10px solid red;
   border-right:10px solid transparent;
   border-left:10px solid transparent;
-  
+
   /*上三角形*/
   border-right:10px solid transparent;
   border-bottom:10px solid blue;
@@ -114,17 +98,11 @@ div {
 }
 ```
 
-
-
 ### 居中
 
 - [transform centering](https://www.30secondsofcode.org/css/s/transform-centering)
   - transform相对自身盒模型的偏移
 - 
-
-
-
-
 
 ### 扩展
 

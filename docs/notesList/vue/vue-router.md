@@ -1,14 +1,12 @@
 # Vue Router
 
 - **this.$router**
-
+  
   router 实例
 
 - **this.$route**
-
+  
   当前激活的[路由信息对象](https://router.vuejs.org/zh/api/#路由对象)。这个属性是只读的，里面的属性是 immutable (不可变) 的，不过你可以 watch (监测变化) 它。
-
-
 
 ## 路由组件传参
 
@@ -44,4 +42,3 @@
   </keep-alive>
 </template>
 ```
-

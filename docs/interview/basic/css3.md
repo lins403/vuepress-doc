@@ -10,29 +10,19 @@
 
 文字环绕：`shape-outside`
 
-
-
 ## BFC
 
-
-
 ## 层叠上下文
-
-
 
 ## 性能优化
 
 不建议用@import导入css，因为会增加http请求，但预处理器中使用会被先编译，所以使用@import没有副作用
-
-
 
 ## 构建打包
 
 Vendor prefixes
 
 - postcss > autofixer (browserslist)
-
-
 
 ### loaders
 
@@ -41,8 +31,6 @@ Vendor prefixes
   - dynamically inject CSS into the document as style tags. (in header tags)
   - 使用多个`<style>`将 CSS 插入到 DOM 中，反应会更快，适用于 `development` 模式。
 - vue-style-loader支持SSR，与style-loader功能一致
-
-
 
 ### plugins
 
@@ -53,15 +41,11 @@ Vendor prefixes
   - 不要同时使用 `style-loader` *与* `mini-css-extract-plugin`
 - css-minimizer-webpack-plugin
 
-
-
 ## 规范
 
 ### BEM命名规范
 
 ### Stylelint
-
-
 
 ## Tips & Tricks
 
@@ -72,4 +56,3 @@ Vendor prefixes
 ### 
 
 ### 滚动进度条
-

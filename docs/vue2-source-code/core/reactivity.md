@@ -2,8 +2,6 @@
 
 ![](https://wangtunan.github.io/blog/assets/img/reactive.c9e2ac37.png)
 
-
-
 # props
 
 有多种定义方法，处理逻辑较复杂。
@@ -15,9 +13,9 @@
 ```js
 for (const key in propsOptions) {
 // 1. 验证prop并处理默认值
-	const value = validateProp(key, propsOptions, propsData, vm)
+  const value = validateProp(key, propsOptions, propsData, vm)
 // 2. 定义响应式
-	defineReactive(props, key, value)
+  defineReactive(props, key, value)
 // 3. 代理_props
   // _props保存了初次render时的props，用于处理default值和updateChildComponent中更新props
   // 方便获取props值的同时避免触发响应式的getter
@@ -74,13 +72,7 @@ Vue.prototype.$watch
 
 ```
 
-
-
 ---
-
-
-
-
 
 # Watcher
 
@@ -88,19 +80,8 @@ Vue.prototype.$watch
 2. computed watcher
 3. user watcher
 
-
-
 # Observer
-
-
 
 # Dep
 
-
-
-
-
-
-
 <img :src="$withBase('/assets/img/vue2-source-code/reactivity_goodnotes.jpeg')">
-

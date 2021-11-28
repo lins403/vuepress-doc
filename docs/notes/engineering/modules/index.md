@@ -1,6 +1,4 @@
-#  模块化 & CommonJS
-
-
+# 模块化 & CommonJS
 
 ## 模块化发展
 
@@ -36,7 +34,7 @@ let myModule = {
   }
 }
 myModule.data = 'other data' // 能直接修改模块内部的数据
-myModule.foo() 		// output: foo() other data
+myModule.foo()         // output: foo() other data
 ```
 
 3. IIFE模式：匿名函数自调用(闭包)
@@ -45,9 +43,9 @@ myModule.foo() 		// output: foo() other data
 // index.html文件
 <script type="text/javascript" src="module.js"></script>
 <script type="text/javascript">
-	myModule.foo()
-	myModule.bar()
-	console.log(myModule.data) //undefined 不能访问模块内部数据
+    myModule.foo()
+    myModule.bar()
+    console.log(myModule.data) //undefined 不能访问模块内部数据
   myModule.data = 'xxxx' //不是修改的模块内部的data
   myModule.foo() //没有改变
 </script>
@@ -74,16 +72,12 @@ myModule.foo() 		// output: foo() other data
 - 更高复用性
 - 高可维护性
 
-
-
 ### 实现
 
 - 按照模块化规范封装模块，将这些模块组成一个复杂的应用（组成）
 - 模块内部的变量和方法是私有的，要和其他模块通信的，需要指定暴露给外部（私有）
 - 指定引入/导出方式，可以加载嵌套的依赖模块（引入/导出）
 - 易于开发人员使用，且还要被有助于部署的优化工具所支持（打包工具）
-
-
 
 ### 模块化规范
 
@@ -94,8 +88,6 @@ myModule.foo() 		// output: foo() other data
 ![](https://cdn.jsdelivr.net/gh/lins403/assetsSpace/vuepress/img/js_modules.png)
 
 来源：<https://segmentfault.com/a/1190000040001687>
-
-
 
 ## CommonJS
 
@@ -141,8 +133,8 @@ console.log('bar.x=',bar.x)
 // exports 与 module.exports 不能在同一个模块内混用 
 
 // 对外暴露一个单一的值，只能使用module.exports输出。
-exports = function(x) {console.log(x)};	// ❎
-module.exports = function (x){ console.log(x);};	// ✅
+exports = function(x) {console.log(x)};    // ❎
+module.exports = function (x){ console.log(x);};    // ✅
 ```
 
 - require 一个目录
@@ -154,7 +146,7 @@ module.exports = function (x){ console.log(x);};	// ✅
   "main": "lib/element-ui.common.js",
   "name": "element-ui",
 }
-  
+
 // require发现参数字符串指向一个目录以后，会自动查看该目录的package.json文件，然后加载main字段指定的入口文件。
 // 如果package.json文件没有main字段，或者根本就没有package.json文件，则会加载该目录下的index.js文件或index.node文件。
 ```
@@ -231,7 +223,7 @@ Module.prototype._compile = function(content, filename) {
 ```
 
 > 知道这个原理后，就很容易把符合 CommonJS 模块规范的项目代码，转化为浏览器支持的代码。很多工具都是这么实现的，从入口模块开始，把所有依赖的模块都放到各自的函数中，把所有模块打包成一个能在浏览器中运行的 js 文件。譬如 Browserify 、webpack 等等。
->
+> 
 > 我们使用 webpack 构建时，把各个模块的文件内容按照如下格式打包到一个 js 文件中，因为它是一个立即执行的匿名函数，所以可以在浏览器直接运行。
 
 ```js{19-20}
@@ -288,21 +280,20 @@ function (module, exports, __webpack_require__) {
 
 webpack 相当于去 hack (模拟) 了commonjs 的功能
 
-
-
 ### 特点
 
 1. 独立的 ==模块作用域== ，不会污染全局作用域
+
 2. ==同步== 加载模块
 
-4. 模块加载 (require) 的 ==缓存==
+3. 模块加载 (require) 的 ==缓存==
+   
+   - 第一次加载某个模块时，Node会缓存该模块。
+   - 以后再加载该模块，就直接从缓存取出该模块的`module.exports`属性。
+   - 所有缓存的模块保存在`require.cache`之中。
+   - 缓存只是根据 <u>绝对路径</u> 识别模块的
 
-	- 第一次加载某个模块时，Node会缓存该模块。
-	- 以后再加载该模块，就直接从缓存取出该模块的`module.exports`属性。
-	- 所有缓存的模块保存在`require.cache`之中。
-	- 缓存只是根据 <u>绝对路径</u> 识别模块的
-
-5. 模块的加载机制是，输入的是被输出的值的 ==拷贝==，输出以后模块内的变化不会影响到输出的这个值
+4. 模块的加载机制是，输入的是被输出的值的 ==拷贝==，输出以后模块内的变化不会影响到输出的这个值
 
 ```js
 // lib.js
@@ -336,16 +327,12 @@ console.log(counter); // 3
 4. /node_modules/bar.js
 ```
 
-
-
 ### 兼容性
 
 在2013年5月，npm的作者宣布Node.js已经废弃了CommonJS，Node.js核心开发者应避免使用它 [wiki/CommonJS]。
 
 > 1. 一个是因为 Node.js 本身也不是完全采用 CommonJS 的规范，而当时是决定不再跟随 CommonJS 的发展而发展了。
 > 2. 二来就是 Node.js 也在逐步用 ES6 Module 替代 CommonJS。（ v13.2.0 起开始正式支持）
-
-
 
 ## AMD
 
@@ -395,8 +382,6 @@ require(['module1', 'module2'], function(m1, m2){
 <script src="js/require.js" data-main="js/entry"></script>
 ```
 
-
-
 ## CMD
 
 CMD (Common Module Definition) ---是 SeaJS 在推广过程中对模块定义的规范化产出，是一个同步模块定义。
@@ -435,8 +420,6 @@ define(function(require, exports, module) {
 ></script>
 ```
 
-
-
 ## UMD
 
 UMD (Universal Module Definition)
@@ -466,23 +449,15 @@ else
     (e = e || self).Vue = t()
 ```
 
-
-
-
-
 ## 补充
 
 工程化具体用法参考：[Chapter 3. Modularizing and Managing JavaScript](https://www.oreilly.com/library/view/modern-javascript/9781491971420/ch03.html)
-
-
 
 ### script 标签中的 `defer` 和 `async` 属性
 
 - 浏览器都不会被阻塞，都是“在后台”加载脚本，然后继续处理 HTML，构建 DOM
 - `async` 意味着脚本是完全独立的，脚本会在后台加载，并在加载就绪时运行。DOM 和其他脚本不会等待它们，它们也不会等待其它的东西。
 - `defer` 仅适用于外部脚本，等 DOM 构建完成后，脚本才会执行，但在 `DOMContentLoaded` 事件之前执行。
-
-
 
 # 参考
 

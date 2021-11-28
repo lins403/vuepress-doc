@@ -12,20 +12,14 @@
 
 [REM适配方案demo](https://juejin.cn/post/6994716514980986910)
 
-
-
-
-
 ## viewport
 
 ```html
 <!-- public/index.html -->
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 ```
-
-
 
 ## media
 
@@ -41,8 +35,6 @@
 @media screen and (max-width:239px){//<=239px的设备:手机竖屏}
 ```
 
-
-
 ## rem
 
 rem相对于根元素`<html>`
@@ -51,13 +43,11 @@ rem相对于根元素`<html>`
 /* https://3g.163.com/touch/news/ */
 @media screen and (min-width: 361px) and (max-width: 375px){
   html {
-      // font-size: 100px;		//它的font-size也有通过js计算	
-      font-size: 13.33333vw;
+    // font-size: 100px;    //它的font-size也有通过js计算    
+    font-size: 13.33333vw;
   }
 }
 ```
-
-
 
 ## 个人方案
 
@@ -107,8 +97,8 @@ rem相对于根元素`<html>`
 - 其他元素基本都用em
 
 ```scss
-$browser-default-font-size: 100px !default;	//变量的值可以根据自己需求定义，浏览器默认是16px，最小是12px
-@function pxTorem($px){	//$px为需要转换的字号
+$browser-default-font-size: 100px !default;    //变量的值可以根据自己需求定义，浏览器默认是16px，最小是12px
+@function pxTorem($px){    //$px为需要转换的字号
   @return $px / $browser-default-font-size * 1rem;
 }
 
@@ -123,7 +113,7 @@ html {
   width: 100%;
   font-size: pxTorem(12px);
   .title{
-    font-size: 2em;		//24px
+    font-size: 2em;        //24px
   }
 }
 
@@ -139,4 +129,3 @@ html {
   }
 }
 ```
-

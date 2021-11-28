@@ -10,8 +10,6 @@
 6. 【如果远端新建了 README 】`git pull --rebase origin master`
 7. `git push -u origin master` （线上默认是main分支了，推送以后就被master分支覆盖了）
 
-
-
 ## 二、fork贡献代码
 
 要贡献代码的repo称为上游仓库
@@ -79,7 +77,7 @@ git push
 ## 三、GitHub Pages
 
 > [如何使用Github Pages?](https://developer.mozilla.org/zh-CN/docs/Learn/Common_questions/Using_Github_pages)
->
+> 
 > [新增 SSH 密钥到 GitHub 帐户](https://docs.github.com/cn/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
 
 ## 四、Github API
@@ -87,9 +85,9 @@ git push
 基于 GraphQL
 
 > [一篇文章搞定Github API 调用 (v3）](https://segmentfault.com/a/1190000015144126)
->
+> 
 > [GitHub GraphQL API](https://docs.github.com/en/graphql)
->
+> 
 > [Show off Github repos in your Gatsby site using Github GraphQL API](https://dev.to/lennythedev/show-off-your-github-repos-in-your-gatsby-site-using-graphql-421l)
 
 ## 五、GitHub actions
@@ -128,8 +126,6 @@ jobs:
           FOLDER: public # The folder the action should deploy.
 ```
 
-
-
 ## 六、自建图床
 
 PicGo: <https://molunerfinn.com/PicGo/>
@@ -144,8 +140,6 @@ https://cdn.jsdelivr.net/gh/<user_name>/>repo_name>/<file_name>
 # 🌰
 https://cdn.jsdelivr.net/gh/lins403/assetsSpace/vuepress/img/Klose.jpg
 ```
-
-
 
 ## 七、GitHub badge
 
@@ -177,10 +171,6 @@ https://img.shields.io/npm/v/vue/next
 
 [150+ Badges for GitHub](https://dev.to/envoy_/150-badges-for-github-pnk)
 
-
-
 ## 八、开源 license
 
 ![开元许可证](http://www.ruanyifeng.com/blogimg/asset/201105/bg2011050101.png)
-
-

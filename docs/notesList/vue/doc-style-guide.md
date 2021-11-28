@@ -41,8 +41,8 @@ var myGreatMixin = {
 ```js
 // .vue 组件名大写，不要用驼峰，不要用驼峰
 components/
-|- MyComponent.vue		// PascalCase
-|- my-component.vue		// kebab-case	[DOM模板中使用，因为HTML大小写不敏感]
+|- MyComponent.vue        // PascalCase
+|- my-component.vue        // kebab-case    [DOM模板中使用，因为HTML大小写不敏感]
 ```
 
 - **参考**： [模板中的组件名大小写](https://cn.vuejs.org/v2/style-guide/#模板中的组件名大小写强烈推荐)
@@ -100,8 +100,6 @@ props: {
 <WelcomeMessage greeting-text="hi"/>
 ```
 
-
-
 ## computed
 
 ```js
@@ -119,8 +117,6 @@ computed: {
 }
 ```
 
-
-
 ## 事件名
 
 不同于组件和 prop，事件名不会被用作一个 JavaScript 变量名或 property 名，所以就没有理由使用 camelCase 或 PascalCase 了。并且 `v-on` 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 `v-on:myEvent` 将会变成 `v-on:myevent`——导致 `myEvent` 不可能被监听到。
@@ -130,10 +126,6 @@ computed: {
 ```vue
 <my-component v-on:my-event="doSomething"></my-component>
 ```
-
-
-
-
 
 ## option的属性顺序
 
@@ -185,11 +177,9 @@ computed: {
 [组件/实例的选项的顺序](https://cn.vuejs.org/v2/style-guide/#组件-实例的选项的顺序推荐)
 
 > 记忆：越早影响组件的越靠前，组件的扩展比组件内部状态方法更靠前，data、computed 比 watch、lifecycle 靠前，template和render方法最后。
->
 > 
->
 > initLifecycle > initEvents > initRender > initInjections > initState > initProvide
->
+> 
 > initProps > initMethods > initData > initComputed > initWatch
 
 ## 元素 attribute 的顺序
@@ -250,8 +240,6 @@ computed: {
 <script src="./script.js"></script>
 ```
 
-
-
 # 参考
 
 [Vue.js 风格指南](https://cn.vuejs.org/v2/style-guide/)
@@ -259,4 +247,3 @@ computed: {
 [Vue 单文件组件 (SFC) 规范](https://vue-loader.vuejs.org/zh/spec.html#简介)
 
 [vue-element-admin > 命名规范](https://juejin.cn/post/6844903840626507784#heading-9)
-
