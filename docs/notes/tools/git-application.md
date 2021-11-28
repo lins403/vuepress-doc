@@ -53,7 +53,7 @@ Git Hooks 的实现其实非常简单，就是就 `.git/hooks` 文件下，保�
 
 新版本的husky使用 Git 2.9 的新特性 (`core.hooksPath`) 进行了重构，从而可以指定git hooks可执行脚本的位置；不用再像旧版本中 `.git/hooks/` 和  `huskyrc.js`（或是package.json中的配置）之间不能同步修改（Generating Git hooks from a JS config can get out of sync.）
 
-```sh
+```shell
 npm install husky -D
 
 # manual install（取消了以前在 npm scripts 的 postinstall钩子 中自动安装husky的方式）
@@ -90,7 +90,7 @@ yarn lint-staged
 
 ### commitlint
 
-```sh
+```shell
 # Install and configure
 npm install --save-dev @commitlint/{cli,config-conventional}
 echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > .commitlintrc.js

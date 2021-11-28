@@ -107,6 +107,7 @@ module.exports = {
               collapsable: false,
               children: [
                 'tools/vscode',
+                'tools/markdown',
                 'tools/linux',
                 'tools/mac-operations',
                 'tools/git-feature',

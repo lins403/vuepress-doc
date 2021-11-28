@@ -29,7 +29,7 @@
 凭证（Credentials）
 
 - 实现认证和授权的前提
-- 如银行办理手续，银行卡密码是认证，而身份证是凭证
+- 例如银行办理手续，银行卡密码是认证，而身份证是凭证
 
 ### 常见的前后端鉴权方式
 
@@ -45,14 +45,14 @@
 
 - **客户端**保持状态
 - cookie默认随着http请求一起发送，除了用于认证授权，cookie还可用于存放用户的操作信息，改善用户体验，例如存放账号密码、用户偏好等等。使用github的cookie，有效期内访问授权登录的网站就不用重新授权登录
-- 重要属性：domain、path、maxAgecookie、expires、**secure**、**httpOnly**
+- 重要属性：domain、path、maxAgecookie、expires、secure、httpOnly
 
 ### 特点
 
 - 服务端通过HTTP响应头set-cookie，或客户端使用 JavaScript 设置
 - 不可跨域，每个 cookie 都会绑定单一的域名，而一级域名和二级域名之间是允许共享使用的
 - 移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
-- 使用Cookie需要防范XSS攻击（secure：只允许请求为https时发送cookie，httponly：禁止JS脚本访问cookie）
+- 使用Cookie需要防范XSS攻击（`secure`：只允许请求为https时发送cookie，`httponly`：禁止JS脚本访问cookie）
 
 ### cookie和webStorage
 
@@ -66,7 +66,7 @@
 
 - Session存储在服务器上，可以放在文件、数据库、Redis或内存中，一般只将**session的id**存储在cookie中。
 
-- session 的运行依赖 session id，而 sessionid 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但可通过其它方式实现，比如**在 url 中传递** session_id「sid」）
+- session 的运行依赖 session id，而 SESSIONID 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但可通过其它方式实现，比如**在 url 中传递** session_id「sid」）
 
 - session 需要手动删除，通常服务器会在用户退出登录时删除，或者会为 session 设置一个失效时间，以便把 session 删除，节省存储空间
 
@@ -154,7 +154,7 @@ TODO: 测试一下sessionStorage在不同标签页的共享和清理情况
 - 强缓存
 - 协商缓存
 
-根据response header中的 `Cache-Control` 和 `Expires` 判断缓存是否过期，同时记录header中的 `etag` 和 `last-modified`，如果没有过期则直接使用浏览器缓存，如果过期，将etag值作为 `If-None-Match`，last-modified值作为 `if-modified-since`，添加到request header中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
+根据 response header 中的 `Cache-Control` 和 `Expires` 判断缓存是否过期，同时记录header中的 `etag` 和 `last-modified`，如果没有过期则直接使用浏览器缓存，如果过期，将etag值作为 `If-None-Match`，last-modified值作为 `if-modified-since`，添加到request header中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
 
 - Cache-Control: max-age=31536000（使用相对时间，同时使用时优先级更高）
 - Expires: Wed, 19 Oct 2022 04:54:02 GMT（使用基于服务器的绝对时间）
