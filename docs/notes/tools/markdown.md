@@ -11,5 +11,5 @@
 更改[快捷键](https://github.com/marktext/marktext/blob/develop/docs/KEYBINDINGS.md)，然后重启应用
 
 ```shell
-echo '{ "view.source-code-mode": "CmdOrCtrl+/", "edit.aidou": "CmdOrCtrl+Shift+/" }' > ~/Library/Application\ Support/marktext/keybindings.json
+echo '{ "format.clear-format": "CmdOrCtrl+/", "view.source-code-mode": "CmdOrCtrl+;", "edit.aidou": "CmdOrCtrl+Shift+/" }' > ~/Library/Application\ Support/marktext/keybindings.json
 ```

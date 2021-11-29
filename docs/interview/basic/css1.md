@@ -102,7 +102,32 @@ div {
 
 - [transform centering](https://www.30secondsofcode.org/css/s/transform-centering)
   - transform相对自身盒模型的偏移
-- 
+
+### serif 和 sans-serif
+
+- serif，衬线体，白体、**宋体**（有棱有角）
+- sans-serif，无衬线体，哥特体、**黑体**
+
+### 添加省略号
+
+#### 单行
+
+```scss
+width: 必须设置;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+```
+
+#### 多行
+
+```scss
+overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box;
+-webkit-line-clamp:3;   //3行文字
+-webkit-box-orient:vertical;
+```
 
 ### 扩展
 

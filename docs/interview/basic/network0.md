@@ -1,4 +1,4 @@
-# 重要历史
+# 发展史
 
 浏览器战争、Ajax&JQuery（交互，数据）、Node.js（server，工程化）、三大框架（组件化）、RN&Flutter跨平台框架
 

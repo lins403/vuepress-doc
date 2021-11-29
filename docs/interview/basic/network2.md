@@ -6,7 +6,7 @@
 
 1. cookie
 2. session
-3. cookie和session的结合使用
+3. cookie和session的认证方式与缺陷
 4. token：Access Token 和 Refresh Token
 5. jwt的结构，和token的区别
 6. oauth
@@ -51,6 +51,7 @@
 
 - 服务端通过HTTP响应头set-cookie，或客户端使用 JavaScript 设置
 - 不可跨域，每个 cookie 都会绑定单一的域名，而一级域名和二级域名之间是允许共享使用的
+- 只要 `Domain` 和 `Path` 一致情况下，不同 Tab 之间即可相互读取
 - 移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
 - 使用Cookie需要防范XSS攻击（`secure`：只允许请求为https时发送cookie，`httponly`：禁止JS脚本访问cookie）
 
@@ -72,17 +73,27 @@
 
 ### cookie和session认证
 
-用户认证的一般流程：
+#### 用户认证的一般流程
 
-> 1、用户向服务器发送用户名和密码。
-> 
-> 2、服务器验证通过后，在当前对话（session）里面保存相关数据，比如用户角色、登录时间等等。
-> 
-> 3、服务器向用户返回一个 session_id，写入用户的 Cookie。
-> 
-> 4、用户随后的每一次请求，都会通过 Cookie，将 session_id 传回服务器。
-> 
-> 5、服务器收到 session_id，找到前期保存的数据，由此得知用户的身份。
+1、用户向服务器发送用户名和密码。
+
+2、服务器验证通过后，在当前对话（session）里面保存相关数据，比如用户角色、登录时间等等。
+
+3、服务器向用户返回一个 session_id，写入用户的 Cookie。
+
+4、用户随后的每一次请求，都会通过 Cookie，将 session_id 传回服务器。
+
+5、服务器收到 session_id，找到前期保存的数据，由此得知用户的身份。
+
+#### 认证方式的缺陷
+
+1. 扩展性
+   
+   - 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上，这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。
+
+2. 安全性：
+   
+   - 不能跨域，若是支持跨域则容易遭受 CSRF 此类盗用cookie的网络攻击
 
 ## token
 
@@ -113,11 +124,35 @@ JSON Web Token（简称 JWT）是目前最流行的 **跨域认证** 解决方�
 - Payload：一个 JSON 对象，用来存放实际需要传递的数据
 - Signature：对前两部分的签名，防止数据篡改
 
-jwt与token不一样在于：JWT 自包含了用户信息和加密的数据，可以减少查询数据库
-
-## Oauth
+一般是在请求头里加入`Authorization`，并加上`Bearer`标注
 
 ```js
+axios.get('/api/list', {
+  headers: {
+    Authorization: 'Bearer ' + getToken()
+  }
+})
+```
+
+jwt与token不一样在于：JWT 自包含了用户信息和加密的数据，可以减少查询数据库
+
+### 优点
+
+1. 相较 token 而言，JWT 可以在 payload 部分存放一些业务逻辑所必要的非敏感信息，以减少数据库查询
+
+2. 相较session而言，JWT 不需要在服务端保持会话信息
+
+3. 结构简单体积小，便于传输，以及 JSON 的多语言通用性
+
+
+
+## OAuth
+
+Open Authorization，开放授权
+
+```js
+// 使用微信第三方登录的模板
+
 const appid = 'xxxxx'
 
 // 授权成功以后的重定向地址
@@ -134,6 +169,7 @@ openWindow(url, thirdpart, 540, 540)
 
 - sessionStorage
   - 浏览器当前窗口关闭后自动清除
+  - 
 - localStorage
   - 保存在浏览器本地，数据不会过期也不会被清除，浏览器重启后依然还在
   - 和cookie一样在所有同源标签页和窗口之间共享
@@ -145,7 +181,13 @@ openWindow(url, thirdpart, 540, 540)
 | IOS WeChat | 约2.5M        | 大于10M          |
 | Mac Safria | 约2.5M        | 大于10M          |
 
-TODO: 测试一下sessionStorage在不同标签页的共享和清理情况
+> ...data stored in sessionStorage gets cleared <u>when the page session ends</u>...
+> 
+> **Opening a page in a new tab or window will cause a new session to be initiated**, which differs from how session cookies work.
+> 
+> > 通过点击 `target="_blank"` 链接（或者用了 `window.open`）打开的新标签页之间是属于同一个 session 的，而如果新开一个独立的标签页访问，则总是会初始化一个新的 session.
+
+
 
 ## 浏览器缓存
 
@@ -154,19 +196,23 @@ TODO: 测试一下sessionStorage在不同标签页的共享和清理情况
 - 强缓存
 - 协商缓存
 
-根据 response header 中的 `Cache-Control` 和 `Expires` 判断缓存是否过期，同时记录header中的 `etag` 和 `last-modified`，如果没有过期则直接使用浏览器缓存，如果过期，将etag值作为 `If-None-Match`，last-modified值作为 `if-modified-since`，添加到request header中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
+根据 response header 中的 `Cache-Control` 和 `Expires` 判断缓存是否过期，同时记录header中的 `etag` 和 `last-modified`，如果没有过期则直接使用浏览器缓存，如果过期，将 etag 值作为 `If-None-Match`，last-modified 值作为 `if-modified-since`，添加到request header 中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
 
 - Cache-Control: max-age=31536000（使用相对时间，同时使用时优先级更高）
 - Expires: Wed, 19 Oct 2022 04:54:02 GMT（使用基于服务器的绝对时间）
 
-精确度：Etag要优于Last-Modified（后者只能精确到秒的颗粒度）
+精确度：Etag要优于 Last-Modified（后者只能精确到秒的颗粒度）
 
-优先级：服务器校验优先考虑Etag（例如适用于文件内容未修改但是修改时间变动的情况）
+优先级：服务器校验优先考虑 Etag（例如适用于文件内容未修改但是修改时间变动的情况）
 
-性能上：Etag要逊于Last-Modified（etag需要每次服务端的读写，后者是个常量只要读取）
+性能上：Etag 要逊于 Last-Modified（etag需要每次服务端的读写，后者是个常量只要读取）
 
 # 参考
 
 [傻傻分不清之 Cookie、Session、Token、JWT](https://juejin.cn/post/6844904034181070861)
+
+[什么是 JWT -- JSON WEB TOKEN - 简书](https://www.jianshu.com/p/576dbf44b2ae)
+
+[sessionStorage 的数据会在同一网站的多个标签页之间共享吗 · Issue #66 · lmk123/blog · GitHub](https://github.com/lmk123/blog/issues/66)
 
 [浏览器的localStorage/sessionStorage的大小](https://juejin.cn/post/6933389518997291015)

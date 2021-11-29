@@ -1,8 +1,18 @@
 # CSS布局
 
-文档流：Normal flow，相对于盒子模型的概念
+## 基础布局
 
-文本流： Text flow，相对于文字段落的概念
+normal flow，floats，absolute positioning
+
+`文档流`：[Normal flow](https://www.w3.org/TR/CSS2/visuren.html#block-formatting)，相对于盒子模型的概念
+
+- Block formatting contexts
+
+- Inline formatting contexts
+
+- Relative positioning
+
+`文本流`： Text flow，相对于文字段落的概念
 
 ### display
 
@@ -12,7 +22,7 @@
   - 只能设置左右的padding和margin
   - padding, margin, border 不会占据文本流，即不会推开其他元素，会发生重叠
 - block
-  - 会将父元素的width填充到100%
+  - 会将自己的width填充到整个viewpoint的宽度大小
 - inline-block
 - contents
 
@@ -39,31 +49,146 @@ float需要使用块布局，会将display为inline布局或table布局，转为
 
 #### 清除浮动
 
+清除浮动的同时，也要考虑是否能撑起父元素的高度
+
+清除浮动的3种方法
+
+```scss
+/* .container.clearfix > .box.float */
+<div class="container clearfix">
+  <div class="box float">Lorem ipsum ...</div>
+</div>
+<div class="main">
+  Hello
+</div>  
+
+/* 方法一：在浮动元素的父元素.clearfix后边追加一个隐藏的block,带一个clear:both属性 */  
+.clearfix:after{
+  content: "";
+  display: block;  /*block宽度会横向填充满屏幕，在父元素的最后追加一个height:0，占满屏幕的看不见的细长条*/
+  line-height: 0;
+  clear: both;  /*这个最下边细长条左右两边都清除float*/
+}
+
+/* 方法二：不用调用clearfix类，在父元素结束标签之前，插入下面这段 */
+<div style="clear: both;"></div>
+
+/* 方法三：给父元素创建BFC */
+.container{
+  overflow: auto; //hidden也可以,visible不行
+}
+```
+
+### BFC
+
+块格式化上下文（Block Formatting Context，BFC），我把它当作是文档流 normal flow 中的一种 layout 布局方式
+
+重点：BFC区域内部和外部的渲染（文档流、文本流）互不影响，BFC的高度包含了内部浮动元素的高度
+
+用途：
+
+- 撑起浮动元素父元素的高度；
+  
+  - 通常用 `overflow: 不为visible` 来清除浮动，副作用较小
+
+- 避免外边距overlap
+  
+  - block 布局下，上下方向的margin会自动重叠，实际margin为二者大的那个
+  
+  - display 为 inline-block 、flex、grid、table 的情况，都会创建BFC，四个方向的margin都不会重叠
+
+创建条件：[块格式化上下文 - Web 开发者指南 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
+
 ### Flex布局
 
-display: flex
+`flex / inline-flex`
+
+[30 分钟学会 Flex 布局](https://zhuanlan.zhihu.com/p/25303493)
+
+- **Flex 容器**
+  
+  1. flex-flow (flex-direction、flex-wrap)
+  2. justify-content
+  3. align-items
+  4. align-content
+
+- **容器的 item**
+  
+  1. order
+  2. flex (flex-grow、flex-shrink、flex-basis)
+  3. align-self
+
+`justify-items 和 justify-self` 在 flexbox 中未被实现，水平方向上只能使用 justify-content，因为 flexbox 本质上是一维的，所以无法让其中的item单独在水平方向上做不一样的偏移
+
+```scss
+flex: 1;
+// 等同于
+flex: 1 1 auto;
+// 等同于
+flex-grow: 1;    // 跨度扩展系数
+flex-shrink: 1;  // 默认宽度之和大于容器的时候才会发生收缩，不同情况下shrink和grow只有一个能生效
+flex-basis: auto;  // 主轴方向上的初始大小，grow和shrink的基础大小
+```
+
+```scss
+flex-flow: row wrap;
+// 等同于
+flex-direction: row;
+flex-wrap: wrap;
+```
 
 ### Grid布局
 
-display: grid
+[最强大的 CSS 布局 —— Grid 布局 - 掘金](https://juejin.cn/post/6854573220306255880)
 
-```
+- **Grid 容器**
+  
+  1. grid-template-rows
+  
+  2. grid-template-columns
+  
+  3. grid-gap (grid-row-gap、grid-column-gap)
+  
+  4. place-items (align-items、justify-items)
+  
+  5. place-content (align-content、justify-content)
+  
+  6. grid-template-areas
+  
+  7. grid-auto-columns、grid-auto-rows
 
+- **容器的 item**
+  
+  1. grid-row-start、grid-row-end
+  
+  2. grid-column-start、grid-column-end
+  
+  3. place-self (justify-self、align-self)
+  
+  4. grid-area
+
+```scss
+// 关键字
+repeat()
+autofill
+fr    // fraction
+minmax()
+auto
 ```
 
 Flex 和 Grid
 
-- flex适合一维，适合对齐元素内的内容，比如说用在页面的header。弹性强，但行和列没有实质性关系。flex也可以实现grid实现不了的功能
-- grid适合多维，适合布局大画面，可以处理一些不规则和非对称的设计（flex应该实现不了）。
+- flex 适合一维，适合对齐元素内的内容，比如说用在页面的header，弹性强但行和列没有实质性关系。flex也可以实现grid实现不了的功能。
+- grid 适合多维，适合布局大画面，可以处理一些不规则和非对称的设计
 - 不是二选一，而是二合一，可以混合使用
 
 ### 表格布局
 
 display：table、inline-table、table-caption、table-cell、table-row、table-row-group
 
-### 多列布局
+<hr />
 
-display: table-caption; column-count: 3;
+## 进阶布局
 
 ### 响应式布局
 
@@ -71,10 +196,60 @@ display: table-caption; column-count: 3;
 
 ### 居中布局
 
-### 三列布局
+[前端复习-----css, html篇 > 居中布局](https://juejin.cn/post/6990928915120275470#heading-30)
+
+思路：
+
+1. inline：
+   
+   - 水平：`text-align: center;`
+   
+   - 垂直
+     
+     - 通用：设置上下 padding 相等
+     
+     - 单行：设置 height 与 line-height 相等
+     
+     - 多行：`vertical-align: middle;`(inline/table-cell)
+
+2. 块block：`margin: auto`
+
+3. flexbox：
+   
+   - `margin: auto;`
+   
+   - `justify-content: center; align-items: center;`
+
+4. absolute positioning：`top: 50%; left: 50%; transform: translate(-50%, -50%);`
+
+### 三栏布局
+
+圣杯布局和双飞翼布局，都是利用float的方式，让固定大小的左右栏，位置偏移至中间main区域的左右侧
+
+- 圣杯布局
+  
+  - 中间部分main的宽度是100%，利用padding的方式，将左右位置腾出来；两侧部分的position设置为relative，然后为它们设置负的margin-left，以及left、right的大小，偏移至main的左右侧
+  
+  - [圣杯布局 - CodeSandbox](https://codesandbox.io/s/html-css-qwonu?file=/css-layout/shengbei.html)
+  
+  - 中间部分宽度小于左侧时布局会混乱
+
+- 双飞翼布局
+  
+  - 中间main部分再内嵌一层wrapper，设置wrapper的margin顶开左右位置；因为margin不同于padding，两侧部分不用设置relative的定位，只需要设置margin-left偏移就可以实现
+  
+  - [双飞翼布局 - CodeSandbox](https://codesandbox.io/s/html-css-qwonu?file=/css-layout/shuangfeiyi.html)
+  
+  - 是针对圣杯布局的改进
 
 ## 隐藏
 
 - opacity: 0;
 - visibility: hidden;
 - display: none;
+
+# 参考
+
+[清除浮动的四种方式及其原理理解](https://juejin.cn/post/6844903504545316877)
+
+[【布局】聊聊为什么淘宝要提出「双飞翼」布局 · Issue #11 · zwwill/blog · GitHub](https://github.com/zwwill/blog/issues/11)

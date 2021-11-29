@@ -1,4 +1,4 @@
-# 进阶
+# CSS 进阶
 
 ## 特殊属性
 
@@ -9,8 +9,6 @@
 渐变：`gradirent`
 
 文字环绕：`shape-outside`
-
-## BFC
 
 ## 层叠上下文
 
@@ -41,12 +39,6 @@ Vendor prefixes
   - 不要同时使用 `style-loader` *与* `mini-css-extract-plugin`
 - css-minimizer-webpack-plugin
 
-## 规范
-
-### BEM命名规范
-
-### Stylelint
-
 ## Tips & Tricks
 
 ### 经验心得
@@ -56,3 +48,23 @@ Vendor prefixes
 ### 
 
 ### 滚动进度条
+
+```css
+body{
+  height: 2000px;
+  background-image: linear-gradient(to right top, #ffcc00 50%, #eee 50%);
+  background-size: 100% calc(100% - 100vh + 5px);
+  background-repeat: no-repeat;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 5px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  z-index: -1;
+}
+```
