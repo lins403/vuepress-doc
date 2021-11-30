@@ -16,6 +16,10 @@
 
 [前端 100 问--木易杨](https://github.com/yygmind/blog/issues/43)
 
+### 算法
+
+[GitHub - sl1673495/leetcode-javascript: 喝杯小酒，一起做题。](https://github.com/sl1673495/leetcode-javascript)
+
 ## 心得类
 
 [关于裸辞，关于前端面试](https://juejin.cn/post/6844903858297143310)

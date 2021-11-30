@@ -10,6 +10,8 @@
 
 文字环绕：`shape-outside`
 
+
+
 ## 层叠上下文
 
 ## 性能优化
@@ -46,25 +48,3 @@ Vendor prefixes
 - margin一般是用来设置兄弟元素之间的间距。padding一般是设置父子元素之间的间距
 
 ### 
-
-### 滚动进度条
-
-```css
-body{
-  height: 2000px;
-  background-image: linear-gradient(to right top, #ffcc00 50%, #eee 50%);
-  background-size: 100% calc(100% - 100vh + 5px);
-  background-repeat: no-repeat;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  top: 5px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #fff;
-  z-index: -1;
-}
-```

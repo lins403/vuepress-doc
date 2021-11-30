@@ -1,6 +1,6 @@
 # CSS基础
 
-## 盒模型
+## 一、盒模型
 
 #### box-sizing
 
@@ -20,20 +20,7 @@
 // 是相对**父元素的宽度**，没有的话接着往上找
 ```
 
-## transition 和 animation
-
-transition：为一个元素在不同状态之间切换的时候定义不同的过渡效果
-
-animation：用来指定一组或多组动画，每组之间用逗号相隔
-
-@keyframes：用来定义animation中的各个状态
-
-#### 区别
-
-- transition更强调状态的变化，开始到结束两种状态，通常需要外部触发，例如伪元素（:hover）之间的切换；
-- animation更强调帧的变化，可以自动触发，且可以被设置成无限次播放
-
-## 选择器
+## 二、选择器
 
 ### 伪类和伪元素
 
@@ -53,6 +40,15 @@ animation：用来指定一组或多组动画，每组之间用逗号相隔
 
 *从0开始，一个行内样式+1000，一个id选择器+100，一个属性选择器、class或者伪类+10，一个元素选择器，或者伪元素+1，通配符+0。* !important无限大
 
+| 选择器             | 权重   |
+| --------------- | ---- |
+| 通配符             | 0    |
+| 标签 / 伪元素        | 1    |
+| class / 伪类 / 属性 | 10   |
+| id              | 100  |
+| 行内样式            | 1000 |
+| !important      | ∞    |
+
 ### selector
 
 css_selector
@@ -64,7 +60,27 @@ xpath
 
 - 控制台下使用 `$x()`进行测试
 
-## 渐变
+## 三、样式渲染
+
+### serif 和 sans-serif
+
+- serif，衬线体，白体、**宋体**（有棱有角）
+- sans-serif，无衬线体，哥特体、**黑体**
+
+### transition 和 animation
+
+transition：为一个元素在不同状态之间切换的时候定义不同的过渡效果
+
+animation：用来指定一组或多组动画，每组之间用逗号相隔
+
+@keyframes：用来定义animation中的各个状态
+
+#### 区别
+
+- transition更强调状态的变化，开始到结束两种状态，通常需要外部触发，例如伪元素（:hover）之间的切换；
+- animation更强调帧的变化，可以自动触发，且可以被设置成无限次播放
+
+### 渐变
 
 linear-gradirent线性渐变
 
@@ -72,14 +88,43 @@ radial-gradirent 径向渐变
 
 repeating-linear-gradient 重复渐变
 
-## 特殊属性
+## 四、特殊属性
 
-- `all`: Reset all styles
-- `::selection`: Changes the styling of text selection.
+### @import
+
+```scss
+@import "navigation.css"; /* Using a string */
+// or
+@import url("navigation.css"); /* Using a url */
+
+// Import the "mobstyle.css" style sheet ONLY if the media is screen and the viewport is maximum 768 pixels:
+@import "mobstyle.css" screen and (max-width: 768px);
+```
+
+**<u>不要使用@import</u>**
+
+1. 比 <link> 慢
+
+2. 影响浏览器的并行下载
+
+3. 多个@import导致下载顺序紊乱
+
+替代办法：
+
+- 使用多个 `<link>` 元素
+- 通过CSS预处理器将多个CSS文件编译为一个文件
+
+### 其它
+
+`all`: Reset all styles
+
+`::selection`: Changes the styling of text selection.
+
+`counter-reset`: Create a new css counter of the given name.
 
 ## FAQ
 
-### 画一个三角形
+### 1）画一个三角形
 
 ```css
 div {
@@ -98,17 +143,7 @@ div {
 }
 ```
 
-### 居中
-
-- [transform centering](https://www.30secondsofcode.org/css/s/transform-centering)
-  - transform相对自身盒模型的偏移
-
-### serif 和 sans-serif
-
-- serif，衬线体，白体、**宋体**（有棱有角）
-- sans-serif，无衬线体，哥特体、**黑体**
-
-### 添加省略号
+### 3）添加省略号
 
 #### 单行
 
@@ -129,7 +164,7 @@ display:-webkit-box;
 -webkit-box-orient:vertical;
 ```
 
-### 扩展
+### ...）扩展
 
 #### 条纹渐变
 
@@ -137,8 +172,18 @@ display:-webkit-box;
 
 - [Zig zag background pattern](https://www.30secondsofcode.org/css/s/zig-zag-pattern)
 
-### 图片
+#### 图片
 
 [Full-width image](https://www.30secondsofcode.org/css/s/full-width)
 
 - `margin-left: -50vw;margin-right: -50vw;` 可以使用 `transform: translateX(-50%)`
+
+# 参考/推荐
+
+[【前端工程师面试宝典】学习说明_互联网校招面试真题面经汇总_牛客网](https://www.nowcoder.com/tutorial/96/1678a0fd35cd4db486af18589e34e4d4)
+
+[前端复习-----css, html篇 - 掘金](https://juejin.cn/post/6990928915120275470)
+
+[CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/)
+
+[Cssom - HTML5 Chinese Interest Group Wiki](https://www.w3.org/html/ig/zh/wiki/Cssom)

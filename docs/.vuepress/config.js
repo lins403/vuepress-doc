@@ -32,6 +32,7 @@ module.exports = {
               title: 'css',
               collapsable: false,
               children: [
+                'adaptive-layout',
                 'responsive-layout',
               ]
             },
@@ -85,7 +86,6 @@ module.exports = {
                 'engineering/webpack',
                 'engineering/rollup',
                 'engineering/vue-cli-config',
-                'engineering/vue-cli@4',
                 'tools/browser',
                 'engineering/css-preprocessor',
               ]

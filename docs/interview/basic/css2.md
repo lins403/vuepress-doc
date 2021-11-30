@@ -16,29 +16,30 @@ normal flow，floats，absolute positioning
 
 ### display
 
-- none
-- inline
+- `none`
+- `inline`
   - 无法设置宽度和高度，只有文本流的真实尺寸
   - 只能设置左右的padding和margin
   - padding, margin, border 不会占据文本流，即不会推开其他元素，会发生重叠
-- block
+- `block`
   - 会将自己的width填充到整个viewpoint的宽度大小
-- inline-block
-- contents
+- `inline-block`
+- `contents`
+  - 元素本身不会渲染，但是子元素和伪元素会正常渲染，用来充当无语义的包裹框
 
 ### position
 
-- static
+- `static`
   - top, right, bottom, left 和 z-index属性无效
-- relative
+- `relative`
   - 相对static正常位置时的偏移，不改变布局，即偏移后元素正常位置占据文档流不会变动
-  - `position:relative; left:20px;`
-- absolute
+  - position:relative; left:20px;
+- `absolute`
   - 相对于**最近的已定位父元素**，没有的话最终会相对于`<html>`
   - 会改变布局，元素脱离文档流，后面的元素会挤占它的空间，发生重叠
-- fixed
+- `fixed`
   - 相对浏览器窗口，元素脱离文档流
-- sticky
+- `sticky`
   - 需要指定 top, right, bottom 或 left 四个阈值其中之一，才可使粘性定位生效
 
 ### 浮动
@@ -81,9 +82,9 @@ float需要使用块布局，会将display为inline布局或table布局，转为
 
 ### BFC
 
-块格式化上下文（Block Formatting Context，BFC），我把它当作是文档流 normal flow 中的一种 layout 布局方式
+块格式化上下文（Block Formatting Context，BFC），我把它当作是文档流 normal flow 中的一种 layout 布局方式。
 
-重点：BFC区域内部和外部的渲染（文档流、文本流）互不影响，BFC的高度包含了内部浮动元素的高度
+<u>BFC区域内部和外部的渲染（文档流、文本流）互不影响，BFC的高度包含了内部浮动元素的高度</u>
 
 用途：
 
@@ -105,18 +106,18 @@ float需要使用块布局，会将display为inline布局或table布局，转为
 
 [30 分钟学会 Flex 布局](https://zhuanlan.zhihu.com/p/25303493)
 
-- **Flex 容器**
-  
-  1. flex-flow (flex-direction、flex-wrap)
-  2. justify-content
-  3. align-items
-  4. align-content
+#### **Flex 容器**
 
-- **容器的 item**
-  
-  1. order
-  2. flex (flex-grow、flex-shrink、flex-basis)
-  3. align-self
+1. flex-flow (flex-direction、flex-wrap)
+2. justify-content
+3. align-items
+4. align-content
+
+#### **容器的 item**
+
+1. order
+2. flex (flex-grow、flex-shrink、flex-basis)
+3. align-self
 
 `justify-items 和 justify-self` 在 flexbox 中未被实现，水平方向上只能使用 justify-content，因为 flexbox 本质上是一维的，所以无法让其中的item单独在水平方向上做不一样的偏移
 
@@ -141,31 +142,31 @@ flex-wrap: wrap;
 
 [最强大的 CSS 布局 —— Grid 布局 - 掘金](https://juejin.cn/post/6854573220306255880)
 
-- **Grid 容器**
-  
-  1. grid-template-rows
-  
-  2. grid-template-columns
-  
-  3. grid-gap (grid-row-gap、grid-column-gap)
-  
-  4. place-items (align-items、justify-items)
-  
-  5. place-content (align-content、justify-content)
-  
-  6. grid-template-areas
-  
-  7. grid-auto-columns、grid-auto-rows
+#### **Grid 容器**
 
-- **容器的 item**
-  
-  1. grid-row-start、grid-row-end
-  
-  2. grid-column-start、grid-column-end
-  
-  3. place-self (justify-self、align-self)
-  
-  4. grid-area
+1. grid-template-rows
+
+2. grid-template-columns
+
+3. grid-gap (grid-row-gap、grid-column-gap)
+
+4. place-items (align-items、justify-items)
+
+5. place-content (align-content、justify-content)
+
+6. grid-template-areas
+
+7. grid-auto-columns、grid-auto-rows
+
+#### **容器的 item**
+
+1. grid-row-start、grid-row-end
+
+2. grid-column-start、grid-column-end
+
+3. place-self (justify-self、align-self)
+
+4. grid-area
 
 ```scss
 // 关键字
@@ -176,7 +177,7 @@ minmax()
 auto
 ```
 
-Flex 和 Grid
+#### Flex 和 Grid
 
 - flex 适合一维，适合对齐元素内的内容，比如说用在页面的header，弹性强但行和列没有实质性关系。flex也可以实现grid实现不了的功能。
 - grid 适合多维，适合布局大画面，可以处理一些不规则和非对称的设计
@@ -186,13 +187,11 @@ Flex 和 Grid
 
 display：table、inline-table、table-caption、table-cell、table-row、table-row-group
 
+用表格布局替换 `<table>` 系表格元素
+
 <hr />
 
 ## 进阶布局
-
-### 响应式布局
-
-### 自适应布局
 
 ### 居中布局
 
@@ -220,33 +219,94 @@ display：table、inline-table、table-caption、table-cell、table-row、table-
    
    - `justify-content: center; align-items: center;`
 
-4. absolute positioning：`top: 50%; left: 50%; transform: translate(-50%, -50%);`
+4. absolute positioning：`position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);`
 
 ### 三栏布局
 
-圣杯布局和双飞翼布局，都是利用float的方式，让固定大小的左右栏，位置偏移至中间main区域的左右侧
+圣杯布局和双飞翼布局，两列定宽一列自适应，都是利用float+负的margin的方式
 
-- 圣杯布局
-  
-  - 中间部分main的宽度是100%，利用padding的方式，将左右位置腾出来；两侧部分的position设置为relative，然后为它们设置负的margin-left，以及left、right的大小，偏移至main的左右侧
-  
-  - [圣杯布局 - CodeSandbox](https://codesandbox.io/s/html-css-qwonu?file=/css-layout/shengbei.html)
-  
-  - 中间部分宽度小于左侧时布局会混乱
+#### 圣杯布局
 
-- 双飞翼布局
-  
-  - 中间main部分再内嵌一层wrapper，设置wrapper的margin顶开左右位置；因为margin不同于padding，两侧部分不用设置relative的定位，只需要设置margin-left偏移就可以实现
-  
-  - [双飞翼布局 - CodeSandbox](https://codesandbox.io/s/html-css-qwonu?file=/css-layout/shuangfeiyi.html)
-  
-  - 是针对圣杯布局的改进
+- [圣杯布局 - CodeSandbox](https://codesandbox.io/s/html-css-qwonu?file=/css-layout/shengbei.html)
+
+- 中间部分main的宽度是100%，利用padding的方式，将左右位置腾出来；两侧部分的position设置为relative，然后为它们设置负的margin-left，以及left、right的大小，偏移至main的左右侧
+
+- 中间部分宽度小于左侧时布局会混乱
+
+#### 双飞翼布局
+
+- [双飞翼布局 - CodeSandbox](https://codesandbox.io/s/html-css-qwonu?file=/css-layout/shuangfeiyi.html)
+
+- 中间main部分再内嵌一层wrapper，设置wrapper的margin顶开左右位置；因为margin不同于padding，两侧部分不用设置relative的定位，只需要设置margin-left偏移就可以实现
+
+- 是针对圣杯布局的改进
+
+#### 其它
+
+- absolute
+
+- flexbox
 
 ## 隐藏
 
-- opacity: 0;
-- visibility: hidden;
-- display: none;
+`opacity: 0;`
+
+- 隐藏元素，不改变布局，绑定的事件依然会触发
+
+`visibility: hidden;`
+
+- 隐藏元素，不改变布局，<u>事件不会触发</u>
+
+`display: none;`
+
+- 会改变页面布局
+
+## 多列布局
+
+Multi-clolumns Layout
+
+### column-count
+
+```scss
+.container{
+  -moz-column-count: 4; /* Firefox */
+  -webkit-column-count: 4;
+  column-count: 4;
+}
+```
+
+### flex
+
+```scss
+.container{
+  display: flex;
+  flex-flow: column wrap;
+  align-content: space-between;  // 非必需
+  height: 500px;  // 容器必须有固定高度，且高度大于item的最高列高
+}
+```
+
+## 瀑布流布局
+
+Masonry Layout
+
+TODO
+
+### JS
+
+[蘑菇街PC首页瀑布流实践 - 掘金](https://juejin.cn/post/6844904032868253710)
+
+> 核心思路
+> 
+> - 监测滚动，判断是否符合渲染条件，如果符合条件则开始渲染。
+> - 定义一个渲染索引 renderIndex，每渲染一个元素后 renderIndex + 1, 实时监测 renderIndex 的变化， 判断是否符合渲染和数据请求条件。
+> - 拿到最小高度列索引后，将下一个元素插入到该列中，并触发 renderIndex + 1 进行下一轮渲染判断。
+
+[这个前端竟然用动态规划写瀑布流布局？给我打死他！ - 掘金](https://juejin.cn/post/6844904178544820237)
+
+### CSS
+
+[纯 CSS 实现横向排序的瀑布流式布局 - The Trivial](https://jessieji.com/2019/pure-css-masonry)
 
 # 参考
 

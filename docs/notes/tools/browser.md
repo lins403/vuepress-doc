@@ -73,7 +73,7 @@ The pixel pipeline:  <u>JavaScript > Style calculations > Layout > Paint > Compo
 
 绘制可以将Layout tree中的元素分解为多个层。将内容提升到GPU上的层，可以提高绘制和重绘的性能。
 
-渲染进程：主线程、合成线程、栅格线程
+渲染进程：<u>主线程 (main thread)、合成线程 (compositor thread)</u>、栅格线程
 
 ## 重排和重绘
 
@@ -106,7 +106,7 @@ Recalculate Style-->Update Layer Tree-->以及之后各个流程
 
 ---
 
-我觉得有不少歧义，按MDN的解释加之我的理解，浏览器会解析css构建CSSOM，然后和DOM树一起合并（combined）生成render tree，随后执行layout布局，去遍历render tree，确定树中每个node的size和position，按照每个元素的盒模型（box model properties，就是content、padding、border、margin等）排列，这样子才得到了Layout tree。
+我觉得有不少歧义，按MDN的解释加之我的理解，浏览器会解析css构建CSSOM，然后和DOM树一起合并（combined）生成render tree，随后执行layout布局，去遍历render tree，确定树中每个node的size和position，依照每个元素的盒模型属性进行排列，这样子才得到了Layout tree。
 
 paint阶段就是将Layout tree上的每个box转换成页面上的实际像素。
 
