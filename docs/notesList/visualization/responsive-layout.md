@@ -120,12 +120,12 @@ html {
 }
 
 /**********结合@media使用**********/
-@media screen and (max-width: 1200px){
+@media screen and (min-width: 768px) and (max-width: 1200px){
   .app{
     width: pxTorem(1200);
   }
 }
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
   .app{
     width: pxTorem(750);
   }
