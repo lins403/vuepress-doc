@@ -1,11 +1,20 @@
 # CSS基础
 
+:::tip 摘要
+
+1. 盒模型
+
+2. 伪类和伪元素，选择器的权重优先级
+
+:::
+
 ## 一、盒模型
 
 #### box-sizing
 
-- content-box（标准盒模型）：占据的空间由：`设置的宽高 + padding + border` 组成
-- border-box（IE盒模型）：设置的宽高包含了padding和border的大小
+`content-box`（标准盒模型）：占据的空间由 <u>设置的宽高 + padding + border </u>组成
+
+`border-box`（IE盒模型）：设置的宽高包含了padding和border的大小
 
 #### margin
 
@@ -17,7 +26,8 @@
   padding: 10%;
 }
 // padding和margin的长度一样，且四个方向大小都一致
-// 是相对**父元素的宽度**，没有的话接着往上找
+// 是相对**父元素的宽度**，没有的话接着往上找，找到有设置宽度的祖先节点，知道100%width的body
+// margin不是子元素的真实空间，所以不会撑开父元素的高度，除非将父元素创建为BFC
 ```
 
 ## 二、选择器
@@ -82,7 +92,7 @@ animation：用来指定一组或多组动画，每组之间用逗号相隔
 
 ### 渐变
 
-linear-gradirent线性渐变
+linear-gradirent 线性渐变
 
 radial-gradirent 径向渐变
 
@@ -103,11 +113,11 @@ repeating-linear-gradient 重复渐变
 
 **<u>不要使用@import</u>**
 
-1. 比 <link> 慢
+1. 比 `<link>` 慢
 
 2. 影响浏览器的并行下载
 
-3. 多个@import导致下载顺序紊乱
+3. 多个@import会导致下载顺序紊乱
 
 替代办法：
 
@@ -117,6 +127,8 @@ repeating-linear-gradient 重复渐变
 ### 其它
 
 `all`: Reset all styles
+
+- initial | inherit | unset(inherit外的值使用initial)  
 
 `::selection`: Changes the styling of text selection.
 
@@ -172,7 +184,7 @@ display:-webkit-box;
 
 - [Zig zag background pattern](https://www.30secondsofcode.org/css/s/zig-zag-pattern)
 
-#### 图片
+#### 全景图片
 
 [Full-width image](https://www.30secondsofcode.org/css/s/full-width)
 

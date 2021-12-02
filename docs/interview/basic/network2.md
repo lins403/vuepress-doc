@@ -140,11 +140,9 @@ jwt与token不一样在于：JWT 自包含了用户信息和加密的数据，�
 
 1. 相较 token 而言，JWT 可以在 payload 部分存放一些业务逻辑所必要的非敏感信息，以减少数据库查询
 
-2. 相较session而言，JWT 不需要在服务端保持会话信息
+2. 相较session而言，JWT 不需要在服务端保持会话信息，减少内存占用且易于服务端扩展
 
 3. 结构简单体积小，便于传输，以及 JSON 的多语言通用性
-
-
 
 ## OAuth
 
@@ -169,7 +167,6 @@ openWindow(url, thirdpart, 540, 540)
 
 - sessionStorage
   - 浏览器当前窗口关闭后自动清除
-  - 
 - localStorage
   - 保存在浏览器本地，数据不会过期也不会被清除，浏览器重启后依然还在
   - 和cookie一样在所有同源标签页和窗口之间共享
@@ -181,17 +178,17 @@ openWindow(url, thirdpart, 540, 540)
 | IOS WeChat | 约2.5M        | 大于10M          |
 | Mac Safria | 约2.5M        | 大于10M          |
 
+关于 sessionStorage 的共享
+
 > ...data stored in sessionStorage gets cleared <u>when the page session ends</u>...
 > 
 > **Opening a page in a new tab or window will cause a new session to be initiated**, which differs from how session cookies work.
 > 
 > > 通过点击 `target="_blank"` 链接（或者用了 `window.open`）打开的新标签页之间是属于同一个 session 的，而如果新开一个独立的标签页访问，则总是会初始化一个新的 session.
 
-
-
 ## 浏览器缓存
 
-针对HTTP get请求的缓存
+针对 HTTP get 请求的缓存
 
 - 强缓存
 - 协商缓存
@@ -201,7 +198,7 @@ openWindow(url, thirdpart, 540, 540)
 - Cache-Control: max-age=31536000（使用相对时间，同时使用时优先级更高）
 - Expires: Wed, 19 Oct 2022 04:54:02 GMT（使用基于服务器的绝对时间）
 
-精确度：Etag要优于 Last-Modified（后者只能精确到秒的颗粒度）
+精确度：Etag 要优于 Last-Modified（后者只能精确到秒的颗粒度）
 
 优先级：服务器校验优先考虑 Etag（例如适用于文件内容未修改但是修改时间变动的情况）
 

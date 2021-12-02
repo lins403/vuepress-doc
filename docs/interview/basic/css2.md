@@ -1,8 +1,26 @@
 # CSS布局
 
-## 基础布局
+:::tip 摘要
 
-normal flow，floats，absolute positioning
+1. 文档流、文本流
+
+2. display属性、position属性
+
+3. 浮动与清除浮动的三种方法
+
+4. BFC
+
+5. Flex布局、Grid布局
+
+6. 居中布局
+
+7. 三栏布局（圣杯与双飞翼）
+
+8. 多列布局、瀑布流布局
+
+:::
+
+## 基础布局
 
 `文档流`：[Normal flow](https://www.w3.org/TR/CSS2/visuren.html#block-formatting)，相对于盒子模型的概念
 
@@ -19,7 +37,7 @@ normal flow，floats，absolute positioning
 - `none`
 - `inline`
   - 无法设置宽度和高度，只有文本流的真实尺寸
-  - 只能设置左右的padding和margin
+  - 只能设置左右方向的 padding 和 margin
   - padding, margin, border 不会占据文本流，即不会推开其他元素，会发生重叠
 - `block`
   - 会将自己的width填充到整个viewpoint的宽度大小
@@ -35,7 +53,7 @@ normal flow，floats，absolute positioning
   - 相对static正常位置时的偏移，不改变布局，即偏移后元素正常位置占据文档流不会变动
   - position:relative; left:20px;
 - `absolute`
-  - 相对于**最近的已定位父元素**，没有的话最终会相对于`<html>`
+  - 相对于**最近的已定位<u>父元素</u>** （absolute / relative / fixed / sticky ），没有的话最终会相对于`<html>`
   - 会改变布局，元素脱离文档流，后面的元素会挤占它的空间，发生重叠
 - `fixed`
   - 相对浏览器窗口，元素脱离文档流
@@ -46,7 +64,7 @@ normal flow，floats，absolute positioning
 
 float、absolute、fixed 属性可以使一个元素脱离标准文档流，但其中float不会脱离文本流，也就是后面的文本会跟在float的元素后面，而不是被覆盖。
 
-float需要使用块布局，会将display为inline布局或table布局，转为**block**。
+float 需要使用块布局，会将 display 值为 inline 或 table 的布局，自动转为 **block**。
 
 #### 清除浮动
 
@@ -80,13 +98,15 @@ float需要使用块布局，会将display为inline布局或table布局，转为
 }
 ```
 
-### BFC
+## BFC
 
 块格式化上下文（Block Formatting Context，BFC），我把它当作是文档流 normal flow 中的一种 layout 布局方式。
 
 <u>BFC区域内部和外部的渲染（文档流、文本流）互不影响，BFC的高度包含了内部浮动元素的高度</u>
 
 用途：
+
+- 将子元素的margin也计算入父元素的高度
 
 - 撑起浮动元素父元素的高度；
   

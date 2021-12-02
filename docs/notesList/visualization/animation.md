@@ -35,20 +35,16 @@ animation: 3s ease-in 1s infinite reverse both running slidein;
 // ---------等同于---------
 
 animation-delay
-animation-direction: normal/reverse/alternate(来回)/alternate-reverse
+animation-direction: normal/reverse/alternate/alternate-reverse
 animation-duration
-animation-fill-mode
-animation-iteration-count
-animation-name
-animation-play-state
+animation-fill-mode: none/backwards/forwards/both //https://www.runoob.com/cssref/css3-pr-animation-fill-mode.html
+animation-iteration-count: infinite/数字(可以是浮点数)
+animation-name: 由@keyframes定义
+animation-play-state: running/paused
 animation-timing-function
 ```
 
-还可以使用多个动画
-
-
-
-
+可以使用多个动画
 
 ## CSS 函数
 
@@ -70,14 +66,9 @@ demo: [Steps() Demo - Clock](https://designmodo.com/demo/stepscss/index.html)
 
 ```scss
 // steps(<number_of_steps>，<direction>)
-
 ```
 
 ### frames()
-
-
-
-
 
 ## 性能相关
 
@@ -87,10 +78,6 @@ demo: [Steps() Demo - Clock](https://designmodo.com/demo/stepscss/index.html)
 - `opacity`
 
 [High Performance Animations - HTML5 Rocks](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/)
-
-
-
-
 
 # 参考
 
