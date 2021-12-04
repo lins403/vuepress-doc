@@ -93,9 +93,13 @@ Recalculate Style-->Layout-->Update Layer Tree-->以及之后各个流程
 
 Recalculate Style-->Update Layer Tree-->以及之后各个流程
 
-### 特殊
+### 影响重排重绘的属性
 
-- 动画、滚动
+[CSS properties by style operation required - Google ](http://goo.gl/lPVJY6)
+
+#### 特殊
+
+- 滚动
 - <u>opacity、transform</u>（通过transform实现的动画不需要进行样式计算、布局和绘制等操作）
 
 既不要布局也不要绘制，浏览器会跳过布局和绘制，直接执行合成

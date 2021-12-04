@@ -82,6 +82,14 @@ iTerm2+zsh
 
 离线开发文档：[Dash](https://kapeli.com/dash)
 
+终端目录生成 tree：`brew install tree`
+
+- `tree --help`
+
+- `tree -I node_modules`
+
+- `tree -L 1`
+
 ## 技巧
 
 ### Mac右键菜单

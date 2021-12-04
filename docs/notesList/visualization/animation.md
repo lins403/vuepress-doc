@@ -1,5 +1,14 @@
 # 动画
 
+## transform
+
+```scss
+tranform
+
+// 变化的原点，可以至多三维，至多由一/二/三个值组成
+transform-origin: <length>|<percentage>|left|center|right|top|bottom
+```
+
 ## transition
 
 ```scss
@@ -46,6 +55,21 @@ animation-timing-function
 
 可以使用多个动画
 
+## @keyframes
+
+```scss
+@keyframes slidein {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+// <custom-ident> (animation-name)
+// from(0%) / to(100%) / <percentage>
+```
+
 ## CSS 函数
 
 timing function
@@ -68,8 +92,6 @@ demo: [Steps() Demo - Clock](https://designmodo.com/demo/stepscss/index.html)
 // steps(<number_of_steps>，<direction>)
 ```
 
-### frames()
-
 ## 性能相关
 
 - `transform: translate()`
@@ -79,6 +101,24 @@ demo: [Steps() Demo - Clock](https://designmodo.com/demo/stepscss/index.html)
 
 [High Performance Animations - HTML5 Rocks](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/)
 
+
+
+## NPM packages
+
+[animate.css vs animejs vs gsap vs popmotion | npm trends](https://www.npmtrends.com/animate.css-vs-animejs-vs-gsap-vs-popmotion)
+
+### Popmotion
+
+[The animator’s JavaScript toolbox.](https://popmotion.io/)
+
+- JS 动画
+
+- 函数式编程
+
+
+
 # 参考
 
 [animation - CSS-Tricks](https://css-tricks.com/almanac/properties/a/animation/)
+
+[【译】css动画里的steps()用法详解](https://segmentfault.com/a/1190000007042048)

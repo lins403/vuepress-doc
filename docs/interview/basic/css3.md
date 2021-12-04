@@ -6,6 +6,8 @@
 
 滤镜：`background-blend-mode` , `mix-blend-mode` , `filter`
 
+模糊：`filter`(元素自身) , `backdrop-filter`(元素背景)
+
 渐变：`gradirent`
 
 文字环绕：`shape-outside`

@@ -3,8 +3,8 @@
 > For Vue 3 core reproductions, try reproducing it in [The SFC Playground](https://sfc.vuejs.org/). 
 > 
 > If it is a Vue 2 bug or cannot be reproduced in the playground, you can use [CodePen](https://codepen.io/pen/), [CodeSandbox](https://codesandbox.io/s/vue) or provide a GitHub repo.
-> 
-> > 目前简易demo用CodePen，project用CodeSandbox，js的调试一般在本地
+
+`REPL`: The acronym REPL stands for **read-eval-print loop** and basically provides a programmer with an interactive programming environment.
 
 ## CodeSandbox
 
@@ -26,8 +26,6 @@ CodePen Trending: <https://codepen.io/trending>
 
 官方Demo：vuejs cookbook、Animate.css、reactjs.org
 
-> 会卡，自动补全功能鸡肋
-
 ## JSFiddle
 
 <https://jsfiddle.net/>
@@ -42,11 +40,11 @@ CodePen Trending: <https://codepen.io/trending>
 
 ## Babel
 
-<http://babeljs.io/repl/>
+[Babel · The compiler for next generation JavaScript](https://babeljs.io/repl/)
 
 ## Webpack
 
-<https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/getting-started?terminal=>
+[Webpack.js Getting Started Example - StackBlitz](https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/getting-started?terminal=)
 
 ## 其它
 

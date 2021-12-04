@@ -38,6 +38,7 @@
 
 - `:focus` `:hover` 
 - `:nth-child()`  `:nth-of-type()`
+- `:root`、`:visited`、`:not()`
 
 伪元素：Pseudo-element
 
@@ -71,6 +72,13 @@ xpath
 - 控制台下使用 `$x()`进行测试
 
 ## 三、样式渲染
+
+### border 和 outline
+
+[border](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border) 和 outline 很类似，但有如下区别：
+
+- outline不占据空间，绘制于元素内容周围。
+- 根据规范，outline通常是矩形，但也可以是非矩形的。
 
 ### serif 和 sans-serif
 

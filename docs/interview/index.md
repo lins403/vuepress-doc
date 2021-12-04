@@ -20,6 +20,10 @@
 
 [GitHub - sl1673495/leetcode-javascript: 喝杯小酒，一起做题。](https://github.com/sl1673495/leetcode-javascript)
 
+## 工程化
+
+[GitHub - senntyou/blogs: 个人博客: Web前端, JavaScript, NodeJs, Electron ...](https://github.com/senntyou/blogs)
+
 ## 心得类
 
 [关于裸辞，关于前端面试](https://juejin.cn/post/6844903858297143310)

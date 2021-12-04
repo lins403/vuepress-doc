@@ -2,17 +2,7 @@
 
 [前端代码规范](https://guide.aotu.io/docs/)
 
-[CSS — BEM 命名规范](https://juejin.cn/post/6844903672162304013)
-
-[Vue风格指南](https://cn.vuejs.org/v2/style-guide/)
-
-[Vue 组件的单元测试](https://cn.vuejs.org/v2/cookbook/unit-testing-vue-components.html)
-
-[koro1FileHeader代码头部注释](https://github.com/OBKoro1/koro1FileHeader)
-
-[ESLint+Prettier](https://zhuanlan.zhihu.com/p/68026905)
-
-[git commit规范](https://zhuanlan.zhihu.com/p/268051722)
+[Code Guide](http://imweb.github.io/CodeGuide/#html)
 
 ---
 
