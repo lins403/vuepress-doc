@@ -101,8 +101,6 @@ demo: [Steps() Demo - Clock](https://designmodo.com/demo/stepscss/index.html)
 
 [High Performance Animations - HTML5 Rocks](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/)
 
-
-
 ## NPM packages
 
 [animate.css vs animejs vs gsap vs popmotion | npm trends](https://www.npmtrends.com/animate.css-vs-animejs-vs-gsap-vs-popmotion)
@@ -114,8 +112,6 @@ demo: [Steps() Demo - Clock](https://designmodo.com/demo/stepscss/index.html)
 - JS 动画
 
 - 函数式编程
-
-
 
 # 参考
 
