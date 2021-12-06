@@ -97,6 +97,7 @@ rem相对于根元素`<html>`
 - 元素的font-size用rem
 - 宽度常用百分比，有时候高度用vh、border用px
 - 其他元素基本都用em
+- clamp函数也很好用，例如 `font-size: clamp(1rem, 8vw - 2rem, 3rem);`
 
 ```scss
 $browser-default-font-size: 100px !default;    //变量的值可以根据自己需求定义，浏览器默认是16px，最小是12px

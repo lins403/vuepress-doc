@@ -1,5 +1,19 @@
 # 颜色
 
+## 色彩模式
+
+- rgb(red, geen, blue)
+  
+  - 三原色光模式
+
+- cmyk(Cyan, Magenta, Yellow, blacK)
+  
+  - 印刷四分色模式
+
+- hsl(hue, saturation, lightness)
+  
+  - 色相、饱和度、亮度
+
 ## 渐变色
 
 ```

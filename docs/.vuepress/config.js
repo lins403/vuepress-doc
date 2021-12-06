@@ -32,6 +32,8 @@ module.exports = {
               title: 'css',
               collapsable: false,
               children: [
+                'animation',
+                'image',
                 'adaptive-layout',
                 'responsive-layout',
               ]
@@ -41,6 +43,7 @@ module.exports = {
               collapsable: false,
               children: [
                 'color',
+                'theme-config',
                 'echarts',
               ]
             },

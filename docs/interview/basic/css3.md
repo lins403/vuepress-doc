@@ -12,6 +12,25 @@
 
 文字环绕：`shape-outside`
 
+文字阴影：`text-shadow`
+
+图片填充：`object-fit` , `object-position`
+
+图片边框：`border-image: image-source image-height image-width image-repeat`
+
+## CSS函数
+
+### clamp
+
+```scss
+clamp(MIN, VAL, MAX) // 其实就是表示 max(MIN, min(VAL, MAX))
+// 🌰
+<p class="fluid-type">Hello World!</p>
+.fluid-type {
+  font-size: clamp(1rem, 8vw - 2rem, 3rem);
+}
+```
+
 ## 层叠上下文
 
 ## 性能优化

@@ -100,11 +100,15 @@ animation：用来指定一组或多组动画，每组之间用逗号相隔
 
 ### 渐变
 
-linear-gradirent 线性渐变
+`linear-gradirent` 线性渐变
 
-radial-gradirent 径向渐变
+`radial-gradirent` 径向渐变
 
-repeating-linear-gradient 重复渐变
+`repeating-linear-gradient` 重复渐变
+
+### 尺寸单位
+
+[CSS units Cheat Sheet - 30 seconds of code](https://www.30secondsofcode.org/articles/s/css-units-cheatsheet)
 
 ## 四、特殊属性
 
@@ -136,69 +140,17 @@ repeating-linear-gradient 重复渐变
 
 `all`: Reset all styles
 
-- initial | inherit | unset(inherit外的值使用initial)  
+- initial | inherit | unset(不能inherit的值使用initial)  
 
 `::selection`: Changes the styling of text selection.
 
 `counter-reset`: Create a new css counter of the given name.
 
+`user-select`: 控制用户能否选中文本
+
 ## FAQ
 
-### 1）画一个三角形
-
-```css
-div {
-  width:0px;
-  height:0px;
-
-  /*下三角形*/
-  border-top:10px solid red;
-  border-right:10px solid transparent;
-  border-left:10px solid transparent;
-
-  /*上三角形*/
-  border-right:10px solid transparent;
-  border-bottom:10px solid blue;
-  border-left:10px solid transparent;
-}
-```
-
-### 3）添加省略号
-
-#### 单行
-
-```scss
-width: 必须设置;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-```
-
-#### 多行
-
-```scss
-overflow:hidden;
-text-overflow:ellipsis;
-display:-webkit-box;
--webkit-line-clamp:3;   //3行文字
--webkit-box-orient:vertical;
-```
-
-### ...）扩展
-
-#### 条纹渐变
-
-- [Stripes background pattern](https://www.30secondsofcode.org/css/s/stripes-pattern)
-
-- [Zig zag background pattern](https://www.30secondsofcode.org/css/s/zig-zag-pattern)
-
-#### 全景图片
-
-[Full-width image](https://www.30secondsofcode.org/css/s/full-width)
-
-- `margin-left: -50vw;margin-right: -50vw;` 可以使用 `transform: translateX(-50%)`
-
-# 参考/推荐
+### # 参考/推荐
 
 [【前端工程师面试宝典】学习说明_互联网校招面试真题面经汇总_牛客网](https://www.nowcoder.com/tutorial/96/1678a0fd35cd4db486af18589e34e4d4)
 

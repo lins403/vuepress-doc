@@ -18,6 +18,10 @@
 
 8. 多列布局、瀑布流布局
 
+9. 层叠上下文、层叠水平、层叠顺序
+
+10. 三种隐藏方法的区别
+
 :::
 
 ## 基础布局
@@ -120,20 +124,32 @@ float 需要使用块布局，会将 display 值为 inline 或 table 的布局�
 
 创建条件：[块格式化上下文 - Web 开发者指南 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
 
-### Flex布局
+## Flex布局
 
 `flex / inline-flex`
 
 [30 分钟学会 Flex 布局](https://zhuanlan.zhihu.com/p/25303493)
 
-#### **Flex 容器**
+[Flexbox Cheat Sheet - 30 seconds of code](https://www.30secondsofcode.org/articles/s/flexbox-cheatsheet)
+
+### Flex 容器
 
 1. flex-flow (flex-direction、flex-wrap)
+
 2. justify-content
+   
+   ```scss
+   space-between  //首个元素放置于起点，末尾元素放置于终点
+   space-around  //每个元素周围分配相同的空间
+   space-evenly  //每个元素之间的间隔相等
+   //...
+   ```
+
 3. align-items
+
 4. align-content
 
-#### **容器的 item**
+### 容器的 item
 
 1. order
 2. flex (flex-grow、flex-shrink、flex-basis)
@@ -158,11 +174,11 @@ flex-direction: row;
 flex-wrap: wrap;
 ```
 
-### Grid布局
+## Grid布局
 
 [最强大的 CSS 布局 —— Grid 布局 - 掘金](https://juejin.cn/post/6854573220306255880)
 
-#### **Grid 容器**
+### Grid 容器
 
 1. grid-template-rows
 
@@ -178,7 +194,7 @@ flex-wrap: wrap;
 
 7. grid-auto-columns、grid-auto-rows
 
-#### **容器的 item**
+### 容器的 item
 
 1. grid-row-start、grid-row-end
 
@@ -197,13 +213,13 @@ minmax()
 auto
 ```
 
-#### Flex 和 Grid
+### Flex 和 Grid
 
 - flex 适合一维，适合对齐元素内的内容，比如说用在页面的header，弹性强但行和列没有实质性关系。flex也可以实现grid实现不了的功能。
 - grid 适合多维，适合布局大画面，可以处理一些不规则和非对称的设计
 - 不是二选一，而是二合一，可以混合使用
 
-### 表格布局
+## 表格布局
 
 display：table、inline-table、table-caption、table-cell、table-row、table-row-group
 
@@ -267,20 +283,6 @@ display：table、inline-table、table-caption、table-cell、table-row、table-
 
 - flexbox
 
-## 隐藏
-
-`opacity: 0;`
-
-- 隐藏元素，不改变布局，绑定的事件依然会触发
-
-`visibility: hidden;`
-
-- 隐藏元素，不改变布局，<u>事件不会触发</u>
-
-`display: none;`
-
-- 会改变页面布局
-
 ## 多列布局
 
 Multi-clolumns Layout
@@ -328,8 +330,48 @@ TODO
 
 [纯 CSS 实现横向排序的瀑布流式布局 - The Trivial](https://jessieji.com/2019/pure-css-masonry)
 
+## 隐藏
+
+`opacity: 0;`
+
+- 隐藏元素，不改变布局，绑定的事件依然会触发
+
+`visibility: hidden;`
+
+- 隐藏元素，不改变布局，<u>事件不会触发</u>
+
+`display: none;`
+
+- 会改变页面布局
+
+## 层叠
+
+stacking
+
+### 层叠上下文 (~ context)
+
+- 要符合[既定条件](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context#%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87)，才会产生
+
+- 层叠上下文可以嵌套，受制于父元素的层叠上下文（如果有），且会影响后代元素（当元素发生层叠的时候，整个元素被认为是在父层叠上下文的层叠顺序中）
+
+- 层叠上下文的<u>层叠水平</u>要比普通元素高，但<u>层叠顺序</u>却位于较低的位置
+
+### 层叠水平 (~ level)
+
+- 每个元素都具备的，用于在<u>同个层叠顺序规则下</u>的比较
+
+- `z-index` 是一种层叠水平标识
+
+### 层叠顺序 (~ order)
+
+- 渲染覆盖规则
+
+![stacking order](https://raw.githubusercontent.com/lins403/assetsSpace/master/vuepress/img/stacking_order.png)
+
 # 参考
 
 [清除浮动的四种方式及其原理理解](https://juejin.cn/post/6844903504545316877)
 
 [【布局】聊聊为什么淘宝要提出「双飞翼」布局 · Issue #11 · zwwill/blog · GitHub](https://github.com/zwwill/blog/issues/11)
+
+[深入理解CSS中的层叠上下文和层叠顺序 &laquo; 张鑫旭-鑫空间-鑫生活](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)

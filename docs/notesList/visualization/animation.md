@@ -78,9 +78,9 @@ timing function
 
 `cubic-bezier()` ，贝塞尔曲线 (Bézier curve)
 
-延伸：ease、ease-in、ease-out、ease-in-out、linear
+延伸：ease、ease-in、ease-out、ease-in-out、linear （[Tip: CSS easing variables - 30 seconds of code](https://www.30secondsofcode.org/articles/s/css-easing-variables)）
 
-与动画结合的效果：[cubic-bezier.com](https://cubic-bezier.com/#0,1,1,0)
+与动画结合的效果：[cubic-bezier.com](https://cubic-bezier.com/#0,1,1,0)、
 
 ### steps()
 
@@ -93,6 +93,18 @@ demo: [Steps() Demo - Clock](https://designmodo.com/demo/stepscss/index.html)
 ```
 
 ## 性能相关
+
+### 3D transform
+
+使用 3D transform 会启用GPU加速，例如`translate3D`, `scaleZ` 之类
+
+### will-change
+
+使用 `will-change` 告知浏览器该元素会有哪些变化的方法，这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作。 这种优化可以将一部分复杂的计算工作提前准备好，使页面的反应更为快速灵敏。
+
+[使用CSS3 will-change提高页面滚动、动画等渲染性能](https://www.zhangxinxu.com/wordpress/2015/11/css3-will-change-improve-paint/)
+
+### 避免重排重绘的属性
 
 - `transform: translate()`
 - `transform: scale()`
