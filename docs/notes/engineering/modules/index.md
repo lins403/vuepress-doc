@@ -87,7 +87,7 @@ myModule.foo()         // output: foo() other data
 
 ![](https://cdn.jsdelivr.net/gh/lins403/assetsSpace/vuepress/img/js_modules.png)
 
-来源：<https://segmentfault.com/a/1190000040001687>
+source： [一次搞懂-JavaScript模块化详解](https://segmentfault.com/a/1190000040001687)
 
 ## CommonJS
 
@@ -282,18 +282,18 @@ webpack 相当于去 hack (模拟) 了commonjs 的功能
 
 ### 特点
 
-1. 独立的 ==模块作用域== ，不会污染全局作用域
+1. 独立的 <mark>模块作用域</mark> ，不会污染全局作用域
 
-2. ==同步== 加载模块
+2. <mark>同步</mark> 加载模块
 
-3. 模块加载 (require) 的 ==缓存==
+3. 模块加载 (require) 的 <mark>缓存</mark>
    
    - 第一次加载某个模块时，Node会缓存该模块。
    - 以后再加载该模块，就直接从缓存取出该模块的`module.exports`属性。
    - 所有缓存的模块保存在`require.cache`之中。
    - 缓存只是根据 <u>绝对路径</u> 识别模块的
 
-4. 模块的加载机制是，输入的是被输出的值的 ==拷贝==，输出以后模块内的变化不会影响到输出的这个值
+4. 模块的加载机制是，输入的是被输出的值的 <mark>拷贝</mark>，输出以后模块内的变化不会影响到输出的这个值
 
 ```js
 // lib.js
@@ -433,7 +433,7 @@ UMD (Universal Module Definition)
 ```js
 // https://cdn.jsdelivr.net/npm/vue@2.6.14
 function(e, t) {
-  "object" == typeof exports && "undefined" != typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = e || self).Vue = t()
+  "object" <mark> typeof exports && "undefined" != typeof module ? module.exports = t() : "function" </mark> typeof define && define.amd ? define(t) : (e = e || self).Vue = t()
 } (this,
 function() {
   // ...

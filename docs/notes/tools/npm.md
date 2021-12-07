@@ -6,7 +6,7 @@
 
 `npm install`
 
-```sh
+```shell
 --save        #-S
 --save--dev        #-D
 --global        #-g
@@ -24,21 +24,21 @@
 
 [npm 7 is now generally available!](https://github.blog/2021-02-02-npm-7-is-now-generally-available/)
 
-```sh
+```shell
 # 回退版本
 npm install --global npm@6
 ```
 
 #### 1）peerDependencies
 
-```sh
+```shell
 npm ERR! Could not resolve dependency:
 npm ERR! peer eslint@">=7.0.0" from eslint-config-prettier@7.2.0
 # npm 7 will block installations if an upstream dependency conflict is present that cannot be automatically resolved.
 # You have the option to retry with --force to bypass the conflict or --legacy-peer-deps command to ignore peer dependencies entirely (this behavior is similar to versions 4-6).
 ```
 
-```sh
+```shell
 npm install --force
 npm install --legacy-peer-deps
 ```
@@ -57,7 +57,7 @@ npm install --legacy-peer-deps
 
 [Node version support policy](https://github.com/sass/node-sass#node-version-support-policy)
 
-```sh
+```shell
 npm i node-sass@4.14.0
 # 然后把package.json和lock.json的更改取消掉，留着node_modules里的package就好
 ```
@@ -70,7 +70,7 @@ npm i node-sass@4.14.0
 
 ### 更换镜像源
 
-```sh
+```shell
 npm config set registry https://registry.npm.taobao.org/
 npm config get registry
 npm config set registry https://registry.npmjs.org
@@ -85,6 +85,8 @@ npm outdated --registry https://skimdb.npmjs.com/registry
 ### unpkg
 
 <https://unpkg.com/>
+
+
 
 ```html
 <script src="https://unpkg.com/@babel/standalone/babel.js"></script>

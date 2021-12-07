@@ -2,13 +2,13 @@
 
 ## CSS Modules
 
-把CSS视作一个独立的模块，在js中import使用
+把CSS视作一个独立的模块，将css内容导出为一个对象，用js来加载
 
-规范：<https://github.com/css-modules/css-modules>
+规范：[Documentation about css-modules](https://github.com/css-modules/css-modules)
 
-基础用法：<http://www.ruanyifeng.com/blog/2016/06/css_modules.html>
+基础用法：[CSS Modules 用法教程 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)
 
-VueCLi的集成使用：<https://cli.vuejs.org/zh/guide/css.html#css-modules>
+VueCLi的集成使用：[CSS Modules | Vue CLI](https://cli.vuejs.org/zh/guide/css.html#css-modules)
 
 ```vue
 <template>
@@ -59,13 +59,13 @@ VueCli内置postcss、postcss-loader、postcss用于添加浏览器前缀的插�
 
 ## SCSS
 
-- LT3.0 `.sass`
+- <3.0 `.sass`
 
-- GT3.0 `.scss`
+- ≥3.0 `.scss`
 
 ### Dart Sass
 
-<https://sass-lang.com/dart-sass>
+[Sass: Dart Sass](https://sass-lang.com/dart-sass)
 
 [Node Sass to Dart Sass](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/sass.html#node-sass-to-dart-sass)
 
@@ -87,7 +87,7 @@ VueCli内置postcss、postcss-loader、postcss用于添加浏览器前缀的插�
 - [stylelint-prettier](https://github.com/prettier/stylelint-prettier)
 - [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier)
 
-```sh
+```shell
 npm i -D stylelint stylelint-config-recommended-scss
 npm i -D stylelint-config-recess-order
 npm i -D stylelint-prettier stylelint-config-prettier
@@ -115,7 +115,7 @@ public/*
 
 命令行检测和修复，可以配合 .stylelintignore 使用
 
-```sh
+```shell
 npx stylelint "**/*.scss"
 npx stylelint --fix "**/*.scss"
 ```

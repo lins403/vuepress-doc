@@ -27,3 +27,15 @@
 ## 心得类
 
 [关于裸辞，关于前端面试](https://juejin.cn/post/6844903858297143310)
+
+## 大厂资源
+
+[淘系前端团队（FED）](https://fed.taobao.org/)
+
+[美团技术团队](https://tech.meituan.com/)
+
+[字节前端](https://www.zhihu.com/org/zi-jie-qian-duan)
+
+[钉钉前端团队 的个人主页 - 文章 - 掘金](https://juejin.cn/user/676954895831517/posts)
+
+[飞猪前端团队 的个人主页 - 动态 - 掘金](https://juejin.cn/user/3051900006845944)

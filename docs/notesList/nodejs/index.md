@@ -88,7 +88,7 @@
 
 删除原来的 node
 
-```sh
+```shell
 sudo npm uninstall npm -g
 sudo rm -rf /usr/local/lib/node /usr/local/lib/node_modules /var/db/receipts/org.nodejs.*
 sudo rm -rf /usr/local/include/node /Users/$USER/.npm
@@ -97,14 +97,14 @@ sudo rm /usr/local/share/man/man1/node.1
 sudo rm /usr/local/lib/dtrace/node.d
 ```
 
-```sh
+```shell
 node -v
 npm -v
 ```
 
 改用 homebrew 安装
 
-```sh
+```shell
 # 卸载原来安装的最新版本node
 (base) MacBook-Pro➜  ~  ᐅ  history -5
  4452  brew uninstall yarn
@@ -114,7 +114,7 @@ npm -v
  4456  brew search node
 ```
 
-```sh
+```shell
 brew install node@14
 # brew list node@14
 brew link node@14
@@ -136,8 +136,8 @@ Node.js的API都是异步的，同步的函数是奢求，要查API文档，在�
 
 # 参考
 
-<https://xie.infoq.cn/article/20c3ad1736d027615b12d6b20>
+[不懂什么是高并发？看完这篇文章你可以去吊打面试官了](https://xie.infoq.cn/article/20c3ad1736d027615b12d6b20)
 
-<https://nodejs.org/en/about/>
+[About | Node.js](https://nodejs.org/en/about/)
 
 [【全文】狼叔：如何正确的学习Node.js](https://segmentfault.com/a/1190000013933520)

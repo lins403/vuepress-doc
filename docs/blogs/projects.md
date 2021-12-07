@@ -1,6 +1,6 @@
 # 踩坑
 
-.vue 文件中 css 使用实例变量（==vue2中css无法响应式更新==）
+.vue 文件中 css 使用实例变量（<mark>vue2中css无法响应式更新</mark>）
 
 ```vue
 <script>

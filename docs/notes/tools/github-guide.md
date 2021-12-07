@@ -14,7 +14,7 @@
 
 要贡献代码的repo称为上游仓库
 
-```sh
+```shell
 # 对上游仓库进行fork得到自己的origin仓库，clone至本地，创建新分支用于自己的开发
 git clone https://github.com/your_github/project_repo.git
 
@@ -50,7 +50,7 @@ git remote rm upstream
 
 <img :src="$withBase('/assets/img/notes/github_fork.png')">
 
-```sh
+```shell
 # 操作实录
 cd Documents
 git clone https://github.com/lins403/ant-design-pro.git
@@ -132,9 +132,9 @@ PicGo: <https://molunerfinn.com/PicGo/>
 
 配置：[GitHub图床](https://picgo.github.io/PicGo-Doc/zh/guide/config.html#github%E5%9B%BE%E5%BA%8A)
 
-jsDelivr CDN : <https://www.jsdelivr.com/?docs=gh>
+jsDelivr CDN : [jsDelivr - A free, fast, and reliable CDN for open source](https://www.jsdelivr.com/?docs=gh)
 
-```sh
+```shell
 # 访问路径
 https://cdn.jsdelivr.net/gh/<user_name>/>repo_name>/<file_name>
 # 🌰

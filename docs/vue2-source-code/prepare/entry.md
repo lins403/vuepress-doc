@@ -36,11 +36,7 @@
 
 ![](https://wangtunan.github.io/blog/assets/img/process.8f86c136.png)
 
-
-
 来源：<https://wangtunan.github.io/blog/vueAnalysis/entry/>
-
-
 
 ## 问题
 
@@ -55,19 +51,19 @@
 **延伸**
 
 1. init初始化中的merge options
-
+   
    需要区分实例化的是component还是Vue，
-
+   
    - 前者调用 `initInternalComponent` 只需要做简单的赋值拷贝，而不涉及递归与合并策略等复杂逻辑，从而使实例化的速度快很多（optimize internal component instantiation）
    - 后者使用 `mergeOptions` 方法，同时在 `resolveConstructorOptions` 中还需要进一步细分是通过new Vue或者是Vue.extend的方式来引入的额外options，如果是extend则需要继承父类的options，同时根据缓存的options判断是否需要更新父类的options，因为它有可能也会被mixin或extend的方式改变。
 
 2. 相关属性的init初始化
-
+   
    ```js
-   initProxy(vm)	
+   initProxy(vm)    
    // render的Proxy代理【TODO: 理清过程】
    // vm._renderProxy = new Proxy(vm, handlers)
-   // vnode = render.call(vm._renderProxy, vm.$createElement)	[Vue.prototype._render()]
+   // vnode = render.call(vm._renderProxy, vm.$createElement)    [Vue.prototype._render()]
    
    initLifecycle(vm)
    initEvents(vm)
@@ -81,10 +77,10 @@
    // --------------------------------------------
    if (vm.$options.el) vm.$mount(vm.$options.el)
    ```
-
+   
    - init留意两个分割点，'beforeCreate'、 'created'，结合生命周期图例来看。
    - initState中初始化的顺序依次是：props、methods、data、computed、watch，这对后面的响应式分析很有帮助。
 
 3. vm.$mount挂载实例
-
+   
    会判断 vm.$options.el 是否存在，存在则 `vm.$mount(vm.$options.el)` ，然后会去调用入口文件中 \$mount 方法，通过compiler和render，将template渲染成实际的DOM，完成vm实例的挂载。

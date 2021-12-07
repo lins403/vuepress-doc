@@ -129,7 +129,7 @@ computed: {
 
 ## option的属性顺序
 
-==温故而知新==
+<mark>温故而知新</mark>
 
 1. **Side Effects** (triggers effects outside the component)
    - `el`

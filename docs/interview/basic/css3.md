@@ -31,8 +31,6 @@ clamp(MIN, VAL, MAX) // 其实就是表示 max(MIN, min(VAL, MAX))
 }
 ```
 
-## 层叠上下文
-
 ## 性能优化
 
 不建议用@import导入css，因为会增加http请求，但预处理器中使用会被先编译，所以使用@import没有副作用

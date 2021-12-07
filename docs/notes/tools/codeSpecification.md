@@ -4,13 +4,13 @@
 
 [Code Guide](http://imweb.github.io/CodeGuide/#html)
 
----
+[blogs/12.md at master · senntyou/blogs · GitHub](https://github.com/senntyou/blogs/blob/master/web-advance/12.md)
 
 [《前端科普系列-ESlint：守住优雅的护城河》](https://zhuanlan.zhihu.com/p/184951182)
 
 ## 一、EditorConfig
 
-```sh
+```shell
 # .editorconfig
 
 # 告诉EditorConfig插件，这是根文件，不用继续往上查找
@@ -39,7 +39,7 @@ trim_trailing_whitespace = false
 
 ## 二、eslint & prettier
 
-```sh
+```shell
 npm install -D eslint eslint-plugin-vue babel-eslint #Vue
 npm install -D eslint eslint-plugin-react babel-eslint eslint-plugin-import #React
 npm install -D --save-exact prettier
@@ -100,7 +100,7 @@ module.exports = {
 - Husky 的原理是把Husky配置和 Git Hook 关联起来，便于我们使用 Git Hook 
 - 只对本次提交的代码（staged git files）做代码检查
 
-```sh
+```shell
 # 方式一：手动
 npm install -D husky lint-staged
 
@@ -130,7 +130,7 @@ npx mrm@2 lint-staged
 }
 ```
 
-```sh
+```shell
 # .husky/pre-commit (v7)
 npx --no-install lint-staged
 # or

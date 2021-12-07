@@ -95,14 +95,14 @@ foo();
 
 ## 特点
 
-- ==编译时加载==
+- <mark>编译时加载</mark>
   
   - 静态分析，编译时就能确定模块间的依赖关系
   - import 提升
 
 - 自动采用严格模式
 
-- 被导出的值是 ==引用==，而非像commonjs那样的拷贝
+- 被导出的值是 <mark>引用</mark>，而非像commonjs那样的拷贝
 
 ```js
 // lib.js
@@ -141,7 +141,7 @@ import { foo, bar } from 'my_module';
 
 [Using ES6 modules in the browser](https://medium.com/ghostcoder/using-es6-modules-in-the-browser-5dce9ca9e911)【自用express未解决】
 
-```sh
+```shell
 cd public
 npm init
 npm install express --save

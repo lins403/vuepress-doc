@@ -10,7 +10,7 @@
 
 ![git命令操作图例](https://i.stack.imgur.com/cZkcV.jpg)
 
-```sh
+```shell
 git status    # 显示工作目录和暂存区的状态
 
 # 创建+切换分支
@@ -81,7 +81,7 @@ package.json方式
 },
 ```
 
-```sh
+```shell
 # 需要保留package.json的husky字段配置才能使用
 npx --no-install lint-staged
 # or

@@ -10,7 +10,7 @@
 
 ## 本地部署
 
-```sh
+```shell
 # deploy.sh
 #!/usr/bin/env sh
 set -e

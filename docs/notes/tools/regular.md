@@ -111,4 +111,4 @@ value = value.replace(reg, '$1')    // 超过16位的字符被删除
 
 # 参考
 
-<https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions>
+[正则表达式 - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)

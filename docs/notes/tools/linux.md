@@ -8,7 +8,7 @@
 
 文件下载
 
-```sh
+```shell
 wget http://www.Linuxcool.com/testfile.zip
 -c,  --continue        # 断点续传
 -b,  --background        # 后台下载
@@ -18,7 +18,7 @@ wget http://www.Linuxcool.com/testfile.zip
 
 文件传输工具
 
-```sh
+```shell
 curl -o response.txt https://catonmat.net        # -o参数将服务器的回应保存成文件，等同于wget命令
 curl -O https://www.example.com/foo/bar.html        # -O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名
 curl -X POST https://catonmat.net        # -X参数指定 HTTP 请求的方法
@@ -57,4 +57,4 @@ curl -X POST https://catonmat.net        # -X参数指定 HTTP 请求的方法
 | `Ctrl+r`      | 重做最后撤销的操作            |
 | `:w new_name` | 用 new_name 作为文件名保存文件 |
 
-查表：<https://linux.cn/article-8144-1.html>
+[技术|Vim 快捷键速查表](https://linux.cn/article-8144-1.html)
