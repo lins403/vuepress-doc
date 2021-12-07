@@ -2,7 +2,7 @@
 
 ## Service
 
-<https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-service/lib/Service.js>
+[vue-cli/Service.js at dev · vuejs/vue-cli · GitHub](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-service/lib/Service.js)
 
 ```json
   "scripts": {
@@ -24,7 +24,7 @@ node `process.env`
 - [dotenv](https://github.com/motdotla/dotenv)
 - [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
-源码：<https://github.com/vuejs/vue-cli/blob/e41ef41540802723eb146f2a630c460c95883c7e/packages/%40vue/cli-service/lib/Service.js#L58>
+源码：[vue-cli/Service.js#L58 at dev · vuejs/vue-cli · GitHub](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-service/lib/Service.js#L58)
 
 文档：**[模式和环境变量](https://cli.vuejs.org/zh/guide/mode-and-env.html)**
 
@@ -35,7 +35,7 @@ node `process.env`
 
 ## 配置
 
-https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config
+[vue-cli/packages/@vue/cli-service/lib/config at dev · vuejs/vue-cli · GitHub](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config)
 
 [base 配置](https://github.com/vuejs/vue-cli/blob/3f0b782bca7df17740b72509c42e5e2ea6562ac9/packages/%40vue/cli-service/lib/config/base.js)
 
@@ -43,7 +43,7 @@ https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config
 
 ## plugins
 
-https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-service/lib/webpack
+[vue-cli/packages/@vue/cli-service/lib/webpack at dev · vuejs/vue-cli · GitHub](https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-service/lib/webpack)
 
 @vue/preload-webpack-plugin
 
@@ -69,7 +69,7 @@ terser-webpack-plugin
 
 ### webpack-chain
 
-https://github.com/neutrinojs/webpack-chain
+[GitHub - neutrinojs/webpack-chain: A chaining API to generate and simplify the modification of Webpack configurations.](https://github.com/neutrinojs/webpack-chain)
 
 ## 升级到VueCli4
 

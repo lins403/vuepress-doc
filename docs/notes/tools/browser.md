@@ -1,20 +1,22 @@
 # 浏览器
 
+## BOM和DOM
+
 - 浏览器对象模型（Browser Object Model，简称 BOM），也就是 `window` 对象
 - 文档对象模型（Document Object Model，简称 DOM），也就是 `document` 对象
 
 ## 离线存储
 
-localStorage
+### localStorage
 
 - Chrome有5M大小限制
 - 只支持字符串
 
-indexDB
+### indexDB
 
 - 资料：[HTML5 indexedDB前端本地存储数据库实例教程](https://www.zhangxinxu.com/wordpress/2017/07/html5-indexeddb-js-example/)
 
-其它
+### 其它
 
 - Web SQL Database（规范放弃支持，淘汰中）
 
@@ -22,12 +24,15 @@ indexDB
 
 ### indexDB 与 Web SQL Database
 
-- Web SQL Database
-  - 关系型数据库，类似SQLite
-  - 事务操作要写SQL
-- indexDB
-  - NoSQL数据库
-  - 写法对JS开发者更友好
+`Web SQL Database`
+
+- 关系型数据库，类似SQLite
+- 事务操作要写SQL
+
+`indexDB`
+
+- NoSQL数据库
+- 写法对JS开发者更友好
 
 ### indexDB 与 localStorage
 
@@ -53,7 +58,7 @@ indexDB
 - 类似 localStorage 的API风格
 - 异步get和set，支持Promise和callback
 
-[localforage手册](https://localforage.docschina.org/#localforage)
+[localForage 中文文档](https://localforage.docschina.org/#localforage)
 
 ## 渲染原理
 
@@ -126,7 +131,7 @@ requestAnimationFrame我看到别的博客提到节流效果，用节流解释�
 
 ---
 
-# browserslist
+## browserslist
 
 指定了项目的<u>目标浏览器的范围</u>和<u>Node.js的版本</u>，用在：
 
@@ -169,7 +174,9 @@ not ie < 11
 
 - [browsersl.ist/](https://browsersl.ist/)
 
-- [Can I use](https://caniuse.com/)
+- 
+
+- [Can I use... Support tables for HTML5, CSS3, etc](https://caniuse.com/)
 
 参考配置
 

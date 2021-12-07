@@ -2,12 +2,14 @@
 
 ## 常规快捷键
 
-| 操作        | 快捷键                   |
-| --------- | --------------------- |
-| 打开应用的偏好设置 | **Command-逗号 (,)**    |
-| 全屏        | **Control-Command-F** |
-| 锁定屏幕🖥    | **Control-Command-Q** |
-|           | **Control–电源按钮**      |
+| 操作        | 快捷键                |
+| --------- | ------------------ |
+| 打开应用的偏好设置 | Command-逗号 (,)     |
+| emoji     | Control-Command-空格 |
+| finder    | Option-Command-空格  |
+| 全屏        | Control-Command-F  |
+| 锁定屏幕🖥    | Control-Command-Q  |
+|           | Control–电源按钮       |
 
 ## 终端命令行
 
@@ -82,8 +84,6 @@ iTerm2+zsh
 
 - `tree -L 1`
 
-
-
 ## 其它
 
 ### 远程
@@ -93,6 +93,21 @@ ssh -p 22 root@101.132.124.236
 ```
 
 ## 技巧
+
+### 特殊符号
+
+| 符号                  |                                                        |
+| ------------------- | ------------------------------------------------------ |
+| `...`               | `Option ;`                                             |
+| `≥` `≤` `≠` `≈`     | `Option .`    `Option ,` `Option =` `Option x`         |
+| `∞` `«` `»`         | `Option 5` `Option \` `Shift Option \`                 |
+| `÷` `˚` `π` `√` `∑` | `Option /` `Option k` `Option p` `Option v` `Option w` |
+| `“` `¥`             | `Option [` `Option y`                                  |
+| `∂`  `ß`  `∆`  `µ`  | `Option d` `Option s`  `Option j` `Option m`           |
+| `®` `©` `™`         | `Option r` `Option g` `Option 2`                       |
+| `±`  `—`            | `Shift Option =`  `Shift Option -`                     |
+| `‰`                 | `Shift Option r`                                       |
+| `` `¿`             | `Shift Option k` `Shift Option /`                      |
 
 ### Mac右键菜单
 

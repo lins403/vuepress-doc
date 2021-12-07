@@ -14,8 +14,9 @@
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.8.2",
     "@vuepress/plugin-google-analytics": "^1.8.2",
-    "markdown-it-mark": "^3.0.1",
     "animate.css": "^4.1.1",
+    "markdown-it-mark": "^3.0.1",
+    "markdown-it-task-lists": "^2.1.1",
     "vuepress": "^1.8.2"
   },
   "dependencies": {}

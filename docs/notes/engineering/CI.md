@@ -6,15 +6,9 @@ https://www.devopsauthority.tech/2021/02/09/github-actions-vs-travis-ci/
 
 [Lerna](https://lerna.js.org/)
 
-Docker
-
 [CICD持续集成: .gitlab-ci.yml配置小记（gitlab-ci + gitlab-runner）](https://segmentfault.com/a/1190000021874825)
 
 [使用YEOMAN创建属于自己的前端工作流](https://segmentfault.com/a/1190000004896264)
-
-
-
-
 
 - [ ] Travis CI
 
@@ -22,7 +16,7 @@ Docker
 
 - [ ] GitLab CI
 
-- [ ] Yeoman
+- [x] Yeoman
 
 - [ ] Lerna
 

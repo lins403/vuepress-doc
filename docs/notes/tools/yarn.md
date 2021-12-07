@@ -41,7 +41,7 @@ warning " > img-loader@3.0.1" has incorrect peer dependency "imagemin@^5.0.0 || 
 
 resolutions 可以突破版本限制
 
-**[resolutions](https://link.zhihu.com/?target=https%3A//classic.yarnpkg.com/en/docs/selective-version-resolutions/%23toc-how-to-use-it)**
+[Selective dependency resolutions | Yarn](https://classic.yarnpkg.com/en/docs/selective-version-resolutions/#toc-how-to-use-it)
 
 # 参考
 

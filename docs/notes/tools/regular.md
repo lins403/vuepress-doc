@@ -82,7 +82,7 @@ String
     split()
 ```
 
-## 🌰
+## 🌰Case
 
 ```javascript
 // 中文

@@ -2,13 +2,13 @@
 
 ## CSS Modules
 
-把CSS视作一个独立的模块，将css内容导出为一个对象，用js来加载
+把 CSS 视作一个独立的模块，将 css 内容导出为一个对象，用 js 来加载
 
 规范：[Documentation about css-modules](https://github.com/css-modules/css-modules)
 
 基础用法：[CSS Modules 用法教程 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)
 
-VueCLi的集成使用：[CSS Modules | Vue CLI](https://cli.vuejs.org/zh/guide/css.html#css-modules)
+VueCLi 的集成使用：[CSS Modules | Vue CLI](https://cli.vuejs.org/zh/guide/css.html#css-modules)
 
 ```vue
 <template>
@@ -40,52 +40,62 @@ export default {
 </style>
 ```
 
-React直接使用 CSS-in-JS ：[styled-components](https://github.com/styled-components/styled-components)
+React 直接使用 CSS-in-JS ：[styled-components](https://github.com/styled-components/styled-components)
 
 ## 预处理器
 
 [Vue Loader > 使用预处理器](https://vue-loader.vuejs.org/zh/guide/pre-processors.html#%E4%BD%BF%E7%94%A8%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8)
 
-### PostCSS
+## PostCSS
 
 - Add vendor prefixes ([autoprefixer](https://github.com/postcss/autoprefixer))
 - convert future syntax ([postcss-preset-env](https://github.com/csstools/postcss-preset-env))
 - add suffix for selectors in a <u>css module</u> to avoid global namespace conflicts ([css-modules](https://github.com/css-modules/css-modules))
 - lint your stylesheets ([stylelint](https://github.com/stylelint/stylelint))
 
-VueCli内置postcss、postcss-loader、postcss用于添加浏览器前缀的插件autoprefixer，以及browserslist
+VueCli内置 postcss、postcss-loader、用于添加浏览器前缀的插件autoprefixer，以及browserslist
 
 [@vue/cli-service > postcss配置](https://github.com/vuejs/vue-cli/blob/e661a923751c2f49a24cb065b5dd5999169e86af/packages/%40vue/cli-service/lib/config/css.js#L50)
 
 ## SCSS
 
-- <3.0 `.sass`
+- < 3.0 `.sass`
 
-- ≥3.0 `.scss`
+- ≥ 3.0 `.scss`
 
 ### Dart Sass
 
-[Sass: Dart Sass](https://sass-lang.com/dart-sass)
+相关：[Sass: Dart Sass](https://sass-lang.com/dart-sass)
 
-[Node Sass to Dart Sass](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/sass.html#node-sass-to-dart-sass)
+升级方案：[Node Sass to Dart Sass](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/sass.html#node-sass-to-dart-sass)
 
 ### SCSS Lint
 
 早期的 [scss-lint](https://github.com/sds/scss-lint) 支持的是已经被淘汰的 Ruby Sass；
 
-使用方案：
+#### 使用方案：
 
-- [stylelint](https://stylelint.io/)
-  - [postcss](https://postcss.org/)
-  - ...postcss plugins
-- [stylelint-config-recommended-scss](https://www.npmjs.com/package/stylelint-config-recommended-scss)
-  - [stylelint-config-recommended](https://www.npmjs.com/package/stylelint-config-recommended)
-  - [postcss-scss](https://www.npmjs.com/package/postcss-scss) ( Parse SCSS syntax and apply PostCSS transformations directly to SCSS source code. )
-  - [stylelint-scss](https://www.npmjs.com/package/stylelint-scss)
-- [stylelint-config-recess-order](https://github.com/stormwarning/stylelint-config-recess-order)
-  - [stylelint-order](https://github.com/hudochenkov/stylelint-order)
-- [stylelint-prettier](https://github.com/prettier/stylelint-prettier)
-- [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier)
+1. [`stylelint`](https://stylelint.io/)
+   
+   - [postcss](https://postcss.org/)
+   
+   - ...postcss plugins
+
+2. [`stylelint-config-recommended-scss`](https://www.npmjs.com/package/stylelint-config-recommended-scss)
+   
+   - [stylelint-config-recommended](https://www.npmjs.com/package/stylelint-config-recommended)
+   
+   - [postcss-scss](https://www.npmjs.com/package/postcss-scss) ( Parse SCSS syntax and apply PostCSS transformations directly to SCSS source code. )
+   
+   - [stylelint-scss](https://www.npmjs.com/package/stylelint-scss)
+
+3. [`stylelint-config-recess-order`](https://github.com/stormwarning/stylelint-config-recess-order)
+   
+   - [stylelint-order](https://github.com/hudochenkov/stylelint-order)
+
+4. [`stylelint-prettier`](https://github.com/prettier/stylelint-prettier)
+
+5. [`stylelint-config-prettier`](https://github.com/prettier/stylelint-config-prettier)
 
 ```shell
 npm i -D stylelint stylelint-config-recommended-scss
@@ -93,7 +103,11 @@ npm i -D stylelint-config-recess-order
 npm i -D stylelint-prettier stylelint-config-prettier
 ```
 
-安装vscode插件 **stylelint** (stylelint-plus supports auto fix on save)，然后修改配置，添加对 `scss` 文件的校验
+#### vscode插件
+
+安装vscode插件 **stylelint** ( *stylelint-plus* supports auto fix on save)，然后修改配置，添加对 `scss` 文件的校验
+
+#### 配置文件
 
 项目配置文件，rules中添加规则覆盖
 
@@ -113,12 +127,16 @@ dist/*
 public/*
 ```
 
-命令行检测和修复，可以配合 .stylelintignore 使用
+#### 命令行
+
+命令行检测和修复，可以配合 *.stylelintignore* 使用
 
 ```shell
 npx stylelint "**/*.scss"
 npx stylelint --fix "**/*.scss"
 ```
+
+#### Ignoring code
 
 disable complains：<https://stylelint.io/user-guide/ignore-code/>
 
@@ -126,7 +144,7 @@ disable complains：<https://stylelint.io/user-guide/ignore-code/>
 /*stylelint-disable*/
 ```
 
-🌰
+#### 🌰🌰
 
 ```scss
 // Bad
@@ -140,27 +158,28 @@ disable complains：<https://stylelint.io/user-guide/ignore-code/>
 }
 ```
 
-.vue文件
+#### .vue文件的支持
 
 [Vue Loader >  stylelint](https://vue-loader.vuejs.org/zh/guide/linting.html#stylelint)
 
 stylelint 插件的设置中，添加 `vue` 文件的支持很多时候，例如使用模板字符串、或者使用带$的私有变量，会带来多余的complains，所以 lint-staged 中 .vue 文件也不使用 `stylelint --fix`
 
-### 使用
+### 语法
 
-注释
+#### 注释
 
 ```scss
 // This comment won't be included in the CSS.
-   This is also commented out.
 
-/* But this comment will, except in compressed mode.
+/* But this comment will, except in compressed mode. */
+
+/*! This comment will be included even in compressed mode. */
 
 p .sans
   font: Helvetica, /* Inline comments must be closed. Also won't be included in the CSS. */ sans-serif
 ```
 
-Basic
+#### Basic
 
 - Variables
 - Nesting
@@ -169,9 +188,10 @@ Basic
 - Extend/Inheritance
 - Math Operators
 
-Advanced    
+#### Advanced
 
 ```scss
+// function
 @function
   @return
 
@@ -182,16 +202,16 @@ Advanced
 @while
 ```
 
-### less-vs-sass-vs-stylus
+## less-vs-sass-vs-stylus
 
-[npm trends](https://www.npmtrends.com/less-vs-sass-vs-stylus)
+[less vs sass vs stylus | npm trends](https://www.npmtrends.com/less-vs-sass-vs-stylus)
 
 - 变量、嵌套、模块、mixins、继承、运算符、内建函数、控制流
 
-- Less和Stylus都是用JavaScript写的，能直接用在浏览器端和node，Sass用Dart写的，~~需要在服务端做处理，~~ 但npm发布的package是纯JavaScript的
+- Less 和 Stylus 都是用 JavaScript 写的，能直接用在浏览器端和 node，Sass 用 Dart 写的，~~需要在服务端做处理，~~ 但 npm 发布的 package 是纯 JavaScript 的
 
-- Less不能使用条件语句、不能自定义function、不能使用带参数的mixins，SCSS的extend也更直观好用
+- Less 不能使用`条件语句`、不能自定义`function`、不能使用带参数的`mixins`，SCSS 的`extend`也更直观好用
 
-- stylus差异较大，采用缩进，其它特性的语法也偏简洁
+- Stylus 差异较大，采用缩进，其它特性的语法也偏简洁
 
-- 总之，SCSS更面向编程，less只能说是css的拓展，不喜欢Stylus的风格，趋势热度上亦或是语法功能上，都倾向于选择scss
+- 总之，SCSS 更面向编程，Less 只能说是 css 的拓展，不喜欢 Stylus 的风格，趋势热度上亦或是语法功能上，都倾向于选择 scss

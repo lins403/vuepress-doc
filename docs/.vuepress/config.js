@@ -14,7 +14,7 @@ module.exports = {
     ],
     markdown: {
       extendMarkdown: md => {
-        md.use(require('markdown-it-mark'))
+        md.use(require('markdown-it-mark')).use(require('markdown-it-task-lists'),{enabled: true, label: true});
       }
     },
     themeConfig: {
@@ -83,14 +83,15 @@ module.exports = {
               title: '前端工程化',
               collapsable: false,
               children: [
+                'engineering/',
                 'engineering/modules/',
                 'engineering/modules/esm',
-                'engineering/workflow',
                 'engineering/webpack',
                 'engineering/rollup',
-                'engineering/vue-cli-config',
-                'tools/browser',
                 'engineering/css-preprocessor',
+                'engineering/vue-cli-config',
+                'engineering/workflow',
+                'engineering/CI',
               ]
             },
             {
@@ -109,6 +110,7 @@ module.exports = {
               title: '开发工具',
               collapsable: false,
               children: [
+                'tools/browser',
                 'tools/vscode',
                 'tools/markdown',
                 'tools/linux',

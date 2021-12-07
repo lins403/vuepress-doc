@@ -12,7 +12,7 @@
 
 ### 语义化标签
 
-- 部分head中的title和元数据meta标签，利于SEO
+- `<head>`中的title和元数据meta标签等，利于SEO
 - aside、section、article、footer等，便于阅读和代码的规范性
 - code、pre、cite、blockquote等，有实际渲染意义，参照markdown
 

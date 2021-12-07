@@ -2,9 +2,31 @@
 
 打包模块，解析模块依赖，构建你的 images、styles、assets、scripts 等静态资源
 
+## 工作原理
+
+> loader机制是webpack核心：
+> 
+> webpack通过打包入口的js => 解析代码依赖模块 => 解析模块依赖 => 形成依赖树 => 递归依赖树 => 找到资源文件 => 根据webpack.config.js配置文件rules属性找到对应加载器 => 最后将加载结果输出到输出文件中
+
+## 意义
+
+1. 代码拆分（Code Splitting）
+   
+   - 可以按需加载，便于构建复杂的 SPA
+
+2. 静态资源（Static Assets）
+   
+   - 使用 loader 进行处理转换，将静态资源都构建为 JavaScript 模块
+   
+   - 解析模块依赖，模块内引用依赖模块，实现一个资源可以依赖其它资源
+   
+   - 使用 hash 重命名需要的资源文件，避免浏览器缓存带来的影响
+
+3. 自动化构建
+
 ## 快速上手
 
-```sh
+```shell
 mkdir webpack-demo
 cd webpack-demo
 git init
@@ -17,7 +39,7 @@ echo "/node_modules" > .gitignore
 1. 创建一个 bundle ( npx webpack、dist/index.html ）
 2. 添加配置文件 webpack.config.js
 3. 添加 npm scripts 快捷方式（npm run build）
-4. [官方在线demo](https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/getting-started?terminal=)
+4. [Webpack.js Getting Started Example](https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/getting-started?terminal=)
 5. npm i webpack-dev-server -D
 
 ## 核心概念
@@ -56,7 +78,7 @@ webpackConfig.module
           .use('vue-loader')
 ```
 
-[Webpack Loaders](https://webpack.docschina.org/loaders/)
+[Loaders | Webpack](https://webpack.docschina.org/loaders/)
 
 ### plugins
 
@@ -120,12 +142,12 @@ resolve: {
 
 ### 4) devServer
 
-==webpack-dev-server==
+<mark>webpack-dev-server</mark>
 
 - express
 - ws
 
-```sh
+```shell
 npm i webpack-dev-server -D
 
 # package.json
