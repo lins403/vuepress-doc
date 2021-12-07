@@ -72,17 +72,21 @@ ins风格静态壁纸：[par.er](http://paper.meiyuan.in/)
 
 终端 iTerm2：`brew cask install iterm2`
 
-iTerm2+zsh
+zsh：[Oh My Zsh](https://ohmyz.sh/)
 
 离线开发文档：[Dash](https://kapeli.com/dash)
 
-终端目录生成 tree：`brew install tree`
+终端目录生成🌲：`brew install tree`
 
 - `tree --help`
 
 - `tree -I node_modules`
 
 - `tree -L 1`
+
+录制gif：[Cockos Incorporated | LICEcap](https://www.cockos.com/licecap/)
+
+屏幕显示按键：[KeyCastr, an open-source keystroke visualizer](https://github.com/keycastr/keycastr)
 
 ## 其它
 
@@ -130,6 +134,6 @@ open "http://www.google.com/search?q=$(ruby -rcgi -e 'print CGI.escape $<.read.c
 
 ## 相关资源
 
-[开发效率提升之工具篇](https://github.com/Louiszhai/tool)
+[GitHub - Louiszhai/tool: 开发效率提升：Mac生产力工具链推荐](https://github.com/Louiszhai/tool)
 
-[awesome-mac](https://github.com/jaywcjlove/awesome-mac)
+[GitHub - jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)

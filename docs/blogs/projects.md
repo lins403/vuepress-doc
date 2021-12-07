@@ -36,3 +36,7 @@ https://juejin.cn/post/6856668819344392206
 [styled-jsx](https://github.com/vercel/styled-jsx)
 
 [styled-components](https://github.com/styled-components/styled-components)
+
+[图形算法（邻接矩阵）在前端领域的应用](https://zhuanlan.zhihu.com/p/95593315)
+
+[人生苦短，我用Python（目录）](https://www.cnblogs.com/haiyan123/p/8387770.html)

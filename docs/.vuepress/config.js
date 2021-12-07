@@ -27,24 +27,26 @@ module.exports = {
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
           '/notesList/javascript/': JavaScriptSidebar('总览', '基础', '进阶'),
           '/notesList/typescript/': 'auto',
-          '/notesList/visualization/': [
+          '/notesList/css/': [
             {
-              title: 'css',
+              title: '学习笔记',
               collapsable: false,
               children: [
-                'animation',
+                'color',
                 'image',
+                'animation',
                 'adaptive-layout',
                 'responsive-layout',
               ]
             },
+          ],
+          '/notesList/visualization/': [
             {
               title: '其它',
               collapsable: false,
               children: [
-                'color',
-                'theme-config',
                 'echarts',
+                'libraries',
               ]
             },
           ],

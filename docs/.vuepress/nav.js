@@ -4,7 +4,7 @@
  * @Date: 2021-09-19 22:14:49
  * @FilePath: /vuepress-doc/docs/.vuepress/nav.js
  * @LastEditors: lins14
- * @LastEditTime: 2021-11-27 12:53:32
+ * @LastEditTime: 2021-12-07 17:22:52
  */
 module.exports = [
   { text: "Home", link: "/" },
@@ -50,8 +50,12 @@ module.exports = [
         text: "其它",
         items: [
           {
+            text: "CSS",
+            link: "/notesList/css/",
+          },
+          {
             text: "可视化",
-            link: "/notesList/visualization/echarts",
+            link: "/notesList/visualization/",
           },
         ],
       },

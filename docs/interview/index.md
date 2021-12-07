@@ -8,6 +8,10 @@
 
 [牛客网面试宝库](https://www.nowcoder.com/tutorial/96/6bc2c10079b245f6b8f02ddb6ca571cf)
 
+[前端学习路线](https://objtube.github.io/front-end-roadmap/#/)
+
+[前端导航 | 百度前端技术学园](http://ife.baidu.com/encyclopedia/)
+
 ## 真题类
 
 [web前端面试 - 面试官系列](https://vue3js.cn/interview/)
@@ -29,6 +33,8 @@
 [关于裸辞，关于前端面试](https://juejin.cn/post/6844903858297143310)
 
 ## 大厂资源
+
+[前端导航 | 百度前端技术学园](http://ife.baidu.com/encyclopedia/)
 
 [淘系前端团队（FED）](https://fed.taobao.org/)
 
