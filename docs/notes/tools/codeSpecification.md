@@ -39,6 +39,8 @@ trim_trailing_whitespace = false
 
 ## 二、eslint & prettier
 
+《JavaScript 高级程序设计》作者 Nicholas C. Zakas 于 2013 年 6 月创建了 ESLint，ESLint 将源代码解析成 AST，然后检测 AST 来判断代码是否符合规则，为 ESLint 的高可扩展性奠定了结实的基础。
+
 ```shell
 npm install -D eslint eslint-plugin-vue babel-eslint #Vue
 npm install -D eslint eslint-plugin-react babel-eslint eslint-plugin-import #React

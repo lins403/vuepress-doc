@@ -92,6 +92,7 @@ module.exports = {
                 'engineering/rollup',
                 'engineering/css-preprocessor',
                 'engineering/vue-cli-config',
+                'engineering/test/unit',
                 'engineering/workflow',
                 'engineering/CI',
               ]

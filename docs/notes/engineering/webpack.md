@@ -241,6 +241,10 @@ module.exports = {
 
 #### splitChunks
 
+CommonsChunkPlugin的用法：[4-11 提取公共代码 · 深入浅出 Webpack](https://webpack.wuhaolin.cn/4%E4%BC%98%E5%8C%96/4-11%E6%8F%90%E5%8F%96%E5%85%AC%E5%85%B1%E4%BB%A3%E7%A0%81.html)
+
+从 webpack v4 开始，移除了 `CommonsChunkPlugin`，取而代之的是 `optimization.splitChunks`。
+
 通用分块策略(common chunk strategy)
 
 > webpack 将根据以下条件自动拆分 chunks：
@@ -328,8 +332,4 @@ loader 用于转换某些类型的模块，而插件则可以用于执行范围�
 
 [详细的 webpack4 多入口配置](https://segmentfault.com/a/1190000021555875)
 
-https://www.valentinog.com/blog/webpack/
-
-https://juejin.cn/post/6855129007785328653#heading-5
-
-https://webpack.toobug.net/zh-cn/
+[A mostly complete guide to webpack 5 (2020)](https://www.valentinog.com/blog/webpack/)

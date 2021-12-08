@@ -41,6 +41,8 @@ npm ERR! peer eslint@">=7.0.0" from eslint-config-prettier@7.2.0
 ```shell
 npm install --force
 npm install --legacy-peer-deps
+
+npx install-peerdeps --dev 
 ```
 
 [Dependencies类型](https://yarn.bootcss.com/docs/dependency-types/)
@@ -113,16 +115,12 @@ npm outdated --registry https://skimdb.npmjs.com/registry
 
 ### bootcdn
 
-
-
 [BootCDN - Bootstrap 中文网开源项目免费 CDN 加速服务](https://www.bootcdn.cn/)
 
 ```js
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 ```
-
-
 
 ## Package
 
