@@ -14,6 +14,8 @@ yarn upgrade
 
 ## yarn 安装
 
+`yarn install` will install the exact version in the lockfile
+
 ```shell
 yarn install v1.22.10
 [1/4] 🔍  Resolving packages...

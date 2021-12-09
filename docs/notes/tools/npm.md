@@ -49,6 +49,8 @@ npx install-peerdeps --dev
 
 [一文搞懂peerDependencies](https://juejin.cn/post/6844904134248759309)
 
+[npm与yarn对peerDependencies处理的差异](https://zhuanlan.zhihu.com/p/237532427)
+
 #### 2）node与node-sass的兼容性问题
 
 | NodeJS  | Supported node-sass version | Node Module |

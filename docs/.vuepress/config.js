@@ -107,6 +107,7 @@ module.exports = {
                 'tools/yarn',
                 'tools/codeSpecification',
                 'tools/online-coding',
+                'tools/vocabulary',
               ]
             },
             {

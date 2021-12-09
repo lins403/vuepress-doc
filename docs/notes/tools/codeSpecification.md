@@ -97,6 +97,29 @@ module.exports = {
 
 [Prettier 所有配置项](https://blog.windstone.cc/front-end-engineering/code-formatter/eslint/eslint-prettier.html#%E9%85%8D%E7%BD%AE-prettier-%E8%A7%84%E5%88%99)
 
+### vue3
+
+```js
+module.exports = {
+  extends: [
+    'eslint:recommended',
+    'plugin:vue/vue3-recommended',
+    // 'plugin:vue/vue3-essential', // This option doesn't impose formatting rules
+    // 'plugin:vue/vue3-strongly-recommended', // This option imposes formatting rules on your code to improve readability 
+    'plugin:prettier/recommended'
+  ],
+  rules: {
+    // override/add rules settings here, such as:
+  }
+}
+```
+
+可选：Disable vetur in VSCodes settings (if you had it installed)
+
+```json
+"vetur.validation.style": false
+```
+
 ## 三、husky & lint-staged
 
 - Husky 的原理是把Husky配置和 Git Hook 关联起来，便于我们使用 Git Hook 
