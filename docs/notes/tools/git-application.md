@@ -142,6 +142,14 @@ module.exports = {
 <type>(<scope>): <short summary>
 ```
 
+## 配置文件
+
+`.gitignore`
+
+`.gitattributes`
+
+- 最大用途在于统一文件的`endOfLine`，Windows(CRLF)与Linux(LF)
+
 # 参考
 
 - [Why husky has dropped conventional JS config](https://blog.typicode.com/husky-git-hooks-javascript-config/)

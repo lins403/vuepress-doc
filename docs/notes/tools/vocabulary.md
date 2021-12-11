@@ -16,6 +16,7 @@
 |                      |           |                   |       |
 | -------------------- | --------- | ----------------- | ----- |
 | alternate            | 另类的，备用的   | assembly language | 汇编语言  |
+| arduous              | 艰难的       |                   |       |
 | connoisseur          | 内行        | error-prone       | 易于出错的 |
 | efficacy             | 功效        |                   |       |
 | encapsulation        | 封装        |                   |       |
@@ -25,10 +26,12 @@
 | intrigued            | 好奇的       |                   |       |
 | intrude              | 侵入        |                   |       |
 | latency              | 延迟        |                   |       |
-| minimalistic         | 极简的       | malicious scripts | 恶意脚本  |
+| mandatory            | 强制的       | malicious scripts | 恶意脚本  |
+| minimalistic         | 极简的       | minor tweaks      | 小调整   |
 | mojibake             | 乱码        | non-optimal       | 不理想   |
 | mnemonics            | 助记符       | pertinent factors | 相关因素  |
 | performant           | 高效的       | performance hit   | 性能消耗  |
+| prioritization       | 优先考虑      |                   |       |
 | rookie, newbie, noob | 菜鸟，新手     |                   |       |
 | scenario             | 场景        | stop-gap measures | 权宜之计  |
 | scoff                | 嘲笑        |                   |       |
@@ -54,8 +57,6 @@
 | stay tuned         | 敬请关注 | ship features and deliver business value | 交付功能和呈现业务价值 |
 | trumps over        | 胜过   | that’s not always the case               | 并非总是如此      |
 | work around        | 解决   | what problem does this solve for...      | 为…解决了什么问题   |
-
-
 
 ## 例句
 

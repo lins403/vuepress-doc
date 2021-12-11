@@ -37,6 +37,7 @@ module.exports = {
                 'animation',
                 'adaptive-layout',
                 'responsive-layout',
+                'css-preprocessor',
               ]
             },
           ],
@@ -90,7 +91,6 @@ module.exports = {
                 'engineering/modules/esm',
                 'engineering/webpack',
                 'engineering/rollup',
-                'engineering/css-preprocessor',
                 'engineering/vue-cli-config',
                 'engineering/test/unit',
                 'engineering/workflow',
@@ -102,8 +102,9 @@ module.exports = {
               collapsable: false,
               children: [
                 'tools/website',
-                'tools/regular',
                 'tools/npm',
+                'tools/npm-packages',
+                'tools/regular',
                 'tools/yarn',
                 'tools/codeSpecification',
                 'tools/online-coding',

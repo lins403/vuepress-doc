@@ -181,7 +181,7 @@ git push origin --delete <tagname>    # 远端
 
 [@commitlint/cli](https://www.npmjs.com/package/@commitlint/cli)：lint commit message
 
-[npm trends](https://www.npmtrends.com/commitizen-vs-commitlint-vs-@commitlint/cli)
+[@commitlint/cli vs commitizen vs commitlint | npm trends](https://www.npmtrends.com/commitizen-vs-commitlint-vs-@commitlint/cli)
 
 ## 三、心得
 

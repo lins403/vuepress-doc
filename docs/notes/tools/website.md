@@ -72,7 +72,15 @@ vue：[Vue 插件库](https://www.vue365.cn/)
 
 ## 工具
 
+翻译：[DeepL翻译：全世界最准确的翻译](https://www.deepl.com/translator)
+
 工具合集：[在线工具 - 你的工具箱](https://tool.lu/)
+
+- 视频下载：[下载地址解析 - 在线工具](https://tool.lu/videoparser/)
+
+- favicon：[favicon在线制作](https://tool.lu/favicon/)
+
+- 图片压缩：[png,jpg,gif图片优化 - 在线工具](https://tool.lu/tinyimage/)
 
 PPT模板：[PPT超级市场官网-免费、优质、高效、安全的PPT下载和定制](https://www.pptsupermarket.com/)
 
@@ -99,10 +107,6 @@ API数据接口：[API接口平台-聚合数据](https://www.juhe.cn/)
 [译学馆 &#8211; 知识无疆界](https://www.yxgapp.com/)
 
 ## 生活
-
-榜单：[今日热榜官网](https://tophub.today/)
-
-榜单：[果汁排行榜 - 各类榜单排名大全](http://guozhivip.com/rank/)
 
 生命日历：[Life calendar](https://wcoder.github.io/life-calendar/)
 
@@ -178,14 +182,38 @@ AI绘制人脸：[G-Lab人脸生成实验](http://www.seeprettyface.com/)
 
 ## 摸鱼
 
+[鱼塘热榜](https://mo.fish/)
+
+[多摸鱼 - 全网资讯一站式浏览](https://duomoyu.com/)
+
+漫话新闻：[数读_网易新闻](https://data.163.com/)
+
+## 游戏
+
+街机小霸王：[小霸王，其乐无穷 。红白机，FC在线游戏，街机游戏，街机在线，NES games，NES games online，Super Mario](https://www.yikm.net/)
+
+打字射击：[ZType – Typing Game - Type to Shoot](https://zty.pe/)
+
+🤔：[Zoomquilt - The infinitely zooming image](https://zoomquilt.org/)
+
 寻找不动的表情：[Emojis & Earth Porn](http://emojisandearthporn.com/)
 
 音乐游戏：[AIDN | CONTENTS](https://aidn.jp/contents/)
 
-漫话新闻：[数读_网易新闻](https://data.163.com/)
+二次元打碟蹦迪：[AIDN | daniwell official website](https://aidn.jp/)
 
-二次元蹦迪：[AIDN | daniwell official website](https://aidn.jp/)
+贪吃蛇：[slither.io](http://slither.io/)
+
+简画：[FlipAnim - create flipbook animations online!](https://flipanim.com/)
+
+计算：[计算题](http://jisuanti.com/)
 
 ### 整蛊
 
 [Let Me Baidu That For You](https://lmbtfy.cn/)
+
+[ZZKIA: 诺基亚短信图片生成器](https://zzkia.noddl.me/)
+
+[狗屁不通文章生成器](https://suulnnka.github.io/BullshitGenerator/index.html)
+
+[毒鸡汤 - 壮士可要来一碗！](http://www.nows.fun/)

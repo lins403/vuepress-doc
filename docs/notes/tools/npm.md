@@ -84,7 +84,7 @@ npm install <package-name> --registry https://registry.npmjs.org
 npm outdated --registry https://skimdb.npmjs.com/registry
 ```
 
-## CDN
+
 
 ### unpkg
 
