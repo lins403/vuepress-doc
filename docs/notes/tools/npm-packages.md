@@ -8,6 +8,8 @@ css-in-js: [aphrodite vs emotion vs jss vs radium vs styled-components vs styled
 
 component-driven application: [@storybook/cli vs bit-bin vs lerna | npm trends](https://www.npmtrends.com/@storybook/cli-vs-bit-bin-vs-lerna)
 
+- [Bit.dev初体验- 掘金](https://juejin.cn/post/6844903872108953607)
+
 ### 其它
 
 fuse.js 模糊搜索

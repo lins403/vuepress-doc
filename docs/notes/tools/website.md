@@ -217,3 +217,7 @@ AI绘制人脸：[G-Lab人脸生成实验](http://www.seeprettyface.com/)
 [狗屁不通文章生成器](https://suulnnka.github.io/BullshitGenerator/index.html)
 
 [毒鸡汤 - 壮士可要来一碗！](http://www.nows.fun/)
+
+## 其它
+
+[github 上有趣又实用的前端项目](https://github.com/senntyou/blogs/blob/master/web-collect/2.md)

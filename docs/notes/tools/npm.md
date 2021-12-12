@@ -12,13 +12,37 @@
 --global        #-g
 --no-save
 --force     #Recommended protections disabled. overriding peer dependency
+--registry=[域名]
 ```
 
 [npm-install > configuration](https://docs.npmjs.com/cli/v7/commands/npm-install#configuration)
 
 `npm shrinkwrap` npm-shrinkwrap.json （npm5以前用来lock版本的）
 
+## .npmrc
+
+查看npm配置：`npm config ls -l`
+
+```js
+package-lock=false;     //在安装时忽略lock文件。
+loglevel=timing；      // 安装依赖包的时候指定日志的类型
+```
+
+[npm v6 配置文档](https://docs.npmjs.com/cli/v6/using-npm/config)
+
+## package.json
+
+[配置文档](https://docs.npmjs.com/cli/v8/configuring-npm/package-json)
+
 ## 踩坑
+
+### nrm
+
+管理切换仓库源，包括npm的私有服
+
+```shell
+npm install nrm -g --save
+```
 
 ### 升级 npm7
 
@@ -83,49 +107,3 @@ npm config set registry https://registry.npmjs.org
 npm install <package-name> --registry https://registry.npmjs.org
 npm outdated --registry https://skimdb.npmjs.com/registry
 ```
-
-
-
-### unpkg
-
-[UNPKG](https://unpkg.com/)
-
-```html
-<script src="https://unpkg.com/@babel/standalone/babel.js"></script>
-<script src="https://unpkg.com/react/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
-<div id="root"></div>
-<script type="text/babel">
-  function Example() {
-    return (
-      <>
-        Some text.
-      </>
-     );
-  }
-  ReactDOM.render(<Example />, document.getElementById('root'));
-</script>
-```
-
-### jsdelivr
-
-[jsDelivr - A free, fast, and reliable CDN for open source](https://www.jsdelivr.com/)
-
-### cdnjs
-
-[cdnjs - The #1 free and open source CDN built to make life easier for developers](https://cdnjs.com/)
-
-### bootcdn
-
-[BootCDN - Bootstrap 中文网开源项目免费 CDN 加速服务](https://www.bootcdn.cn/)
-
-```js
-<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-```
-
-## Package
-
-fuse.js 模糊搜索
-
-vue-pdf 基于pdf.js的展示PDF

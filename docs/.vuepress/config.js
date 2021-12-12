@@ -92,6 +92,7 @@ module.exports = {
                 'engineering/webpack',
                 'engineering/rollup',
                 'engineering/vue-cli-config',
+                'engineering/test/',
                 'engineering/test/unit',
                 'engineering/workflow',
                 'engineering/CI',

@@ -48,14 +48,24 @@ React 直接使用 CSS-in-JS ：[styled-components](https://github.com/styled-co
 
 ## PostCSS
 
-- Add vendor prefixes ([autoprefixer](https://github.com/postcss/autoprefixer))
-- convert future syntax ([postcss-preset-env](https://github.com/csstools/postcss-preset-env))
-- add suffix for selectors in a <u>css module</u> to avoid global namespace conflicts ([css-modules](https://github.com/css-modules/css-modules))
-- lint your stylesheets ([stylelint](https://github.com/stylelint/stylelint))
+- Add vendor prefixes. » [autoprefixer](https://github.com/postcss/autoprefixer)
+- convert future syntax. » [postcss-preset-env](https://github.com/csstools/postcss-preset-env)
+- add suffix for selectors in a <u>css module</u> to avoid global namespace conflicts. » [css-modules](https://github.com/css-modules/css-modules)
+- lint your stylesheets. » [stylelint](https://github.com/stylelint/stylelint)
 
-VueCli内置 postcss、postcss-loader、用于添加浏览器前缀的插件autoprefixer，以及browserslist
+### 配置
+
+[GitHub - postcss/postcss-load-config: Autoload Config for PostCSS](https://github.com/postcss/postcss-load-config)
+
+配置参考： [vue 移动端 使用postcssrc.js 并配置文件](https://segmentfault.com/a/1190000021196911)
+
+### VueCli
+
+VueCli 内置 postcss、postcss-loader、用于添加浏览器前缀的插件 autoprefixer，以及browserslist
 
 [@vue/cli-service > postcss配置](https://github.com/vuejs/vue-cli/blob/e661a923751c2f49a24cb065b5dd5999169e86af/packages/%40vue/cli-service/lib/config/css.js#L50)
+
+
 
 ## SCSS
 
@@ -83,15 +93,15 @@ VueCli内置 postcss、postcss-loader、用于添加浏览器前缀的插件auto
 
 2. [`stylelint-config-recommended-scss`](https://www.npmjs.com/package/stylelint-config-recommended-scss)
    
-   - [stylelint-config-recommended](https://www.npmjs.com/package/stylelint-config-recommended)
+   - stylelint-config-recommended
    
-   - [postcss-scss](https://www.npmjs.com/package/postcss-scss) ( Parse SCSS syntax and apply PostCSS transformations directly to SCSS source code. )
+   - postcss-scss ( Parse SCSS syntax and apply PostCSS transformations directly to SCSS source code. )
    
-   - [stylelint-scss](https://www.npmjs.com/package/stylelint-scss)
+   - stylelint-scss
 
 3. [`stylelint-config-recess-order`](https://github.com/stormwarning/stylelint-config-recess-order)
    
-   - [stylelint-order](https://github.com/hudochenkov/stylelint-order)
+   - stylelint-order
 
 4. [`stylelint-prettier`](https://github.com/prettier/stylelint-prettier)
 

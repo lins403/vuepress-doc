@@ -17,9 +17,3 @@
 ## 组件测试
 
 测试React组件：[GitHub - enzymejs/enzyme: JavaScript Testing utilities for React](https://github.com/enzymejs/enzyme)
-
-## E2E测试
-
-[GitHub - cypress-io/cypress: Fast, easy and reliable testing for anything that runs in a browser.](https://github.com/cypress-io/cypress)
-
-`cypress.json`

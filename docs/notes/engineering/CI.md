@@ -16,8 +16,10 @@ https://www.devopsauthority.tech/2021/02/09/github-actions-vs-travis-ci/
 
 - [ ] GitLab CI
 
-- [x] Yeoman
+- [ ] Yeoman
 
 - [ ] Lerna
 
 - [ ] Docker
+
+- [ ] appveyor

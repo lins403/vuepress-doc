@@ -48,6 +48,4 @@
 
 TDDO: 
 
-[Storybook: UI component explorer for frontend developers](https://storybook.js.org/)
-
 虚拟滚动
