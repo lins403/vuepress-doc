@@ -1,6 +1,6 @@
 # 技巧
 
-### 组件批量自动化注册
+### 1) 组件批量自动化注册
 
 `require.context`
 
@@ -21,7 +21,7 @@ requireAll(req)
 
 - **参考**：[基础组件的自动化全局注册](https://cn.vuejs.org/v2/guide/components-registration.html#基础组件的自动化全局注册)
 
-### 批量创建子节点Vnode
+### 2) 批量创建子节点Vnode
 
 ```js
 render: function (createElement) {
@@ -33,7 +33,7 @@ render: function (createElement) {
 }
 ```
 
-### 动态 key
+### 3) 动态 key
 
 ```vue
 <!--给同一个元素的 `key` attribute 设置不同的状态来代替 `v-if` 和 `v-else`-->
@@ -44,7 +44,7 @@ render: function (createElement) {
 </transition>
 ```
 
-### 使用vue内置的混入策略
+### 4) 使用vue内置的混入策略
 
 ```js
 const merge = Vue.config.optionMergeStrategies.computed
@@ -60,3 +60,51 @@ Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
 ```
 
 - [手摸手，带你用vue撸后台 系列五(v4.0新版本)](https://juejin.cn/post/6844903840626507784#heading-16)
+
+### 5) 任何HTML标签都可以作为动态组件使用
+
+<!-- Use preprocessors via the lang attribute! e.g. <template lang="pug"> -->
+
+<template>
+  <div id="app">
+    <anchored-heading :level="1">hello~</anchored-heading>
+    <anchored-heading :level="3">hello~</anchored-heading>
+    <anchored-heading :level="5">hello~</anchored-heading>
+  </div>
+</template>
+
+```vue
+<template>
+  <div id="app">
+    <anchored-heading :level="1">hello~</anchored-heading>
+    <anchored-heading :level="3">hello~</anchored-heading>
+    <anchored-heading :level="5">hello~</anchored-heading>
+  </div>
+</template>
+
+<script>
+Vue.component('anchored-heading', {
+  // render: function (createElement) {
+  //   return createElement(
+  //     "h" + this.level, // tag name
+  //     this.$slots.default // array of children
+  //   );
+  // },
+  template: `<component :is="'h' + level"><slot /></component>`,
+  props: {
+    level: {
+      type: Number,
+      required: true
+    }
+  }
+})
+</script>
+```
+
+
+
+
+
+# 参考
+
+[Vue 文档中没有告诉你的事 · Issue #1 · javoski/blog · GitHub](https://github.com/javoski/blog/issues/1)

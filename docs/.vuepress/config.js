@@ -81,23 +81,44 @@ module.exports = {
               ]
             },
           ],
-          '/notes/': [
+          '/notes/engineering/':[
             {
-              title: '前端工程化',
+              title: '模块化',
               collapsable: false,
               children: [
-                'engineering/',
-                'engineering/modules/',
-                'engineering/modules/esm',
-                'engineering/webpack',
-                'engineering/rollup',
-                'engineering/vue-cli-config',
-                'engineering/test/',
-                'engineering/test/unit',
-                'engineering/workflow',
-                'engineering/CI',
+                'modules/',
+                'modules/esm',
+                'webpack',
+                'rollup',
+                'vue-cli-config',
               ]
             },
+            {
+              title: '测试',
+              collapsable: false,
+              children: [
+                'test/',
+                'test/unit',
+                'test/vue-unit-jest',
+              ]
+            },
+            {
+              title: '自动化',
+              collapsable: false,
+              children: [
+                'workflow',
+                'CI',
+              ]
+            },
+            {
+              title: '其它',
+              collapsable: false,
+              children: [
+                'graphQL',
+              ]
+            }
+          ],
+          '/notes/': [
             {
               title: '前端工具',
               collapsable: false,
@@ -200,6 +221,7 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
       collapsable: false,
       children: [
         'advanced/',
+        'advanced/skills',
         'advanced/design-pattern',
       ]
     },

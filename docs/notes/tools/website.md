@@ -221,3 +221,5 @@ AI绘制人脸：[G-Lab人脸生成实验](http://www.seeprettyface.com/)
 ## 其它
 
 [github 上有趣又实用的前端项目](https://github.com/senntyou/blogs/blob/master/web-collect/2.md)
+
+[Issues · ruanyf/weekly · GitHub](https://github.com/ruanyf/weekly/issues)

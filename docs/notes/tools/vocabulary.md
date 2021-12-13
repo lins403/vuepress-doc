@@ -2,14 +2,15 @@
 
 ## 缩写
 
-| A        | E                     | C    |
-| -------- | --------------------- | ---- |
-| `a.k.a.` | also known as         | 又称作  |
-| `FYI`    | for your information  | 供您参考 |
-| `IMO`    | In my opinion         | 在我看来 |
-| `IMHO`   | In my humble opinion  | 恕我直言 |
-| `LOL`    | Laugh Out Loud        | 放声大笑 |
-| `TL;DR`  | too long; didn't read |      |
+| A        | E                               | C    |
+| -------- | ------------------------------- | ---- |
+| `a.k.a.` | also known as                   | 又称作  |
+| `FYI`    | for your information            | 供您参考 |
+| `IMO`    | In my opinion                   | 在我看来 |
+| `IMHO`   | In my humble opinion            | 恕我直言 |
+| `LOL`    | Laugh Out Loud                  | 放声大笑 |
+| `TL;DR`  | too long; didn't read           |      |
+| `CRUD`   | create, read, update and delete |      |
 
 ## 单词
 

@@ -1,8 +1,24 @@
 # VueCli
 
+安装
+
+```shell
+npm install -g @vue/cli
+#
+vue --version
+vue add -h
+vue serve -h
+vue build -h
+vue create <project-name>
+```
+
 ## Service
 
 [vue-cli/Service.js at dev · vuejs/vue-cli · GitHub](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-service/lib/Service.js)
+
+```shell
+npx vue-cli-service help
+```
 
 ```json
   "scripts": {

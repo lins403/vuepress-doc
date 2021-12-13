@@ -8,7 +8,7 @@
 
 ## 单元测试
 
-[jasmine vs jest vs karma vs mocha | npm trends](https://www.npmtrends.com/jasmine-vs-jest-vs-karma-vs-mocha)
+[chai vs jasmine vs jest vs karma vs mocha | npm trends](https://www.npmtrends.com/chai-vs-jasmine-vs-jest-vs-karma-vs-mocha)
 
 [Vue 组件的单元测试 — Vue.js](https://cn.vuejs.org/v2/cookbook/unit-testing-vue-components.html)
 
@@ -17,3 +17,9 @@
 ## 组件测试
 
 测试React组件：[GitHub - enzymejs/enzyme: JavaScript Testing utilities for React](https://github.com/enzymejs/enzyme)
+
+## E2E测试
+
+[GitHub - cypress-io/cypress: Fast, easy and reliable testing for anything that runs in a browser.](https://github.com/cypress-io/cypress)
+
+`cypress.json`

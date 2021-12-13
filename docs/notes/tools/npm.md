@@ -32,7 +32,19 @@ loglevel=timing；      // 安装依赖包的时候指定日志的类型
 
 ## package.json
 
-[配置文档](https://docs.npmjs.com/cli/v8/configuring-npm/package-json)
+### ~与^
+
+Tilde Range
+
+- `~1.5.2` := [1.5.2, 1.6.0)
+
+Caret Range
+
+- `^1.5.2` := [1.5.2, 2.0.0)
+
+[semver - The semantic versioner for npm](https://docs.npmjs.com/cli/v6/using-npm/semver)
+
+[官方配置文档](https://docs.npmjs.com/cli/v8/configuring-npm/package-json)
 
 ## 踩坑
 
