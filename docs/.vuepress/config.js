@@ -213,6 +213,10 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
       collapsable: false,
       children: [
         'basic/',
+        'basic/type',
+        'basic/es6',
+        'basic/oop',
+        'basic/dom',
         'basic/utils',
       ]
     },
@@ -222,6 +226,9 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
       children: [
         'advanced/',
         'advanced/skills',
+        'advanced/engine',
+        'advanced/runtime',
+        'advanced/let-const',
         'advanced/design-pattern',
       ]
     },

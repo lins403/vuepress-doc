@@ -1,4 +1,4 @@
-# 基础
+# 数据类型
 
 ## 判断数据类型
 
@@ -8,7 +8,7 @@ typeof function(){}  //"function"
 typeof []  //"object"
 typeof undefined  //"undefined"
 typeof null  //"object"
-typeof NaN  //"number"
+typeof NaN  //"number"
 ```
 
 ```js
@@ -43,23 +43,19 @@ Number(undefined)  //NaN
 ## Number运算
 
 ```js
-
-```
-
-```js
 1 === 1.0  //true
 0.1 + 0.2 === 0.3  //false
 ```
 
 ```js
 NaN === NaN  //false
-typeof NaN  //"number"
+typeof NaN  //"number"
 ```
 
 ```js
 +'123.456'  //123.456
 
-~~'123.456'  //123
+~~'123.456'  //123
 ```
 
 ## 字符串
@@ -70,7 +66,7 @@ long \
 long \
 string';
 
-console.log(longString)    // "Long long long string"
+console.log(longString)    // "Long long long string"
 ```
 
 由于历史原因，JavaScript只支持 UTF-16 两字节的字符，不支持四字节的字符，因此JavaScript 的单位字符长度固定为16位长度，即2个字节。

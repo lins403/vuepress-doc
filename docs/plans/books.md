@@ -4,8 +4,6 @@
 
 [Give it five minutes](https://signalvnoise.com/posts/3124-give-it-five-minutes)
 
-
-
 ## 书单
 
 [Borland传奇 (豆瓣)](https://book.douban.com/subject/1106304/)
