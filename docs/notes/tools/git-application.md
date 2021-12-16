@@ -88,6 +88,14 @@ npx --no-install lint-staged
 yarn lint-staged
 ```
 
+#### 命令行
+
+```shell
+# 跳过校验
+git commit -m "yolo!" --no-verify
+git commit -m "yolo!" -n
+```
+
 ### commitlint
 
 ```shell

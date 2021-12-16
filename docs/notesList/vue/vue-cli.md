@@ -1,0 +1,21 @@
+# VueCli
+
+
+
+## 踩坑
+
+### 1）eslint8与vue-eslint-parser不兼容
+
+> Syntax Error: TypeError: eslint.CLIEngine is not a constructor
+
+解决：
+
+[Add support for ESlint 8.0 in `vue-eslint-parser` · Issue #6759 · vuejs/vue-cli · GitHub](https://github.com/vuejs/vue-cli/issues/6759)
+
+```shell
+npm i eslint@7 -D  
+```
+
+2）
+
+>  [Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.

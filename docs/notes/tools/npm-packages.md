@@ -1,5 +1,9 @@
 # Packages
 
+[file-saver ](https://github.com/eligrey/FileSaver.js):  保存/下载文件到指定文件，轻量（3.3K）
+
+[html2canvas](https://github.com/niklasvh/html2canvas)
+
 ## Package
 
 immutable state: [immer vs immutable | npm trends](https://www.npmtrends.com/immer-vs-immutable)

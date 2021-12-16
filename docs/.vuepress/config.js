@@ -48,6 +48,7 @@ module.exports = {
               children: [
                 'echarts',
                 'libraries',
+                '3d-start',
               ]
             },
           ],
@@ -78,6 +79,7 @@ module.exports = {
                 'doc-skills',
                 'component-communication',
                 'vue-router',
+                'vue-cli',
               ]
             },
           ],

@@ -18,6 +18,7 @@
 | -------------------- | --------- | ----------------- | ----- |
 | alternate            | 另类的，备用的   | assembly language | 汇编语言  |
 | arduous              | 艰难的       |                   |       |
+| circumvent           | 规避，绕开     |                   |       |
 | connoisseur          | 内行        | error-prone       | 易于出错的 |
 | efficacy             | 功效        |                   |       |
 | encapsulation        | 封装        |                   |       |

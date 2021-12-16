@@ -83,27 +83,32 @@ Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
 </template>
 
 <script>
-Vue.component('anchored-heading', {
-  // render: function (createElement) {
-  //   return createElement(
-  //     "h" + this.level, // tag name
-  //     this.$slots.default // array of children
-  //   );
-  // },
-  template: `<component :is="'h' + level"><slot /></component>`,
+import Vue from 'vue'
+Vue.component('AnchoredHeading', {
   props: {
     level: {
       type: Number,
       required: true
     }
+  },
+  // template: `<component :is="'h' + level"><slot /></component>`,
+  render(h) {
+    return h(
+      'component',
+      {
+        is: 'h' + this.level
+      },
+      this.$slots.default
+    )
   }
 })
+export default {
+  data() {
+    return {}
+  }
+}
 </script>
 ```
-
-
-
-
 
 # 参考
 

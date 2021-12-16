@@ -19,6 +19,8 @@
 
 `npm shrinkwrap` npm-shrinkwrap.json （npm5以前用来lock版本的）
 
+`npm prune`
+
 ## .npmrc
 
 查看npm配置：`npm config ls -l`
