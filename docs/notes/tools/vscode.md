@@ -58,6 +58,11 @@ Code > 首选项 > 用户片段
     "prefix": "ed",
     "body": ["/* eslint-disable */"],
     "description": "Eslint disable block"
+  },
+  "Eslint disable next line": {
+    "prefix": "edn",
+    "body": ["/* eslint-disable-next-line */"],
+    "description": "Eslint disable next line"
   }
 }
 ```

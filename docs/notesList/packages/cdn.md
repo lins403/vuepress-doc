@@ -1,28 +1,6 @@
-# Packages
+# CDN
 
-[file-saver ](https://github.com/eligrey/FileSaver.js):  保存/下载文件到指定文件，轻量（3.3K）
-
-[html2canvas](https://github.com/niklasvh/html2canvas)
-
-## Package
-
-immutable state: [immer vs immutable | npm trends](https://www.npmtrends.com/immer-vs-immutable)
-
-css-in-js: [aphrodite vs emotion vs jss vs radium vs styled-components vs styled-jsx | npm trends](https://www.npmtrends.com/aphrodite-vs-emotion-vs-jss-vs-radium-vs-styled-components-vs-styled-jsx)
-
-component-driven application: [@storybook/cli vs bit-bin vs lerna | npm trends](https://www.npmtrends.com/@storybook/cli-vs-bit-bin-vs-lerna)
-
-- [Bit.dev初体验- 掘金](https://juejin.cn/post/6844903872108953607)
-
-### 其它
-
-fuse.js 模糊搜索
-
-vue-pdf 基于pdf.js的展示PDF
-
-## CDN
-
-### unpkg
+## unpkg
 
 [UNPKG](https://unpkg.com/)
 
@@ -43,15 +21,15 @@ vue-pdf 基于pdf.js的展示PDF
 </script>
 ```
 
-### jsdelivr
+## jsdelivr
 
 [jsDelivr - A free, fast, and reliable CDN for open source](https://www.jsdelivr.com/)
 
-### cdnjs
+## cdnjs
 
 [cdnjs - The #1 free and open source CDN built to make life easier for developers](https://cdnjs.com/)
 
-### bootcdn
+## bootcdn
 
 [BootCDN - Bootstrap 中文网开源项目免费 CDN 加速服务](https://www.bootcdn.cn/)
 

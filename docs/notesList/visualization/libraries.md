@@ -1,4 +1,4 @@
-# 库
+# 资源
 
 [前端导航 | 百度前端技术学园](http://ife.baidu.com/encyclopedia/)
 

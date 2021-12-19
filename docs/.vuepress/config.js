@@ -27,6 +27,31 @@ module.exports = {
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
           '/notesList/javascript/': JavaScriptSidebar('总览', '基础', '进阶'),
           '/notesList/typescript/': 'auto',
+          '/notesList/packages/': [
+            {
+              title: '文件预览下载',
+              collapsable: false,
+              children: [
+                'files',
+                'pdf',
+              ]
+            },
+            {
+              title: '项目工程',
+              collapsable: false,
+              children: [
+                'application',
+              ]
+            },
+            {
+              title: '其它',
+              collapsable: false,
+              children: [
+                'cdn',
+                'tools',
+              ]
+            },
+          ],
           '/notesList/css/': [
             {
               title: '学习笔记',
@@ -43,11 +68,24 @@ module.exports = {
           ],
           '/notesList/visualization/': [
             {
-              title: '其它',
+              title: '综合',
               collapsable: false,
               children: [
-                'echarts',
                 'libraries',
+              ]
+            },
+            {
+              title: '2D',
+              collapsable: false,
+              children: [
+                'canvas',
+                'echarts',
+              ]
+            },
+            {
+              title: '3D',
+              collapsable: false,
+              children: [
                 '3d-start',
               ]
             },
@@ -116,6 +154,7 @@ module.exports = {
               title: '其它',
               collapsable: false,
               children: [
+                'codeSpecification',
                 'graphQL',
               ]
             }
@@ -127,10 +166,8 @@ module.exports = {
               children: [
                 'tools/website',
                 'tools/npm',
-                'tools/npm-packages',
-                'tools/regular',
                 'tools/yarn',
-                'tools/codeSpecification',
+                'tools/regular',
                 'tools/online-coding',
                 'tools/vocabulary',
               ]

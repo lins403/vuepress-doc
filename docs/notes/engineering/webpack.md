@@ -308,6 +308,38 @@ build
 - `[chunkhash]`
 - `[contenthash]`
 
+### 本地CDN
+
+```
+public
+├── cdn
+│   └── xlsx
+│       └── xlsx.full.min.js
+├── favicon.png
+├── index.html
+```
+
+```js
+// vue.config.js
+module.exports = {
+  chainWebpack: config => {
+    // 忽略的打包文件
+    config.externals({
+      xlsx: 'XLSX'
+    })
+  }
+}
+```
+
+```html
+<!--public/index.html-->
+<script src="<%= BASE_URL %>cdn/xlsx/xlsx.full.min.js"></script>
+```
+
+```js
+import XLSX from 'xlsx'
+```
+
 ### mock和proxy
 
 因为webpack-dev-server启动了一个服务器，所以在开发时，前端去请求真正的后台接口，是存在跨域问题的。webpack提供了跨域的解决方案，原理就是让服务器反向代理请求真正的接口

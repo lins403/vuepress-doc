@@ -4,23 +4,36 @@
  * @Date: 2021-09-19 22:14:49
  * @FilePath: /vuepress-doc/docs/.vuepress/nav.js
  * @LastEditors: lins14
- * @LastEditTime: 2021-12-13 13:41:12
+ * @LastEditTime: 2021-12-19 10:24:50
  */
 module.exports = [
   { text: 'Home', link: '/' },
   { text: '知识点', link: '/interview/' },
-  { text: '笔记', link: '/notes/' },
   {
     text: '系列笔记',
     ariaLabel: '系列笔记',
     items: [
       {
-        // text: '综合',
+        text: '综合',
         items: [
           {
             text: '前端工程化',
             link: '/notes/engineering/'
           },
+          {
+            text: 'NPM Packages',
+            link: '/notesList/packages/'
+          },
+
+          {
+            text: '可视化',
+            link: '/notesList/visualization/'
+          }
+        ]
+      },
+      {
+        text: '基础',
+        items: [
           {
             text: 'CSS',
             link: '/notesList/css/'
@@ -36,17 +49,9 @@ module.exports = [
           {
             text: 'Node.js',
             link: '/notesList/nodejs/'
-          },
-          {
-            text: '可视化',
-            link: '/notesList/visualization/'
           }
         ]
       },
-      // {
-      //   text: '前端工程化',
-      //   items: [{}]
-      // },
       {
         text: 'Vue',
         items: [
@@ -62,6 +67,7 @@ module.exports = [
       }
     ]
   },
+  { text: '笔记', link: '/notes/' },
   { text: '博客', link: '/blogs/' },
   { text: '计划', link: '/plans/index2' }
 ];

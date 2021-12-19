@@ -20,13 +20,14 @@
 | arduous              | 艰难的       |                   |       |
 | circumvent           | 规避，绕开     |                   |       |
 | connoisseur          | 内行        | error-prone       | 易于出错的 |
-| efficacy             | 功效        |                   |       |
+| efficacy             | 功效        | error resistance  | 容错性   |
 | encapsulation        | 封装        |                   |       |
 | escaping             | 转义        |                   |       |
 | gurus                | 领袖，专家     |                   |       |
 | hassle               | 麻烦        |                   |       |
 | intrigued            | 好奇的       |                   |       |
 | intrude              | 侵入        |                   |       |
+| Kanji                | 日本汉字      |                   |       |
 | latency              | 延迟        |                   |       |
 | mandatory            | 强制的       | malicious scripts | 恶意脚本  |
 | minimalistic         | 极简的       | minor tweaks      | 小调整   |
@@ -35,9 +36,11 @@
 | performant           | 高效的       | performance hit   | 性能消耗  |
 | palette              | 调色板，一组颜色  |                   |       |
 | prioritization       | 优先考虑      |                   |       |
+| Quartile             | 四分位数      |                   |       |
 | rookie, newbie, noob | 菜鸟，新手     |                   |       |
 | scenario             | 场景        | stop-gap measures | 权宜之计  |
 | scoff                | 嘲笑        |                   |       |
+| taint                | 污染        |                   |       |
 | teardown             | 拆除，拆解     |                   |       |
 | terminology          | 术语        |                   |       |
 | vulnerable           | 脆弱的，易受攻击的 | visual clutter    | 视觉混乱  |
