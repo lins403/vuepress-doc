@@ -256,6 +256,8 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
         'basic/es6',
         'basic/oop',
         'basic/dom',
+        'basic/json',
+        'basic/binary',
         'basic/utils',
       ]
     },

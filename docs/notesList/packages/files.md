@@ -1,5 +1,9 @@
 # 特殊文件
 
+## MIME 类型
+
+[MIME 类型 - HTTP | MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
+
 ## MS Office
 
 [Embedded File Viewer: Google Drive, OneDrive · GitHub](https://gist.github.com/tzmartin/1cf85dc3d975f94cfddc04bc0dd399be)
@@ -19,3 +23,20 @@
 ### .docx
 
 [GitHub - mwilliamson/mammoth.js: Convert Word documents (.docx files) to HTML](https://github.com/mwilliamson/mammoth.js)
+
+```shell
+npm i mammoth
+
+npx mammoth public/1.docx output.html
+
+npx mammoth public/1.docx output.md --output-format=markdown
+```
+
+不支持 `.doc` 文件
+
+```js
+axios.get('/demo.docx', {responseType: 'arraybuffer'})
+  .then(arrayBuffer => {
+     mammoth.convertToHtml({ arrayBuffer: arrayBuffer }).then().catch().done()
+   })
+```

@@ -1,6 +1,6 @@
 # PDF
 
-- iframe、embed
+- `<iframe>`、`<embed>`、`<object>`
 
 - [GitHub - mozilla/`pdf.js`: PDF Reader in JavaScript](https://github.com/mozilla/pdf.js)
   
