@@ -1,5 +1,13 @@
 # ES6
 
+# Set 和 Map
+
+- Set
+- WeakSet
+- Map
+- WeakMap
+- WeakRef
+
 ## Symbol
 
 ### Symbol.for(key)

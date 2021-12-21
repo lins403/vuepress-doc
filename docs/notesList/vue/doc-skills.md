@@ -110,6 +110,14 @@ export default {
 </script>
 ```
 
+## 6) 控制台上打印vue
+
+```js
+document.querySelector('#app').__vue__    //等同于app.__vue__，app就是Vue的实例,root
+
+document.querySelector('.app-main').__vue__
+```
+
 # 参考
 
 [Vue 文档中没有告诉你的事 · Issue #1 · javoski/blog · GitHub](https://github.com/javoski/blog/issues/1)

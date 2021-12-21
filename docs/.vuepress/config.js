@@ -40,6 +40,8 @@ module.exports = {
               title: '项目工程',
               collapsable: false,
               children: [
+                'css',
+                'js',
                 'application',
               ]
             },
@@ -251,8 +253,12 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
       title: groupB,
       collapsable: false,
       children: [
-        'basic/',
-        'basic/type',
+        'basic/base-types/type',
+        'basic/base-types/number',
+        'basic/base-types/string',
+        'basic/base-types/array',
+        'basic/base-types/object',
+        'basic/base-types/function',
         'basic/es6',
         'basic/oop',
         'basic/dom',

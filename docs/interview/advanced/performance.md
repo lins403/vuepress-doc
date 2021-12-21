@@ -1,5 +1,15 @@
 # 网站性能
 
+- Critical rendering path.
+- Service workers
+- Image optimizations.
+- Lazy loading and bundle splitting.
+- General implications of HTTP/2 and server-push.
+- When to prefetch and preload resources.
+- Reduce browser reflows and when to promote an element to the GPU.
+- Differences between the browser layout, compositing and painting.
+- 
+
 ## 检测
 
 - 被动检测：布置工具，在用户请求时收集信息

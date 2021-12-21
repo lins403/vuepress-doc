@@ -1,18 +1,6 @@
 # 技巧
 
-## 1）函数具名传参
-
-```js
-const func1 = ({ param1, param2 ...params }) => { console.log(param1, param2, params) }
-func1({param1:2, param3:'hello world'})
-func1()  // TypeError
-
-// 改进
-const func = ({ param1, param2, ...params }={}) => { console.log(param1, param2, params) }
-func()  // ✔️
-```
-
-## 2）判断变量是否存在
+## 1）判断变量是否存在
 
 ```js
 // 错误的写法
@@ -27,7 +15,7 @@ if (typeof v === "undefined") {
 }
 ```
 
-## 3）void
+## 2）void
 
 一些情况下 `undefined` 会被编译为 `void 0`，所以理论上后者要快一些
 
@@ -62,19 +50,7 @@ void的妙用
    <a href="javascript:void(document.form.submit())">提交</a>
    ```
 
-## 4）批量创建数组
-
-```js
-Array(5).map(()=>{console.log(1)})
-// [empty × 5]
-// 没有打印内容
-// ------------------------------------------------------------
-Array.apply(null, { length: 5 }).map(()=>{console.log(1)})
-// [undefined, undefined, undefined, undefined, undefined]
-// 打印了5次1
-```
-
-## 5）遍历
+## 3）遍历
 
 ### for 循环简写
 

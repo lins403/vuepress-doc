@@ -103,4 +103,4 @@ http://nginx.org/en/docs/http/ngx_http_core_module.html#alias
 
 ## 效果
 
-![](./1.gif)
+![]()

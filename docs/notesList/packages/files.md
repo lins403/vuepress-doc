@@ -20,7 +20,7 @@
 <iframe src="https://docs.google.com/gview?url=http://ieee802.org/secmail/docIZSEwEqHFr.doc&embedded=true" frameborder="0"></iframe>
 ```
 
-### .docx
+## .docx
 
 [GitHub - mwilliamson/mammoth.js: Convert Word documents (.docx files) to HTML](https://github.com/mwilliamson/mammoth.js)
 
@@ -40,3 +40,13 @@ axios.get('/demo.docx', {responseType: 'arraybuffer'})
      mammoth.convertToHtml({ arrayBuffer: arrayBuffer }).then().catch().done()
    })
 ```
+
+## xlsx
+
+[GitHub - SheetJS/sheetjs: SheetJS Community Edition -- Spreadsheet Data Toolkit](https://github.com/SheetJS/sheetjs)
+
+```shell
+npm i xlsx
+```
+
+Demo: [vue2-boilerplate/src/pages/vue-demo/xlsx at master](https://github.com/lins403/vue2-boilerplate/tree/master/src/pages/vue-demo/xlsx)
