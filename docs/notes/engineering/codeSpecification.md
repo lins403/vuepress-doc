@@ -8,6 +8,8 @@
 
 [《前端科普系列-ESlint：守住优雅的护城河》](https://zhuanlan.zhihu.com/p/184951182)
 
+[[译] 以和为贵！让 ESlint、Prettier 和 EditorConfig 互不冲突](https://juejin.cn/post/6971783776221265927)
+
 ## 一、EditorConfig
 
 ```shell
@@ -30,6 +32,8 @@ end_of_line = lf
 insert_final_newline = true
 # 删除一行中的前后空格
 trim_trailing_whitespace = true
+# 限定每行最多字符
+max_line_length = 160
 
 # 匹配md结尾的文件
 [*.md]
@@ -129,7 +133,7 @@ module.exports = {
 }
 ```
 
-可选：Disable vetur in VSCodes settings (if you had it installed)
+可选：Disable vetur in VSCode's settings (if you had it installed)
 
 ```json
 "vetur.validation.style": false
@@ -236,8 +240,6 @@ yarn lint-staged
 > _   单下划线：单下划线用来描述一个块或者块的子元素的一种状态
 
 # 参考
-
-[[译] 以和为贵！让 ESlint、Prettier 和 EditorConfig 互不冲突](https://juejin.cn/post/6971783776221265927)
 
 [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 

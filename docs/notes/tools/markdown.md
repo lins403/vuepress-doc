@@ -13,3 +13,6 @@
 ```shell
 echo '{ "format.clear-format": "CmdOrCtrl+/", "view.source-code-mode": "CmdOrCtrl+;", "edit.aidou": "CmdOrCtrl+Shift+/" }' > ~/Library/Application\ Support/marktext/keybindings.json
 ```
+
+## emoji
+[markdown-emoji](https://github.com/zhouie/markdown-emoji)

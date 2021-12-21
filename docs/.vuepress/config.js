@@ -156,6 +156,7 @@ module.exports = {
               title: '其它',
               collapsable: false,
               children: [
+                'specification-config',
                 'codeSpecification',
                 'graphQL',
               ]

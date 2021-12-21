@@ -38,6 +38,9 @@ undefined == null  //true
 Number('') // 0
 Number(null)  //0
 Number(undefined)  //NaN
+
+// Object.js() 相对比===和==的改进
+Object.is(NaN,NaN)    //true
 ```
 
 ## 参考

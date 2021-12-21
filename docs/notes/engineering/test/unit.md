@@ -5,3 +5,7 @@
 [Vue 组件的单元测试 — Vue.js](https://cn.vuejs.org/v2/cookbook/unit-testing-vue-components.html)
 
 [学习单元测试框架karma+mocha - 掘金](https://juejin.cn/post/6844903683365273607)
+
+
+
+[Unit test reports | GitLab](https://docs.gitlab.com/ee/ci/unit_test_reports.html#jest)

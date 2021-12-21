@@ -46,7 +46,7 @@ rgb转hex：[颜色码转换器](https://www.sioe.cn/yingyong/yanse-rgb-16/)
 
 占位图片：[Placeholder.com – The Free Image Placeholder Service](https://placeholder.com/)
 
-emoji：[Emojipedia](https://emojipedia.org/)
+emoji：[Emojipedia](https://emojipedia.org/)  [Emoji Homepage](http://emojihomepage.com/)
 
 svg-icons库：[Feather – Simply beautiful open source icons](https://feathericons.com/)
 

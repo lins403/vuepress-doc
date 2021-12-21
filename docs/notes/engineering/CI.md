@@ -23,3 +23,26 @@ https://www.devopsauthority.tech/2021/02/09/github-actions-vs-travis-ci/
 - [ ] Docker
 
 - [ ] appveyor
+
+
+
+## GitLab CI/CD
+
+### Pipeline
+
+A typical pipeline might consist of four stages, executed in the following order:
+
+- A `build` stage, with a job called `compile`.
+- A `test` stage, with two jobs called `test1` and `test2`.
+- A `staging` stage, with a job called `deploy-to-stage`.
+- A `production` stage, with a job called `deploy-to-prod`.
+
+### 配置
+
+`.gitlab-ci.yml`
+
+[Development guide for GitLab CI/CD templates | GitLab](https://docs.gitlab.com/ee/development/cicd/templates.html)
+
+[Keyword reference for the .gitlab-ci.yml file | GitLab](https://docs.gitlab.com/ee/ci/yaml/index.html)
+
+[GitLab CI/CD](https://www.cnblogs.com/cjsblog/p/12256843.html)

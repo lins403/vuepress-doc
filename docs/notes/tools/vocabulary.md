@@ -14,6 +14,24 @@
 
 ## 单词
 
+|                   |      |
+| ----------------- | ---- |
+| backslash/escape  | \    |
+| brace             | {}   |
+| bracket           | []   |
+| caret             | ^    |
+| colon             | :    |
+| dash              | --   |
+| dot/period        | .    |
+| ellipsis          | …    |
+| hyphen            | -    |
+| parenthesis/paren | ()   |
+| semicolon         | ;    |
+| slash             | /    |
+| tilde             | ~    |
+
+
+
 |                      |           |                     |       |
 | -------------------- | --------- | ------------------- | ----- |
 | alternate            | 另类的，备用的   | assembly language   | 汇编语言  |
@@ -35,9 +53,9 @@
 | mojibake             | 乱码        | non-optimal         | 不理想   |
 | mnemonics            | 助记符       | pertinent factors   | 相关因素  |
 | performant           | 高效的       | performance hit     | 性能消耗  |
-| palette              | 调色板，一组颜色  |                     |       |
-| prioritization       | 优先考虑      |                     |       |
-| Quartile             | 四分位数      |                     |       |
+| palette              | 调色板，一组颜色  | requisites          | 必需品   |
+| prioritization       | 优先考虑      | prerequisites       | 先决条件  |
+| Quartile             | 四分位数      | takes precedence    | 优先    |
 | rookie, newbie, noob | 菜鸟，新手     |                     |       |
 | scenario             | 场景        | stop-gap measures   | 权宜之计  |
 | scoff                | 嘲笑        |                     |       |
@@ -49,22 +67,25 @@
 
 ## 短语
 
-|                    |      |                                          |             |
-| ------------------ | ---- | ---------------------------------------- | ----------- |
-| 30 or so           | 30左右 |                                          |             |
-| be addressed       | 被解决  | has grown exponentially                  | 呈指数增长       |
-| be leveraged for   | 被利用  | hooking … up to existing code            | 将…与现有代码挂钩   |
-|                    |      | it keeps this in sync with …             | 与…保持同步      |
-| In a gist          | 总而言之 | iteration and innovation stall           | 迭代和创新停滞     |
-| In a nutshell      | 简而言之 |                                          |             |
-| in the big picture | 总体来看 | no knowledge of them is required         | 不需要了解       |
-| kick in            | 起作用  |                                          |             |
-| kick off           | 开始   |                                          |             |
-| from scratch       | 从头开始 |                                          |             |
-| out of the box     | 开箱即用 |                                          |             |
-| stay tuned         | 敬请关注 | ship features and deliver business value | 交付功能和呈现业务价值 |
-| trumps over        | 胜过   | that’s not always the case               | 并非总是如此      |
-| work around        | 解决   | what problem does this solve for...      | 为…解决了什么问题   |
+|                     |          |                                          |                        |
+| ------------------- | -------- | ---------------------------------------- | ---------------------- |
+| 30 or so            | 30左右   | code compliance standards                | 代码合规标准           |
+|                     |          | you established for your application     |                        |
+|                     |          | compliance configuration                 | 合规性配置             |
+| be addressed        | 被解决   | has grown exponentially                  | 呈指数增长             |
+| be leveraged for    | 被利用   | hooking … up to existing code            | 将…与现有代码挂钩      |
+| execute in parallel | 并行执行 | it keeps this in sync with …             | 与…保持同步            |
+| In a gist           | 总而言之 | iteration and innovation stall           | 迭代和创新停滞         |
+| In a nutshell       | 简而言之 | Erase the job log.                       | 清除作业日志           |
+| in the big picture  | 总体来看 | no knowledge of them is required         | 不需要了解             |
+| kick in             | 起作用   |                                          |                        |
+| kick off            | 开始     |                                          |                        |
+| from scratch        | 从头开始 |                                          |                        |
+| out of the box      | 开箱即用 | proposed changes.                        | 提议的改变             |
+| stay tuned          | 敬请关注 | ship features and deliver business value | 交付功能和呈现业务价值 |
+| trumps over         | 胜过     | that’s not always the case               | 并非总是如此           |
+| work around         | 解决     | what problem does this solve for...      | 为…解决了什么问题      |
+|                     |          | When rules evaluate to true,             | 当规则符合时           |
 
 ## 例句
 
@@ -73,3 +94,5 @@
 | There are more things to take into consideration like SEO or increasing performance. |     |
 |                                                                                      |     |
 |                                                                                      |     |
+
+Me encantó tu

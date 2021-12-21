@@ -23,3 +23,16 @@ inc() // 5
 inc() // 6
 inc() // 7
 ```
+
+```js
+// 
+const once = function (fn) {
+  let called = false
+  return function () {
+    if (!called) {
+      called = true
+      fn.apply(this, arguments)
+    }
+  }
+}
+```
