@@ -2,15 +2,16 @@
 
 ## 缩写
 
-| A        | E                               | C    |
-| -------- | ------------------------------- | ---- |
-| `a.k.a.` | also known as                   | 又称作  |
+| A        | E                               | C        |
+| -------- | ------------------------------- | -------- |
+| `a.k.a.` | also known as                   | 又称作   |
 | `FYI`    | for your information            | 供您参考 |
 | `IMO`    | In my opinion                   | 在我看来 |
 | `IMHO`   | In my humble opinion            | 恕我直言 |
 | `LOL`    | Laugh Out Loud                  | 放声大笑 |
-| `TL;DR`  | too long; didn't read           |      |
-| `CRUD`   | create, read, update and delete |      |
+| `TL;DR`  | too long; didn't read           |          |
+| `CRUD`   | create, read, update and delete |          |
+| OSS      | Open-source software            |          |
 
 ## 单词
 
@@ -32,38 +33,39 @@
 
 
 
-|                      |           |                     |       |
-| -------------------- | --------- | ------------------- | ----- |
-| alternate            | 另类的，备用的   | assembly language   | 汇编语言  |
-| arduous              | 艰难的       | a short-hand syntax | 简写的语法 |
-| braceless            | 没有括号的     | a hundred thousand  | 十万    |
-| circumvent           | 规避，绕开     |                     |       |
-| connoisseur          | 内行        | error-prone         | 易于出错的 |
-| efficacy             | 功效        | error resistance    | 容错性   |
-| encapsulation        | 封装        |                     |       |
-| escaping             | 转义        |                     |       |
-| gurus                | 领袖，专家     |                     |       |
-| hassle               | 麻烦        |                     |       |
-| intrigued            | 好奇的       |                     |       |
-| intrude              | 侵入        |                     |       |
-| Kanji                | 日本汉字      |                     |       |
-| latency              | 延迟        |                     |       |
-| mandatory            | 强制的       | malicious scripts   | 恶意脚本  |
-| minimalistic         | 极简的       | minor tweaks        | 小调整   |
-| mojibake             | 乱码        | non-optimal         | 不理想   |
-| mnemonics            | 助记符       | pertinent factors   | 相关因素  |
-| performant           | 高效的       | performance hit     | 性能消耗  |
-| palette              | 调色板，一组颜色  | requisites          | 必需品   |
-| prioritization       | 优先考虑      | prerequisites       | 先决条件  |
-| Quartile             | 四分位数      | takes precedence    | 优先    |
-| rookie, newbie, noob | 菜鸟，新手     |                     |       |
-| scenario             | 场景        | stop-gap measures   | 权宜之计  |
-| scoff                | 嘲笑        |                     |       |
-| taint                | 污染        |                     |       |
-| teardown             | 拆除，拆解     |                     |       |
-| terminology          | 术语        |                     |       |
-| vulnerable           | 脆弱的，易受攻击的 | visual clutter      | 视觉混乱  |
-| workout              | 制定，解决     |                     |       |
+|                      |                    |                         |            |
+| -------------------- | ------------------ | ----------------------- | ---------- |
+| alternate            | 另类的，备用的     | assembly language       | 汇编语言   |
+| arduous              | 艰难的             | a short-hand syntax     | 简写的语法 |
+| bespoke              | 定制的             | a hundred thousand      | 十万       |
+| braceless            | 没有括号的         |                         |            |
+| circumvent           | 规避，绕开         |                         |            |
+| connoisseur          | 内行               | error-prone             | 易于出错的 |
+| efficacy             | 功效               | error resistance        | 容错性     |
+| encapsulation        | 封装               |                         |            |
+| escaping             | 转义               |                         |            |
+| gurus                | 领袖，专家         |                         |            |
+| hassle               | 麻烦               |                         |            |
+| intrigued            | 好奇的             |                         |            |
+| intrude              | 侵入               |                         |            |
+| Kanji                | 日本汉字           |                         |            |
+| latency              | 延迟               |                         |            |
+| mandatory            | 强制的             | malicious scripts       | 恶意脚本   |
+| minimalistic         | 极简的             | minor tweaks            | 小调整     |
+| mojibake             | 乱码               | non-optimal             | 不理想     |
+| mnemonics            | 助记符             | pertinent factors       | 相关因素   |
+| performant           | 高效的             | performance hit         | 性能消耗   |
+| palette              | 调色板，一组颜色   | requisites              | 必需品     |
+| prioritization       | 优先考虑           | prerequisites           | 先决条件   |
+| Quartile             | 四分位数           | takes precedence        | 优先       |
+| rookie, newbie, noob | 菜鸟，新手         | the aggregated results  | 聚合结果   |
+| scenario             | 场景               | stop-gap measures       | 权宜之计   |
+| scoff                | 嘲笑               | succinct configuration. | 简洁的配置 |
+| taint                | 污染               |                         |            |
+| teardown             | 拆除，拆解         |                         |            |
+| terminology          | 术语               |                         |            |
+| vulnerable           | 脆弱的，易受攻击的 | visual clutter          | 视觉混乱   |
+| workout              | 制定，解决         |                         |            |
 
 ## 短语
 

@@ -12,6 +12,8 @@
 
 [The State of Developer Ecosystem 2021](https://www.jetbrains.com/lp/devecosystem-2021/)
 
+[DB-Engines Ranking](https://db-engines.com/en/ranking)
+
 [199IT大数据工具导航-Hao.199it.com](http://hao.199it.com/)
 
 ## UI
@@ -22,7 +24,11 @@ rgb转hex：[颜色码转换器](https://www.sioe.cn/yingyong/yanse-rgb-16/)
 
 渐变色取色：[uiGradients - Beautiful colored gradients](https://uigradients.com/)
 
+取色：[Palettable](https://www.palettable.io/)
+
 颜色：[Trending color palettes - Coolors](https://coolors.co/palettes/trending)
+
+中国色：[中国色 － 中国传统颜色](http://zhongguose.com/)
 
 ## 图库
 
@@ -47,6 +53,8 @@ rgb转hex：[颜色码转换器](https://www.sioe.cn/yingyong/yanse-rgb-16/)
 占位图片：[Placeholder.com – The Free Image Placeholder Service](https://placeholder.com/)
 
 emoji：[Emojipedia](https://emojipedia.org/)  [Emoji Homepage](http://emojihomepage.com/)
+
+icons库：[Noun Project: Free Icons & Stock Photos for Everything](https://thenounproject.com/)
 
 svg-icons库：[Feather – Simply beautiful open source icons](https://feathericons.com/)
 

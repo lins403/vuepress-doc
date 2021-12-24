@@ -59,6 +59,7 @@ npm install -D @babel/core @babel/eslint-parser
 ```
 
 ```js
+// .eslintrc.js
 module.exports = {
   parserOptions: {
     parser: '@babel/eslint-parser',

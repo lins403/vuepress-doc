@@ -38,3 +38,5 @@
 [2021 SegmentFault D-Day 大前端前沿技术实践](https://segmentfault.com/a/1190000040435530)
 
 [blogs/23.md at master · senntyou/blogs · GitHub](https://github.com/senntyou/blogs/blob/master/web-advance/23.md)
+
+[GitHub - GoogleChrome/lighthouse: Automated auditing, performance metrics, and best practices for the web.](https://github.com/GoogleChrome/lighthouse)

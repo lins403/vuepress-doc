@@ -88,11 +88,11 @@
 #### 认证方式的缺陷
 
 1. 扩展性
-   
+  
    - 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上，这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。
 
 2. 安全性：
-   
+  
    - 不能跨域，若是支持跨域则容易遭受 CSRF 此类盗用cookie的网络攻击
 
 ## token
@@ -185,6 +185,8 @@ openWindow(url, thirdpart, 540, 540)
 > **Opening a page in a new tab or window will cause a new session to be initiated**, which differs from how session cookies work.
 > 
 > > 通过点击 `target="_blank"` 链接（或者用了 `window.open`）打开的新标签页之间是属于同一个 session 的，而如果新开一个独立的标签页访问，则总是会初始化一个新的 session.
+
+Tip: localStorage的使用需要注意命名规范，如果需要设置过期时间，则可以将value值设置为一个对象 {value:'123', time: Date.now(), expire:86400*1000 } （Date.now()是13位的时间戳），如果要加密则可以使用crypto-js
 
 ## 浏览器缓存
 

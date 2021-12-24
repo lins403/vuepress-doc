@@ -1,5 +1,9 @@
 # 特殊文件
 
+## 文件
+
+[file-saver](https://github.com/eligrey/FileSaver.js) : 保存/下载文件到指定文件，轻量（3.3K / 1.5K）
+
 ## MIME 类型
 
 [MIME 类型 - HTTP | MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types)

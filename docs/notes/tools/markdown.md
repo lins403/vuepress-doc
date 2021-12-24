@@ -13,6 +13,7 @@
 ```shell
 echo '{ "format.clear-format": "CmdOrCtrl+/", "view.source-code-mode": "CmdOrCtrl+;", "edit.aidou": "CmdOrCtrl+Shift+/" }' > ~/Library/Application\ Support/marktext/keybindings.json
 ```
+会卡，莫名其妙的bug一堆
 
 ## emoji
 [markdown-emoji](https://github.com/zhouie/markdown-emoji)

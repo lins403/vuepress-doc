@@ -42,6 +42,7 @@ module.exports = {
               children: [
                 'css',
                 'js',
+                'vuejs',
                 'application',
               ]
             },
@@ -145,11 +146,12 @@ module.exports = {
               ]
             },
             {
-              title: '自动化',
+              title: '自动化与CI/CD',
               collapsable: false,
               children: [
                 'workflow',
-                'CI',
+                'CI-CD/',
+                'CI-CD/gitlab-ci',
               ]
             },
             {

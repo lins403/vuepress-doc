@@ -4,7 +4,11 @@
 
 rgb转hex：[颜色码转换器](https://www.sioe.cn/yingyong/yanse-rgb-16/)
 
-色彩：[Trending color palettes - Coolors](https://coolors.co/palettes/trending)
+色彩：
+
+[Trending color palettes - Coolors](https://coolors.co/palettes/trending)
+
+[中国色 － 中国传统颜色](http://zhongguose.com/)
 
 ## 色彩模式
 
