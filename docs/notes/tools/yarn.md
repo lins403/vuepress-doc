@@ -12,6 +12,8 @@ yarn add
 yarn upgrade
 ```
 
+[Migrating from npm | Yarn](https://classic.yarnpkg.com/en/docs/migrating-from-npm#toc-cli-commands-comparison)
+
 ## yarn 安装
 
 `yarn install` will install the exact version in the lockfile

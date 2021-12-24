@@ -87,6 +87,7 @@ Code > 首选项 > 用户片段
 - lit-html ( for html inside of JavaScript and TypeScript tagged template strings )
 - Markdown Preview Enhanced
 - CSS Modules
+- Jest Snippets
 
 ### Git
 

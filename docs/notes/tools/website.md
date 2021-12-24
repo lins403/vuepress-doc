@@ -178,7 +178,11 @@ API数据接口：[API接口平台-聚合数据](https://www.juhe.cn/)
 
 网盘：[超能搜 - 百度网盘搜索神器](https://www.chaonengsou.com/)
 
-YouTube视频下载：[YouTube Downloader](https://www.y2mate.com/en140)
+YouTube视频下载：[y2mate](https://www.y2mate.com/en140)
+
+字幕下载：[DownSub](https://downsub.com/)
+
+视频字幕合成：‎[PineconeSuppress](https://apps.apple.com/cn/app/pineconesuppress/id1398134175)
 
 QMCFLAC转FLAC：[QMCFLAC格式批量在线转换为FLAC格式](https://convert.freelrc.com/QMCFLAC-to-FLAC)
 
