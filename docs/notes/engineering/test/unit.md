@@ -30,3 +30,23 @@ Config 配置
 
 - package.json > jest
 - jest.config.js 、jest.config.ts
+
+### Mock
+
+#### Mock Modules
+
+> *When using `babel-jest`, calls to `enableAutomock` will automatically be hoisted to the top of the code block. Use `autoMockOn` if you want to explicitly avoid this behavior.* 
+
+```js
+jest.mock(moduleName, factory, options)
+```
+
+#### Mock Functions
+
+```js
+jest.fn(implementation)
+
+jest.spyOn(object, methodName)	// object[methodName] = jest.fn()
+jest.spyOn(object, methodName).mockImplementation(() => customImplementation)	// object[methodName] = jest.fn(() => customImplementation)
+```
+

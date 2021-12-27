@@ -80,6 +80,8 @@ git push
 > 
 > [新增 SSH 密钥到 GitHub 帐户](https://docs.github.com/cn/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
 
+[利用 CDN 解决百度爬虫被 Github Pages 拒绝的问题](https://www.dozer.cc/2015/06/github-pages-and-cdn.html)
+
 ## 四、Github API
 
 基于 GraphQL
@@ -174,3 +176,21 @@ https://img.shields.io/npm/v/vue/next
 ## 八、开源 license
 
 ![开元许可证](http://www.ruanyifeng.com/blogimg/asset/201105/bg2011050101.png)
+
+## 九、其它
+
+### webhooks
+
+通过定制 Webhooks 来监测你在 Github.com 上的各种事件；
+
+Travis-Cli 也可以配置 webhooks，借助后者来自动触发一些 CI 的运作。
+
+[About webhooks - GitHub Docs](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks)
+
+### Apps
+
+Github App 可以通过 Github 提供的认证信息去调用 Github API。
+
+[Apps - GitHub Docs](https://docs.github.com/en/developers/apps)
+
+[GitHub Apps - Settings · GitHub](https://github.com/apps/settings)

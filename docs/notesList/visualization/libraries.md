@@ -10,7 +10,7 @@
 
 ## 2D
 
-- Echarts是基于Canvas技术的可视化工具，底层封装了原生的JavaScript的绘图 API。
+- Echarts是基于Canvas技术的可视化工具，底层封装了原生的JavaScript的绘图 API。V4.0后开始支持SVG渲染
 
 - D3底层基于SVG技术，与Canvas完全不一样，SVG的本质是一个XML 文档。
 
@@ -21,3 +21,9 @@
 ## 移动端
 
 [GitHub - antvis/F2: 📱📈An elegant, interactive and flexible charting library for mobile.](https://github.com/antvis/F2)
+
+
+
+## Demo
+
+[GitHub - yyhsong/iDataV: 大屏数据可视化 Big screen data visualization demo](https://github.com/yyhsong/iDataV)

@@ -159,6 +159,24 @@ import LinearGradient from 'zrender/src/graphic/LinearGradient';
 }
 ```
 
+## 4. 数据
+
+[ECharts省份地图数据合集: 收录中国各个省份的地图JSON数据](https://gitee.com/MTrun/echarts-map-json)
+
+## 5. 封装库
+
+[GitHub - ecomfe/vue-echarts: Apache ECharts component for Vue.js.](https://github.com/ecomfe/vue-echarts)
+
+[GitHub - DataV-Team/DataV: Vue数据可视化组件库](https://github.com/DataV-Team/DataV)
+
+[vue-big-screen: 🔥一个基于 vue、datav、Echart 框架的大数据可视化（大屏展示）模板，提供数据动态刷新渲染、屏幕适应、内部图表自由替换、Mixins注入等功能，持续更新....](https://gitee.com/MTrun/big-screen-vue-datav)
+
+[GitHub - hustcc/echarts-for-react: ⛳️ Apache ECharts components for React wrapper. 一个简单的 Apache echarts 的 React 封装。](https://github.com/hustcc/echarts-for-react)
+
+## 6. 图表资源库
+
+[图表配置工具](http://mincharts.com/)
+
 # 参考
 
 [echarts折线图添加区域点击事件，而不用去点小圆点（扩大点击范围）](https://blog.csdn.net/lightpass/article/details/81457410)

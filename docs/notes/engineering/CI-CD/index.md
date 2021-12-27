@@ -11,19 +11,14 @@ https://www.devopsauthority.tech/2021/02/09/github-actions-vs-travis-ci/
 [使用YEOMAN创建属于自己的前端工作流](https://segmentfault.com/a/1190000004896264)
 
 - [ ] Jenkins
-
 - [ ] Travis CI
-
+  - [Building a JavaScript and Node.js project](https://docs.travis-ci.com/user/languages/javascript-with-nodejs)
+  - travis.org被弃用，travis.com开始收费
 - [ ] GitHub Actions
-
 - [ ] GitLab CI
-
 - [ ] Yeoman
-
 - [ ] Lerna
-
 - [ ] Docker
-
 - [ ] appveyor
 
 
