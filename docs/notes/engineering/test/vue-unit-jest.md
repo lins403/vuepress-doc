@@ -30,6 +30,15 @@ module.exports = {
 
 ## 快照
 
+```js
+// 测试内容：snapshot->概括的测试DOM结构
+it('matches snapshot', () => {
+  const wrapper = shallowMount(MyComponent)
+  expect(wrapper.html()).toMatchSnapshot()
+  wrapper.destroy()
+})
+```
+
 ```shell
 # update snapshots
 npm run test:unit -- -u

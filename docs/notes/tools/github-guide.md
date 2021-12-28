@@ -95,13 +95,18 @@ git push
 ## 五、GitHub actions
 
 > [github actions 入门指南及实践](https://shanyue.tech/no-vps/github-action-guide.html#快速开始)
+>
+> [GitHub Actions Documentation - GitHub Docs](https://docs.github.com/cn/actions)
+>
+> [Deploy to GitHub Pages · Actions · GitHub Marketplace · GitHub](https://github.com/marketplace/actions/deploy-to-github-pages)
+>
+> [GitHub - actions/checkout: Action for checking out a repo](https://github.com/actions/checkout)
 
 🌰：部署Hexo静态博客到 github pages
 
 创建 Workflow 文件：`.github/workflows/deploy.yml`
 
 ```yaml
-# 模板源于B站「objtube的卢克儿」
 name: Build and Deploy
 on: [push]
 jobs:

@@ -79,6 +79,13 @@ VueCli 内置 postcss、postcss-loader、用于添加浏览器前缀的插件 au
 
 升级方案：[Node Sass to Dart Sass](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/sass.html#node-sass-to-dart-sass)
 
+[vue.js - TypeError: this.getOptions is not a function - Stack Overflow](https://stackoverflow.com/questions/66082397/typeerror-this-getoptions-is-not-a-function)
+
+```shell
+# sass-loader@11.0.0 doesn't work with vue@2.6.12
+npm i -D sass sass-loader@10
+```
+
 ### SCSS Lint
 
 早期的 [scss-lint](https://github.com/sds/scss-lint) 支持的是已经被淘汰的 Ruby Sass；
@@ -86,31 +93,29 @@ VueCli 内置 postcss、postcss-loader、用于添加浏览器前缀的插件 au
 #### 使用方案：
 
 1. [`stylelint`](https://stylelint.io/)
-   
+  
    - [postcss](https://postcss.org/)
    
    - ...postcss plugins
-
 2. [`stylelint-config-recommended-scss`](https://www.npmjs.com/package/stylelint-config-recommended-scss)
-   
+  
    - stylelint-config-recommended
    
    - postcss-scss ( Parse SCSS syntax and apply PostCSS transformations directly to SCSS source code. )
    
    - stylelint-scss
-
 3. [`stylelint-config-recess-order`](https://github.com/stormwarning/stylelint-config-recess-order)
-   
+  
    - stylelint-order
-
 4. [`stylelint-prettier`](https://github.com/prettier/stylelint-prettier)
-
 5. [`stylelint-config-prettier`](https://github.com/prettier/stylelint-config-prettier)
+5. [`postcss-html`](https://www.npmjs.com/package/postcss-html)
 
 ```shell
 npm i -D stylelint stylelint-config-recommended-scss
 npm i -D stylelint-config-recess-order
 npm i -D stylelint-prettier stylelint-config-prettier
+npm i -D postcss-html # parse .vue files
 ```
 
 #### vscode插件

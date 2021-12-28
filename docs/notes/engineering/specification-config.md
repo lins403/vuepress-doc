@@ -1,10 +1,10 @@
 # 🚫💩
 
-## 入门
+## 预备知识
 
-<https://github.com/senntyou/blogs/blob/master/web-advance/12.md>
+[怎样提升代码质量 · senntyou/blogs · GitHub](https://github.com/senntyou/blogs/blob/master/web-advance/12.md)
 
-<https://zhuanlan.zhihu.com/p/184951182>
+[前端科普系列-ESlint：守住优雅的护城河 - 知乎](https://zhuanlan.zhihu.com/p/184951182)
 
 ## Vue2配置方案
 
@@ -33,10 +33,11 @@ npm install -D eslint-plugin-prettier eslint-config-prettier
 
 ### 命令行使用
 
-### eslint
+#### eslint
 
 ```shell
 npx eslint --fix .
+npx eslint --fix src/**/*.{js,vue}
 ```
 
 #### prettier
@@ -46,7 +47,7 @@ npx eslint --fix .
 npx prettier -w .
 
 # --check
-npx prettier -c "src/**/*.js"
+npx prettier -c src/**/*.js
 
 # use config
 npx prettier -w . --print-width 120
@@ -55,7 +56,9 @@ npx prettier -w . --print-width 120
 ## babel
 
 ```shell
-npm install -D @babel/core @babel/eslint-parser
+npm install -D @babel/core
+npm un babel-eslint	#deprecated
+npm install -D @babel/eslint-parser
 ```
 
 ```js
@@ -76,7 +79,8 @@ module.exports = {
 ```shell
 npm i -D stylelint stylelint-config-recommended-scss
 npm i -D stylelint-config-recess-order
-npm i -D stylelint-prettier stylelint-config-prettier
+npm i -D stylelint-prettier@1 stylelint-config-prettier
+npm i -D postcss-html
 ```
 
 命令行使用
@@ -86,6 +90,14 @@ npx stylelint "**/*.scss"
 npx stylelint --fix "**/*.scss"
 ```
 
+兼容性说明
+
+> error stylelint-prettier@2.0.0: The engine "node" is incompatible with this module. Expected version "^12.22.0 || ^14.17.0 || >=16.0.0". Got "14.16.1"
+>
+> > ```
+> > npm i -D stylelint-prettier@1	//yarn add -D stylelint-prettier@1.2.0
+> > ```
+
 ## husky
 
 新版本的husky使用 Git 2.9 的新特性 `core.hooksPath` 进行了重构，原来在 package.json 中的配置方式不再推荐
@@ -94,9 +106,6 @@ npx stylelint --fix "**/*.scss"
 npm install husky -D
 
 npx husky install
-
-# 添加pre-commit钩子的可执行脚本
-npx husky add .husky/pre-commit "npx lint-staged"
 ```
 
 ```shell
@@ -110,6 +119,9 @@ git commit -m "yolo!" -n
 
 ```shell
 npm install -D lint-staged
+
+# 添加pre-commit钩子的可执行脚本
+npx husky add .husky/pre-commit "npx lint-staged"
 ```
 
 ```json
@@ -118,7 +130,7 @@ npm install -D lint-staged
     "*.{js,vue}": [
       "eslint --fix"
     ],
-    "*.{scss,less,styl,css}": [
+    "src/**/*.{scss,less,styl,css}": [
       "stylelint --fix",
       "prettier --write"
     ]
@@ -154,10 +166,21 @@ npx commitlint --from HEAD~1 --to HEAD --verbose
 - ESLint
 - Prettier - Code formatter
 - stylelint (stylelint-plus supports auto fix on save)
-  - 要修改配置，添加对 `.scss` 文件的校验
+  - 要修改配置，添加对 `.scss` 和 `.vue` 文件的校验
 
 关闭 vetur 样式校验（可选）
 
 ```json
 "vetur.validation.style": false
 ```
+
+##  踩坑
+
+### 如果安装依赖有冲突
+
+```shell
+yarn install --ignore-engines
+# or
+npm install --force
+```
+
