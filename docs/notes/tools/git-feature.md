@@ -70,7 +70,16 @@ Distributed Version Control System，简称 DVCS
 - Environment Branches，每个环境，都对应一个分支。prodution 分支专门用来发布版本，pre-production预发、test-production测试。
 - Upstream First。代码合并的顺序，要按环境依次推送，确保代码被充分测试过，才会从上游分支合并到下游分支。（🌰: feature=>dev=>production）
 
-## 三、HEAD、工作树、索引
+## 三、Git 数据模型
+
+- Tag
+- Commit
+- Tree
+- BLOB
+
+TODO
+
+## 四、HEAD、工作树、索引
 
 打开 `.git` 文件来看
 

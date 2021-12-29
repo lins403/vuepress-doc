@@ -41,7 +41,7 @@ git branch -a
 
 ## 三、Git Hooks
 
-[all Git hooks](https://git-scm.com/docs/githooks)
+[Git - githooks Documentation](https://git-scm.com/docs/githooks)
 
 Hook 就是在执行某个事件之前或之后进行一些其他额外的操作。
 
@@ -96,7 +96,9 @@ git commit -m "yolo!" --no-verify
 git commit -m "yolo!" -n
 ```
 
-### commitlint
+## 四、commitlint
+
+因为习惯使用 `git commit` 或者 GUI 的方式，所以就不使用 `commitizen` 了
 
 ```shell
 # Install and configure
@@ -110,7 +112,23 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
 npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
-#### rule
+### Specification
+
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+[vue/COMMIT_CONVENTION.md at dev · vuejs/vue · GitHub](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
+
+[angular/CONTRIBUTING.md at master · angular/angular · GitHub](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)
+
+```shell
+[header]	# <type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Rule
 
 [@commitlint/config-conventional](https://www.npmjs.com/package/@commitlint/config-conventional)
 
@@ -131,26 +149,60 @@ module.exports = {
 }
 ```
 
-#### 规范
+## 五、conventional-changelog
 
-[Git Commit Message Convention](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
+[Modules Important to Conventional Changelog Ecosystem](https://github.com/conventional-changelog/conventional-changelog#modules-important-to-conventional-changelog-ecosystem)
 
-[Angular > commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
+[`conventional-changelog-cli`  -  npm](https://www.npmjs.com/package/conventional-changelog-cli)
 
-```
-<header>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
+```shell
+npm install -g conventional-changelog-cli
+# conventional-changelog -p angular -i CHANGELOG.md -s -r 0
 ```
 
-```js
-// Commit Message Header
-<type>(<scope>): <short summary>
+[`standard-version`  -  npm](https://www.npmjs.com/package/standard-version)
+
+1. `bump` the version in bumpFiles based on your commits.（自动修改 package.json 中的 version）
+2. Generates a `changelog` based on your commits 
+3. Creates a new `commit` including your bumpFiles and updated CHANGELOG.
+4. Creates a new `tag` with the new version number.
+
+```shell
+npm install -g standard-version
+# Or
+npm i -D standard-version
 ```
 
-## 配置文件
+```shell
+{
+  "scripts": {
+    "release": "standard-version"
+    # "release": "standard-version --dry-run"
+  }
+}
+```
+
+```shell
+# see what commands would be run, without committing to git or updating files.
+standard-version --dry-run
+
+# first-release(This will tag a release without bumping the version bumpFiles.)
+npm run release -- -f		#npm scripts
+standard-version -f		#global bin
+npx standard-version -f		#npx
+
+# 1.0.0 -> 1.1.0
+npm run release -- -r minor
+# Or
+npm run release -- -r 1.1.0
+
+# tag prefix
+standard-version -t "stable-"
+```
+
+
+
+## 六、配置文件
 
 `.gitignore`
 
@@ -160,5 +212,6 @@ module.exports = {
 
 # 参考
 
-- [Why husky has dropped conventional JS config](https://blog.typicode.com/husky-git-hooks-javascript-config/)
-- [husky使用总结](https://zhuanlan.zhihu.com/p/366786798)
+- [Typicode's blog - Why husky has dropped conventional JS config](https://blog.typicode.com/husky-git-hooks-javascript-config/)
+- [husky使用总结 - 知乎](https://zhuanlan.zhihu.com/p/366786798)
+- [git commit 、CHANGELOG 和版本发布的标准自动化 - 知乎](https://zhuanlan.zhihu.com/p/51894196)

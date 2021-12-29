@@ -22,7 +22,9 @@
 ### 安装
 
 ```shell
-npm install -D eslint@7 eslint-plugin-vue babel-eslint # eslint8与vue-eslint-parser不兼容
+npm install -D eslint@7
+# eslint8与vue-eslint-parser@7不兼容，eslint-config-prettier@8 peer eslint@">=7.0.0"
+npm install -D eslint-plugin-vue babel-eslint
 npm install -D --save-exact prettier
 npm install -D eslint-plugin-prettier eslint-config-prettier
 ```
@@ -158,6 +160,8 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
 npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
+关于 changelog 与 release：[Git 应用 > conventional-changelog | 小眯嘻的文档博客](https://lins403.github.io/vuepress-doc/notes/tools/git-application.html#五、conventional-changelog)
+
 ## VSCode
 
 ### 插件
@@ -184,3 +188,16 @@ yarn install --ignore-engines
 npm install --force
 ```
 
+### CHANGELOG.md不显示chore和build
+
+[Chores section · Issue #135 · conventional-changelog/standard-version · GitHub](https://github.com/conventional-changelog/standard-version/issues/135)
+
+[docs(FAQ): explain why is chore entries not in my CHANGELOG](https://github.com/conventional-changelog/standard-version/pull/195)
+
+**Solution1**: fork一份 preset，在运行 conventional-changelog 时指定这份 preset
+
+- 实现参考：[conventional-changelog-config  -  npm](https://www.npmjs.com/package/conventional-changelog-config)
+
+**Solution2**: 使用 `standard-version` ，配置 `.versionrc.js`，通过官方支持实现preset平替
+
+- 使用参考：[feat: adds new configurable conventionalcommits preset](https://github.com/conventional-changelog/standard-version/pull/323)

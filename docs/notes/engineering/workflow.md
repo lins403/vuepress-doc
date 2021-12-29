@@ -1,5 +1,10 @@
 # 工作流
 
+TODO
+
+- Duplex流
+- Transform流
+
 Grunt
 
 Gulp
