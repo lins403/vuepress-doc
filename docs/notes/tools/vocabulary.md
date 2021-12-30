@@ -67,6 +67,7 @@
 | serially             | 按顺序，连续地     | retrofit all executed files | 改造所有执行过的文件 |
 | scenario             | 场景               | stop-gap measures           | 权宜之计             |
 | scoff                | 嘲笑               | succinct configuration.     | 简洁的配置           |
+| simultaneously       | 同时               | The guts of                 | 内部结构             |
 | taint                | 污染               |                             |                      |
 | teardown             | 拆除，拆解         |                             |                      |
 | terminology          | 术语               |                             |                      |
@@ -80,9 +81,10 @@
 |                          |                          |                                           |                        |
 | ------------------------ | ------------------------ | ----------------------------------------- | ---------------------- |
 |                          |                          | a divergence of interests between A and B | 利益分歧               |
+|                          |                          | be a separate operation to                | 单独操作               |
 | 30 or so                 | 30左右                   | code compliance standards                 | 代码合规标准           |
 | around the corner        | 即将推出                 | you established for your application      |                        |
-|                          |                          | compliance configuration                  | 合规性配置             |
+| aside from               | 除了                     | compliance configuration                  | 合规性配置             |
 | be addressed             | 被解决                   | has grown exponentially                   | 呈指数增长             |
 | be leveraged for         | 被利用                   | hooking … up to existing code             | 将…与现有代码挂钩      |
 | be reflected in          | 反映在                   |                                           |                        |
@@ -112,5 +114,6 @@
 | `setMethods` is tricky, very much case by case!              | 棘手，非常个案 |
 | Having said this, what might be nice would be to introduce a setting to allow folks to pass their own template. | 话虽如此，     |
 | I'm really happy with how things turned out.                 |                |
+| I'm aware of the reason that                                 |                |
 
 Me encantó tu

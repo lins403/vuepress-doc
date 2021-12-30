@@ -1,6 +1,15 @@
 # Git 使用技巧
 
+🖖📔：[阮一峰 Git 教程](https://www.bookstack.cn/books/git-tutorial)
+
 ## 一、Black-tech
+
+### git config
+
+```shell
+# 执行 git push 时默认带上 --follow-tags
+git config --global push.followTags true
+```
 
 ### git clone
 
@@ -163,33 +172,17 @@ git tag -a v1.2 <commit-id>
 # 删除标签
 git tag -d v1.4
 git push origin --delete <tagname>    # 远端
+
+# 提交标签
+git push && git push --tags		# tag需要单独推送
+git push --follow-tags		# 使得 commit 以及与之相关的 tag 一起推送
 ```
 
 有更多的意义也可以考虑新建 stable 分支
 
-## 二、Git commit 规范
+## 二、工具
 
-```js
-// Git Commit Message Convention
-/^(revert: )?(feat|fix|polish|docs|style|refactor|perf|test|workflow|ci|chore|types)(\(.+\))?: .{1,50}/
-```
-
-- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-- **ci**: Changes to our CI configuration files and scripts
-- **docs**: Documentation only changes
-- **feat**: A new feature
-- **fix**: A bug fix
-- **perf**: A code change that improves performance
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **test**: Adding missing tests or correcting existing tests
-
-### 工具
-
-[Commitizen](http://commitizen.github.io/cz-cli/)：通过命令行交互的方式生成规范的commit message
-
-[@commitlint/cli](https://www.npmjs.com/package/@commitlint/cli)：lint commit message
-
-[@commitlint/cli vs commitizen vs commitlint | npm trends](https://www.npmtrends.com/commitizen-vs-commitlint-vs-@commitlint/cli)
+[commitlint、conventional-changelog](./git-application.md)
 
 ## 三、心得
 

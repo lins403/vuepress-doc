@@ -1,5 +1,7 @@
 # Git 特性
 
+关于 Git 原理，阮一峰更系统全面的说明：[git-tutorial/basic.md at master · wangdoc/git-tutorial · GitHub](https://github.com/wangdoc/git-tutorial/blob/master/docs/basic.md)
+
 ## 一、版本控制
 
 记录文件历史变化，便于团队的协作开发
@@ -70,14 +72,56 @@ Distributed Version Control System，简称 DVCS
 - Environment Branches，每个环境，都对应一个分支。prodution 分支专门用来发布版本，pre-production预发、test-production测试。
 - Upstream First。代码合并的顺序，要按环境依次推送，确保代码被充分测试过，才会从上游分支合并到下游分支。（🌰: feature=>dev=>production）
 
-## 三、Git 数据模型
+## 三、Git 对象
 
-- Tag
-- Commit
-- Tree
-- BLOB
+对象数据库包含四类对象，blob、tree、commit、tag
 
-TODO
+### Blob
+
+- **数据对象（blob object）**，保存文件内容，`.git/objects/*/*`，文件名是该对象40位的SHA-1值
+- 描述文件内容的二进制数据，文件内容改变时在对象数据库中生成
+- blob对象只保存文件内容，不含文件名、文件存储位置等信息
+
+### Tree
+
+- **树对象（tree object）**，解决文件名保存的问题
+
+- blob对象的集合，以及它们的文件名和权限
+- 一个tree对象包含了一条或多条树对象记录（tree entry），每条记录含有一个指向数据对象或者子树对象的 SHA-1 指针，以及相应的模式、类型、文件名信息。
+
+### Commit
+
+- 提交对象，保存项目快照信息
+- 先指定一个顶层树对象，代表当前项目快照， 然后是父提交（除了第一次Commit外）； 以及作者/提交者信息、提交注释等
+
+### 数据模型
+
+> 每次我们运行 `git add` 和 `git commit` 命令时，Git 所做的工作实质就是将被改写的文件保存为数据对象， 更新暂存区，记录树对象，最后创建一个指明了顶层树对象和父提交的提交对象。 
+>
+> 这三种主要的 Git 对象——数据对象、树对象、提交对象——最初均以单独文件的形式保存在 `.git/objects` 目录下。 
+
+```shell
+$ find .git/objects -type f
+.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4 	# 'test content'
+.git/objects/d8/329fc1cc938780ffdd9f94e0d364e0ea74f579 	# tree 1
+.git/objects/fa/49b077972391ad58037050f2a75f74e3671e92 	# new.txt
+.git/objects/fd/f4fc3344e67ab068f836878b6c4951e3b15f3d # commit 1
+# …
+```
+
+![](https://raw.githubusercontent.com/lins403/assetsSpace/master/vuepress/img/git_data_model_astah_11.png)
+
+### Tag
+
+**lightweight** tags
+
+- `git tag v1.2.1`
+
+**annotated** tags
+
+- 产生 **Tag Object**
+- created with `-a`, `-s`, or `-u` ，一般用于发布
+-  `git tag -a v1.2.0 -m "my version 1.2.0"`
 
 ## 四、HEAD、工作树、索引
 
@@ -85,7 +129,7 @@ TODO
 
 ### HEAD
 
-> ref: refs/heads/branch_name
+> 指针，Reference，ref: refs/heads/branch_name
 > 
 > > 指向 `.git/refs/heads/branch_name` ，其中保存了最新的提交即 commitId
 > 
@@ -141,16 +185,25 @@ HEAD指针保存的ref指向分支指针，分支指针保存的一个commit哈�
 
 :::
 
+::: details 三、Git Commit 发生了什么？
+
+1. 根据文件内容生成 `Blob object`
+2. 写入 file mode, blob SHA1, file name 到暂存区 `staging area`
+3. 根据 staging area 产生 `Tree object`
+4. 用顶层树对象（root tree SHA1）和 父提交（parent commit SHA1）生成 `Commit object`
+5. 用 commit SHA1 更新 `分支的指针`（HEAD指针 => 分支指针 => 最新Commit）
+
+:::
+
 # 参考
 
-[起步 - 关于版本控制](http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6)
+[Git - 关于版本控制](http://git-scm.com/book/zh/v2/起步-关于版本控制)
 
-[What is a centralized version control system](https://about.gitlab.com/topics/version-control/what-is-centralized-version-control-system/)
-
-[分布式版本控制 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6)
+[What is a centralized version control system | GitLab](https://about.gitlab.com/topics/version-control/what-is-centralized-version-control-system/)
 
 [Git三大特色之WorkFlow(工作流)](https://blog.csdn.net/qq_32452623/article/details/78905181)
 
 [What's the difference between HEAD^ and HEAD~ in Git? - Stack Overflow](https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git)
 
 [What's the difference between HEAD, working tree and index, in Git? - Stack Overflow](https://stackoverflow.com/questions/3689838/whats-the-difference-between-head-working-tree-and-index-in-git)
+

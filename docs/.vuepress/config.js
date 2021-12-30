@@ -166,18 +166,6 @@ module.exports = {
           ],
           '/notes/': [
             {
-              title: '前端工具',
-              collapsable: false,
-              children: [
-                'tools/website',
-                'tools/npm',
-                'tools/yarn',
-                'tools/regular',
-                'tools/online-coding',
-                'tools/vocabulary',
-              ]
-            },
-            {
               title: '开发工具',
               collapsable: false,
               children: [
@@ -190,6 +178,18 @@ module.exports = {
                 'tools/git-application',
                 'tools/git-skills',
                 'tools/github-guide',
+              ]
+            },
+            {
+              title: '前端工具',
+              collapsable: false,
+              children: [
+                'tools/website',
+                'tools/npm',
+                'tools/yarn',
+                'tools/regular',
+                'tools/online-coding',
+                'tools/vocabulary',
               ]
             },
           ],

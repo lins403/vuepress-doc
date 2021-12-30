@@ -98,11 +98,18 @@ git commit -m "yolo!" -n
 
 ## 四、commitlint
 
+[Commitizen](http://commitizen.github.io/cz-cli/)：通过命令行交互的方式生成规范的commit message
+
+[@commitlint/cli](https://www.npmjs.com/package/@commitlint/cli)：校验 commit message
+
 因为习惯使用 `git commit` 或者 GUI 的方式，所以就不使用 `commitizen` 了
 
 ```shell
-# Install and configure
+# Install 
 npm install --save-dev @commitlint/{cli,config-conventional}
+# or @commitlint/config-angular，but not support chore and style
+
+# configure
 echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > .commitlintrc.js
 
 # Add hook
@@ -116,10 +123,6 @@ npx commitlint --from HEAD~1 --to HEAD --verbose
 
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
-[vue/COMMIT_CONVENTION.md at dev · vuejs/vue · GitHub](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
-
-[angular/CONTRIBUTING.md at master · angular/angular · GitHub](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)
-
 ```shell
 [header]	# <type>[optional scope]: <description>
 
@@ -127,6 +130,21 @@ npx commitlint --from HEAD~1 --to HEAD --verbose
 
 [optional footer(s)]
 ```
+
+```js
+// Git Commit Message Convention
+/^(revert: )?(feat|fix|polish|docs|style|refactor|perf|test|workflow|ci|chore|types)(\(.+\))?: .{1,50}/
+```
+
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **test**: Adding missing tests or correcting existing tests
+- **chore**: changes aside from src
 
 ### Rule
 
@@ -192,12 +210,15 @@ standard-version -f		#global bin
 npx standard-version -f		#npx
 
 # 1.0.0 -> 1.1.0
-npm run release -- -r minor
+npm run release -- -r minor		# major, minor, patch
 # Or
 npm run release -- -r 1.1.0
 
 # tag prefix
 standard-version -t "stable-"
+
+# pre-release
+standard-version --release-as major --prerelease alpha
 ```
 
 
@@ -215,3 +236,5 @@ standard-version -t "stable-"
 - [Typicode's blog - Why husky has dropped conventional JS config](https://blog.typicode.com/husky-git-hooks-javascript-config/)
 - [husky使用总结 - 知乎](https://zhuanlan.zhihu.com/p/366786798)
 - [git commit 、CHANGELOG 和版本发布的标准自动化 - 知乎](https://zhuanlan.zhihu.com/p/51894196)
+- [vue/COMMIT_CONVENTION.md at dev · vuejs/vue · GitHub](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
+- [angular/CONTRIBUTING.md at master · angular/angular · GitHub](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)
