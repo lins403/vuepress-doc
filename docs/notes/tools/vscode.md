@@ -49,7 +49,7 @@ Code > 首选项 > 用户片段
     "prefix": "br",
     "body": [
       "",
-      "//-------------------------------------/* $1 */-------------------------------------", 
+      "//==================================/* $1 */==================================", 
       "$2"
     ],
     "description": "Long comments for breaking lines"
@@ -87,7 +87,7 @@ Code > 首选项 > 用户片段
 - lit-html ( for html inside of JavaScript and TypeScript tagged template strings )
 - Markdown Preview Enhanced
 - CSS Modules
-- Jest Snippets
+- **Jest Snippets**
 
 ### Git
 
@@ -117,10 +117,11 @@ Code > 首选项 > 用户片段
 - **Prettier - Code formatter**
 - **TSLint**
 - **stylelint** (stylelint-plus supports auto fix on save)
+- **Complete JSDoc Tags**
+- **koroFileHeader**
 
 ### 扩展
 
-- **koroFileHeader**
 - Better Comments
 - **Window Colors**
 - Todo Tree

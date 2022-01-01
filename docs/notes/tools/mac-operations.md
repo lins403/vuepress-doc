@@ -88,7 +88,12 @@ zsh：[Oh My Zsh](https://ohmyz.sh/)
 
 屏幕显示按键：[KeyCastr, an open-source keystroke visualizer](https://github.com/keycastr/keycastr)
 
-视频解析：`brew install ffmpeg` [音视频 | Mac安装 FFmpeg](https://juejin.cn/post/6862577150420058126#comment)
+视频解析：`brew install ffmpeg` [音视频 | Mac安装 FFmpeg](https://juejin.cn/post/6862577150420058126)
+
+```shell
+# ffmpeg添加软字幕
+ffmpeg -i demo.mp4 -i demo_subtitle.srt -c copy output.mp4
+```
 
 
 

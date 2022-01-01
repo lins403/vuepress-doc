@@ -10,7 +10,11 @@ module.exports = {
       ['@vuepress/nprogress'],
       ['@vuepress/active-header-links'],
       ['@vuepress/search', {searchMaxSuggestions: 10 }],
-      ['@vuepress/google-analytics',{'ga': 'UA-197628886-1'}]
+      ['@vuepress/google-analytics',{'ga': 'UA-197628886-1'}],
+      ['@vuepress/medium-zoom', {
+        selector: 'img.zoom-imgs',
+        options: { margin: 32 }
+      }]
     ],
     markdown: {
       extendMarkdown: md => {
@@ -23,6 +27,7 @@ module.exports = {
         nav: require('./nav'),
         // sidebar: 'auto',
         sidebar: {
+          '/blogs/': blogSidebar(),
           '/interview/': interviewSidebar('前端基础', '进阶'),
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
           '/notesList/javascript/': JavaScriptSidebar('总览', '基础', '进阶'),
@@ -193,7 +198,6 @@ module.exports = {
               ]
             },
           ],
-          '/blogs/': [],
           '/plans/': [
             {
               title: '学习计划',
@@ -309,4 +313,23 @@ function interviewSidebar(groupA,groupB){
         ]
       },
     ]
+}
+
+function blogSidebar(){
+  return [
+    {
+      title: '2021',
+      collapsable: false,
+      children: [
+        '2021/nginx-alias',
+      ]
+    },
+    {
+      title: '2022',
+      collapsable: false,
+      children: [
+        '2022/1/how-to-learn',
+      ]
+    }
+  ]
 }
