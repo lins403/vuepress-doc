@@ -37,8 +37,10 @@
 |                      |                    |                             |                      |
 | -------------------- | ------------------ | --------------------------- | -------------------- |
 | accountability       | 责任               |                             |                      |
+| adorable             | 可爱的，漂亮的     |                             |                      |
 | alternate            | 另类的，备用的     | assembly language           | 汇编语言             |
 | arduous              | 艰难的             | a short-hand syntax         | 简写的语法           |
+| assorted             | 各种各样的         |                             |                      |
 | bespoke              | 定制的             | a hundred thousand          | 十万                 |
 | braceless            | 没有括号的         | be tidied up                | 整理好               |
 | circumvent           | 规避，绕开         | be geared towards           | 针对…                |
@@ -72,6 +74,7 @@
 | scoff                | 嘲笑               | succinct configuration.     | 简洁的配置           |
 | simultaneously       | 同时               | The guts of                 | 内部结构             |
 | taint                | 污染               | sound ludicrous             | 听起来荒唐可笑       |
+| tarball              | 压缩包             |                             |                      |
 | teardown             | 拆除，拆解         | to jot here                 | 在这里记下           |
 | terminology          | 术语               |                             |                      |
 | threshold            | 临界点，阈值       |                             |                      |
@@ -85,6 +88,7 @@
 | ------------------------ | ------------------------ | ----------------------------------------- | ---------------------- |
 |                          |                          | a divergence of interests between A and B | 利益分歧               |
 | As i alluded             | 正如我提到的             | be a separate operation to                | 单独操作               |
+|                          |                          | be named after                            | 以…命名                |
 | 30 or so                 | 30左右                   | code compliance standards                 | 代码合规标准           |
 | around the corner        | 即将推出                 | you established for your application      |                        |
 | aside from               | 除了                     | compliance configuration                  | 合规性配置             |
@@ -103,6 +107,7 @@
 | out of the box           | 开箱即用                 | proposed changes.                         | 提议的改变             |
 | there's pros and cons    | 有利有弊                 | right off the bat                         | 立即行动/执行          |
 | stay tuned               | 敬请关注                 | ship features and deliver business value  | 交付功能和呈现业务价值 |
+| That is,                 | 也就是说                 |                                           |                        |
 | trumps over              | 胜过                     | that’s not always the case                | 并非总是如此           |
 | work around              | 解决                     | what problem does this solve for...       | 为…解决了什么问题      |
 | uses sth. under the hood | 底层使用…                | When rules evaluate to true,              | 当规则符合时           |

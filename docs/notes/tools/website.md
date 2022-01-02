@@ -182,6 +182,8 @@ YouTube视频下载：[y2mate](https://www.y2mate.com/en140)
 
 字幕下载：[DownSub](https://downsub.com/)
 
+封面下载：[thumbnail downloader](https://www.strerr.com)
+
 视频字幕合成：‎[PineconeSuppress](https://apps.apple.com/cn/app/pineconesuppress/id1398134175)
 
 QMCFLAC转FLAC：[QMCFLAC格式批量在线转换为FLAC格式](https://convert.freelrc.com/QMCFLAC-to-FLAC)

@@ -1,10 +1,6 @@
-# yarn
+# yarn <Badge text="v1.22.10" type="tip" />
 
-`yarn autoclean --init`
-
-`yarn autoclean --force`
-
-## 命令
+Yarn stands for “*Yet Another Resource Negotiator*”, developed in 2016 by Facebook.
 
 ```
 yarn
@@ -14,16 +10,18 @@ yarn upgrade
 
 [Migrating from npm | Yarn](https://classic.yarnpkg.com/en/docs/migrating-from-npm#toc-cli-commands-comparison)
 
-## yarn 安装
+## yarn install
 
 `yarn install` will install the exact version in the lockfile
 
 ```shell
+$ yarn
 yarn install v1.22.10
 [1/4] 🔍  Resolving packages...
 [2/4] 🚚  Fetching packages...
 [3/4] 🔗  Linking dependencies...
 [4/4] 🔨  Building fresh packages...
+# [5/5] ♻️  Cleaning modules...
 ```
 
 ## yarn.lock
@@ -45,6 +43,19 @@ yarn install v1.22.10
 resolutions 可以突破版本限制
 
 [Selective dependency resolutions | Yarn](https://classic.yarnpkg.com/en/docs/selective-version-resolutions/#toc-how-to-use-it)
+
+## autoclean
+
+Cleans and removes unnecessary files from package dependencies.
+
+删除 `node_modules` 的在 `.yarnclean` 中声明的文件和文件夹，以减小依赖包的大小
+
+```bash
+yarn autoclean -I #--init
+yarn autoclean -F #--force
+```
+
+
 
 # 参考
 
