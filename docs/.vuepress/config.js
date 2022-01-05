@@ -125,11 +125,29 @@ module.exports = {
                 'doc-skills',
                 'component-communication',
                 'vue-router',
-                'vue-cli',
+              ]
+            },
+            {
+              title: 'Vue CLI',
+              collapsable: false,
+              children: [
+                'vue-cli/vue-cli',
+                'vue-cli/vue-cli2',
+                'vue-cli/config',
+                'vue-cli/solutions',
               ]
             },
           ],
           '/notes/engineering/':[
+            {
+              title: '代码规范',
+              collapsable: false,
+              children: [
+                'specification-config',
+                'codeSpecification',
+                'jsdoc',
+              ]
+            },
             {
               title: '模块化',
               collapsable: false,
@@ -138,7 +156,6 @@ module.exports = {
                 'modules/esm',
                 'webpack',
                 'rollup',
-                'vue-cli-config',
               ]
             },
             {
@@ -163,8 +180,6 @@ module.exports = {
               title: '其它',
               collapsable: false,
               children: [
-                'specification-config',
-                'codeSpecification',
                 'graphQL',
               ]
             }

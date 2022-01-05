@@ -74,15 +74,13 @@ ins风格静态壁纸：[par.er](http://paper.meiyuan.in/)
 
 zsh：[Oh My Zsh](https://ohmyz.sh/)
 
-离线开发文档：[Dash](https://kapeli.com/dash)
-
 终端目录生成🌲：`brew install tree`
 
 - `tree --help`
-
 - `tree -I node_modules`
-
 - `tree -L 1`
+
+安装运行windows软件：[Wine](https://wiki.winehq.org/MacOS)  [CrossOver | CodeWeavers](https://www.codeweavers.com/crossover#mac)
 
 录制gif：[Cockos Incorporated | LICEcap](https://www.cockos.com/licecap/)
 
@@ -95,7 +93,7 @@ zsh：[Oh My Zsh](https://ohmyz.sh/)
 ffmpeg -i demo.mp4 -i demo_subtitle.srt -c copy output.mp4
 ```
 
-
+离线开发文档：[Dash](https://kapeli.com/dash)
 
 ## 其它
 

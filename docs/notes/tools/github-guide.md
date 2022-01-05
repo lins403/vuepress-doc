@@ -77,8 +77,10 @@ git push
 ## 三、GitHub Pages
 
 > [如何使用Github Pages?](https://developer.mozilla.org/zh-CN/docs/Learn/Common_questions/Using_Github_pages)
-> 
+>
 > [新增 SSH 密钥到 GitHub 帐户](https://docs.github.com/cn/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
+>
+> [Deploy to GitHub Pages · Actions · GitHub Marketplace · GitHub](https://github.com/marketplace/actions/deploy-to-github-pages)
 
 [利用 CDN 解决百度爬虫被 Github Pages 拒绝的问题](https://www.dozer.cc/2015/06/github-pages-and-cdn.html)
 
@@ -98,9 +100,7 @@ git push
 >
 > [GitHub Actions Documentation - GitHub Docs](https://docs.github.com/cn/actions)
 >
-> [Deploy to GitHub Pages · Actions · GitHub Marketplace · GitHub](https://github.com/marketplace/actions/deploy-to-github-pages)
->
-> [GitHub - actions/checkout: Action for checking out a repo](https://github.com/actions/checkout)
+> [Workflow syntax for GitHub Actions - GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions) 
 
 🌰：部署Hexo静态博客到 github pages
 
@@ -132,6 +132,8 @@ jobs:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: public # The folder the action should deploy.
 ```
+
+[GitHub - actions/setup-node: Set up your GitHub Actions workflow with a specific version of node.js](https://github.com/actions/setup-node)
 
 ## 六、自建图床
 

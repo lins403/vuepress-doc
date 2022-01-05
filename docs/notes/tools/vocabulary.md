@@ -2,17 +2,19 @@
 
 ## 缩写
 
-| A        | E                               | C        |
-| -------- | ------------------------------- | -------- |
-| `a.k.a.` | also known as                   | 又称作   |
-| `FYI`    | for your information            | 供您参考 |
-| `IMO`    | In my opinion                   | 在我看来 |
-| `IMHO`   | In my humble opinion            | 恕我直言 |
-| `LOL`    | Laugh Out Loud                  | 放声大笑 |
-| `TL;DR`  | too long; didn't read           |          |
-| `CRUD`   | create, read, update and delete |          |
-| `OSS`    | Open-source software            |          |
-| `AFAIK`  | as far as I know                |          |
+| A        | E                               | C           |
+| -------- | ------------------------------- | ----------- |
+| `a.k.a.` | also known as                   | 又称作      |
+| `FYI`    | for your information            | 供您参考    |
+| `IMO`    | In my opinion                   | 在我看来    |
+| `IMHO`   | In my humble opinion            | 恕我直言    |
+| `LOL`    | Laugh Out Loud                  | 放声大笑    |
+| `TL;DR`  | too long; didn't read           |             |
+| `i.e.`   | id est                          | that is     |
+| `e.g.`   | exempli gratia                  | for example |
+| `CRUD`   | create, read, update and delete |             |
+| `OSS`    | Open-source software            |             |
+| `AFAIK`  | as far as I know                |             |
 
 ## 单词
 
@@ -111,6 +113,7 @@
 | trumps over              | 胜过                     | that’s not always the case                | 并非总是如此           |
 | work around              | 解决                     | what problem does this solve for...       | 为…解决了什么问题      |
 | uses sth. under the hood | 底层使用…                | When rules evaluate to true,              | 当规则符合时           |
+|                          |                          | Yes, sort of.                             | 是的，有点             |
 
 ## 例句
 
@@ -119,10 +122,15 @@
 | There are more things to take into consideration like SEO or increasing performance. |                |
 | @Sb. is indeed doing a very good job creating it.            |                |
 | Anyone fancy to open up a PR with improved deprecation messages? otherwise I will. |                |
-| `setMethods` is tricky, very much case by case!              | 棘手，非常个案 |
+| it is tricky, very much case by case!                        | 棘手，非常个案 |
 | Having said this, what might be nice would be to introduce a setting to allow folks to pass their own template. | 话虽如此，     |
 | I'm really happy with how things turned out.                 |                |
 | I'm aware of the reason that                                 |                |
 | how to create a beautiful and awesome-looking fully-fledged website. |                |
+| That gets us back to the first part.                         |                |
 
 Me encantó tu
+
+
+
+长句很多，中文字幕阅读体验可能稍差一些

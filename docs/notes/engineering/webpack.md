@@ -11,11 +11,11 @@
 ## 意义
 
 1. 代码拆分（Code Splitting）
-   
-   - 可以按需加载，便于构建复杂的 SPA
+  
+   - 可以按需加载(on-demand-load)，便于构建复杂的 SPA
 
 2. 静态资源（Static Assets）
-   
+  
    - 使用 loader 进行处理转换，将静态资源都构建为 JavaScript 模块
    
    - 解析模块依赖，模块内引用依赖模块，实现一个资源可以依赖其它资源
@@ -110,6 +110,12 @@ module.exports = {
   },
 }
 ```
+
+- output.path: 打包后的文件目录，绝对路径
+- output.publicPath:
+  - 相对 URL 时，会被相对于 `index.html` 解析，相当于其中的 `<%= BASE_URL %>` ，以及用于注入的css和js文件路径的前缀，例如 `<script src="/hello/js/chunk-vendors.7ff3d805.js"></script>` (如果 `publicPath:'/hello'` )
+  - 如果你的应用被部署在 `https://www.my-app.com/my-app/`，则设置 `publicPath` 为 `/my-app/`。
+  - 也可以使用绝对 URL(absolute URL) ，如 `publicPath: 'https://cdn.example.com/assets/'`
 
 ### 2) module
 
