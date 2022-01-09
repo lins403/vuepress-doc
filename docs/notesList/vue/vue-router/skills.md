@@ -142,6 +142,29 @@ const router = new VueRouter({
 
 ## 其它
 
+### 打开blank窗口
+
+方法一：`<router-link target="_blank" to="/login">登录</router-link>`
+
+方法二
+
+```js
+methods:{
+  makeCase(row) {
+    // this.caseWindow&&this.caseWindow.opener? this.caseWindow.focus(): this.showWindow()
+    this.showWindow(row.id)
+  },
+  showWindow(id) {
+    const { href } = this.$router.resolve({
+      path: "/hello-world",
+      query: { id }
+    });
+    this.caseWindow = window.open(href, "") //默认是_blank
+    this.caseWindow.focus() //定位到新打开的窗口
+  }
+}
+```
+
 ### 页面离开前提示用户
 
 ```js

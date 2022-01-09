@@ -78,7 +78,7 @@
 | scoff                | 嘲笑               | succinct configuration.     | 简洁的配置           |
 | simultaneously       | 同时               | The guts of                 | 内部结构             |
 | taint                | 污染               | sound ludicrous             | 听起来荒唐可笑       |
-| tarball              | 压缩包             |                             |                      |
+| tarball              | 压缩包             | sustainable development     | 可持续发展           |
 | teardown             | 拆除，拆解         | to jot here                 | 在这里记下           |
 | terminology          | 术语               |                             |                      |
 | threshold            | 临界点，阈值       |                             |                      |

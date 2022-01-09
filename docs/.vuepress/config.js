@@ -34,11 +34,11 @@ module.exports = {
           '/notesList/typescript/': 'auto',
           '/notesList/packages/': [
             {
-              title: '文件预览下载',
+              title: '通用',
               collapsable: false,
               children: [
-                'files',
-                'pdf',
+                'babel',
+                'browserslist',
               ]
             },
             {
@@ -49,6 +49,14 @@ module.exports = {
                 'js',
                 'vuejs',
                 'application',
+              ]
+            },
+            {
+              title: '文件预览下载',
+              collapsable: false,
+              children: [
+                'files',
+                'pdf',
               ]
             },
             {
@@ -309,6 +317,7 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
         'advanced/runtime',
         'advanced/let-const',
         'advanced/design-pattern',
+        'advanced/libraries',
       ]
     },
   ]
@@ -354,6 +363,7 @@ function blogSidebar(){
       collapsable: false,
       children: [
         '2022/1/how-to-learn',
+        '2022/1/dynamic-import',
       ]
     }
   ]

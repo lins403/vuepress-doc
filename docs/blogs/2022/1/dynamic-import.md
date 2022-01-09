@@ -1,10 +1,12 @@
-# 踩坑
+# 项目踩坑之——路由懒加载
 
-## 基于 vue-element-admin 的项目
+> 基于 vue-element-admin 的项目
+
+[使用 vue-router 的路由懒加载](https://lins403.github.io/vuepress-doc/notesList/vue/vue-router/advanced.html#路由懒加载)
 
 改进路由懒加载以后，可以显著提高第一次加载页面的速度，但代码拆分到一定颗粒度后也是把双刃剑，拆分太多模块会导致项目启动、打包和热更新的时间过久，以及懒加载导致页面加载过慢的问题
 
-### 路由懒加载失效
+## 1）路由懒加载失效
 
 #### solution1
 
@@ -14,10 +16,6 @@
 # vue-cli会通过这个环境变量来区分是否使用babel-plugin-dynamic-import-node
 VUE_CLI_BABEL_TRANSPILE_MODULES = true
 ```
-
-[Pull Request #1267 · PanJiaChen/vue-element-admin · GitHub](https://github.com/PanJiaChen/vue-element-admin/pull/1267#issuecomment-434619054)
-
-[路由懒加载 | vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/lazy-loading.html#vue-cli-3-该方案已淘汰)
 
 #### solution2
 
@@ -34,13 +32,11 @@ component: resolve => require(['@/views/login/index'], resolve),
 component: resolve => require.ensure([], () => resolve(require('@/views/login/index')), 'login'),
 ```
 
-[webpack import() 动态加载模块踩坑](https://segmentfault.com/a/1190000015648036)
-
-[模块方法 > import() 中的表达式 | webpack 中文文档](https://webpack.docschina.org/api/module-methods/#dynamic-expressions-in-import)，`Webpack5` 中优化了，允许import语句中使用带有模块路径信息的动态变量名，以后有用到webpack5时实测验证一下
+[`Webpack5`](https://webpack.docschina.org/api/module-methods/#dynamic-expressions-in-import) 中优化了，允许 import 语句中使用带有模块路径信息的动态变量名，以后有用到webpack5时验证一下
 
 
 
-### 动态路由视图加载失败
+## 2）动态路由视图加载失败
 
 **开发环境**下，Error: Cannot find module ...
 
@@ -48,7 +44,7 @@ component: resolve => require.ensure([], () => resolve(require('@/views/login/in
 // 动态路由懒加载
 export const loadView = view => {
   // webpack4+中动态import不支持变量方式，导致动态路由失效
-  // 然后开发环境下，这里 babel-plugin-dynamic-import-node 不能予以转换
+  // 然后开发环境下，这里 babel-plugin-dynamic-import-node 不能予以转换？
   return () => import(`@/views/${view}`)
 }
 ```
@@ -78,11 +74,9 @@ export const loadView = view => {
 
 
 
-### 优化热更新速度的方案
+## 3）优化热更新速度的方案
 
-> 使用 babel 的 plugins [`babel-plugin-dynamic-import-node`](https://github.com/airbnb/babel-plugin-dynamic-import-node)，它只做一件事就是将所有的`import()`转化为`require()`
->
-> > [路由懒加载 | vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/lazy-loading.html#新方案)
+> 使用 babel 的 plugins [`babel-plugin-dynamic-import-node`](https://github.com/airbnb/babel-plugin-dynamic-import-node)，它只做一件事就是将所有的`import()`转化为`require()` ，这样就可以用这个插件将所有异步组件都用同步的方式引入，提高开发环境的热更新速度
 
 #### vue-cli@4
 
@@ -104,7 +98,7 @@ module.exports = {
 
 
 
-### 动态路由懒加载
+## 4）动态路由懒加载
 
 question：
 
@@ -114,9 +108,32 @@ question：
 - 结果反而是在开发环境下，才会有代码分块和懒加载，打包构建时，反而代码在同一个chunk没有被分割
 - 然后，虽说性价比很低，但如果就要实现后台管理的每个路由组件的代码分块，以及实现线上后台管理页面之间独立的懒加载，要怎么做？
 
+todo：可能还是要在前端上做动态路由的映射，然后需要验证一下用这个映射来构建代码分块的结果，以及线上懒加载的效果
+
+more：
+
 [动态路由懒加载有解决方案么？ · Issue #3709 · PanJiaChen/vue-element-admin · GitHub](https://github.com/PanJiaChen/vue-element-admin/issues/3709)
 
 [路由权限的修改 · Issue #167 · PanJiaChen/vue-element-admin · GitHub](https://github.com/PanJiaChen/vue-element-admin/issues/167#issuecomment-401584177)
 
-TODO
+```js
+export const componentsMap = {
+  example_table: () => import('@/views/table/index'),
+  example_tree: () => import('@/views/tree/index'),
+  form_index: () => import('@/views/form/index')
+}
+```
 
+```
+components.children = componentsMap[item.name]
+```
+
+
+
+## 参考
+
+[Pull Request #1267 · PanJiaChen/vue-element-admin · GitHub](https://github.com/PanJiaChen/vue-element-admin/pull/1267#issuecomment-434619054)
+
+[路由懒加载 | vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/lazy-loading.html)
+
+[webpack import() 动态加载模块踩坑](https://segmentfault.com/a/1190000015648036)
