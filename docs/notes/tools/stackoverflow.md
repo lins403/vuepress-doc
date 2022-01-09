@@ -13,3 +13,19 @@
 > I am setting up my first Github action, and I have a question regarding `npm ci` vs `npm install`. My objective is the fastest possible execution time
 >
 > So I …
+
+
+
+## Answer
+
+1. [javascript - Scroll behaviour VueJS not working properly - Stack Overflow](https://stackoverflow.com/a/57212324/16654657)
+
+> I couldn't get any of the other solutions around this working, and it was really frustrating.
+>
+> What ended up working for me was the below:
+>
+> ```
+> 
+> ```
+>
+> I ... so i can be certain it is present its available for selection.

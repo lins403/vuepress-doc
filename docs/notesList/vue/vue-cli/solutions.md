@@ -1,6 +1,14 @@
 # 踩坑
 
-### 1）eslint8与vue-eslint-parser不兼容
+### 1）运行打包后的数据
+
+```bash
+npm install --g http-server
+
+http-server ./dist
+```
+
+### 2）eslint8与vue-eslint-parser不兼容
 
 > Syntax Error: TypeError: eslint.CLIEngine is not a constructor
 
@@ -12,7 +20,7 @@
 npm i eslint@7 -D  
 ```
 
-### 2）runtime-only build of Vue
+### ）runtime-only build of Vue
 
 >  [Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
 

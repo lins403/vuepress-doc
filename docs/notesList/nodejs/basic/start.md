@@ -38,9 +38,34 @@
 ### 其它
 
 - buffer缓冲区，处理二进制
+
 - crypto 加密
+
 - events事件触发器
+
 - process进程
   - `process.argv` 读取命令行参数
-  - `process.env` 环境变量
+  
+    ```shell
+    $ node process-args.js one two=three four
+    
+    # output
+    0: /usr/local/bin/node
+    1: /Users/mjr/work/node/process-args.js
+    2: one
+    3: two=three
+    4: four
+    ```
+  
+    ```js
+    // print process.argv
+    process.argv.forEach((val, index) => {
+      console.log(`${index}: ${val}`);
+    });
+    console.log(process.argv[2])
+    ```
+  
+  - `process.env` 环境变量（[`cross-env`](https://www.npmjs.com/package/cross-env) 跨平台设置 process.env.NODE_ENV）
+  
 - Stream流：处理流数据的抽象接口，流的读写要通过buffer缓冲来实现
+

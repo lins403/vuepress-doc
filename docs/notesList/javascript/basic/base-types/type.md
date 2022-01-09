@@ -25,6 +25,12 @@ Object.prototype.toString.call([]).slice(8, -1)  //'Array
 
 ## undefined和null
 
+> `undefined` 原始值
+>
+> `null` 缺少值
+>
+> `NaN` 非数值
+
 ```js
 undefined === undefined    //true
 typeof undefined    //"undefined"
@@ -41,6 +47,22 @@ Number(undefined)  //NaN
 
 // Object.js() 相对比===和==的改进
 Object.is(NaN,NaN)    //true
+```
+
+## falsy
+
+falsy 值 (虚值) 是在 Boolean 上下文中认定为 false 的值。
+
+```js
+if (false)
+if (null)
+if (undefined)
+if (0)
+if (0n)
+if (NaN)
+if ('')
+if ("")
+if (``)
 ```
 
 ## 参考

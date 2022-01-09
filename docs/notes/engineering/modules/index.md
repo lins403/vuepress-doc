@@ -101,6 +101,7 @@ source： [一次搞懂-JavaScript模块化详解](https://segmentfault.com/a/11
 - 引入模块：`require(xxx)` 或 `require('xxx.js')`
 
 ```js
+// 解构赋值
 let { stat, exists, readfile } = require('fs');
 ```
 
@@ -287,7 +288,7 @@ webpack 相当于去 hack (模拟) 了commonjs 的功能
 2. <mark>同步</mark> 加载模块
 
 3. 模块加载 (require) 的 <mark>缓存</mark>
-   
+  
    - 第一次加载某个模块时，Node会缓存该模块。
    - 以后再加载该模块，就直接从缓存取出该模块的`module.exports`属性。
    - 所有缓存的模块保存在`require.cache`之中。

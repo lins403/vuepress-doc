@@ -120,11 +120,20 @@ module.exports = {
               title: '文档学习笔记',
               collapsable: false,
               children: [
+                'solutions',
                 'doc-guide',
                 'doc-style-guide',
                 'doc-skills',
                 'component-communication',
-                'vue-router',
+              ]
+            },
+            {
+              title: 'Vue Router',
+              collapsable: false,
+              children: [
+                'vue-router/base',
+                'vue-router/advanced',
+                'vue-router/skills',
               ]
             },
             {
@@ -190,6 +199,7 @@ module.exports = {
               collapsable: false,
               children: [
                 'tools/browser',
+                'tools/nginx',
                 'tools/vscode',
                 'tools/markdown',
                 'tools/linux',

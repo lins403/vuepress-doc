@@ -127,3 +127,4 @@ Code > 首选项 > 用户片段
 - Todo Tree
 - Dash
 - Sort lines
+- **WakaTime**

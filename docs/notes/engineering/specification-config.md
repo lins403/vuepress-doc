@@ -40,6 +40,7 @@ npm install -D eslint-plugin-prettier eslint-config-prettier
 ```shell
 npx eslint --fix .
 npx eslint --fix src/**/*.{js,vue}
+eslint --fix --ext .js,.vue src test/unit/specs test/e2e/specs
 ```
 
 #### prettier

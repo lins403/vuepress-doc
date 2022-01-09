@@ -38,16 +38,17 @@
 
 |                      |                    |                             |                      |
 | -------------------- | ------------------ | --------------------------- | -------------------- |
-| accountability       | 责任               |                             |                      |
+| accountability       | 责任               | a brand new project         | 全新项目             |
 | adorable             | 可爱的，漂亮的     |                             |                      |
 | alternate            | 另类的，备用的     | assembly language           | 汇编语言             |
 | arduous              | 艰难的             | a short-hand syntax         | 简写的语法           |
-| assorted             | 各种各样的         |                             |                      |
+| assorted             | 各种各样的         | available values            | 可选值               |
 | bespoke              | 定制的             | a hundred thousand          | 十万                 |
 | braceless            | 没有括号的         | be tidied up                | 整理好               |
 | circumvent           | 规避，绕开         | be geared towards           | 针对…                |
 | connoisseur          | 内行               | error-prone                 | 易于出错的           |
 | efficacy             | 功效               | error resistance            | 容错性               |
+| emulated             | 模仿的             |                             |                      |
 | encapsulation        | 封装               | fully-fledged               | 完善的               |
 | escaping             | 转义               | be part of a boot-camp      | 新兵训练营的一员     |
 | estimate             | 估算、约等         | free coupons                | 免费优惠券           |
@@ -65,6 +66,7 @@
 | mojibake             | 乱码               | non-optimal                 | 不理想               |
 | mnemonics            | 助记符             | pertinent factors           | 相关因素             |
 | momentum             | 动力               |                             |                      |
+| opaque               | 不透明的           |                             |                      |
 | performant           | 高效的             | performance hit             | 性能消耗             |
 | palette              | 调色板，一组颜色   | requisites                  | 必需品               |
 | prioritization       | 优先考虑           | prerequisites               | 先决条件             |
@@ -82,6 +84,7 @@
 | threshold            | 临界点，阈值       |                             |                      |
 | truthiness           | 真实性             |                             |                      |
 | vulnerable           | 脆弱的，易受攻击的 | visual clutter              | 视觉混乱             |
+| workaround           | 应变方法，变通方法 |                             |                      |
 | workout              | 制定，解决         |                             |                      |
 
 ## 短语
@@ -128,9 +131,9 @@
 | I'm aware of the reason that                                 |                |
 | how to create a beautiful and awesome-looking fully-fledged website. |                |
 | That gets us back to the first part.                         |                |
+| You can pass in additional options here, but let's  keep it simple for now. |                |
 
 Me encantó tu
 
 
 
-长句很多，中文字幕阅读体验可能稍差一些
