@@ -39,7 +39,7 @@
 |                      |                    |                             |                      |
 | -------------------- | ------------------ | --------------------------- | -------------------- |
 | accountability       | 责任               | a brand new project         | 全新项目             |
-| adorable             | 可爱的，漂亮的     |                             |                      |
+| adorable             | 可爱的，漂亮的     | a directory hierarchy       | 目录层次结构         |
 | alternate            | 另类的，备用的     | assembly language           | 汇编语言             |
 | arduous              | 艰难的             | a short-hand syntax         | 简写的语法           |
 | assorted             | 各种各样的         | available values            | 可选值               |

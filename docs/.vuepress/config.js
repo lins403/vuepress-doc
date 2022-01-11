@@ -207,15 +207,16 @@ module.exports = {
               collapsable: false,
               children: [
                 'tools/browser',
-                'tools/nginx',
                 'tools/vscode',
-                'tools/markdown',
+                'tools/nginx',
                 'tools/linux',
+                'tools/linux-command',
                 'tools/mac-operations',
                 'tools/git-feature',
                 'tools/git-application',
                 'tools/git-skills',
                 'tools/github-guide',
+                'tools/markdown',
               ]
             },
             {

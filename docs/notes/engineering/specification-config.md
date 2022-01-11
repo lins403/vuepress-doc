@@ -83,7 +83,7 @@ module.exports = {
 npm i -D stylelint stylelint-config-recommended-scss
 npm i -D stylelint-config-recess-order
 npm i -D stylelint-prettier@1 stylelint-config-prettier
-npm i -D postcss-html
+npm i -D postcss postcss-html	#需要再手动装postcss@8
 ```
 
 命令行使用
@@ -94,6 +94,8 @@ npx stylelint --fix "**/*.scss"
 ```
 
 兼容性说明
+
+[Cannot resolve custom syntax module "postcss-scss"](https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/2#issuecomment-951636774)
 
 > error stylelint-prettier@2.0.0: The engine "node" is incompatible with this module. Expected version "^12.22.0 || ^14.17.0 || >=16.0.0". Got "14.16.1"
 >

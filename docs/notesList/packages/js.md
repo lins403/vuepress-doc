@@ -23,3 +23,5 @@ immutable state: [immer vs immutable | npm trends](https://www.npmtrends.com/imm
 [http-server](https://www.npmjs.com/package/http-server)
 
 [rimraf](https://www.npmjs.com/package/rimraf)
+
+[node-pre-gyp](https://www.npmjs.com/package/node-pre-gyp)

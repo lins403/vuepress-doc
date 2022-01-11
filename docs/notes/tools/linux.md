@@ -24,33 +24,6 @@ path.posix
   - 一类是C语言标准规定的库函数，一类是编译器特定的库函数。
   - 库函数调用与系统无关，不同的系统，调用库函数，库函数会调用不同的底层函数实现，因此**可移植性**好。
 
-## 命令
-
-类型一(TODO)
-
-#### wget
-
-文件下载
-
-```shell
-wget http://www.Linuxcool.com/testfile.zip
--c,  --continue        # 断点续传
--b,  --background        # 后台下载
-```
-
-#### curl
-
-文件传输工具
-
-```shell
-curl -o response.txt https://catonmat.net        # -o参数将服务器的回应保存成文件，等同于wget命令
-curl -O https://www.example.com/foo/bar.html        # -O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名
-curl -X POST https://catonmat.net        # -X参数指定 HTTP 请求的方法
-curl -I -XHEAD http://www.baidu.com
-```
-
-- [Curl Cookbook](https://catonmat.net/cookbooks/curl)
-
 ## Vim
 
 ### 快捷键
@@ -83,3 +56,4 @@ curl -I -XHEAD http://www.baidu.com
 | `:w new_name` | 用 new_name 作为文件名保存文件 |
 
 [技术|Vim 快捷键速查表](https://linux.cn/article-8144-1.html)
+

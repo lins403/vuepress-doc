@@ -217,8 +217,17 @@ npm run release -- -r 1.1.0
 # tag prefix
 standard-version -t "stable-"
 
+
 # pre-release
 standard-version --release-as major --prerelease alpha
+```
+
+```bash
+# delete tag
+git tag -d v1.1.0
+
+# push tag to origin
+git push --tags
 ```
 
 

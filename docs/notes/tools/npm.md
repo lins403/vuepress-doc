@@ -34,6 +34,8 @@ npm install ./myPackage.tgz		#.tar/.tar.gz/.tgz
 # <alias>@npm:<name>
 npm install vue2@npm:vue@2
 npm install vue3@npm:vue@next
+
+npm install --target_arch=x64
 ```
 
 [npm-install > configuration](https://docs.npmjs.com/cli/v7/commands/npm-install#configuration)
