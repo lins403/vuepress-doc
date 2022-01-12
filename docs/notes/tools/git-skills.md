@@ -150,6 +150,12 @@ git cherry-pick <commit-id>    # 将指定commit应用于当前分支，用于�
 
 ::: tip
 已push的commit用 `revert`，未push就用 `reset`（也可以参考在GUI中undo回退到暂存区），否则工作区和暂存区的就使用 `restore`
+
+```
+git reset HEAD~
+git restore .
+```
+
 :::
 
 ### git tag

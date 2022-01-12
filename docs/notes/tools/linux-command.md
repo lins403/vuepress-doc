@@ -88,11 +88,14 @@ echo "finish"
 exit 0
 ```
 
-### cp 与 scp
+### cp
 
 ```bash
 # 递归复制文件和目录
-cp -R dir1 dir2/
+cp -r dir1 dir2/
+
+# 远程复制
+scp -r local_dir remote_username@remote_ip:remote_folder 
 ```
 
 

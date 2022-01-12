@@ -40,3 +40,11 @@
 [blogs/23.md at master · senntyou/blogs · GitHub](https://github.com/senntyou/blogs/blob/master/web-advance/23.md)
 
 [GitHub - GoogleChrome/lighthouse: Automated auditing, performance metrics, and best practices for the web.](https://github.com/GoogleChrome/lighthouse)
+
+https://www.ahwgs.cn/vue-cli3-build.html
+
+
+
+清除console.log 
+
+compress > drop_console: true,
