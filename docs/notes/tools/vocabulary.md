@@ -44,6 +44,7 @@
 | arduous              | 艰难的             | a short-hand syntax         | 简写的语法           |
 | assorted             | 各种各样的         | available values            | 可选值               |
 | bespoke              | 定制的             | a hundred thousand          | 十万                 |
+|                      |                    | an abstract construct       | 抽象构造             |
 | braceless            | 没有括号的         | be tidied up                | 整理好               |
 | circumvent           | 规避，绕开         | be geared towards           | 针对…                |
 | connoisseur          | 内行               | error-prone                 | 易于出错的           |
@@ -77,7 +78,7 @@
 | scenario             | 场景               | stop-gap measures           | 权宜之计             |
 | scoff                | 嘲笑               | succinct configuration.     | 简洁的配置           |
 | simultaneously       | 同时               | The guts of                 | 内部结构             |
-| taint                | 污染               | sound ludicrous             | 听起来荒唐可笑       |
+|                      |                    | sound ludicrous             | 听起来荒唐可笑       |
 | tarball              | 压缩包             | sustainable development     | 可持续发展           |
 | teardown             | 拆除，拆解         | to jot here                 | 在这里记下           |
 | terminology          | 术语               |                             |                      |
@@ -112,7 +113,7 @@
 | out of the box           | 开箱即用                 | proposed changes.                         | 提议的改变             |
 | there's pros and cons    | 有利有弊                 | right off the bat                         | 立即行动/执行          |
 | stay tuned               | 敬请关注                 | ship features and deliver business value  | 交付功能和呈现业务价值 |
-| That is,                 | 也就是说                 |                                           |                        |
+| That is,                 | 也就是说                 | the rumoured upcoming sth.                | 传言中即将到来的       |
 | trumps over              | 胜过                     | that’s not always the case                | 并非总是如此           |
 | work around              | 解决                     | what problem does this solve for...       | 为…解决了什么问题      |
 | uses sth. under the hood | 底层使用…                | When rules evaluate to true,              | 当规则符合时           |
@@ -132,6 +133,8 @@
 | how to create a beautiful and awesome-looking fully-fledged website. |                |
 | That gets us back to the first part.                         |                |
 | You can pass in additional options here, but let's  keep it simple for now. |                |
+| The image below depicts that.                                |                |
+| Not much to see here, since …                                |                |
 
 Me encantó tu
 

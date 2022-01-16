@@ -133,9 +133,10 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 #### 修饰符
 
 ```js
-.lazy        // 取代 input 监听 change 事件
+.lazy        // 取代 input 监听 change 事件，当光标离开输入框时，v-model绑定的value值才会改变
 .number        // parseFloat()
 .trim        // 首尾空格过滤
+.native				// 添加在自定义组件的事件上，直接监听组件根元素的原生事件
 ```
 
 ### v-bind
@@ -411,7 +412,7 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 </navigation-link>
 ```
 
-规则：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
+规则：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。简单的情况就是父组件中 `<child> {{ childVariable }}</child>` 是不行的，父组件中要使用子组件的变量需要通过作用域插槽
 
 ### 具名插槽
 
@@ -431,7 +432,7 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 
 ```vue
 <span>
-  <slot v-bind:user="user">
+  <slot v-bind:user="user" :title="childTitle">
     {{ user.lastName }}
   </slot>
 </span>
@@ -439,6 +440,7 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 <current-user>
   <template v-slot:default="slotProps">
     {{ slotProps.user.firstName }}
+		<span>{{ slotProps.title }}</span>
   </template>
 </current-user>
 ```
@@ -957,6 +959,8 @@ Vue.component('example', {
 ::: details data必须是一个函数
 
 > 当一个**组件**被定义，`data` 必须声明为返回一个初始数据对象的函数，因为组件可能被用来创建多个实例。如果 `data` 仍然是一个纯粹的对象，则所有的实例将**共享引用**同一个数据对象！通过提供 `data` 函数，每次创建一个新实例后，我们能够调用 `data` 函数，从而返回初始数据的一个全新副本数据对象。（ initData --> getData --> data.call(vm,vm) ）
+>
+> > 组件可能被多次调用，data是一个函数可以避免不同组件修改自身数据时不会互相污染
 
 :::
 

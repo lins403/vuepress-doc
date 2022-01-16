@@ -76,8 +76,8 @@ module.exports = {
                 'color',
                 'image',
                 'animation',
-                'adaptive-layout',
                 'responsive-layout',
+                'responsive-layout-solutions',
                 'css-preprocessor',
               ]
             },
@@ -96,6 +96,7 @@ module.exports = {
               children: [
                 'canvas',
                 'echarts',
+                'echarts5',
               ]
             },
             {

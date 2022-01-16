@@ -18,3 +18,28 @@
    - compile（parse、optimize、codegen）
    - VDOM & VNode
    - Diff
+
+
+
+## 生命周期
+
+TODO
+
+|               | 作用 | 补充 |
+| ------------- | ---- | ---- |
+| beforeCreate  |      |      |
+| created       |      |      |
+| beforeMount   |      |      |
+| mounted       |      |      |
+| beforeUpdate  |      |      |
+| update        |      |      |
+| activated     |      |      |
+| deactivated   |      |      |
+| beforeDestroy |      |      |
+| destroyed     |      |      |
+| errorCaptured |      |      |
+
+> 父子组件的生命周期顺序：父beforeCreate -> 父created -> 父beforeMount -> 子beforeCreate -> 子created -> 子beforeMount -> 子mounted -> 父mounted
+
+
+

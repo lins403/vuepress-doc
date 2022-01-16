@@ -70,8 +70,13 @@ VueCli 内置 postcss、postcss-loader、用于添加浏览器前缀的插件 au
 ## SCSS
 
 - < 3.0 `.sass`
-
 - ≥ 3.0 `.scss`
+
+```bash
+# Syntax Error: TypeError: this.getOptions is not a function
+# sass-loader@11.0.0` doesn't work with `vue@2.6.12`
+npm i -D sass sass-loader@10
+```
 
 ### Dart Sass
 
@@ -86,7 +91,7 @@ VueCli 内置 postcss、postcss-loader、用于添加浏览器前缀的插件 au
 npm i -D sass sass-loader@10
 ```
 
-### SCSS Lint
+## SCSS Lint
 
 早期的 [scss-lint](https://github.com/sds/scss-lint) 支持的是已经被淘汰的 Ruby Sass；
 

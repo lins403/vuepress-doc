@@ -85,3 +85,14 @@ Vue.prototype.$watch
 # Dep
 
 <img :src="$withBase('/assets/img/vue2-source-code/reactivity_goodnotes.jpeg')">
+
+
+
+## 问题
+
+### 1. 如何实现响应式？
+
+使用 `Object.defineProperty` 劫持对象，但对数组进行原型上的方法重写。因为对象的属性个数通常有限，拦截起来数量不多，但数组元素个数可能就会非常多，显然不适用于数据劫持
+
+
+

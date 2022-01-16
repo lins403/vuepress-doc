@@ -1,5 +1,7 @@
 # 技巧
 
+## 基础
+
 ### 1) 组件批量自动化注册
 
 `require.context`
@@ -110,7 +112,30 @@ export default {
 </script>
 ```
 
-## 6) 控制台上打印vue
+## 性能优化
+
+### 1）冻结不需要响应式的对象数据
+
+```js
+data () {
+  return {
+    obj: Object.freeze({xxxxxxxxxxxxxxxxxxxxxxxx}),
+    list: Object.freeze([x, xx, xxx])
+  }
+}
+```
+
+### 2）v-for 节点不要用 index 做 key
+
+index的值是按照绑定的数组的索引顺序，所以如果在数组头部或者中间再插入数据，则会导致原来的index顺序被打破，使得更新时需要计算更多的节点，更消耗性能
+
+### 3）nextTick
+
+
+
+## 其它
+
+### 控制台上打印vue
 
 ```js
 document.querySelector('#app').__vue__    //等同于app.__vue__，app就是Vue的实例,root

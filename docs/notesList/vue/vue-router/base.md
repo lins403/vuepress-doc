@@ -111,7 +111,7 @@ mode
 
 - 利用 `history.pushState` 和 `history.replaceState` API 来完成 URL 跳转，而无须重新加载页面
 
-  - 调用这两个API时并不会触发 `popstate` 事件，只有在做出浏览器动作时，才会触发该事件，如用户点击浏览器的前进/回退按钮（或者在Javascript代码中调用`history.back()`或者`history.forward()`方法）
+  - 调用这两个API时并不会触发 `popstate` 事件，只有在做出浏览器动作时，才会触发该事件，如用户点击浏览器的前进/回退按钮（这时一条会话历史记录被执行，会触发页面显示(pageshow)事件），或者在Javascript代码中调用`history.back()`或者`history.forward()`方法 
   - vue-router 在 HTML5 history 模式下，`router-link` 会守卫点击事件，让浏览器不再重新加载页面。
   - 当你在 vue-router 的 HTML5 history 模式下使用 `base` 选项之后，所有的 `to` 属性都不需要写 (基路径) 了（域名子项目，nginx alias的应用场景）
 
