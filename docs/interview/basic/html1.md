@@ -26,13 +26,32 @@ HTML 4.01 中有三种声明，在 HTML5 中只有一种：`<!DOCTYPE html>`
 
 - 浏览器在后台加载脚本，然后继续解析HTML构建DOM
 - `async` 
-  - async脚本会在<u>加载完成时执行</u>，且完全独立，独立于DOM和其它脚本
-  - 适用于独立脚本，例如计数器或广告，这些脚本的相对执行顺序无关紧要
+  - async脚本会在<u>加载完成时执行</u>，且完全独立，独立于DOM和其它脚本，不能确保执行次序
+  - <u>适用于独立脚本</u>，例如计数器或广告，这些脚本的相对执行顺序无关紧要
+  - 保证会在页面的 `load` 事件前执行，但可能会在 DOMContentLoaded 之前或之后
 - `defer` 
   - defer特性仅适用于外部脚本，如果\<script> 脚本没有 src，则会忽略 defer 特性
-  - defer脚本将在<u>文档完成解析后</u>，触发 `DOMContentLoaded ` 事件前执行。
-  - defer脚本可以确保<u>按照文档顺序执行</u>，即使后面的先下载完成，也要等待前面的下载完成后执行
-  - 适用于需要整个 DOM 的脚本，和/或脚本的相对执行顺序很重要的时候
+  - defer脚本将推迟执行，直到<u>文档完成解析后</u>，触发 `DOMContentLoaded ` 事件前执行。
+  - defer脚本<u>可以确保按照文档顺序执行</u>，即使第二个defer脚本先下载完成，也要等待第一个defer脚本下载完成后执行
+  - <u>适用于需要整个 DOM 的脚本</u>，以及脚本的相对执行顺序很重要的时候
+
+### link 标签
+
+规定了当前文档与外部资源的关系
+
+`rel` 属性 —  names a relationship of the linked document to the current document.
+
+- `rel=preload`：告诉浏览器要预加载这个资源。
+- `rel=prefetch`：告诉浏览器这个资源空闲的时候给我加载一下。(因为它可能被用户加载，即懒加载)
+- `rel="icon"` 、`rel="stylesheet"`
+
+`as` 属性 — Potential destination for a preload request 
+
+- `as=script`：告诉浏览器这个资源是script，提升加载的优先级。
+
+🌰demo：[SPA打包后的index.html](https://lins403.github.io/vuepress-doc/notesList/vue/vue-cli/vue-cli.html#index-html)
+
+`crossorigin`属性 — 表示该资源是否应该使用一个CORS请求来获取
 
 ### 特殊标签
 

@@ -4,6 +4,19 @@
 
 ## 一、Black-tech
 
+### git log
+
+```bash
+git log --after="2021-12-16" --before="2022-1-15" --author="lins403"
+git log 1055ca..23be39 --author="lins403"
+
+# 显示修改文件
+git log --after="2021-12-16" --before="2022-1-15" --author="lins403" --name-only
+
+# 输出日志到指定文件
+git log --after="2021-12-16" --before="2022-1-15" --author="lins403" > git-log.txt
+```
+
 ### git config
 
 ```shell

@@ -36,6 +36,8 @@ transition: margin-right 4s, color 1s;
 transition: all 0.5s ease-out;
 ```
 
+- transition 不能对`display`属性生效，如果要实现隐藏显示切换，可以用`visibility`来实现
+
 ## animation
 
 ```scss

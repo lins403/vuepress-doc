@@ -14,3 +14,17 @@
 
 [GitHub - lins403/html-css-demos: Created with CodeSandbox](https://github.com/lins403/html-css-demos)
 
+
+
+### 1）内容填充底部
+
+```scss
+parent{
+	position: relative;
+}
+child{
+	position: absolute;
+	bottom: 0;
+}
+```
+

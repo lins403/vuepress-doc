@@ -98,7 +98,7 @@ animation：用来指定一组或多组动画，每组之间用逗号相隔
 - transition更强调状态的变化，开始到结束两种状态，通常需要外部触发，例如伪元素（:hover）之间的切换；
 - animation更强调帧的变化，可以自动触发，且可以被设置成无限次播放
 
-[动画 | 小眯嘻的文档博客](https://lins403.github.io/vuepress-doc/notesList/visualization/animation.html)
+[动画 | 小眯嘻的文档博客](https://lins403.github.io/vuepress-doc/notesList/css/animation.html)
 
 ### 渐变
 

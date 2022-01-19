@@ -85,7 +85,7 @@ module.exports = {
 
 `<link>` types
 
-- `ref=preload`：告诉浏览器这个资源要给我提前加载。
+- `rel=preload`：告诉浏览器这个资源要给我提前加载。
 - `rel=prefetch`：告诉浏览器这个资源空闲的时候给我加载一下。(因为它可能被用户加载，即懒加载)
 
 `as` — Potential destination for a preload request 

@@ -366,6 +366,7 @@ function blogSidebar(){
       children: [
         '2022/1/how-to-learn',
         '2022/1/dynamic-import',
+        '2022/1/patch-node-modules',
       ]
     }
   ]
