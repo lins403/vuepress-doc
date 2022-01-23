@@ -28,3 +28,6 @@ child{
 }
 ```
 
+2）
+
+-webkit-text-stroke

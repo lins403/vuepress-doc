@@ -49,6 +49,7 @@
 | circumvent           | 规避，绕开         | be geared towards           | 针对…                |
 | connoisseur          | 内行               | error-prone                 | 易于出错的           |
 | efficacy             | 功效               | error resistance            | 容错性               |
+| elapse               | （时间）流逝       |                             |                      |
 | emulated             | 模仿的             |                             |                      |
 | encapsulation        | 封装               | fully-fledged               | 完善的               |
 | escaping             | 转义               | be part of a boot-camp      | 新兵训练营的一员     |

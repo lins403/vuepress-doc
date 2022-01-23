@@ -40,12 +40,6 @@ innerWidth = clientWidth + border + 滚动条宽度
    - `screen.availWidth` 【屏幕可用宽高】
      - 不受浏览器缩放大小影响，和书签栏高度、标签页高度等等有关
 
-#### URL.createObjectURL()
-
-```js
-
-```
-
 ## Navigator对象
 
 ### userAgent

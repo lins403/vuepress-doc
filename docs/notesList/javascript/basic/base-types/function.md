@@ -1,5 +1,10 @@
 # Function
 
+## 传参
+
+- 变量有按值和按引用访问，而传参则只有按值传递
+- 函数的参数就是局部变量
+
 ## 属性和方法
 
 ```js
@@ -24,5 +29,4 @@ func1()  // TypeError
 const func = ({ param1, param2, ...params }={}) => { console.log(param1, param2, params) }
 func()  // ✔️
 ```
-
 

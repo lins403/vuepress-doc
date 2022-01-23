@@ -9,6 +9,7 @@ typeof []  //"object"
 typeof undefined  //"undefined"
 typeof null  //"object"
 typeof NaN  //"number"
+typeof Symbol()	//'symbol'
 ```
 
 ```js
@@ -58,7 +59,7 @@ if (false)
 if (null)
 if (undefined)
 if (0)
-if (0n)
+if (0n)	//BigInt
 if (NaN)
 if ('')
 if ("")

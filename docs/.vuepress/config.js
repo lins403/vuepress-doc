@@ -204,6 +204,15 @@ module.exports = {
           ],
           '/notes/': [
             {
+              title: '计算机基础',
+              collapsable: false,
+              children: [
+                'computer/operation-system',
+                'computer/encode',
+                'computer/encrypt',
+              ]
+            },
+            {
               title: '开发工具',
               collapsable: false,
               children: [
@@ -296,11 +305,13 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
       collapsable: false,
       children: [
         'basic/base-types/type',
+        'basic/reference',
         'basic/base-types/number',
         'basic/base-types/string',
         'basic/base-types/array',
         'basic/base-types/object',
         'basic/base-types/function',
+        'basic/base-types/symbol',
         'basic/es6',
         'basic/oop',
         'basic/dom',
@@ -316,7 +327,8 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
         'advanced/',
         'advanced/skills',
         'advanced/engine',
-        'advanced/runtime',
+        'advanced/execution-context',
+        'advanced/memory-garbage-collection',
         'advanced/let-const',
         'advanced/design-pattern',
         'advanced/libraries',

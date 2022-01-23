@@ -95,6 +95,14 @@ ffmpeg -i demo.mp4 -i demo_subtitle.srt -c copy output.mp4
 
 离线开发文档：[Dash](https://kapeli.com/dash)
 
+图片拼接：`brew install imagemagick`
+
+```
+convert +append 1.png 2.png
+```
+
+
+
 ## 其它
 
 ### 远程

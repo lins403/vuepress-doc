@@ -1,0 +1,284 @@
+# 执行上下文和作用域
+
+> - 任何变量都存在于某个执行上下文中(也称为作用域)，这个上下文(作用域)决定了变量的生命周期，以及它们可以访问代码的哪些部分
+>
+> - 代码执行流每进入一个新上下文，都会创建一个作用域链，用于搜索变量和函数
+
+## 预编译
+
+词法分析「分词」>>> 语法分析「转AST，检查语法错误」>>> 预编译「分配内存」>>> 解释执行
+
+预编译阶段
+- 我理解应该是代码分析阶段，JavaScript是一种解释性脚本语言，代码不进行预编译
+- 创建变量对象 » 创建作用域链 » 确定this指向
+
+执行阶段
+- 解析变量标识符（沿着作用域链，变量赋值） » 函数引用 » 执行其他代码 » 执行结束，内存回收
+
+
+## 执行上下文
+
+演示工具：[A tool for visualizing Execution Context, Hoisting, Closures, and Scopes in JavaScript.](https://ui.dev/)
+
+### 意义
+
+执行上下文就是ECMA规范里面提到的一个抽象概念，仅仅只是一个抽象模型，具体如何实现是v8引擎内部做的事
+
+变量或函数的上下文决定了它们可以访问哪些数据，以及它们的行为
+
+- 确定<mark>作用域</mark>，区分代码执行时，全局和函数执行所处的不同作用域
+- 确定<mark>生命周期</mark>，变量的执行上下文用于确定什么时候释放内存
+- （函数的）执行上下文包含了跟踪其关联代码的执行进度所需的任何状态，JS引擎可以添加信息（变量对象/环境记录）来<mark>跟踪执行进度</mark>
+- 执行上下文对后续理解 js内存、垃圾回收、闭包等具有深刻意义，它可以帮助我们在不需要很了解基础底层情况下去分析内存，执行过程
+
+### 概念
+
+- GlobalExecutionContext、FunctionExecutionContext（、EvalExecutionContext）
+
+- ThisBinding、LexicalEnvironment、VariableEnvironment
+
+- EnvironmentRecord ("Declarative"(Function、Module)、"Object"、"GLobal")、outer(外部环境引用)
+
+- Variable Object、Activation Object
+
+#### 执行上下文
+
+> 有时候上下文和执行上下文的概念要区分，前者通常被认为是 this 的指向
+
+上下文的生成时机在词法解析阶段，而激活时机在运行阶段
+
+上下文在其所有代码都执行完毕后会被销毁，包括定义在它上面的所有变量和函数
+
+```js
+ExecutionContext = {  
+  // 确定this的值
+  ThisBinding = <this value>,
+  // 创建词法环境组件
+  LexicalEnvironment = {},
+  // 创建变量环境组件
+  VariableEnvironment = {},
+};
+```
+
+> `全局上下文`：全局上下文是最外层的上下文
+>
+> - 根据 ECMAScript 实现的宿主环境，表示全局上下文的对象可能不一 样。
+> - 在浏览器中全局上下文就是 window 对象，因此所有通过 var 定义的全局变量和函数都会成为 window 对象的属性和方法。而使用 let 和 const 的顶级声明不会定义在全局上下文中，但在作用域链解析上效果是一样的
+> - 全局上下文在应用程序退出前才会被销毁，比如关闭网页或退出浏览器
+
+> `函数上下文` / 局部上下文：每个函数调用都有自己的上下文
+>
+> - 当代码执行流进入函数时，函数的上下文被推到一个上下文栈上。 
+> - 在函数执行完之后，上下文栈会弹出该函数上下文，将控制权返还给之前的执行上下文。
+> - ECMAScript 程序的执行流就是通过这个上下文栈进行控制的。
+
+#### 词法环境与变量环境
+
+> `词法环境`： 词法环境定义了由代码编译过程中，ecma规范词法对应的一些关系，比如记录函数内部的this内容，不对外暴露，可以理解为ecma内部自己的语法关系。
+>
+> `变量环境`：变量环境指的的是在词法环境中，代码运行时生成的变量关系，可以理解为由我们创建的变量。
+
+#### 环境记录
+
+> `环境记录`：记录的是，在它关联的词法环境的范围内创建的标识符绑定，意味着环境记录会跟踪变量与函数名称，以及它们关联的值。「就是变量名和变量值的映射」
+>
+> - `声明性环境记录` (DER)：保存了变量与函数名，以及它们的值；
+>   - 用在Function、Module，适用性更强，更贴近于环境记录本身的意义
+> - `对象环境记录` (OER)：保存了绑定对象的属性名与值
+>   - 全局作用域的 ER 是一个 OER，它的绑定对象也就是 window/global 这个全局对象
+> - `全局环境记录` (GER)：保存了内置的全局变量（例如NaN、undefined、globalThis(全局作用域中的this) ）
+>   - 所有脚本共享的最外部作用域
+>
+> `outer`：可以通过outer拿到上一层的作用域链
+
+#### 变量对象与活动对象
+
+变量对象(VO)是执行上下文创建阶段生成的，只是在执行上下文的执行阶段变成活动对象(AO)，变成AO了以后就可以使用其中的变量、函数标示符、形参...
+
+> `变量对象` (VO)：每个上下文都有一个关联的变量对象，保存了这个上下文中定义的所有变量和函数
+>
+> - 执行上下文创建阶段生成，但代码执行遇到  try/catch 语句的 `catch` 块 或者是 `with` 语句时，都会在作用域链前端添加一个变量对象
+>
+> `活动对象` (AO)：如果代码正在执行的上下文是函数，则其活动对象用作变量对象，放置在作用域链的最前端
+>
+> - 活动对象最初只有 一个定义变量 `arguments`。随着函数的执行，还会往活动对象上添加变量
+
+从ES5开始概念就被废弃了，可能是因为原来活动对象上的 arguments 可以被直接添加进执行上下文的 `环境记录(DER)` 了
+
+
+
+## 作用域
+
+作用域，是为了区分每个词法作用域下代码的独立性
+
+一个执行上下文定义了一个**函数执行时的环境**，所以作用域其实就是**变量所处的执行上下文**
+
+### 词法作用域
+
+词法（lexical）一词指的是，词法作用域 (lexical scope) <u>根据源代码中声明变量的位置来确定该变量在何处可用</u>。
+
+所以词法作用域也是静态作用域，在代码编写时就确定了作用域
+
+### 作用域链
+
+上下文中的代码在执行的时候，会创建变量对象的一个作用域链(scope chain)。
+
+作用域链是一个指向各级变量对象的指针列表
+
+- 这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序，作用域链中的下一个变量对象来自包含上下文，再下一个对象来自再下一个包含上下文，以此类推直至全局上下文。
+- 代码正在执行的上下文的变量对象始终位于作用域链的最前端，全局上下文的变量对象始终位于作用域链的最后端
+- 代码执行时的标识符解析是通过沿作用域链逐级搜索标识符名称完成的
+- 内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。也就是说，嵌套函数可访问声明于它们外部作用域（函数作用域）的变量
+
+### 函数作用域
+
+在ES6以前，只有全局作用域和函数作用域
+
+> 1. 当一个函数定义的时候，会创建一个包含全局变量对象和所有包含函数的活动对象的作用域链，并将它保存在这个函数对象的 `[[Scope]]` 内部属性上（函数也是一个对象，包含函数体和其他一些可访问或不可访问的属性，比如 name、length 等）、
+>
+> 2. 当这个函数执行的时候，会创建一个 执行上下文，将 `[[Scope]]` 复制到执行上下文中的作用域链。然后，创建当前的活动对象，推到作用域链顶端。此刻，函数执行过程中可访问的作用域是：AO + Scope Chain。
+
+子函数引用了外部作用域的变量，这种情况称为闭包，闭包函数会包含完整的作用域链
+
+### 块作用域
+
+ES6新概念，let 和 const 的作用域是块级的，代码块由最近的一对花括号界定，let 和 const 声明的变量，它们的作用域不会超出这个代码块的范围
+
+#### let声明变量
+
+> 严格来讲，let 在 JavaScript 运行时中也会被提升(hoisting)，但由于“暂时性死区”(temporal dead zone)的 缘故，实际上不能在声明之前使用 let 变量。因此，从写 JavaScript 代码的角度说，let 的提升跟 var 是不一样的。
+
+
+
+## 🌰例子
+
+1. 使用 **var** 的函数作用域声明
+
+  var 声明会被拿到函数或全局作用域的顶部，位于作用域中所有代码之前。这个现象叫作“提升”  (hoisting)。
+
+  ```js
+  function add(num1, num2) {
+    // 使用var声明变量，变量会被自动添加到最接近的上下文
+    var sum = num1 + num2;
+    return sum;
+  }
+  let result = add(10, 20);
+  console.log(sum);	//Uncaught ReferenceError: sum is not defined
+  ```
+
+  ```js
+  function add(num1, num2) {
+    // 未经声明就初始化，变量就会自动被添加到全局上下文
+    sum = num1 + num2;
+    //return sum;
+  }
+  add(1, 2)
+  console.log(sum)	//3
+  // sum在函数退出之后依然存在，从而在后面可以访问到
+  ```
+
+2. 标识符查找
+
+	搜索过程中，引用局部变量会让搜索自动停止，而不继续搜索下一级变量对象
+
+  ```js
+  var a = 5;
+  function todo(){
+    var a = 9
+    return function(){
+      a = 7
+    }
+  }
+  todo()()
+  console.log(a)	//5
+  ```
+
+## 伪代码示例
+
+```js
+let a = 20;  
+const b = 30;  
+var c;
+
+function multiply(e, f) {  
+ var g = 20;  
+ return e * f * g;  
+}
+c = multiply(20, 30);
+```
+
+```js
+//全局执行上下文
+GlobalExectionContext = {
+    // this绑定为全局对象
+    ThisBinding: <Global Object>,
+    // 词法环境
+    LexicalEnvironment: {  
+        //环境记录
+      EnvironmentRecord: {  
+        Type: "Object",  // 对象环境记录
+        // 标识符绑定在这里 let const创建的变量a b在这
+        a: < uninitialized >,  
+        b: < uninitialized >,  
+        multiply: < func >  
+      }
+      // 全局环境外部环境引入为null
+      outer: <null>  
+    },
+  
+    VariableEnvironment: {  
+      EnvironmentRecord: {  
+        Type: "Object",  // 对象环境记录
+        // 标识符绑定在这里  var创建的c在这
+        c: undefined,  
+      }
+      // 全局环境外部环境引入为null
+      outer: <null>  
+    }  
+  }
+```
+
+```js
+// 函数执行上下文
+  FunctionExectionContext = {
+     //由于函数是默认调用 this绑定同样是全局对象
+    ThisBinding: <Global Object>,
+    // 词法环境
+    LexicalEnvironment: {  
+      EnvironmentRecord: {  
+        Type: "Declarative",  // 声明性环境记录
+        // 标识符绑定在这里  arguments对象在这
+        Arguments: {0: 20, 1: 30, length: 2},  
+      },  
+      // 外部环境引入记录为</Global>
+      outer: <GlobalEnvironment>  
+    },
+  
+    VariableEnvironment: {  
+      EnvironmentRecord: {  
+        Type: "Declarative",  // 声明性环境记录
+        // 标识符绑定在这里  var创建的g在这
+        g: undefined  
+      },  
+      // 外部环境引入记录为</Global>
+      outer: <GlobalEnvironment>  
+    }  
+  }
+```
+
+
+
+## 总结
+
+> 当javascript代码文件被浏览器载入后，默认最先进入的是一个**全局的执行上下文**。当在全局上下文中调用执行一个函数时，程序流就进入该被调用函数内，此时引擎就会为该函数创建一个**新的执行上下文**，并且将其压入到**执行栈顶部（作用域链）**。浏览器总是执行位于**执行栈顶部的当前执行上下文**，一旦执行完毕，该执行上下文就会从执行栈顶部**弹出**，并且控制权将进入**其下的**执行上下文。这样，执行栈中的执行上下文就会被依次执行并且弹出，直到回到全局的执行上下文。
+
+# 参考
+
+[一篇文章看懂JS执行上下文 - 听风是风 - 博客园](https://www.cnblogs.com/echolun/p/11438363.html)
+
+[javascript - What really is a declarative environment record and how does it differ from an activation object? - Stack Overflow](https://stackoverflow.com/questions/20139050/what-really-is-a-declarative-environment-record-and-how-does-it-differ-from-an-a)
+
+[js没那么简单(1)-- 执行上下文 - 知乎](https://zhuanlan.zhihu.com/p/188394420)
+
+[V8底层运行机制之执行上下文及堆栈内存原理刨析 - 简书](https://www.jianshu.com/p/14277a357598)
+
