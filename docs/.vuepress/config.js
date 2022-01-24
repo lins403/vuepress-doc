@@ -30,7 +30,7 @@ module.exports = {
           '/blogs/': blogSidebar(),
           '/interview/': interviewSidebar('前端基础', '进阶'),
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
-          '/notesList/javascript/': JavaScriptSidebar('总览', '基础', '进阶'),
+          '/notesList/javascript/': JavaScriptSidebar('总览', '基础', 'ES6', '进阶'),
           '/notesList/typescript/': 'auto',
           '/notesList/packages/': [
             {
@@ -291,7 +291,7 @@ function sourceCodeSidebar (groupA, groupB, groupC) {
   ]
 }
 
-function JavaScriptSidebar (groupA, groupB, groupC) {
+function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
   return [
     {
       title: groupA,
@@ -305,23 +305,30 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
       collapsable: false,
       children: [
         'basic/base-types/type',
-        'basic/reference',
         'basic/base-types/number',
         'basic/base-types/string',
         'basic/base-types/array',
         'basic/base-types/object',
         'basic/base-types/function',
-        'basic/base-types/symbol',
-        'basic/es6',
+        'basic/reference',
         'basic/oop',
         'basic/dom',
         'basic/json',
-        'basic/binary',
         'basic/utils',
       ]
     },
     {
       title: groupC,
+      collapsable: false,
+      children: [
+        'es6/',
+        'es6/symbol',
+        'es6/set-map',
+        'es6/iterator-generator',
+      ]
+    },
+    {
+      title: groupD,
       collapsable: false,
       children: [
         'advanced/',
@@ -332,6 +339,7 @@ function JavaScriptSidebar (groupA, groupB, groupC) {
         'advanced/let-const',
         'advanced/design-pattern',
         'advanced/libraries',
+        'advanced/binary',
       ]
     },
   ]

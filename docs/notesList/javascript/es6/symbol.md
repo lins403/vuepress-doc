@@ -59,7 +59,7 @@ o[s1]	//'foo val'
 // 一些内置类型拥有默认的迭代器行为，其他类型（如 Object）则没有
 // @@iterator 指的就是 Symbol.iterator 
 Array.prototype[@@iterator]()
-TypedArray.prototype[@@iterator]()
+TypedArray.prototype[@@iterator]()	//所有定型数组
 String.prototype[@@iterator]()
 Map.prototype[@@iterator]()
 Set.prototype[@@iterator]()

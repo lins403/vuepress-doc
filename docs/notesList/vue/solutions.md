@@ -62,8 +62,6 @@ module.exports = {
 }
 ```
 
-
-
 ### 2）el-tree 的选中数据变化，视图不能更新
 
 solution1：
@@ -115,6 +113,14 @@ methods:{
       loadingInstance.close()
     })
   },
+}
+```
+
+### 5）el-table底边框
+
+```css
+.el-table::before {
+	height: 0px;
 }
 ```
 

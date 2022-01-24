@@ -30,3 +30,19 @@ const func = ({ param1, param2, ...params }={}) => { console.log(param1, param2,
 func()  // ✔️
 ```
 
+### eval()
+
+解释代码字符串
+
+```js
+let msg = "hello world";
+  eval("console.log(msg)");  // "hello world"
+
+eval("function sayHi() { console.log('hi'); }");
+	sayHi();	// "hi"，但严格模式下会报错
+
+eval("let msg = 'hello world';");
+	console.log(msg);  // Reference Error: msg is not defined
+```
+
+在严格模式下，在 eval()内部创建的变量和函数无法被外部访问

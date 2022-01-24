@@ -76,7 +76,7 @@ new Date(2021, 11, 1).toString()	// 'Wed Dec 01 2021 00:00:00 GMT+0800 (中国�
 // 2）调用实例上的特定方法如substring
 		let s2 = s1.substring(2);
 
-// 3）创建一个 String 类型的实例
+// 3）涉及原始值的语句执行完毕后，包装对象就会被销毁
     s1 = null;
 ```
 
@@ -112,8 +112,10 @@ new Object(!!123) instanceof Boolean		//true
 当代码开始执行时，全局上下文中会存在两个内置对象
 
 1. `Global`
-   - 无法直接访问，但浏览器将其实现为 window 对象
-   - 所有全局变量和函 数都是 Global 对象的属性
+   - 无法直接访问，但浏览器将 window 对象实现为 Global 对象的代理
+   - 所有全局变量和函数都是 Global 对象的属性
+   - isNaN()、isFinite()、parseInt()、parseFloat()、encodeURI()、eval()
+   - 我理解它就是全局执行上下文的对象环境记录所绑定的对象
 2. `Math`
 
 

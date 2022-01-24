@@ -80,17 +80,22 @@ server {
         # …
 
         # main
-        location / {
-            root /home/zhxc/lins/dist/;
-            index index.html index.htm;
-             try_files $uri $uri/ /index.html;
+    location / {
+        root /home/zhxc/lins/dist/;
+        index index.html index.htm;
+        try_files $uri $uri/ /index.html;
     }
 
         # alternatives
     location /hello {
         alias /home/zhxc/lins/hello/;
         index index.html index.htm;
-            try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ /index.html;
+        # 解决页面重载(例如刷新页面或修改window.location)后找不到索引文件的问题
+        if ( !-e $request_filename) {
+          rewrite ^(.*)$ /dv/index.html last;
+          break;
+        }
     }
 
     # …

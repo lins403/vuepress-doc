@@ -1,17 +1,51 @@
 # Array
 
-## 极限值
+## 基础
+
+### 创建方法
+
+- 使用 new 操作符和 Array 构造函数
+
+  ```
+  const colors = new Array("red", "blue", "green")
+  ```
+
+- 使用数组字面量(array literal)表示法（并不会调用Array构造函数）
+
+  ```js
+  const colors = ["red","blue","green"]
+  
+  const options = [,,,,,]; // 创建包含 5 个元素的数组，占位数组(undefined填充)
+  ```
+
+- 使用ES6新增的静态方法 Array.of
+
+  ```
+  Array.of("red", "blue", "green")
+  ```
+
+  
+
+### 极限值
 
 JavaScript 使用一个32位整数，保存数组的元素个数，这意味着，数组成员最多只有 4294967295 （`2^32 - 1`）个
 
 ## 常用方法
 
 ```js
+Array.isArray([,,,])	//true
+[,,,] instanceof Array	//true
+```
+
+### 实例方法
+
+```js
 // instance
 console.log(Array.prototype)
-
-
 const arr = ['a', 'b', 'c']
+
+copyWithin()
+fill()
 
 forEach()
 keys()
@@ -27,14 +61,17 @@ lastIndexOf()
 every()
 some()
 
+toLocaleString()
 toString()
+valueOf()
 
 // 不会改变原数组
 flat()
 map()
 filter()
 reduce()
-slice()  // arr.slice(-2,-1)  //['b']
+reduceRight()	//反方向遍历
+slice()  // 适合用于复制数组片段，arr.slice(-2,-1)  //['b']
 
 // 会改变原数组
 pop()
@@ -44,27 +81,54 @@ unshift()    // arr.unshift(1,2,3) //[1, 2, 3, 'a', 'b', 'c']
 reverse()
 sort()
 splice()  // arr.splice(1,2,'bbb')  //['a', 'bbb']
+// splice()适合用于往数组中间插入元素的场景，可以是删除、插入、替换
 ```
 
-```js
-// static
-console.dir(Array)
+### 静态方法
 
+```js
+console.dir(Array)
 new Array(1,2,3); // [1, 2, 3]
 Array(1, 2, 3); // [1, 2, 3]
-Array.of(1, 2, 3); // [1, 2, 3]
 
+/* Array.of() 一组参数=>数组实例 */
+Array.of(1, 2, 3); // [1, 2, 3]
+```
+
+
+
+```js
+/* Array.from() 类数组结构(任何可迭代对象)=>数组实例 */
 Array.from('foo')  // ["f", "o", "o"]
 Array.from([1, 2, 3], x => x + x)  // [2, 4, 6]
 
-Array.isArray('foobar');   // false
+// 传入一个迭代器
+const iter = {
+  *[Symbol.iterator]() {
+    yield 1;
+    yield 2;
+    yield 3;
+} };
+console.log(Array.from(iter)); // [1, 2, 3]
+
+// 将函数的arguments对象转换为数组
+function getArgsArray() {
+  return Array.from(arguments);
+}
+console.log(getArgsArray(1, 2, 3, 4)); // [1, 2, 3, 4]
 ```
 
-## 拷贝
+## 定型数组
 
-[JavaScript中十种一步拷贝数组的方法](https://segmentfault.com/a/1190000018947028)
+定型数组包含一套不同的引用类型，用于管理数值在内存中的类型。
+
+[二进制数据 > ArrayBuffer](https://lins403.github.io/vuepress-doc/notesList/javascript/basic/binary.html#arraybuffer)
 
 ## Skills
+
+### 拷贝
+
+[JavaScript中十种一步拷贝数组的方法](https://segmentfault.com/a/1190000018947028)
 
 ### 批量创建数组
 
