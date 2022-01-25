@@ -169,17 +169,23 @@ grep "main()" . -r --exclude-from filelist
 
 ## 类型二：进程管理
 
+```
+netstat -tunlp |grep <port>
+lsof -i:<port>
+```
+
 ### ps
 
 ```bash
 # 查找指定进程
 $ ps -ef | grep <process_name>
+$ ps -aux | grep <process_name>
 
 # 以树状图显示所有进程
 $ pstree
 
 # 突出在运行中的进程
-pstree -apnh
+$ pstree -apnh
 ```
 
 ### kill

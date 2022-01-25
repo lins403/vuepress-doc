@@ -86,6 +86,50 @@ nginx.conf
 		└── …
 ```
 
+### location
+
+#### 语法
+
+```nginx
+location [ = | ~ | ~* | ^~ ] /URI { … }
+location @/name/ { … }
+```
+
+#### 匹配规则
+
+| 参数     | 解释                                                         |
+| -------- | ------------------------------------------------------------ |
+| **`空`** | location 后没有参数直接跟着 **标准 URI**，表示前缀匹配，代表跟请求中的 URI 从头开始匹配。 |
+| **`=`**  | 用于**标准 URI** 前，要求请求字符串与其精准匹配，成功则立即处理，nginx停止搜索其他匹配。 |
+| **`^~`** | 用于**标准 URI** 前，并要求一旦匹配到就会立即处理，不再去匹配其他的那些个正则 URI，一般用来匹配<u>目录</u> |
+| **`~`**  | 用于**正则 URI** 前，表示 URI 包含正则表达式， **区分**大小写 |
+| **`~*`** | 用于**正则 URI** 前， 表示 URI 包含正则表达式， **不区分**大小写 |
+| **`@`**  | @ 定义一个命名的 location，@ 定义的locaiton名字不参与请求匹配，一般用在内部定向，<br />例如error_page, try_files命令中。它的功能类似于编程中的goto。 |
+
+```nginx
+#以 /img/ 开头的请求，如果链接的状态为 404，则会匹配到 @img_err 这条规则上
+location /img/ {
+  error_page 404 @img_err;
+}
+
+location @img_err {
+  # 规则
+}
+```
+
+
+
+#### 匹配优先级
+
+```nginx
+1. location =    # 精准匹配
+2. location ^~   # 带参前缀匹配
+3. location ~    # 正则匹配（区分大小写）（!!正则匹配是使用文件中的顺序，先匹配成功的返回）
+4. location ~*   # 正则匹配（不区分大小写）
+5. location /a   # 普通前缀匹配，优先级低于带参数前缀匹配。（!!前缀匹配下，返回最长匹配的 location，与所在位置顺序无关）
+6. location /    # 任何没有匹配成功的，都会匹配这里处理
+```
+
 ### gzip
 
 nginx 有静态压缩和实时压缩(always)两种方式
@@ -175,6 +219,30 @@ location / {
 }
 ```
 
+### 配置二级域名
+
+1. 在域名服务商处配置二级域名，添加需要被解析的主机记录如 `www`、 `blog`
+2. nginx 配置
+
+```nginx
+http{
+    server {  
+        listen 80;
+        server_name example.com;
+        location / {
+            proxy_pass         http://127.0.0.1:8001;
+        }
+    }
+    server {  
+        listen 80;
+        server_name blog.example.com;
+        location / {
+            proxy_pass         http://127.0.0.1:8002;
+        }
+    }
+}
+```
+
 ###  HTTP 请求转发到 HTTPS
 
 ```nginx
@@ -219,6 +287,7 @@ if ($host != 'baidu.com') {
 - 配置https
 - 域名路径重写
 - keepalive
+- 使用auth_request进行鉴权
 
 ## 使用技巧
 
@@ -230,9 +299,88 @@ nginx -t -q
 nginx -s reload
 ```
 
+### location URI结尾带不带 /
+
+结论：location 中的字符有没有 `/` 都没有影响，效果完全一致
+
+### 强制让http的访问变为Https
+
+#### HTML
+
+`public/index.html`
+
+```html
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+```
+
+#### Nginx
+
+通过 `upgrade-insecure-requests` 这个 CSP 指令，可以让浏览器帮忙做这个转换
+
+```nginx
+server{
+	add_header Content-Security-Policy "upgrade-insecure-requests;connect-src *";
+	# add_header Content-Security-Policy upgrade-insecure-requests
+}
+```
+
+### 域名路径重写
+
+```nginx
+# 访问`http://localhost:8000/todo/xxx`将会被代理至`https://www.example.com/todo/xxx`。
+location ^~/todo/{
+		rewrite /(.*)$ /$1 break;
+  	# 跳转第三方地址
+		proxy_pass https://www.example.com;
+}
+```
+
+
+
+## 踩坑
+
+### net::ERR_SSL_PROTOCOL_ERROR
+
+https域名下使用只有http的资源，浏览器出现 net::ERR_SSL_PROTOCOL_ERROR 错误
+
+这个没招好像，只能让资源升级https，或者是将资源fork到本地了再引用
+
+[javascript - How to deal with net::ERR_SSL_PROTOCOL_ERROR? - Stack Overflow](https://stackoverflow.com/questions/43232686/how-to-deal-with-neterr-ssl-protocol-error)
+
+### 网页重载后页面丢失
+
+（配置alias子路径时）刷新页面或修改window.location后，索引不到文件的问题
+
+解决：
+
+```nginx
+location /yourPath {
+    if ( !-e $request_filename) {
+        rewrite ^(.*)$ /yourPath/index.html last;
+        break;
+    }
+}
+```
+
+### 去掉304 Not Modified
+
+```nginx
+location / {
+		expires -1;
+		if_modified_since off;
+		add_header Last-Modified "";
+		add_header Cache-Control no-cache;
+		etag off;
+        ......
+}
+```
+
+
+
 # 参考
 
 [Nginx从听说到学会 - 简书](https://www.jianshu.com/p/630e2e1ca57f)
 
 [Nginx 从入门到实践，万字详解！ - 掘金](https://juejin.cn/post/6844904144235413512)
 
+[一文理清 nginx 中的 location 配置（系列一）](https://segmentfault.com/a/1190000022315733)

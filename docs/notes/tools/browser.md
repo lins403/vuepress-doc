@@ -129,3 +129,8 @@ paint阶段就是将Layout tree上的每个box转换成页面上的实际像素�
 
 requestAnimationFrame我看到别的博客提到节流效果，用节流解释太妙了。
 
+
+
+## 技巧
+
+`Cmd+Shft+R` 无缓存重载页面

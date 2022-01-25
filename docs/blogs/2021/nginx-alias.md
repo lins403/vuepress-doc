@@ -2,7 +2,7 @@
 
 适合用于有一定规模的项目拆分，将耦合度较低的功能页面分离出来，到一个独立的子项目。通过nginx的alias配置让nginx将请求定位到对应子项目的静态页面上，多个子项目可以共享域名，例如用于https
 
-## 项目配置
+## Vue项目配置
 
 ### Main Project
 
@@ -73,6 +73,33 @@ module.exports = {
 }
 ```
 
+## React项目配置
+
+1. 修改资源路径
+
+   ```json
+   // package.json
+   {
+     "homepage": ".",
+   }
+   ```
+
+2. history路由
+
+   ```js
+   import { BrowserRouter } from 'react-router-dom'
+   
+   <BrowserRouter basename="/hello">
+     <App>
+       <Switch>
+       	<Route path="/login" component={Login}/>
+           // ...
+   ```
+
+   ```js
+   window.location.href='/hello/screen';
+   ```
+
 ## Nginx配置
 
 ```shell
@@ -102,7 +129,7 @@ server {
 }
 ```
 
-http://nginx.org/en/docs/http/ngx_http_core_module.html#alias
+[Module ngx_http_core_module #alias](http://nginx.org/en/docs/http/ngx_http_core_module.html#alias)
 
 `nginx -t`
 

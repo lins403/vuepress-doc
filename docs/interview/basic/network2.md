@@ -194,8 +194,10 @@ Tip: localStorage的使用需要注意命名规范，如果需要设置过期时
 
 - 强缓存
 - 协商缓存
+  - 协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程
 
-根据 response header 中的 `Cache-Control` 和 `Expires` 判断缓存是否过期，同时记录header中的 `etag` 和 `last-modified`，如果没有过期则直接使用浏览器缓存，如果过期，将 etag 值作为 `If-None-Match`，last-modified 值作为 `if-modified-since`，添加到request header 中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
+
+用户请求资源，浏览器发送请求前，检查是否存在缓存，如果存在，则先根据 response header 中的 `Cache-Control` 和 `Expires` 判断缓存是否过期，同时记录header中的 `etag` 和 `last-modified`，如果没有过期则直接使用浏览器缓存，如果过期，将 etag 值作为 `If-None-Match`，last-modified 值作为 `if-modified-since`，添加到request header 中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
 
 - Cache-Control: max-age=31536000（使用相对时间，同时使用时优先级更高）
 - Expires: Wed, 19 Oct 2022 04:54:02 GMT（使用基于服务器的绝对时间）

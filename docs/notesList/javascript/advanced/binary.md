@@ -4,6 +4,10 @@
 
 `ArrayBuffer` 是核心对象，是所有的基础，是原始的二进制数据。
 
+> `ArrayBuffer`对象、`TypedArray`视图和`DataView`视图是 JavaScript 操作二进制数据的一个接口。
+>
+> 它们都是以数组的语法处理二进制数据，所以统称为二进制数组。
+
 1. `ArrayBuffer` 是对固定长度的连续内存空间的引用
 
 ```js

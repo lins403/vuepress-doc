@@ -21,6 +21,14 @@ module.exports = {
 }
 ```
 
+### 3）index.html中加载外部脚本
+
+```html
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- 最好带上type="text/javascript"，否则在https域名下可能有意外的错误 -->
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+```
+
 ## 踩坑
 
 ### 2）eslint8与vue-eslint-parser不兼容

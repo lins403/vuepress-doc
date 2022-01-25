@@ -63,5 +63,6 @@ Vendor prefixes
 ### 经验心得
 
 - margin一般是用来设置兄弟元素之间的间距。padding一般是设置父子元素之间的间距
+- `background : url("//example.com/a/b/c/d.png");` 根据站点类型自动补上http或https
 
 ### 
