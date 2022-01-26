@@ -332,7 +332,6 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
       collapsable: false,
       children: [
         'advanced/',
-        'advanced/skills',
         'advanced/engine',
         'advanced/execution-context',
         'advanced/memory-garbage-collection',
@@ -340,6 +339,8 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'advanced/design-pattern',
         'advanced/libraries',
         'advanced/binary',
+        'advanced/skills',
+        'advanced/applications',
       ]
     },
   ]

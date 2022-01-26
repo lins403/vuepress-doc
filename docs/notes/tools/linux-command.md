@@ -243,6 +243,6 @@ curl -I -XHEAD http://www.baidu.com
 ### zip
 
 ```shell
-zip -r build.zip ./build
+zip -r build.zip .
 ```
 
