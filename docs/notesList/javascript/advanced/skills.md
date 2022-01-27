@@ -1,25 +1,10 @@
 # 技巧
 
-## 1）判断变量是否存在
-
-```js
-// 错误的写法
-if (v) {
-  // ...
-}
-// ReferenceError: v is not defined
-// ---------------------------------------
-// 正确的写法
-if (typeof v === "undefined") {
-  // ...
-}
-```
+## 1）
 
 ## 2）void
 
 一些情况下 `undefined` 会被编译为 `void 0`，所以理论上后者要快一些
-
-[void operator - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void)
 
 void的妙用
 
@@ -90,7 +75,22 @@ Array.prototype.forEach.call([3,2,1], print)
 
 
 
-## 4）变量的声明
+## 4）变量
+
+## 判断变量是否存在
+
+```js
+// 错误的写法
+if (v) {
+  // ...
+}
+// ReferenceError: v is not defined
+// ---------------------------------------
+// 正确的写法
+if (typeof v === "undefined") {
+  // ...
+}
+```
 
 ### Object.freeze()冻结一个常量对象
 
@@ -100,5 +100,14 @@ const声明一个对象，但这个对象的属性值依然可以修改，要避
 const o3 = Object.freeze({});
 o3.name = 'Jake';
 console.log(o3.name); // undefined
+```
+
+### 使用Object.is比较多个值
+
+```js
+// 递归
+function recursivelyCheckEqual(x, ...rest) {
+  return Object.is(x, rest[0]) && (rest.length < 2 || recursivelyCheckEqual(...rest));
+}
 ```
 

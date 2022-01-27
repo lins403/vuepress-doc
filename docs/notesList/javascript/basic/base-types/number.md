@@ -126,6 +126,7 @@ Number(10).toString(16)		//'a'
 NaN === NaN  //false
 'NaN'==NaN	//false
 typeof NaN  //"number"
+Object.is(NaN,NaN)	//true
 ```
 
 ### Number

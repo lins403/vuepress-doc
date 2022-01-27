@@ -175,7 +175,7 @@ server {
   charset utf-8;    # 防止中文文件名乱码
 
   location /download {
-    alias	          /usr/share/nginx/html/static;  # 静态资源目录
+    alias	          /usr/share/nginx/html/static/;  # 静态资源目录
     
     autoindex               on;    # 开启静态资源列目录
     autoindex_exact_size    off;   # on(默认)显示文件的确切大小，单位是byte；off显示文件大概大小，单位KB、MB、GB
@@ -299,6 +299,14 @@ nginx -t -q
 nginx -s reload
 ```
 
+### 拆分配置文件
+
+```nginx
+include /etc/nginx/conf.d/*.conf
+# 如果放在http中，就可以在模块conf文件中添加server
+# 如果放在server中，就可以在模块conf文件中添加location
+```
+
 ### location URI结尾带不带 /
 
 结论：location 中的字符有没有 `/` 都没有影响，效果完全一致
@@ -335,6 +343,19 @@ location ^~/todo/{
 }
 ```
 
+### 去掉304 Not Modified
+
+```nginx
+location / {
+		expires -1;
+		if_modified_since off;
+		add_header Last-Modified "";
+		add_header Cache-Control no-cache;
+		etag off;
+        ......
+}
+```
+
 
 
 ## 踩坑
@@ -362,17 +383,31 @@ location /yourPath {
 }
 ```
 
-### 去掉304 Not Modified
+### 代理重写失效
 
 ```nginx
-location / {
-		expires -1;
-		if_modified_since off;
-		add_header Last-Modified "";
-		add_header Cache-Control no-cache;
-		etag off;
-        ......
+location /your-api {
+	#rewrite ^/iot-large/login/(.*)$ /$1 break;
+	#proxy_pass http://remote_ip:1234/api;
+  rewrite ^/iot-large/login/(.*)$ /api/$1 break;
+  proxy_pass http://remote_ip:1234;
 }
+```
+
+### 配置websocket
+
+```nginx
+location /wx {
+    rewrite ^/wx/(.*) /$1 break;
+    proxy_pass http://<websocket-server-ip>:1234;
+    proxy_http_version 1.1;
+    proxy_connect_timeout 4s;
+    proxy_read_timeout 120s;
+    proxy_send_timeout 10s;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+}
+wss:<your-website-url>/wx
 ```
 
 

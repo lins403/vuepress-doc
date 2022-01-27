@@ -332,6 +332,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
       collapsable: false,
       children: [
         'advanced/',
+        'advanced/object-oriented',
         'advanced/engine',
         'advanced/execution-context',
         'advanced/memory-garbage-collection',

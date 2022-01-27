@@ -57,6 +57,7 @@
 | flaky                | 不可靠的           | enroll for                  | 参加，注册           |
 | foster               | 促进               |                             |                      |
 | gurus                | 领袖，专家         |                             |                      |
+| gratis               | 免费地，无偿地     |                             |                      |
 | hassle               | 麻烦               |                             |                      |
 | instill              | 灌输               |                             |                      |
 | intrigued            | 好奇的             |                             |                      |
