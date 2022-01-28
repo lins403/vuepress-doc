@@ -2,15 +2,15 @@
 
 ## 基础
 
-> 每个构造函数都有一个原型对象`prototype`，原型有一个属性`constructor`指回构造函数，而实例有一个内部指针`[[prototype]]`指向原型 `person1.__proto__ === Person.prototype`
+> 每个构造函数都有一个**原型对象**`prototype`，原型有一个属性`constructor`指回构造函数，而实例有一个内部指针`[[prototype]]`（**原型指针**）指向原型 `person1.__proto__ === Person.prototype`
 
-### new操作符
+### 1）new操作符
 
 1. 在内存中创建一个新对象
 2. 这个新对象内部的`[[Prototype]]`特性，即`__proto__`属性，被赋值为构造函数的 prototype 属性
 3. 构造函数内部的 this 被赋值为这个新对象 (即 this 指向新对象)
 4. 执行构造函数内部的代码 (给新对象添加属性)
-5. 如果构造函数返回非空对象，则返回该对象;否则，返回刚创建的新对象
+5. 如果构造函数返回非空对象，则返回该对象；否则，返回刚创建的新对象
 
 ```js
 function MyNew(Constructor, ...arg) {
@@ -27,7 +27,7 @@ function MyNew(Constructor, ...arg) {
 }
 ```
 
-### 构造函数
+### 2）构造函数
 
 ```js
 // 作为构造函数
@@ -46,7 +46,7 @@ o.sayName(); // "Kristen"
 
 构造函数的主要问题在于，其定义的方法会在每个实例上都创建一遍，而不能共享方法
 
-### 原型prototype
+### 3）原型prototype
 
 每个函数都会创建一个 `prototype` 属性，指向原型对象，使用这个构造函数创建的实例的内部`[[Prototype]]`指针指向这个原型对象
 
@@ -92,7 +92,7 @@ console.log(person1.friends)	// ['张三', '李四', '王五']
 console.log(person2.friends)	// ['张三', '李四', '王五']
 ```
 
-### 原型链
+### 4）原型链
 
 ```js
 // 正常的原型链都会终止于 Object 的原型对象，Object原型的原型是null
@@ -205,7 +205,7 @@ let person2 = createPerson("Greg", 27, "Doctor");
 
 ### 2. 构造函数模式
 
-原型方法不能在实例之间共享
+缺陷：原型方法不能在实例之间共享
 
 ```js
 // 自定义引用类型
@@ -263,11 +263,13 @@ console.log(person1.sayName == person2.sayName); // true
 SubType.prototype = new SuperType();
 ```
 
+JavaScript 的继承主要通过原型链来实现。原型链涉及把构造函数的原型赋值为另一个类型的实例。 这样一来，子类就可以访问父类的所有属性和方法，就像基于类的继承那样。
+
 ### 模式
 
 <img src="https://raw.githubusercontent.com/lins403/assetsSpace/master/vuepress/img/js_inherit_mode.png" style="zoom:50%;" />
 
-1. #### 原型链
+1. #### 原型链继承
 
    - 共享的原型属性被污染
      - 原型中包含的引用值会在所有实例间共享，所以属性通常会在构造函数中定义而不会定义在原型上
@@ -275,7 +277,7 @@ SubType.prototype = new SuperType();
 
 2. #### 盗用构造函数
 
-   - 在子类构造函数中调用父类构造函数
+   - 在子类构造函数中调用父类构造函数，从而可以让每个实例继承的属性都是私有的
    - 主要问题：父类方法必须在构造函数中定义，因此函数不能重用；子类也不能访问父类原型上定义的方法
 
    ```js
@@ -296,7 +298,7 @@ SubType.prototype = new SuperType();
 3. #### 组合继承
 
    - 是 JavaScript 中使用最多的继承模式
-   - 使用原型链继承原型上的属性和方法，而通过盗用构造函数继承实例属性
+   - 使用`原型链`继承原型上的属性和方法，而通过`盗用构造函数`继承实例属性
    - 这样既可以把方法定义在原型上以实现重用，又可以让每个实例都有自己的父类属性的副本
    - 组存在效率问题，父类构造函数始终会被调用两次：一次在是创建子类原型时调用，另一次是在子类构造函数中调用
 
@@ -327,7 +329,8 @@ SubType.prototype = new SuperType();
 
 4. #### 原型式继承
 
-   - 跟使用原型模式一样，属性中包含的引用值始终会在相关对象间共享
+   - 原型式继承可以无须明确定义构造函数而实现继承，本质上是对给定对象执行浅复制
+   - 但是跟原型链继承一样，属性中包含的引用值始终会在相关对象间共享
 
    ```js
    let person = {
@@ -364,6 +367,8 @@ SubType.prototype = new SuperType();
    
 
 6. #### 寄生组合继承
+
+   - 寄生组合继承被认为是实现基于类型继承的最有效方式
 
    ```js
    function SuperType(name){
@@ -403,9 +408,10 @@ SubType.prototype = new SuperType();
    let instance1 = new SubType("Nicholas", 29);
    ```
 
-   
 
-## 类
 
-- ECMAScript 6 新增的类很大程度上是基于既有原型机制（寄生组合继承）的语法糖
-- 类有效地跨越了对象实例、对象原型和对象类之间的鸿沟
+# 参考
+
+[一篇文章理解JS继承——原型链/构造函数/组合/原型式/寄生式/寄生组合/Class extends](https://segmentfault.com/a/1190000015727237)
+
+《JavaScript高级程序设计（第4版）》— 第 8章 对象、类与面向对象编程

@@ -325,6 +325,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'es6/symbol',
         'es6/set-map',
         'es6/iterator-generator',
+        'es6/class',
       ]
     },
     {
