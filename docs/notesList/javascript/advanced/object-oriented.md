@@ -27,6 +27,36 @@ function MyNew(Constructor, ...arg) {
 }
 ```
 
+#### new.target
+
+函数表达式和箭头函数中都不能使用，普通函数中new.target为undefined
+
+```js
+// 使用 new.target 检测一个函数是否是作为构造函数通过new被调用的
+function Foo() {
+  if (!new.target) throw "Foo() must be called with new";
+  console.log("Foo instantiated with new");
+}
+
+Foo(); // throws "Foo() must be called with new"
+new Foo(); // logs "Foo instantiated with new"
+```
+
+```js
+// 构造函数中的new.target
+class A {
+  constructor() {
+    console.log(new.target.name);
+  }
+}
+class B extends A { constructor() { super(); } }
+
+var a = new A(); // logs "A"
+var b = new B(); // logs "B"
+```
+
+
+
 ### 2）构造函数
 
 ```js

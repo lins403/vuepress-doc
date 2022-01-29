@@ -311,7 +311,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'basic/base-types/object',
         'basic/base-types/function',
         'basic/reference',
-        'basic/oop',
+        'basic/call-apply',
         'basic/dom',
         'basic/json',
         'basic/utils',
@@ -326,6 +326,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'es6/set-map',
         'es6/iterator-generator',
         'es6/class',
+        'es6/proxy-reflect',
       ]
     },
     {

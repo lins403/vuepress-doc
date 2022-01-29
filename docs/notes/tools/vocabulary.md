@@ -54,6 +54,7 @@
 | encapsulation        | 封装               | fully-fledged               | 完善的               |
 | escaping             | 转义               | be part of a boot-camp      | 新兵训练营的一员     |
 | estimate             | 估算、约等         | free coupons                | 免费优惠券           |
+| factorial            | 阶乘               |                             |                      |
 | flaky                | 不可靠的           | enroll for                  | 参加，注册           |
 | foster               | 促进               |                             |                      |
 | gurus                | 领袖，专家         |                             |                      |
