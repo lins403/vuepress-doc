@@ -189,6 +189,8 @@ if (condition) {
 
 ### 递归
 
+递归写法主要有如下三种：
+
 ```js
 function factorial(num) {
   if (num <= 1) {
@@ -217,9 +219,82 @@ const factorial = (function f(num) {
 });
 ```
 
-### 尾调用
+再改进：严格模式下，JavaScript引擎会使用**尾调用优化**
+
+```js
+"use strict";
+const factorial = function f(num, res=1) {
+  return (num <= 1) ? res: f(num-1, res*num)
+}
+```
+
+
+
+### 尾调用优化
+
+ECMAScript 6 规范新增了一项内存管理优化机制，让 JavaScript引擎在满足条件时可以重用栈帧，从而让嵌套函数被执行时，栈内存都只有一个栈帧（调用帧），条件如下：
+
+1. 代码在严格模式下执行;
+2. 外部函数的返回值是对尾调用函数的调用
+3. 尾调用函数返回后不需要执行额外的逻辑
+4. 尾调用函数不是引用外部函数作用域中自由变量的闭包
+
+```js
+"use strict";
+
+// 有优化:栈帧销毁前执行参数计算 
+function outerFunction1(a, b) { 
+  return innerFunction(a + b);
+}
+
+// 有优化:初始返回值不涉及栈帧 
+function outerFunction2(a, b) {
+  if (a < b) {
+    return a;
+  }
+  return innerFunction(a + b);
+}
+
+// 有优化:两个内部函数都在尾部 
+function outerFunction3(condition) {
+  return condition ? innerFunctionA() : innerFunctionB();
+}
+
+// 无优化:尾调用没有直接返回 
+function outerFunction4() {
+  let innerFunctionResult = innerFunction();
+  return innerFunctionResult;
+}
+```
+
+优化需要运算的尾调用递归，栈内存中每次就只需要保存一个调用帧，所以永远不会发生“栈溢出”错误
+
+```js
+// 无优化:尾调用返回后还需要运算 - O(n)
+function fib(n) {
+  if (n < 2) {
+    return n; 
+  }
+  return fib(n - 1) + fib(n - 2);
+}
+
+// workaround - O(1)
+"use strict";
+function fib(n, a=0, b=1) {
+  if(n<1) return a
+  return fib(n-1, b, a+b);
+}
+```
 
 ### 闭包
+
+闭包（closure）指的是那些引用了另一个函数作用域中变量的函数，通常是在嵌套函数中实现的。
+
+[执行上下文与作用域](../../advanced/execution-context.md)
+
+外部函数的活动对象是内部函数作用域链上的第二个对 象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止。
+
+在函数执行时，要从作用域链中查找变量，以便读、写值。
 
 ### 立即调用函数
 
@@ -255,3 +330,4 @@ eval("let msg = 'hello world';");
 ```
 
 在严格模式下，在 eval()内部创建的变量和函数无法被外部访问
+
