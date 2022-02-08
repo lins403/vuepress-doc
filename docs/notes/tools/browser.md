@@ -5,6 +5,27 @@
 - 浏览器对象模型（Browser Object Model，简称 BOM），也就是 `window` 对象
 - 文档对象模型（Document Object Model，简称 DOM），也就是 `document` 对象
 
+## 浏览器分析
+
+```js
+console.log(window.navigator.userAgent)	//用户代理
+
+ 浏览器
+ 浏览器版本
+ 浏览器渲染引擎
+ 设备类型(桌面/移动)
+ 设备生产商
+ 设备型号
+ 操作系统
+ 操作系统版本
+
+console.log(window.navigator.platform)
+console.log(navigator.deviceMemory)
+console.log(navigator.hardwareConcurrency)
+```
+
+
+
 ## 离线存储
 
 ### localStorage

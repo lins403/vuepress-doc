@@ -12,6 +12,7 @@ function fun(a, b, ...params) {
     //类数组对象
   console.log(arguments)
   console.log(Array.prototype.slice.call(arguments))
+  console.log(Array.from(arguments))
 }
 
 //函数标识符
@@ -267,7 +268,7 @@ function outerFunction4() {
 }
 ```
 
-优化需要运算的尾调用递归，栈内存中每次就只需要保存一个调用帧，所以永远不会发生“栈溢出”错误
+优化需要运算的尾调用递归，栈内存中每次就只需要保存一个调用帧，所以可以节省栈空间，而且永远不会发生“栈溢出”错误
 
 ```js
 // 无优化:尾调用返回后还需要运算 - O(n)
@@ -292,11 +293,71 @@ function fib(n, a=0, b=1) {
 
 [执行上下文与作用域](../../advanced/execution-context.md)
 
-外部函数的活动对象是内部函数作用域链上的第二个对 象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止。
+闭包的作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止。
 
-在函数执行时，要从作用域链中查找变量，以便读、写值。
+包含函数执行完毕后，其执行上下文的作用域链会销毁，但它的活动对象仍然会保留在内存中，直到闭包被销毁后才会被销毁。因此闭包比其他函数更占用内存。过度使用闭包可能导致内存过度占用，因此建议仅在十分必要时使用
+
+闭包经典实用场景（柯里化、防抖节流）
+
+- return函数
+- 函数作为参数
+- IIFE自执行函数
+- setTimeout
+- 所有的回调函数
+
+#### this指向
+
+如果内部函数没有使用箭头函数定义，则 this 对象会在运 行时绑定到执行函数的上下文
+
+```js
+window.identity = 'The Window';
+let object = {
+  identity: 'My Object',
+  getIdentityFunc() {
+    const that = this
+    return function() {
+      console.log(that.identity)	//'My Object'
+      return this.identity;
+    }; 
+  }
+};
+console.log(object.getIdentityFunc()()); // 'The Window'
+```
 
 ### 立即调用函数
+
+立即调用的匿名函数又被称作立即调用的函数表达式(IIFE，Immediately Invoked Function Expression)。
+
+#### 模拟块作用域
+
+```js
+// ES6引入块作用域以前，使用 IIFE 模拟块级作用域是相当普遍的
+(function() { 
+  // 块级作用域
+  var foo = 'hello world'
+})()
+console.log(foo)	//ReferenceError: foo is not defined
+```
+
+#### 锁定参数
+
+```js
+// 使用IIFE锁定参数
+for(var i = 0; i < 3; i++) {
+  (function(j){
+    setTimeout(function() {
+      console.log(j)
+    }, 0)
+  })(i)
+}
+
+// 使用let声明循环变量
+for(let i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i)
+  }, 0)
+}
+```
 
 
 
@@ -330,4 +391,41 @@ eval("let msg = 'hello world';");
 ```
 
 在严格模式下，在 eval()内部创建的变量和函数无法被外部访问
+
+### 函数柯里化
+
+#### 管道函数(简易版)
+
+```js
+const pipe = (...fns) => x => fns.reduce((acc, fn) => fn(acc), x)		//从左向右
+console.log(pipe(Math.ceil, Math.abs)(-1.49))	//1
+console.log(pipe(Math.abs, Math.ceil)(-1.49))	//2
+```
+
+#### 组合函数(复杂版)
+
+```js
+// https://github.com/reduxjs/redux/blob/master/src/compose.ts
+function compose(...funcs) {
+  if (funcs.length === 0) {
+    return arg => arg;
+  }
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+  // return funcs.reduce((a, b) => (...args) => a(b(...args)))	//从右向左（reduceRight）
+  return funcs.reduce((a, b) => (...args) => b(a(...args)))
+}
+
+const composeMixins = (...mixins) => (
+  instance = {},
+  mix = compose
+) => mix(...mixins)(instance)
+composeMixins(Math.ceil, Math.abs)(-1.49)
+
+const minus = (a,b) => a-b
+const positive = v => !!(v>0)
+const chains = compose(minus, positive)
+console.log(chains(2,1))	// true
+```
 

@@ -312,6 +312,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'basic/base-types/function',
         'basic/reference',
         'basic/call-apply',
+        'basic/bom',
         'basic/dom',
         'basic/json',
         'basic/utils',

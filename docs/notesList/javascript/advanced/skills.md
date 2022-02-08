@@ -52,10 +52,11 @@ for(let i = arr.length; i--;) {...} // 注意 i-- 后面的分号别漏了
 ```
 1) forEach
   - break和return都不能中断循环
+  - forEach 遍历数组会自动跳过空元素
 
 2) for-in
-  - 使用for in会遍历数组所有的可枚举属性，包括prototype上的原型和方法
-  - for in更适合遍历对象，不应该用来遍历数组。
+  - 使用for in会遍历数组所有的可枚举属性，包括prototype上的原型和方法，例如keys、values、forEach、length、...
+  - for in更适合遍历对象，不应该用来遍历数组或类数组对象。
 
 3) for-of
   - for (var value of myArray) { console.log(value) }
@@ -109,5 +110,40 @@ console.log(o3.name); // undefined
 function recursivelyCheckEqual(x, ...rest) {
   return Object.is(x, rest[0]) && (rest.length < 2 || recursivelyCheckEqual(...rest));
 }
+```
+
+
+
+## Promise
+
+### 进度追踪
+
+```js
+class TrackablePromise extends Promise {
+  constructor(executor) {
+    const notifyHandlers = []
+    super((resolve, reject) => {
+      return executor(resolve, reject, (status) => {
+        notifyHandlers.map((handler) => handler(status)); });
+    })
+    this.notifyHandlers = notifyHandlers
+  }
+  notify(notifyHandler) {
+    this.notifyHandlers.push(notifyHandler)
+    return this
+  } 
+}
+
+let p = new TrackablePromise((resolve, reject, notify) => { 
+  function countdown(x) {
+    if (x > 0) {
+      notify(`${20 * x}% remaining`)
+      setTimeout(() => countdown(x - 1), 1000)
+    } else {
+      resolve()
+    }
+  }
+  countdown(5)
+})
 ```
 

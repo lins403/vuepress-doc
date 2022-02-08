@@ -134,6 +134,18 @@ console.log(bus)
 console.log(Bus.identify())
 ```
 
+```js
+// 重写构造函数
+class Bus extends Vehicle {
+  // generated for extending classes without own constructors
+  constructor(...args) {
+    super(...args);
+  }
+}
+```
+
+
+
 ## 🌰例子
 
 ### 实例工厂函数

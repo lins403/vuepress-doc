@@ -391,6 +391,8 @@ Async-Await ≈ Generators + Promises
 - async/await 的 polyfill 是通过 generator 实现
 - async 实现原理，就是将 Generator 函数和自动执行器，包装在这个async函数里
 
+JavaScript 运行时在碰 到 await 关键字时，会记录在哪里暂停执行。等到 await 右边的值可用了，JavaScript 运行时会向消息队列中推送一个任务，这个任务会恢复异步函数的执行。
+
 ```js
 async function fn(args){
   // ...
@@ -411,6 +413,108 @@ function fn(args){
 2. 正常情况下`await`命令后面是一个 Promise 对象，返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值
 3. `async`函数返回的 Promise 对象，必须等到内部所有`await`命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到`return`或者`throw`语句
 4. 任何一个`await`语句后面的 Promise 对象变为`reject`状态，那么整个`async`函数都会中断执行。需要catch异步操作失败，才能不中断后面的异步操作
+
+### 例子
+
+#### 1)
+
+```js
+async function foo() {
+  console.log(2);
+  console.log(await 4);
+  console.log(5);
+}
+console.log(1);
+foo();
+console.log(3);
+//1 2 3 4 5
+```
+
+打印1，调用异步函数foo；
+
+打印2，遇到await时暂停执行，并且将await后面的表达式或值，作为一个异步任务添加到消息队列中，然后退出 foo 函数的执行；
+
+打印3，这时同步线程的代码执行完毕，然后JavaScript runtime（运行时）从消息队列中取出任务，求得异步任务的值4，然后注入并恢复异步函数的执行；
+
+foo函数恢复执行，await 取得值4，然后打印 4；
+
+打印5，然后foo函数return，执行结束。
+
+#### 2)
+
+```js
+async function foo() {
+  console.log(2);
+  console.log(await Promise.resolve(8));
+  console.log(9);
+}
+async function bar() {
+  console.log(4);
+  console.log(await 6);
+  console.log(7);
+}
+console.log(1);
+foo();
+console.log(3);
+bar();
+console.log(5);
+//1 2 3 4 5 6 7 8 9
+// Promise.resolve 属于微任务
+```
+
+#### 3) sleep
+
+```js
+const sleep = delay => {
+	return new Promise(async resolve => {
+		await setTimeout(resolve, delay)
+	})
+}
+console.log(1)
+await sleep(2000)
+console.log(3.14159265358979323846264)
+```
+
+#### 4) 并行加速（没有严格按照词法顺序执行）
+
+```js
+async function foo() {
+  const t0 = Date.now();
+  const p1 = asyncFunction(1);
+  const p2 = asyncFunction(2);
+  const p3 = asyncFunction(3);
+  await p1;
+  await p2;
+  await p3;
+  setTimeout(console.log, 0, `${Date.now() - t0}ms elapsed`);
+}
+foo();
+```
+
+```js
+// 使用for循环改进写法
+async function foo() {
+  const t0 = Date.now();
+  const promises = Array(5).fill(null).map((_, i) => asyncFunction(i));
+  for (const p of promises) {
+    await p;
+  }
+  console.log(`${Date.now() - t0}ms elapsed`);
+}
+foo();
+```
+
+
+
+```js
+function fooPromiseExecutor(resolve, reject) {
+  setTimeout(reject, 1000, 'bar');
+}
+async function foo() {
+  await new Promise(fooPromiseExecutor);
+}
+foo()
+```
 
 
 

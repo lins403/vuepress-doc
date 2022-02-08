@@ -6,8 +6,11 @@
 
 - 使用 new 操作符和 Array 构造函数
 
-  ```
+  ```js
   const colors = new Array("red", "blue", "green")
+  
+  Array(3).fill()	//[undefined, undefined, undefined]
+  Array(3).fill(0)	//[0, 0, 0]
   ```
 
 - 使用数组字面量(array literal)表示法（并不会调用Array构造函数）
@@ -18,10 +21,18 @@
   const options = [,,,,,]; // 创建包含 5 个元素的数组，占位数组(undefined填充)
   ```
 
-- 使用ES6新增的静态方法 Array.of
+- 使用ES6新增的静态方法 `Array.of`
 
   ```
   Array.of("red", "blue", "green")
+  ```
+
+
+- `Array.from`转换类数组对象
+
+  ```js
+  Array.from({ length: 3 }, () => 1)	//[1, 1, 1]
+  Array.from({ length: 3 }, (value, index)=>index)	//[0, 1, 2]
   ```
 
   
@@ -45,7 +56,7 @@ console.log(Array.prototype)
 const arr = ['a', 'b', 'c']
 
 copyWithin()
-fill()
+fill(value[, start[, end]])
 
 forEach()
 keys()
@@ -95,12 +106,13 @@ Array(1, 2, 3); // [1, 2, 3]
 Array.of(1, 2, 3); // [1, 2, 3]
 ```
 
-
+#### `Array.from(arrayLike[, mapFn[, thisArg]])`
 
 ```js
 /* Array.from() 类数组结构(任何可迭代对象)=>数组实例 */
 Array.from('foo')  // ["f", "o", "o"]
 Array.from([1, 2, 3], x => x + x)  // [2, 4, 6]
+Array.from({length: 5}, (v, i) => i);	// [0, 1, 2, 3, 4]
 
 // 传入一个迭代器
 const iter = {
@@ -145,9 +157,44 @@ Array.apply(null, { length: 5 }).map(()=>{console.log(1)})
 ### 数组去重
 
 ```js
+// 数组去重
 Array.from(new Set(arr))
 // or
 [...new Set(arr)]
 
-const str = [...new Set("zhhsajwnns")].join(""); //字符串去重
+
+//字符串去重
+const str = [...new Set("zhhsajwnns")].join("")
+
+
+// 数组去重合并
+function combine(){
+  const arr = Array.from(arguments).flat()
+  return Array.from(new Set(arr))
+}
+var m = [1, 2, 2], n = [2,3,3]
+combine(m,n)	//[1, 2, 3]
 ```
+
+### 序列生成器
+
+```js
+const range = (start, end, step) => Array.from({ length: (end - start) / step + 1 }, (_, index) => start + index * step)
+// 示例
+range(0, 4, 1)		// [0, 1, 2, 3, 4]
+range(1,10,2)		// [1, 3, 5, 7, 9]
+```
+
+### flat的polyfill
+
+```js
+const flatDeep = (arr, depth = 1) => {
+  if (depth === 0) return arr.slice()
+  return arr.reduce((acc, cur) => acc.concat(Array.isArray(cur) ? flatDeep(cur, depth - 1) : cur), [])
+}
+var arr1 = [1, 2, 3, [1, 2, 3, 4, [2, 3, 4]]]
+flatDeep(arr1)
+flatDeep(arr1, 2)
+flatDeep(arr1, Infinity)
+```
+
