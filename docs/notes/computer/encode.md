@@ -3,7 +3,7 @@
 ## Unicode、UTF
 
 - `Unicode` 编码只是定义了字符集
-- `UTF `(Unicode Transformation Format) 系列编码就是对 Unicode 字符集的实现（如何存储）
+- `UTF `(Unicode Transformation Format) 系列编码就是对 Unicode 字符集的**实现**（如何存储）
 
 ## 编码空间
 
@@ -16,14 +16,21 @@
 
 `代码点`（Code Point)：一个代码点等同于一个 Unicode 字符，就是某个任意字符在Unicode编码表中对应的代码值
 
-`码元`（Code Unit，也称“代码单元”）指一个已编码的文本中具有**最短**的比特组合的单元，是最小的不可拆分的部分
+`码元`（Code Unit，也称“代码单元”）指一个已编码的文本中具有最短的**比特组合的单元**，是最小的不可拆分的部分
 
 - 对于 UTF-8 来说，码元是8比特长（1个字节）；对于UTF-16来说，码元是16比特长；对于UTF-32来说，码元是32比特长。码值（Code Value）是过时的用法。
+
+| Unicode 代码点  | U+0041   | U+00DF   | U+6771   | U+10400  |
+| --------------- | -------- | -------- | -------- | -------- |
+| 表示字形        |          |          |          |          |
+| UTF-32 代码单元 | 00000041 | 000000DF | 00006771 | 00010400 |
+| UTF-16 代码单元 | 0041     | 00DF     | 6771     | D801DC00 |
+| UTF-8 代码单元  | 41       | C39F     | E69DB1   | F0909080 |
 
 ## UTF-8、UTF-16、UTF-32
 
 - `UTF-8` 使用 **1-4** 个字节，ASCII 使用一个字节编码
-- `UTF-16` 大部分使用 **2** 个字节，小部分是 **4** 个字节
+- `UTF-16` 大部分(Plane0区间内的字符)使用 **2** 个字节，小部分是 **4** 个字节
 - `UTF-32` 全部使用 **4** 个字节
 
 > `UTF-8` uses anywhere from one to four bytes per character depending on what character you're encoding. Characters within the ASCII range take only one byte while very unusual characters take four.
@@ -62,11 +69,11 @@
 
 #### UTF-16与UCS-2的关系
 
-UTF-16 可看成是 UCS-2 的父集。
+UTF-16 可看成是 UCS-2 的超集。
 
 UCS-2 编码只能表示Plane0范围内（小于0x10000）的字符，这个范围内UTF-16编码就等于UCS码。
 
-在没有辅助平面字符前，UTF-16与UCS-2所指的是同一的意思，但当引入辅助平面字符后，就称为UTF-16了。
+在没有辅助平面字符前，UTF-16与UCS-2所指的是同一个意思，但当引入辅助平面字符后，就称为UTF-16了。
 
 ### 优缺点比较
 
@@ -78,13 +85,13 @@ UCS-2 编码只能表示Plane0范围内（小于0x10000）的字符，这个范�
 
 ## 大端模式与小端模式
 
-在计算机中，数据的存储是以字节为单位的，那么当一个字符需要使用多个字节来表示的时候，就会产生一个问题，那就是多字节字符应该从前往后组合还是从后往前组合
+在计算机中，数据的存储是以字节为单位的，那么当一个字符需要使用多个字节来表示的时候，就会产生一个问题，那就是<u>多字节字符应该从前往后组合还是从后往前组合</u>
 
 `大端模式`(Big-endian)：最高有效位保存在第一个字节，而最低有效位保存在最后一个字节
 
 - 数据的高字节位保存在内存的低地址中，而数据的低字节位保存在内存的高地址中
 
-`小端模式` (Little-endian)：最低有效位保存在第一个字节，最高有效位保存在最后一个字节
+`小端模式` (Little-endian)：最低有效位保存在第一个字节，最高有效位保存在最后一个字节（与二进制表达式方向一致）
 
 ```js
 // 以 `双` 字为例，转成二进制为：0101001111001100，
@@ -122,6 +129,11 @@ JPEG、Adobe PS – Big Endian
 如果上面这一行最后的charset是UTF-8，则URL就以UTF-8编码；如果是GB2312，URL就以GB2312编码。
 
 举例来说，百度是GB2312编码，Google是UTF-8编码。因此，从它们的搜索框中搜索同一个词"春节"，生成的查询字符串是不一样的。
+
+```js
+console.log(document.charset)
+console.log(document.characterSet)
+```
 
 ### encodeURI() 与 encodeURIComponent()
 

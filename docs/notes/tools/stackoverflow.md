@@ -29,3 +29,13 @@
 > ```
 >
 > I ... so i can be certain it is present its available for selection.
+
+
+
+
+
+## Blog
+
+1. [Using requestAnimationFrame | CSS-Tricks - CSS-Tricks](https://css-tricks.com/using-requestanimationframe/)
+
+> There is a better alternative to this now. [Paul Irish introduced](https://www.paulirish.com/2011/requestanimationframe-for-smart-animating/) `requestAnimationFrame` over two years ago. I don’t have a whole lot to add to it, I just had never actually used it before and now I have so I thought I’d help spread the word and write about its basic usage.

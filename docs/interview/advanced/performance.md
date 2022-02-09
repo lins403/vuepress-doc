@@ -8,7 +8,8 @@
 - When to prefetch and preload resources.
 - Reduce browser reflows and when to promote an element to the GPU.
 - Differences between the browser layout, compositing and painting.
-- 
+
+
 
 ## 检测
 
@@ -28,6 +29,8 @@
 - 渲染优化
 
 ## TODO
+
+https://developers.google.com/web/fundamentals/performance/rendering?hl=zh-cn
 
 [5 分钟撸一个前端性能监控工具](https://juejin.cn/post/6844903662020460552)
 

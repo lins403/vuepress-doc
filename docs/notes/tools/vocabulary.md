@@ -138,6 +138,7 @@
 | You can pass in additional options here, but let's  keep it simple for now. |                |
 | The image below depicts that.                                |                |
 | Not much to see here, since …                                |                |
+| There is a better alternative to this now.                   |                |
 
 Me encantó tu
 

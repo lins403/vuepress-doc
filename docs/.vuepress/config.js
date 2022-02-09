@@ -314,6 +314,8 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'basic/call-apply',
         'basic/bom',
         'basic/dom',
+        'basic/form',
+        'basic/event',
         'basic/json',
         'basic/utils',
       ]
@@ -343,6 +345,8 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'advanced/design-pattern',
         'advanced/libraries',
         'advanced/binary',
+        'advanced/animation',
+        'advanced/web-worker',
         'advanced/skills',
         'advanced/applications',
       ]
