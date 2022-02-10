@@ -106,9 +106,11 @@ Array(1, 2, 3); // [1, 2, 3]
 Array.of(1, 2, 3); // [1, 2, 3]
 ```
 
-#### `Array.from(arrayLike[, mapFn[, thisArg]])`
+#### `Array.from`
 
 ```js
+Array.from(arrayLike[, mapFn[, thisArg]])
+
 /* Array.from() 类数组结构(任何可迭代对象)=>数组实例 */
 Array.from('foo')  // ["f", "o", "o"]
 Array.from([1, 2, 3], x => x + x)  // [2, 4, 6]
@@ -148,7 +150,9 @@ console.log(getArgsArray(1, 2, 3, 4)); // [1, 2, 3, 4]
 Array(5).map(()=>{console.log(1)})
 // [empty × 5]
 // 没有打印内容
-// ------------------------------------------------------------
+```
+
+```js
 Array.apply(null, { length: 5 }).map(()=>{console.log(1)})
 // [undefined, undefined, undefined, undefined, undefined]
 // 打印了5次1

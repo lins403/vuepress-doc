@@ -4,7 +4,7 @@
 
 ### 编码
 
-JavaScript 字符串使用了两种 Unicode 编码混合的策略:UCS-2 和 UTF-16。对于可以采用 16 位编码 的字符(U+0000~U+FFFF)，这两种编码实际上是一样的。
+JavaScript 字符串使用了两种 Unicode 编码混合的策略:UCS-2 和 UTF-16。对于可以采用 16 位编码的字符(Plane0区间: U+0000~U+FFFF)，这两种编码实际上是一样的。
 
 所以实际上，JavaScript只支持 UTF-16 两字节的字符，不支持四字节的字符。
 
@@ -122,6 +122,18 @@ String.prototype[@@iterator]()	//用于迭代与解构，const iterator = str[Sy
 
 ```js
 // substring、substr、slice 都不会改变原字符串
+// MDN中推荐使用substring来替代substr
+str.substring(indexStart[, indexEnd])
+str.slice(beginIndex[, endIndex])
+str.substr(start[, length])
+```
+
+- 参数为负值时
+  - `substring`中转换为0
+  - `slice`中转化为length+参数值（即反向索引）
+  - `substr`中第一个参数也是反向索引，但第二个参数为负时会被转换为0
+
+```js
 let text = 'Mozilla'
 console.log(text.substring(2,5))  // => "zil"
 console.log(text.substr(2,3))     // => "zil"

@@ -16,6 +16,16 @@
 | Exponent              | 11 bits |
 | Significant precision | 52 bits |
 
+::: tip 关于指数偏移量
+
+在32位浮点数中，指数位有8位，偏移量是127；（要扣除0和255）
+
+在64位浮点数中，指数位有11位，偏移量是1023；（要扣除0和2048）
+
+指数位也需要表示正负，所以一种做法是把高位置是1的数字当作负数，但这会给变量比较运算带来麻烦，所以通过给所有数加上偏移量，这样的话进行比较运算时就不存在负数，不会混淆。
+
+:::
+
 #### 🌰例子
 
 ```js
@@ -32,23 +42,24 @@
 
 ### 极限值
 
-安全整数（`Number.isSafeInteger()`）
+安全整数
 
-- `Number.MAX_SAFE_INTEGER` (-2<sup>53</sup> + 1)
+- `Number.isSafeInteger()`
 
-- `Number.MIN_SAFE_INTEGER` (2<sup>53</sup> - 1)
-
-`安全整数`：<u>在此范围内的整数和双精度浮点数是一一对应的</u>，不会存在一对多或多对一的情况。默认情况下，ECMAScript中的所有整数都表示为有符号数，即占用符号位
+- <u>在此范围内的整数和双精度浮点数是一一对应的</u>，不会存在一对多或多对一的情况。默认情况下，ECMAScript中的所有整数都表示为有符号数，即占用符号位
 
 `Number.EPSILON`：ES6，极小的常量，目的在于为浮点数计算设置一个误差范围，如果误差能够小于Number.EPSILON，我们就可以认为结果是可靠的。
 
 `Number.isFinite()`
 
 ```js
+Number.MAX_SAFE_INTEGER: 9007199254740991	// 2^53 - 1
+Number.MIN_SAFE_INTEGER: -9007199254740991	// -2^53 + 1
+Number.EPSILON: 2.220446049250313e-16
 Number.MIN_VALUE: 5e-324
+Number.POSITIVE_INFINITY: Infinity
 Number.NEGATIVE_INFINITY: -Infinity
 Number.NaN: NaN
-Number.POSITIVE_INFINITY: Infinity
 ```
 
 ### 拓展
@@ -68,13 +79,13 @@ Number.POSITIVE_INFINITY: Infinity
 单精度浮点数（`float`）
 
 - 在内存中占 4 个字节
-- 数符加尾数占 24 位，指数位（指数符加指数）占 8 位，指数偏移量 27-1
+- 数符加尾数占 24 位，指数位（指数符加指数）占 8 位，指数偏移量 2<sup>7</sup>-1
 - 2^23 = 8388608，一共七位，这意味着最多能有 7 位有效数字，但绝对能保证的为 6 位，也即float的精度为 6~7 位有效数字
 
 双精度浮点数（`double`）
 
 - 在内存中占 8 个字节
-- 数符加尾数占 ~~48~~ 53 位，指数符加指数占 ~~16~~ 11 位，指数偏移量 210-1
+- 数符加尾数占 ~~48~~ 53 位，指数符加指数占 ~~16~~ 11 位，指数偏移量 2<sup>10</sup>-1
 - 2^52 = 4503599627370496，一共16位，同理，double的精度为15~16 位
 
 

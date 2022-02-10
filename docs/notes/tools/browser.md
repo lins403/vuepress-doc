@@ -85,6 +85,8 @@ console.log(navigator.hardwareConcurrency)
 
 The pixel pipeline:  <u>JavaScript > Style calculations > Layout > Paint > Composite</u>
 
+像素管道：JavaScript » 样式计算 » 布局 » 绘制 » 合成
+
 **JavaScript**：使用 JavaScript 来实现一些视觉变化的效果
 
 **样式计算**：匹配selectors，应用css规则，计算每个元素的最终样式

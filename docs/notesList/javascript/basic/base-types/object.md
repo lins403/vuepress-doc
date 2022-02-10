@@ -8,7 +8,7 @@ ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意�
 
 - 使用 new 操作符和 Object 构造函数创建一个实例，然后再给它添加属性和方法
 
-  ```
+  ```js
   let person = new Object();
   person.name = "Nicholas";
   person.age = 29;
@@ -16,7 +16,7 @@ ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意�
 
 - 使用对象字面量(object literal)表示法（并不会调用Object构造函数）
 
-  ```
+  ```js
    let person = {
      name: "Nicholas",
      age: 29
@@ -28,32 +28,33 @@ ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意�
   ```js
   const p1 = {name:'xiaomixi', age:24}
   const p2 = Object.create(p1)
+  p2		//{}
   p2.name		//'xiaomixi'
   p2.__proto__		//{name: 'xiaomixi', age: 24}
   ```
-
+  
   
 
 ### API
 
 | 静态方法                       |                                                              |
 | ------------------------------ | ------------------------------------------------------------ |
-| Object.getOwnPropertyNames()   | 返回对象自身的全部属性（不会返回symbol类型的属性名）         |
 | Object.keys()                  | 只返回对象自身的、可遍历的属性（不会返回symbol类型的属性名） |
 | Object.entries()               | 同上，返回一个二维数组，包含属性值                           |
+| Object.getOwnPropertyNames()   | 返回对象自身的全部属性（不会返回symbol类型的属性名）         |
 | Object.getOwnPropertySymbols() | 仅返回`symbol`类型的属性名                                   |
 | Object.hasOwn()                | 结果可以包含symbol属性名，被用来取代hasOwnProperty()，提案中… |
 | Object.getPrototypeOf()        | 获取对象的`Prototype`对象                                    |
 | Object.create()                | 可以指定原型对象和属性，返回一个新的对象                     |
 | Object.is()                    | ES6，判断两个值是否为同一个值                                |
 
-| 实例方法                   |                                    |
-| -------------------------- | ---------------------------------- |
-| obj.hasOwnProperty()       | 自有属性                           |
-| obj.propertyIsEnumerable() | 可枚举属性                         |
-| obj.isPrototypeOf()        | 判断当前对象是否为另一个对象的原型 |
-| valueOf()                  |                                    |
-| toString()                 |                                    |
+| 实例方法                   |                                                |
+| -------------------------- | ---------------------------------------------- |
+| obj.hasOwnProperty()       | 自有属性                                       |
+| obj.propertyIsEnumerable() | 可枚举属性                                     |
+| obj.isPrototypeOf()        | 判断当前对象是否为另一个对象的原型             |
+| valueOf()                  | 返回指定对象的原始值，如果没有则将返回对象本身 |
+| toString()                 | 返回一个表示该对象的字符串                     |
 
 ### 属性描述对象
 
@@ -86,9 +87,11 @@ Object.getOwnPropertyDescriptor(o,'baz')
 Object.getOwnPropertyDescriptor(o, s1)
 // {value: 'foo val', writable: true, enumerable: true, configurable: true}
 
-Object.getOwnPropertyDescriptor(o,'toString')		// undefined
+Object.getOwnPropertyDescriptor(o,'toString')		
+// undefined
 
-Object.getOwnPropertyDescriptors(o)	// ECMAScript 2017 
+Object.getOwnPropertyDescriptors(o)	// ECMAScript2017 
+// {baz: {…}, qux: {…}, Symbol(foo): {…}, Symbol(bar): {…}}
 ```
 
 #### `Object.defineProperty()`

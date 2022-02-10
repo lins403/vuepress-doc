@@ -2,9 +2,9 @@
 
 ## TL;DR
 
-> 【事件流】JavaScript事件流，有事件捕获和事件冒泡两种机制，当年浏览器大战时，网景主张捕获方式，微软主张冒泡方式。后来 w3c 制定了统一的标准——先捕获再冒泡，这是针对事件流上的非target节点，而target节点上呢就是谁先注册就谁先，通常注册事件监听函数用的是addEventListener，其中第三个参数useCapture，意思是是否使用捕获方式，默认是false也就是冒泡方式。然后事件委托，现在浏览器也都是默认用的冒泡机制。
+> 【`事件流`】JavaScript事件流，有事件捕获和事件冒泡两种机制，当年浏览器大战时，网景主张捕获方式，微软主张冒泡方式。后来 w3c 制定了统一的标准——先捕获再冒泡，这是针对事件流上的非target节点，而target节点上呢就是谁先注册就谁先。通常注册事件监听函数用的是addEventListener函数，其中第三个参数useCapture，表示是否使用捕获方式，默认是false也就是冒泡方式。然后事件委托，现在浏览器也都是默认用的冒泡机制。
 >
-> 【事件委托】事件委托，也叫事件代理，就是利用事件冒泡机制，将一个元素或者一组元素的事件处理函数，委托给它们的父元素或者更外层的元素。这样做的好处是可以不用给每一个元素都注册监听事件，可以节省资源，扩展性也更强。当然本身也有一定的缺陷，比如有些事件本身没有冒泡事件，比如focus和blur等等，它们就不能被委托；还有些是不适合做委托的，比如鼠标移动这种需要计算偏移或位置的。
+> 【`事件委托`】事件委托，也叫事件代理，就是利用事件冒泡机制，将一组元素的事件处理函数，委托给它们的父元素或者更外层的元素。这样做的好处是可以不用给每一个元素都注册监听事件，可以节省资源，扩展性也更强。当然本身也有一定的缺陷，比如有些事件本身没有冒泡事件，比如聚焦事件focus和blur等等，它们就不能被委托；还有些是不适合做委托的，比如鼠标移动这种需要计算偏移或位置的事件，比较消耗性能。
 
 ## 一、事件流
 
@@ -19,9 +19,13 @@
 - 对于非target节点则先执行捕获再执行冒泡
 - 对于target节点则是先执行先注册的事件，无论冒泡还是捕获
 
-> 大多数情况下，事件处理程序会被添加到事件流的冒泡阶段，主要原因是跨浏览器兼容性好（IE8 及更早版本只支持事件冒泡）
->
-> 把事件处理程序注册到捕获阶段通常用于在事件到达其指定目标之前拦截事件。如果不需要拦截，则不要使用事件捕获。
+::: tip 
+
+大多数情况下，事件处理程序会被添加到事件流的冒泡阶段，主要原因是跨浏览器兼容性好（IE8 及更早版本只支持事件冒泡）
+
+把事件处理程序注册到捕获阶段的方式，通常用于在事件到达其指定目标之前拦截事件。如果不需要拦截，则不要使用事件捕获。
+
+:::
 
 ## 二、添加事件
 
@@ -50,51 +54,51 @@ btn.onclick = null; // 移除事件处理程序
 
 使用 DOM2 方式的主要优势是可以为同一个事件添加多个事件处理程序，两个核心API
 
-- addEventListener()
+- `addEventListener()`
 
   ```js
   element.addEventListener(event, function, useCapture/* true:捕获、false:冒泡(default) */); 
   ```
 
-- removeEventListener()
+  ```js
+  let btn = document.getElementById('myBtn')
+  
+  btn.onclick = () => {
+    console.log('hello')	//DOM0方式同个事件只支持一个处理程序，会被后者覆盖
+  }
+  
+  btn.onclick = function () {
+    console.log(this.id) 
+  }
+  
+  btn.addEventListener('click',function(){
+    console.log(this.id)	
+  },false)
+  
+  btn.addEventListener('click',() => {
+    console.log(this.id)	//小心这里this指向的是window对象
+  },false)
+  
+  // "myBtn"
+  // "myBtn"
+  // undefined
+  ```
 
-```js
-let btn = document.getElementById('myBtn')
+- `removeEventListener()`
 
-btn.onclick = () => {
-  console.log('hello')	//DOM0方式同个事件只支持一个处理程序，会被后者覆盖
-}
-
-btn.onclick = function () {
-  console.log(this.id) 
-}
-
-btn.addEventListener('click',function(){
-  console.log(this.id)	
-},false)
-
-btn.addEventListener('click',() => {
-  console.log(this.id)	//小心这里this指向的是window对象
-},false)
-
-// "myBtn"
-// "myBtn"
-// undefined
-```
-
-```js
-// 移除事件(需要传入同一个函数，箭头函数与匿名函数不能互相替代)
-btn.addEventListener("click", () => {
-  console.log(this.id);
-}, false);
-
-// 处理程序使用函数表达式
-let handler = function() {
-  console.log(this.id);
-};
-btn.addEventListener("click", handler, false);
-btn.removeEventListener("click", handler, false); // 有效果!
-```
+  ```js
+  // 移除事件(需要传入同一个函数，箭头函数与匿名函数不能互相替代)
+  btn.addEventListener("click", () => {
+    console.log(this.id);
+  }, false);
+  
+  // 处理程序使用函数表达式
+  let handler = function() {
+    console.log(this.id);
+  };
+  btn.addEventListener("click", handler, false);
+  btn.removeEventListener("click", handler, false); // 有效果!
+  ```
 
 ### 跨浏览器事件处理程序
 
@@ -104,6 +108,7 @@ var EventUtil = {
     if (element.addEventListener) {
       element.addEventListener(type, handler, false);
     } else if (element.attachEvent) {
+      //兼容IE
       element.attachEvent("on" + type, handler);
     } else {
       element["on" + type] = handler;
@@ -122,19 +127,19 @@ var EventUtil = {
 
 ## 三、事件对象
 
-event对象只在事件处理程序执行期间存在，一旦执行完毕，就会被销毁。
+`event对象`只在事件处理程序执行期间存在，一旦执行完毕，就会被销毁。
 
 | 属性/方法                  | 类 型  | 说 明                                                        |
 | -------------------------- | ------ | ------------------------------------------------------------ |
 | type                       | 字符串 | 被触发的事件类型                                             |
 | target                     | 元素   | 事件目标                                                     |
 | **currentTarget**          | 元素   | 当前事件处理程序所在的元素                                   |
-| **eventPhase**             | 整数   | 表示调用事件处理程序的阶段: 1 代表捕获阶段，2 代表到达目标，3 代表冒泡阶段 |
+| **eventPhase**             | 整数   | 表示调用事件处理程序的阶段:<br /> 1 代表捕获阶段，2 代表到达目标，3 代表冒泡阶段 |
 | bubbles                    | 布尔值 | 表示事件是否冒泡                                             |
 | cancelable                 | 布尔值 | 表示是否可以取消事件的默认行为                               |
 | preventDefault()           | 函数   | 用于取消事件的默认行为。<br />比如阻止a标签的跳转，checkbox的选中等浏览器默认行为。<br />只有 cancelable 为 true 才可以调用这个方法 |
-| stopPropagation()          | 函数   | 用于取消所有后续事件传播（包括**事件捕获或事件冒泡**）。<br />只有 bubbles 为 true 才可以调用这个方法 |
-| stopImmediatePropagation() | 函数   | 用于取消所有后续事件捕获或事件冒泡，并阻止调用任何后续事件处理程序<br />（阻止监听同一事件的其他事件监听器被调用） |
+| stopPropagation()          | 函数   | 用于取消所有后续事件传播（包括**事件捕获或事件冒泡**）<br />只有 bubbles 为 true 才可以调用这个方法 |
+| stopImmediatePropagation() | 函数   | 用于取消所有后续事件捕获或事件冒泡，<br />并阻止监听同一事件的其他事件监听器被调用 |
 
 ## 四、事件类型
 
@@ -163,7 +168,7 @@ event对象只在事件处理程序执行期间存在，一旦执行完毕，就
 - mouseenter与mouseover的区别是，`mouseenter` 不会冒泡和捕获后代元素。
 - 除了 mouseenter 和 mouseleave，所有鼠标事件都会冒泡，都可以被取消，而这会影响浏览器的默认行为
 
-事件之间存在关系，因此取消鼠标事件的默认行为也会影响其他事件。
+<u>事件之间存在关系，因此取消鼠标事件的默认行为也会影响其他事件。</u>
 
 例如dblclick事件前如果click被取消，则无法触发，正常触发顺序如下：
 
@@ -195,11 +200,11 @@ shiftKey、ctrlKey、altKey 和 metaKey
 
 ### HTML5 事件
 
-1. `contextmenu` 事件：右键菜单
-2. `beforeunload` 事件：这个事件会向用户显示一个确认框，并请用户确认是希望关闭页面，还是继续留在页面上
-3. `load` 事件：会在页面完全加载后触发，因为要等待图片、JavaScript文件、CSS 文件或其他资源加载完成，所以会花费较长时间
-4. `DOMContentLoaded` 事件：会在 DOM 树构建完成后立即触发，而不用等待很多外部资源加载完成
-5. `hashchange` 事件：`location.hash`
+1. `contextmenu` ：右键菜单
+2. `beforeunload` ：这个事件会向用户显示一个确认框，并请用户确认是希望关闭页面，还是继续留在页面上
+3. `load` ：会在页面完全加载后触发，因为要等待图片、JavaScript文件、CSS 文件或其他资源加载完成，所以会花费较长时间
+4. `DOMContentLoaded` ：会在 DOM 树构建完成后立即触发，而不用等待很多外部资源加载完成
+5. `hashchange` ：`location.hash`变化
 
 
 
@@ -262,7 +267,7 @@ list.addEventListener("click", (event) => {
 
 ## 其它
 
-1. 如果知道某个元素会被删除，那么最好在删除它之前手动删除它的事件处理程序，例如使用 innerHTML 以前，先把要被替换的元素上的事件释放掉： `btn.onclick = null`，以避免元素被删除时事件没有被清理而仍然滞留在内存中。
+1. 如果知道某个元素会被删除，那么最好在删除它之前手动删除它的事件处理程序，例如使用 innerHTML 以前，先把要被替换的元素上的事件释放掉： `btn.onclick = null`，以避免元素被删除时，而事件没有被清理仍然滞留在内存中。
 2. DOM 事件模拟。使用document.createEvent()方法创建一个 event 对象，调用dispatchEvent()方法触发事件。
 
 # 参考
