@@ -318,6 +318,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'basic/event',
         'basic/json',
         'basic/utils',
+        'basic/error-analysis',
       ]
     },
     {

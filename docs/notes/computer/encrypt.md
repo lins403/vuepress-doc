@@ -1,4 +1,4 @@
-# 数据编码
+# 加密
 
 - AES
 - RSA
@@ -38,9 +38,9 @@ Trapdoor Function，Trap door - 暗门，类似于地窖口的门，只能向外
 
 为解决这个问题，密码学安全伪随机数生成器(**CSPRNG**，Cryptographically Secure PseudoRandom Number Generator) 额外增加了一个熵作为输入，例如测试硬件时间或其他无法预计行为的系统特性。这样一来，计算速度明显比常规 PRNG 慢很多，但 CSPRNG 生成的值就很难预测，可以用于加密了。
 
-Web Cryptography API 引入了 CSPRNG，这个 CSPRNG 可以通过 `crypto.getRandomValues()` 在全局 Crypto 对象上访问。
+Web Cryptography API 引入了 CSPRNG，这个 CSPRNG 可以通过 crypto.getRandomValues() 在全局 Crypto 对象上访问。
 
-crypto.getRandomValues() 会把随机值写入作为参数传给它的定型数组
+`crypto.getRandomValues()` 会把随机值写入作为参数传给它的定型数组
 
 ```js
 /** 使用 crypto.getRandomValues() 模拟 Math.random() **/
@@ -60,15 +60,16 @@ console.log(randomFloat()); // 0.8903489459516362
 ## 密码学摘要
 
 - `SHA-1`(Secure Hash Algorithm 1): 架构类似 MD5 的散列函数。接收任意大小的输入，生成 160 位消息散列。由于容易受到碰撞攻击，这个算法已经不再安全。
--  `SHA-2`(Secure Hash Algorithm 2): 构建于相同耐碰撞单向压缩函数之上的一套散列函数。规范支持其中 3 种: SHA-256、SHA-384 和 SHA-512。生成的消息摘要可以是 256 位(SHA-256)、 384 位(SHA-384)或 512 位(SHA-512)。这个算法被认为是安全的，广泛应用于很多领域和协议，包括 TLS、PGP 和加密货币(如比特币)。
+-  `SHA-2`(Secure Hash Algorithm 2): 构建于相同耐碰撞单向压缩函数之上的一套散列函数。规范支持其中 3 种: SHA-256、SHA-384 和 SHA-512。生成的消息摘要可以是 256 位(SHA-256)、 384 位(SHA-384)或 512 位(SHA-512)。<u>这个算法被认为是安全的，广泛应用于很多领域和协议，包括 TLS、PGP 和加密货币(如比特币)。</u>
 
 ## 加密算法
 
-| 算法名称 | 全称                         | 描述                                                         | 陷门函数                                                     |
-| -------- | ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| RSA      | Rivest-Shamir-Adleman        | 公钥密码系统，使用两个大素数获得一对公钥和私钥，<br />可用于签名/验证或加密/解密消息。 | 分解难题(factoring problem)                                  |
-| ECC      | Elliptic-Curve Cryptography  | 公钥密码系统，使用一个素数和一个椭圆曲线获得一对公钥和私钥，<br />可用于签名/验证消息。 | 椭圆曲线离散对数问题<br />(elliptic curve discrete logarithm problem) |
-| AES      | Advanced Encryption Standard | 对称密钥密码系统                                             |                                                              |
+|      | 全称                                   | 描述                                                         | 陷门函数                                                     |
+| ---- | -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| RSA  | Rivest-Shamir-Adleman                  | 公钥密码系统，使用两个大素数获得一对公钥和私钥，可用于签名/验证或加密/解密消息。 | 分解难题(factoring problem)                                  |
+| ECC  | Elliptic-Curve Cryptography            | 公钥密码系统，使用一个素数和一个椭圆曲线获得一对公钥和私钥，可用于签名/验证消息。 | 椭圆曲线离散对数问题<br />(elliptic curve discrete logarithm problem) |
+| HMAC | Hash-Based Message Authentication Code | 使用密码散列函数，同时结合一个加密密钥来计算，所产生的消息认证码。<br />可以用来保证资料的完整性，同时可以用来作某个消息的身份验证。 |                                                              |
+| AES  | Advanced Encryption Standard           | 对称密钥密码系统                                             | -                                                            |
 
 
 

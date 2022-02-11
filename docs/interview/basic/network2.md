@@ -41,6 +41,10 @@
 
 ## Cookie
 
+```
+console.log(document.cookie)
+```
+
 ### 用途
 
 - **客户端**保持状态
@@ -60,6 +64,18 @@
 - cookie设置的value值不能超过4k，而且浏览器一般对同个站点也有cookie数量的限制；webStorage通常为5M
 - cookie会伴随着request一起发送，但webStorage并不会
 - server端也能使用cookie，但webStorage只能用在浏览器
+
+### js-cookie
+
+因为在 JavaScript 中读写 cookie 不是很直观，需要设置成拼接字符串，而且读写还需要进行URL编码，因此使用`js-cookie`库
+
+```js
+import Cookies from 'js-cookie'
+Cookies.get()
+Cookies.set('name', 'value', { expires: 365, path: '' })
+Cookies.get('name')
+Cookies.remove('name', { path: '' })	//如果添加时设置了path或domain，那么删除时也需要指定
+```
 
 ## Session
 
@@ -165,10 +181,13 @@ openWindow(url, thirdpart, 540, 540)
 
 ## sessionStorage 和 localStorage
 
+Storage 类型只能存储字符串。非字符串数据在存储之前会自动转换为字符串（ toString() ）。
+
 - sessionStorage
-  - 浏览器当前窗口关闭后自动清除
+  - 跨会话的存储机制，浏览器当前窗口关闭后自动清除
 - localStorage
-  - 保存在浏览器本地，数据不会过期也不会被清除，浏览器重启后依然还在
+  - 永久存储机制，保存在浏览器本地，数据不会过期也不会被清除，浏览器重启后依然还在
+  - 会一直保留至通过 JavaScript 删除，或者用户清除浏览器缓存。
   - 和cookie一样在所有同源标签页和窗口之间共享
 - 都有容量大小限制，只支持字符串
 
@@ -186,7 +205,27 @@ openWindow(url, thirdpart, 540, 540)
 > 
 > > 通过点击 `target="_blank"` 链接（或者用了 `window.open`）打开的新标签页之间是属于同一个 session 的，而如果新开一个独立的标签页访问，则总是会初始化一个新的 session.
 
-Tip: localStorage的使用需要注意命名规范，如果需要设置过期时间，则可以将value值设置为一个对象 {value:'123', time: Date.now(), expire:86400*1000 } （Date.now()是13位的时间戳），如果要加密则可以使用crypto-js
+### 使用
+
+```
+clear()
+getItem(name)
+key(index)
+removeItem(name)
+setItem(name, value)
+```
+
+所有现代浏览器在实现存储写入时都使用了同步阻塞方式，因此数据会被立即提交到存储。通过 Web Storage 写入的任何数据都可以立即被读取
+
+```js
+// 使用方法存储数据 
+sessionStorage.setItem("name", "Nicholas");
+
+// 使用属性存储数据
+sessionStorage.book = "Professional JavaScript";
+```
+
+在Storage.prototype上自定义方法实现：[给localStorage设置一个过期时间](https://www.jianshu.com/p/50b4c89d3be3)
 
 ## 浏览器缓存
 

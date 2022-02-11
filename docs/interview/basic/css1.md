@@ -62,12 +62,12 @@
 
 ### selector
 
-css_selector
+#### css_selector
 
 - 控制台下使用 `document.querySelector()` 或者 `$()` 进行测试 
 - 不能迭代查找（TypeError: 'WebElement' object is not iterable）
 
-xpath
+#### xpath
 
 - 控制台下使用 `$x()`进行测试
 

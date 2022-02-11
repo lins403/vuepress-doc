@@ -1,12 +1,16 @@
 # HTML
 
-> `XML`（Extensible Markup Language，可扩展标记语言），是一种标记语言。
-> 
-> `XPath`（XML Path Language，XML路径语言），用来确定XML文档中某部分位置。
-> 
-> `HTML`（HyperText Markup Language，超文本标记语言），是一种用于创建网页的标准标记语言
-> 
-> `XHTML`（Extensible HyperText Markup Language，可扩展超文本标记语言），是使用 XML1.0 改写自 HTML4.01 的独立语言。它不再被作为单独标准开发。
+## XML
+
+`XML`（Extensible Markup Language，可扩展标记语言），是一种标记语言。XML 曾一度是在互联网上 <u>存储和传输</u> 结构化数据的标准， JSON 格式用于取代 XML 格式进行服务器和网页之间的数据交换。
+
+`HTML`（HyperText Markup Language，超文本标记语言），是一种用于创建网页的标准标记语言。
+
+`DOM` （文档对象模型）是HTML 和 XML 文档的编程接口，但DOM 标准不仅是为了在浏览器中使用，而且还为了在桌面和服务器应用程序中处理 XML 数据结构
+
+`XHTML`（Extensible HyperText Markup Language，可扩展超文本标记语言），是使用 XML1.0 改写自 HTML4.01 的独立语言。它不再被作为单独标准开发。
+
+`XPath`（XML Path Language，XML路径语言），用来确定XML文档中某部分位置。XPath 是为了在 DOM 文档中定位特定节点而创建的。
 
 ## 知识点
 

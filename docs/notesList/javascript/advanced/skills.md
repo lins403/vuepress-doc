@@ -1,6 +1,40 @@
 # 技巧
 
-## 1）
+## 1）控制台
+
+### 打印变量
+
+在开发者工具的 Element(元素)标签页内，单击 DOM 树中一个节点，就可以在 Console(控制台)标签页中使用 `$0` 引用该节点的 JavaScript 实例。它就跟普通的 JavaScript 实例一样，因此可以读取属性(如`$0.scrollWidth`)，或者调用成员方法(如`$0.remove()`)。
+
+```js
+// 打印vue
+document.querySelector('#app').__vue__    //等同于app.__vue__，app就是Vue的实例,root
+document.querySelector('.app-main').__vue__
+```
+
+### 调试
+
+```js
+function pauseExecution(){
+  console.log("Will print before breakpoint");
+  debugger;
+  console.log("Will not print until breakpoint continues");
+}
+pauseExecution()
+```
+
+### 抛出错误
+
+```js
+function assert(condition, message) {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+assert(1>2, 'false~~')
+```
+
+
 
 ## 2）void
 

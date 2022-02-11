@@ -78,6 +78,7 @@
 | Quartile             | 四分位数           | takes precedence            | 优先                 |
 | rookie, newbie, noob | 菜鸟，新手         | the aggregated results      | 聚合结果             |
 | serially             | 按顺序，连续地     | retrofit all executed files | 改造所有执行过的文件 |
+|                      |                    | replacer-reviver            | 替代函数-还原函数    |
 | scenario             | 场景               | stop-gap measures           | 权宜之计             |
 | scoff                | 嘲笑               | succinct configuration.     | 简洁的配置           |
 | simultaneously       | 同时               | The guts of                 | 内部结构             |
