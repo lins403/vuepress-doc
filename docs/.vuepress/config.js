@@ -171,6 +171,7 @@ module.exports = {
               collapsable: false,
               children: [
                 'modules/',
+                'modules/commonjs',
                 'modules/esm',
                 'webpack',
                 'rollup',
@@ -219,6 +220,7 @@ module.exports = {
                 'tools/browser',
                 'tools/vscode',
                 'tools/nginx',
+                'tools/database',
                 'tools/linux',
                 'tools/linux-command',
                 'tools/mac-operations',

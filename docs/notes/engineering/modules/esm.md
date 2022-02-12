@@ -4,20 +4,23 @@
 
 AMD 和 CMD 是社区的开发者们制定的模块加载方案，并不是语言层面的标准。**从 ES6 开始，在语言标准的层面上，实现了模块化功能，而且实现得相当简单，完全可以取代 CommonJS 和 CMD、AMD 规范，成为浏览器和服务器通用的模块解决方案**。
 
-ES6模块是编译时加载，在编译时就确定了依赖关系，而CommonJS和AMD只能在运行时确定
+ES6模块是编译时加载，在编译时就确定了依赖关系，而CommonJS和AMD只能在运行时确定。
+
+ES Modules 的加载、解析和执行都是异步的。
+
+加载与解析：完全支持 ECMAScript 6 模块的浏览器可以从顶级模块加载整个依赖图，且是异步完成的。浏览器会解析入口模块，确定依赖，并发送对依赖模块的请求。这些文件通过网络返回后，浏览器就会解析它们的内容，确定它们的依赖，如果这些二级依赖还没有加载，则会发送更多请求。这个**异步递归加载**过程会持续到整个应用程序的依赖图都解析完成。解析完依赖图，应用程序就可以正式加载模块了。
 
 ```javascript
-// bar.js
+/** bar.js **/
 console.log('bar.js')
 import { message } from './foo.js'
 console.log(message)
 
-// foo.js
+/** foo.js **/
 console.log('foo.js')
 export const message = 'hello foo~'
 
-// output:
-// 因为`import`在静态解析阶段执行，所以它是一个模块之中最早执行的
+// output（因为`import`在静态解析阶段执行，所以它是一个模块之中最早执行的）：
 foo.js
 hello foo~
 bar.js
@@ -34,7 +37,7 @@ bar.js
 ```javascript
 import
 export
-// 只能用于模块最外层，便于静态分析，所以不能用在代码块中
+// 只能用于模块最外层，且要尽量声明在模块顶级，便于静态分析，所以不能用在代码块中
 // 或者说由于import是静态执行，所以不能使用需要运行才能得到结果的表达式和变量
 
 export default    
@@ -46,6 +49,15 @@ import()
 // 运行时执行，也就是说，什么时候运行到这一句，就会加载指定的模块
 // 可以用于实现 按需加载、条件加载、动态路径(路径为表达式或变量)
 ```
+
+```js
+// 标识符foo、bonjour、arr
+const arr = [1, 2, 3]
+const str = 'hello'
+export { 123 as foo, str as bonjour, arr }
+```
+
+### import()
 
 ```javascript
 // import()返回一个 Promise 对象
@@ -62,36 +74,52 @@ import(`./section-modules/${someVariable}.js`)
   });
 ```
 
-```javascript
-// modules.js
-function add(x, y) {
-  return x * y;
-}
-export {add as default};
-// ===
-export default add;
-
-
-// app.js
-import { default as foo } from 'modules';
-// ===
-import foo from 'modules';
-```
+### default
 
 ```js
-// demo.js
+/** demo.js **/
+// 默认导出
 export default function bar () {
     return 1;
 };
+// 命名导出
 export function foo () {
     return 2;
 }
 
-// index.js
+/** index.js **/
 import bar, {foo} from './demo';
 bar();
 foo();
 ```
+
+### 别名
+
+```javascript
+/** modules.js **/
+function add(x, y) {
+  return x * y;
+}
+export {add as default};
+// 等同于
+export default add;
+
+
+/** app.js **/
+import { default as foo } from 'modules';
+// 等同于
+import foo from 'modules';
+```
+
+#### 模块转移导出
+
+```js
+export { default } from './foo.js'
+export { foo, bar as myBar } from './foo.js'
+export { foo as default } from './foo.js'
+```
+
+
 
 ## 特点
 
@@ -99,9 +127,7 @@ foo();
   
   - 静态分析，编译时就能确定模块间的依赖关系
   - import 提升
-
 - 自动采用严格模式
-
 - 被导出的值是 <mark>引用</mark>，而非像commonjs那样的拷贝
 
 ```js
@@ -118,7 +144,7 @@ incCounter();
 console.log(counter);    // 4
 ```
 
-- `import`语句是 Singleton 模式
+- 和commonjs的require()语法一样，`import`语句也是 Singleton 模式
 
 ```js
 import { foo } from 'my_module';
@@ -129,9 +155,13 @@ import { foo, bar } from 'my_module';
 // if(INSTANCE == null){ INSTANCE = new Singleton(); }
 ```
 
+
+
 ## 应用
 
-#### 浏览器
+### 浏览器
+
+与`<script defer>`一样，解析到`<script type="module">`标签后会立即下载模块文件，但执行会延迟到文档解析完成；`<script type="module">`在页面中出现的顺序就是它们执行的顺序，可以确保按照文档顺序（书写顺序）执行；有点不同的是，无论对嵌入的模块代码，还是通过`src`属性引入的外部模块文件，都是这样。
 
 ```js
 <script type="module" src="./main.js"></script>
@@ -149,14 +179,25 @@ touch server.js
 node server.js
 ```
 
-#### Node
+#### nomodule
 
-- `.mjs`
-- `"type": "module"`
+```js
+// 支持模块的浏览器会执行这段脚本
+// 不支持模块的浏览器不会执行这段脚本
+<script type="module" src="module.js"></script>
 
-#### Webpack
+// 支持模块的浏览器不会执行这段脚本
+// 不支持模块的浏览器会执行这段脚本
+<script nomodule src="script.js"></script>
+```
 
-[在线调试](https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/getting-started?terminal=)
+### Node
+
+To load an ES module, set `"type": "module"` in the package.json or use the `.mjs` extension.
+
+### Webpack
+
+[webpack在线调试](https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/getting-started?terminal=)
 
 ```js
 // "webpack": "^5.38.1", webpack-cli": "^4.7.2"

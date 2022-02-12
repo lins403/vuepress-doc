@@ -33,45 +33,42 @@ console.log(navigator.hardwareConcurrency)
 - Chrome有5M大小限制
 - 只支持字符串
 
-### indexDB
+### indexedDB
 
-- 资料：[HTML5 indexedDB前端本地存储数据库实例教程](https://www.zhangxinxu.com/wordpress/2017/07/html5-indexeddb-js-example/)
+Indexed Database API 简称 IndexedDB，是浏览器中存储<u>结构化数据</u>（也包括File/Blob）的一个方案。
+
+IndexedDB 用于代替目前已废弃的 Web SQL Database API。
+
+IndexedDB 背后的思想是创造一套 API，方便 JavaScript 对象的存储和获取，同时也支持查询和搜索。
+
+- 实例：[HTML5 indexedDB前端本地存储数据库实例教程](https://www.zhangxinxu.com/wordpress/2017/07/html5-indexeddb-js-example/)
 
 ### 其它
 
-- Web SQL Database（规范放弃支持，淘汰中）
+- Web SQL Database（已废弃）
 
 - CacheStorage（experimental）
 
-### indexDB 与 Web SQL Database
+### indexedDB 与 Web SQL Database
 
 `Web SQL Database`
 
 - 关系型数据库，类似SQLite
 - 事务操作要写SQL
 
-`indexDB`
+`indexedDB`
 
-- NoSQL数据库
-- 写法对JS开发者更友好
+- NoSQL数据库，一个基于 JavaScript 的面向对象数据库
+- 写法对JS开发者更友好，存储和检索通过键来索引
+- 异步执行操作，以免阻塞应用程序
 
-### indexDB 与 localStorage
+### indexedDB 与 localStorage
 
+- 都是实现了客户端的离线存储，但是数据默认都没有加密，谨慎使用敏感信息
 - localStorage兼容IE8+，indexDB兼容IE10+
 - localStorage仅支持存储字符串，而indexDB几乎可以任何格式，包括图片的Blob数据（IE需要考虑兼容性）
-- indexDB可以在service workers中使用
-
-> **数据库**
-> 
-> ACID特性：原子性(Atomicity)、一致性(Consistemcy)、隔离性(Isolation)、持久性(Durability)
-> 
-> 关系型数据库和非关系型数据库最大的理念区别在于，对数据一致性的要求。
-> 
-> 前者非常严格，一个事务操作中只要有一条数据不合规则，前面的也会被放弃掉，整个事务回滚至原来状态，牺牲性能而追求一致性和稳定性；后者数据结构不固定，灵活，扩展性强
-> 
-> 数据库中的“锁” lock，是保证数据库数据高并发时候数据一致性的一种机制
-> 
-> 回滚rollback、提交commit
+- indexDB可以在web workers 和 service workers中使用
+- 使用 IndexedDB 执行的操作是异步执行的，而webStorage是同步阻塞的
 
 ### localForage
 

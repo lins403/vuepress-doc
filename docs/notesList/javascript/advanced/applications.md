@@ -92,3 +92,18 @@ function logData() {
 }
 ```
 
+
+
+## Javascript Workers
+
+都是运行在浏览器主线程外的，独立线程上的脚本；
+
+不同之处在于它们各自的用处和具备的特性：
+
+- Web workers
+  - 通用脚本，用于分担主线程上处理器密集型的工作
+
+- Service workers
+  - 浏览器与网络间的代理，拦截request然后返回缓存，实现离线访问
+- Worklets
+  - 浏览器渲染管道的hooks，开发者可以通过它访问浏览器渲染进程，例如样式计算和布局
