@@ -1,233 +1,136 @@
-# 编程规范
+# 可维护性
 
-[前端代码规范](https://guide.aotu.io/docs/)
+## 编码规范
 
-[Code Guide](http://imweb.github.io/CodeGuide/#html)
+可读性
 
-[blogs/12.md at master · senntyou/blogs · GitHub](https://github.com/senntyou/blogs/blob/master/web-advance/12.md)
+- 空格缩进和代码注释
 
-[《前端科普系列-ESlint：守住优雅的护城河》](https://zhuanlan.zhihu.com/p/184951182)
+变量和函数命名
 
-[[译] 以和为贵！让 ESlint、Prettier 和 EditorConfig 互不冲突](https://juejin.cn/post/6971783776221265927)
+- 变量名应该是个名词。函数名应该以动词开始，例如 getName()
+- 变量、函数和方法应该以小写字母开头，使用驼峰大小写(camelCase)形式，例如 getName() 和 isPerson
+- 类名应该首字母大写，如 Person、RequestFactory
+- 常量值应该全部大写并以<u>下划线</u>相接，比如 REQUEST_TIMEOUT。
 
-## 一、EditorConfig
+变量类型透明化
 
-```shell
-# .editorconfig
+1. 定义变量时，应该立即将其初始化为一个将来要使用的类型值。
+2. 使用类型注释，例如 `let count /*:int*/ = 10` 、`let person /*:Object*/ = null`
 
-# 告诉EditorConfig插件，这是根文件，不用继续往上查找
-root = true
+## 松散耦合
 
-# 匹配全部文件
-[*]
-# 设置字符集
-charset = utf-8
-# 缩进风格，可选space、tab
-indent_style = space
-# 缩进的空格数
-indent_size = 2
-# 结尾换行符，可选lf、cr、crlf
-end_of_line = lf
-# 在文件结尾插入新行
-insert_final_newline = true
-# 删除一行中的前后空格
-trim_trailing_whitespace = true
-# 限定每行最多字符
-max_line_length = 160
+耦合度低的应用程序，便于定位错误来源和修改错误，增强可维护性。
 
-# 匹配md结尾的文件
-[*.md]
-insert_final_newline = false
-trim_trailing_whitespace = false
-```
+### 解耦 HTML/JavaScript
 
-## 二、eslint & prettier
+HTML 渲染应该尽可能与 JavaScript 分开。
 
-《JavaScript 高级程序设计》作者 Nicholas C. Zakas 于 2013 年 6 月创建了 ESLint，ESLint 将源代码解析成 AST，然后检测 AST 来判断代码是否符合规则，为 ESLint 的高可扩展性奠定了结实的基础。
+1）尽量避免把 JavaScript 直接嵌入在 HTML 中
 
-### 配置
+- 避免使用包含嵌入代码的`<script>`元素
+- 避免使用 HTML 属性添加事件处理程序
 
-```shell
-npm install -D eslint eslint-plugin-vue babel-eslint #Vue
-npm install -D eslint eslint-plugin-react babel-eslint eslint-plugin-import #React
-npm install -D --save-exact prettier
-npm install -D eslint-plugin-prettier eslint-config-prettier
-```
+2）尽量避免把 HTML 包含在 JavaScript 中
 
-- `eslint-config-prettier`  用于关闭那些不需要或与 Prettier 冲突的 ESLint 规则，但只是关闭rules，需要配合其它配置来使用。
+- 避免在 JavaScript 中创建大量 HTML，然后通过 innerHTML 等方式插入到页面中
 
-- `eslint-plugin-prettier`  将 Prettier 作为 ESLint 规则运行，并将差异报告为单个 ESLint 问题。
+### 解耦 CSS/JavaScript
 
-- 二者结合使用最佳，效果相当于把 ESLint 中与 Prettier 冲突的规则disable掉，这部分转而使用 prettier 的规则做校验。
+通过动态修改元素的 CSS 类名，而不是直接修改元素样式，来实现 JavaScript 修改 CSS 样式。这样可以把大部分样式限制在 CSS 文件里。
 
 ```js
-// .eslintrc.js
-module.exports = {
-  root: true,
-  parserOptions: {
-    // 自定义 parser，详见 https://eslint.vuejs.org/user-guide/#how-to-use-custom-parser
-    parser: 'babel-eslint',
-    sourceType: 'module'
-  },
-  env: {
-    browser: true,
-    node: true,
-    es6: true,
-  },
-  extends: [
-    // 每个配置继承，且会覆盖它前面的配置
-       // 使用 eslint-plugin-vue 插件，并继承 eslint-config-vue 的 recommended 配置
-    'plugin:vue/recommended',
-    'eslint:recommended',
-      // eslint-config-prettier版本8.0.0以前还需要额外添加"prettier/react"或者"prettier/vue"
-    'plugin:prettier/recommended'
-  ],
-  // add your custom rules here
-  "rules": {}
-}
+// CSS 与 JavaScript 松散耦合
+element.className = "edit";
 ```
 
-```json
-// .prettierrc
-{
-  "tabWidth": 2,
-  "printWidth": 120,
-  "singleQuote": true,    // 单引号
-  "jsxBracketSameLine": false, // 不将>放置在下一行
-  "htmlWhitespaceSensitivity": "ignore", // 忽略空格敏感模式，如<span>等文字空白敏感的标签，格式化后可能导致>单独成行
-  "arrowParens": "avoid", // 箭头函数只有一个参数时不加括号
-  "trailingComma": "none", // 逗号
-  "semi":false    // 不要分号
-}
-```
+### 解耦应用程序逻辑/事件处理程序
 
-[Prettier 所有配置项](https://blog.windstone.cc/front-end-engineering/code-formatter/eslint/eslint-prettier.html#%E9%85%8D%E7%BD%AE-prettier-%E8%A7%84%E5%88%99)
-
-### 格式化
-
-```shell
-# --write
-npx prettier -w .
-
-# --check
-npx prettier -c "src/**/*.js"
-
-# --print-width <int>
-npx prettier -w . --print-width 120
-```
-
-### vue3配置
+易于代码扩展、易于测试，如编写单元测试代码
 
 ```js
-module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/vue3-recommended',
-    // 'plugin:vue/vue3-essential', // This option doesn't impose formatting rules
-    // 'plugin:vue/vue3-strongly-recommended', // This option imposes formatting rules on your code to improve readability 
-    'plugin:prettier/recommended'
-  ],
-  rules: {
-    // override/add rules settings here, such as:
-  }
-}
-```
-
-可选：Disable vetur in VSCode's settings (if you had it installed)
-
-```json
-"vetur.validation.style": false
-```
-
-## 三、husky & lint-staged
-
-- Husky 的原理是把Husky配置和 Git Hook 关联起来，便于我们使用 Git Hook 
-- 只对本次提交的代码（staged git files）做代码检查
-
-```shell
-# 方式一：手动
-npm install -D husky lint-staged
-
-# 方式二，基于prettier（https://prettier.io/docs/en/precommit.html）
-# 自动安装 husky 和 lint-staged，并在package.json中添加配置
-npx mrm@2 lint-staged
-```
-
-```json
-// package.json
-{
-  // ...
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged", //在本地提交之前做 Lint。
-      // "pre-commit": "npm run lint"
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+function handleKeyPress(event) {
+  if (event.keyCode == 13) {
+    let target = event.target;
+    let value = 5 * parseInt(target.value);
+    if (value > 10) {
+      document.getElementById("error-msg").style.display = "block"; 
     }
-  },
-  "lint-staged": {
-    // 将每一个暂存区的 .js、.vue 文件作为参数，依次传给 eslint --fix 和 git add 执行
-    // .eslintrc.js 、babel.config.js 等均不合匹配规则
-    "*.{js,vue}": ["eslint --fix"],
-    "*.{scss,less,styl,css}": ["stylelint --fix", "prettier --write"]
-  }
-  // ...
+  } 
 }
 ```
 
-```shell
-# .husky/pre-commit (v7)
-npx --no-install lint-staged
-# or
-yarn lint-staged
-```
-
-## 延伸问题
-
-::: details eslint 中 plugins 和 extends 的区别是什么？
-
-<br />
-
-#### 1. plugins
-
-[eslint > plugins](https://eslint.org/docs/user-guide/configuring/plugins)
-
-- 指定 Parser（词法、语法分析的工具，解析结果类似于 AST，默认使用 Espree ）
-- 指定 Processor（用于从特殊文件如 .vue 中提取 js 代码，也可以在预处理中转换 js 代码）
-- 单指配置文件中的 plugins 属性：<u>define additional rules, environments, configs, etc. for ESLint to use.</u>
-
-#### 2. extends
-
-[eslint > extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
-
-- 相当于使用第三方配置好的的 .eslintrc.js，有三种配置来源：文件路径、eslint-config- 、eslint-plugin-
-- 配置多个时，后者继承且会覆盖前者规则
-
-🌰
+**改进**
 
 ```js
-// npm install -D --save-exact prettier
-// npm install -D eslint-plugin-prettier eslint-config-prettier
-
-{
-  "extends": ["plugin:prettier/recommended"]
+function validateValue(value) {
+  value = 5 * parseInt(value);
+  if (value > 10) {
+    document.getElementById("error-msg").style.display = "block"; 
+  }
 }
-
-// ------------this is what it expands to:------------
-{
-      // 继承了eslint-config-prettier配置
-  "extends": ["prettier"],
-    // 启用了eslint-plugin-prettier插件
-  "plugins": ["prettier"],
-  "rules": {
-    // 设置了"prettier/prettier"规则为"error"
-    "prettier/prettier": "error",
-    "arrow-body-style": "off",
-    "prefer-arrow-callback": "off"
+function handleKeyPress(event) {
+  if (event.keyCode == 13) {
+    let target = event.target;
+    validateValue(target.value);
   }
 }
 ```
 
-:::
+## 编码惯例
+
+### 尊重对象所有权
+
+- 不要给实例或原型添加属性或方法
+- 不要重定义已有的方法
+
+可以按如下这样为对象添加新功能
+
+1. 创建包含想要功能的新对象，通过它与别人的对象交互。
+2. 创建新自定义类型继承本来想要修改的类型，可以给自定义类型添加新功能。
+
+### 不声明全局变量
+
+使用一个全局对象作为唯一的全局变量，然后创建对象作为独立的命名空间
+
+```js
+// 创建全局对象
+var School = {};
+
+// 创建一个命名空间
+School.Classroom = {};
+School.Playground = {};
+
+// 添加本书用到的其他对象 
+School.Classroom.MemberUtil = { ... }; 
+School.Classroom.SetupUtil = { ... };
+
+// 使用 ProJS 下面的对象 
+School.Classroom.MemberUtil.addStudent( ... );
+```
+
+### 类型检查
+
+不要只与null进行比较，可以使用下列某种技术替换它。
+
+  如果值应该是引用类型，则使用 instanceof 操作符检查其构造函数。
+
+  如果值应该是原始类型，则使用 typeof 检查其类型。
+
+  如果希望值是有特定方法名的对象，则使用 typeof 操作符确保对象上存在给定名字的方法。 
+
+代码中比较 null 的地方越少，就越容易明确类型检查的目的，从而消除不必要的错误。
+
+### 使用常量
+
+依赖常量的目标是从应用程序逻辑中分离数据，以便修改数据时不会引发错误。
+
+数据需要提取的几种常见情况
+
+1. 重复出现的值
+2. 用户界面字符串：以方便实现国际化
+3. URL
+4. 任何可能变化的值
 
 ## CSS — BEM 命名规范
 
@@ -239,8 +142,8 @@ yarn lint-staged
 
 > _   单下划线：单下划线用来描述一个块或者块的子元素的一种状态
 
-# 参考
+## 规范参考
 
-[PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+[前端代码规范](https://guide.aotu.io/docs/)
 
-[ESLint--风动之石的博客](https://blog.windstone.cc/front-end-engineering/code-formatter/eslint/#%E8%A7%84%E5%88%99)
+[Code Guide](http://alloyteam.github.io/CodeGuide/)

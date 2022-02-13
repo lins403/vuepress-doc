@@ -1,6 +1,4 @@
-# 应用
-
-## Web API
+# Web API
 
 [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
 
@@ -107,3 +105,8 @@ function logData() {
   - 浏览器与网络间的代理，拦截request然后返回缓存，实现离线访问
 - Worklets
   - 浏览器渲染管道的hooks，开发者可以通过它访问浏览器渲染进程，例如样式计算和布局
+
+## MessageChannel 和 BroadcastChannel
+
+- The Channel Messaging API is a great way to send 1-to-1 messages from a window to an iframe, from a window to a Web Worker, and so on.
+- The BroadcastChannel API can be used to send 1-to-many messages, communicating to multiple entities at the same time.

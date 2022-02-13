@@ -163,6 +163,7 @@ module.exports = {
               children: [
                 'specification-config',
                 'codeSpecification',
+                'code-specification-tools',
                 'jsdoc',
               ]
             },

@@ -4,6 +4,8 @@
 
 [file-saver](https://github.com/eligrey/FileSaver.js) : 保存/下载文件到指定文件，轻量（3.3K / 1.5K）
 
+[serve](https://www.npmjs.com/package/serve)：为静态资源创建一个服务，使用 `http://` or `https://` 协议，替代 `file:///`
+
 ## MIME 类型
 
 [MIME 类型 - HTTP | MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
