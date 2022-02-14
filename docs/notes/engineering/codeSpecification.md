@@ -18,6 +18,22 @@
 1. 定义变量时，应该立即将其初始化为一个将来要使用的类型值。
 2. 使用类型注释，例如 `let count /*:int*/ = 10` 、`let person /*:Object*/ = null`
 
+### CSS — BEM 命名规范
+
+- Bem 是块（block）、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种前端 CSS 命名方法论。
+
+> \-  中划线 ：仅作为连字符使用，表示某个块或者某个子元素的多单词之间的连接记号。
+
+> __  双下划线：双下划线用来连接块和块的子元素
+
+> _   单下划线：单下划线用来描述一个块或者块的子元素的一种状态
+
+### 规范参考
+
+[前端代码规范](https://guide.aotu.io/docs/)
+
+[Code Guide](http://alloyteam.github.io/CodeGuide/)
+
 ## 松散耦合
 
 耦合度低的应用程序，便于定位错误来源和修改错误，增强可维护性。
@@ -132,18 +148,3 @@ School.Classroom.MemberUtil.addStudent( ... );
 3. URL
 4. 任何可能变化的值
 
-## CSS — BEM 命名规范
-
-- Bem 是块（block）、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种前端 CSS 命名方法论。
-
-> \-  中划线 ：仅作为连字符使用，表示某个块或者某个子元素的多单词之间的连接记号。
-
-> __  双下划线：双下划线用来连接块和块的子元素
-
-> _   单下划线：单下划线用来描述一个块或者块的子元素的一种状态
-
-## 规范参考
-
-[前端代码规范](https://guide.aotu.io/docs/)
-
-[Code Guide](http://alloyteam.github.io/CodeGuide/)

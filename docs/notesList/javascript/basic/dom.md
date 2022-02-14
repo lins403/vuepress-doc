@@ -172,6 +172,15 @@ ul.appendChild(fragment);
 
 ### HTMLCollection 与 NodeList 
 
+以下情形会返回 HTMLCollection:
+
+- 调用 `getElementsByTagName()`;
+- 读取元素的 `childNodes` 属性;
+- 读取元素的 `attributes` 属性;
+- 访问特殊集合，如 `document.form`、`document.images` 等。
+
+---
+
 HTMLCollection 与 NodeList 的区别：
 
 - NodeList 是一个**静态集合**，其不受 DOM 树元素变化的影响；相当于是 DOM 树快照，节点数量和类型的快照，就是对节点增删，NodeList 感觉不到。但是对节点内部内容修改，是可以感觉到的，比如修改 `innerHTML`。

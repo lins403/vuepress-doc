@@ -165,6 +165,7 @@ module.exports = {
                 'codeSpecification',
                 'code-specification-tools',
                 'jsdoc',
+                'coding-performance',
               ]
             },
             {

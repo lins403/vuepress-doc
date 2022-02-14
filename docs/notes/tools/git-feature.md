@@ -15,7 +15,7 @@ Centralized Version Control Systems，简称 CVCS
 - 每次需要先拉取最新版本作为本地副本（local copy，可以不是完整的项目代码），工作完成以后将修改推送回服务器。
 - 一般只有一个主仓库一个主分支，修改都会直接被commit至主分支，然后解决合并冲突。
 - 所有的命令都要和中央服务器进行交互，影响开发效率。
-- SVN、CVS
+- CVS、SVN（ SVN全名Subversion，它的设计目标就是取代CVS ）
 
 #### 优点
 

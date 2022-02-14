@@ -12,6 +12,8 @@
 
 [lodash vs ramda vs rxjs vs underscore | npm trends](https://www.npmtrends.com/lodash-vs-ramda-vs-underscore-vs-rxjs)
 
+[Prototype](https://github.com/prototypejs/prototype)
+
 ## CSS
 
 ### CSS Tricks

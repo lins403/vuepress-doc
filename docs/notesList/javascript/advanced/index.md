@@ -1,31 +1,5 @@
 # 进阶
 
-## 严格模式
-
-严格模式是 ES5 引入的，不属于 ES6
-
-严格模式主要有以下限制。
-
-- 变量必须声明后再使用
-- 函数的参数不能有同名属性，否则报错
-- 不能使用`with`语句
-- 不能对只读属性赋值，否则报错
-- 不能使用前缀 0 表示八进制数，否则报错
-- 不能删除不可删除的属性，否则报错
-- 不能删除变量`delete prop`，会报错，只能删除属性`delete global[prop]`
-- `eval`不会在它的外层作用域引入变量
-- `eval`和`arguments`不能被重新赋值
-- `arguments`不会自动反映函数参数的变化
-- 不能使用`arguments.callee`
-- 不能使用`arguments.caller`
-- 禁止`this`指向全局对象（如果在全局函数中调用，则 this 在非严格模式下等于 window，在严格模式下等于undefined）
-- 不能使用`fn.caller`和`fn.arguments`获取函数调用的堆栈
-- 增加了保留字（比如`protected`、`static`和`interface`）
-
-[ECMAScript 6 入门 > Module > 严格模式](https://es6.ruanyifeng.com/#docs/module#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F)
-
-
-
 ## 私有变量
 
 私有变量包括函数参数、局部变量，以及函数内部定义的其他函数。
@@ -66,3 +40,12 @@ console.log(ex.getName()); // private
 console.log(ex._private); // undefined
 ```
 
+### 高性能脚本工具
+
+### WebAssembly
+
+WebAssembly 项目(简称 Wasm)正在实现一门语言，该语言可以在多处执行(可移植)并以二进 制语言形式存在，可以作为多种低级语言(如 C++和 Rust)的编译目标。WebAssembly 代码在浏览器的 一个与 JavaScript 完全独立的虚拟机中运行，与各种浏览器 API 交互的能力极为有限。它可以与 JavaScript 和 DOM 以间接、受限的方式交互，但其更大的目标是创造一门可以在 Web 浏览器中(以及在任何地方) 运行的速度极快的语言，并提供接近原生的性能和硬件加速。WebAssembly 系列规范在 2019 年 12 月 5 日已成为 W3C 的正式推荐标准，是浏览器技术中非常值得期待的领域。
+
+### asm.js
+
+asm.js 的理论基础是 JavaScript 编译后比硬编码 JavaScript 运行得更快。asm.js 是 JavaScript 的子集， 可以作为低级语言的编译目标，并在常规浏览器或 Node.js 引擎中执行。现代 JavaScript 引擎在运行时推 断类型，而 asm.js 代码通过使用词法提示将这些类型推断(及其相关操作)的计算大大降低。asm.js 广 泛使用了定型数组(TypedArray)，相比常规的 JavaScript 数组能够显著提升性能。asm.js 没有 WebAssembly 快，但通过编译显著提升了性能。

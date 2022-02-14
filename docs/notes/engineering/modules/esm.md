@@ -335,6 +335,10 @@ export const sleep = interval => {
 
 ## Tree-Shaking
 
+减少代码冗余。
+
+构建工具基于静态分析，通过Tree-Shaking将没有被使用到的代码完全排除在打包文件之外，最终打包得到的文件可以瘦身很多。
+
 TODO
 
 # 参考

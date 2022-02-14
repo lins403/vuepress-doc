@@ -132,6 +132,8 @@ location @img_err {
 
 ### gzip
 
+优化页面加载速度，降低对网络带宽的需求
+
 nginx 有静态压缩和实时压缩(always)两种方式
 
 - 如果 `gzip_static` 设置为 on 以后，检查本地是否有 precompressed files( `.gz` 文件)，如果有就直接作为压缩结果使用，而不再进行实时压缩，从而加快响应速度
@@ -141,10 +143,10 @@ nginx 有静态压缩和实时压缩(always)两种方式
 http {
     gzip on;
     gzip_static on;
-    gzip_min_length  1k;
+    gzip_min_length  1k;	#Default20，文件体积小于这个设置值时则不会进行精压缩
     gzip_buffers     4 16k;
     gzip_http_version 1.1;
-    gzip_comp_level 8;
+    gzip_comp_level 5;	#可选值1-9，数值越高压缩比也就越高。但需要考虑CPU资源消耗，按实际业务场景来选择，通常5就够了
     gzip_types     text/plain application/javascript application/x-javascript         
     text/javascript text/css application/xml;
     gzip_vary on;
