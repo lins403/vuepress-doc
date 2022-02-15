@@ -18,3 +18,24 @@ function shuffle(arr) {
   return arr
 }
 ```
+
+## 汉诺塔
+
+递归、分而治之
+
+```js
+var hanoi = function(A, B, C) {
+  // n个盘子从A到C
+  function dfs(A, B, C, n){
+    if(n == 0) return
+    dfs(A, C, B, n - 1)    // n - 1个盘子从A到B
+    C.push(A.pop());       // n从A到C
+    dfs(B, A, C, n - 1)    // n - 1个盘子从B到C  
+  }
+  return dfs(A, B, C, A.length)
+}
+var A = [1,2,3], B=[], C=[]
+hanoi(A, B, C)
+console.log(C)	//[1, 2, 3]
+```
+

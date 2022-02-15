@@ -37,9 +37,51 @@ ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意�
 
 ### API
 
+[对象属性的可枚举性和所有权](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)
+
+`in` 操作符判断，以下全部属性都符合。
+
+- 自身的可枚举属性、不可枚举属性、Symbol 键
+- 继承的可枚举属性、不可枚举属性、Symbol 键
+
+```js
+var triangle = {a: 1, b: 2, c: 3};
+function ColoredTriangle() {
+  this.color = 'red';
+}
+ColoredTriangle.prototype = triangle;
+var obj = new ColoredTriangle();
+```
+
+```js
+var obj = Object.create({ hello: 1, [Symbol()]: 2, getHello(){console.log(this.hello)} })
+obj = Object.assign(obj, { a:1, [Symbol()]:2, getA(){console.log(this.a)} })
+Object.defineProperty(obj, 'b', {
+  value: 3,
+  enumerable: false
+})
+
+// in 和 for...in 是唯二会包含继承属性的语法
+for(let i in obj){ console.log(i) }		// a getA hello getHello
+
+Object.keys(obj)		// ['a', 'getA']
+Object.getOwnPropertyNames(obj)		// ['a', 'getA', 'b']
+Object.getOwnPropertySymbols(obj)		// [Symbol()]
+
+Reflect.ownKeys(obj)		// ['a', 'getA', 'b', Symbol()]
+
+Object.hasOwn(obj, 'b')		// true
+Object.hasOwn(obj, 'hello')		// false
+
+obj.propertyIsEnumerable('b')		//false
+obj.propertyIsEnumerable('hello')		//false
+
+JSON.stringify(obj)		// '{"a":1}'
+```
+
 | 静态方法                       |                                                              |
 | ------------------------------ | ------------------------------------------------------------ |
-| Object.keys()                  | 只返回对象自身的、可遍历的属性（不会返回symbol类型的属性名） |
+| Object.keys()                  | 只返回对象自身的、可遍历的属性（不包含继承的，也不返回symbol类型的属性名）<br />而`for...in`的遍历会返回自身的和继承的可枚举属性 |
 | Object.entries()               | 同上，返回一个二维数组，包含属性值                           |
 | Object.getOwnPropertyNames()   | 返回对象自身的全部属性（不会返回symbol类型的属性名）         |
 | Object.getOwnPropertySymbols() | 仅返回`symbol`类型的属性名                                   |
@@ -47,10 +89,11 @@ ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意�
 | Object.getPrototypeOf()        | 获取对象的`Prototype`对象                                    |
 | Object.create()                | 可以指定原型对象和属性，返回一个新的对象                     |
 | Object.is()                    | ES6，判断两个值是否为同一个值                                |
+| **Reflect.ownKeys()**          | 自有属性，即符合hasOwnProperty判断的属性                     |
 
 | 实例方法                   |                                                |
 | -------------------------- | ---------------------------------------------- |
-| obj.hasOwnProperty()       | 自有属性                                       |
+| obj.hasOwnProperty()       | 自有属性（可枚举、不可枚举、symbol键）         |
 | obj.propertyIsEnumerable() | 可枚举属性                                     |
 | obj.isPrototypeOf()        | 判断当前对象是否为另一个对象的原型             |
 | valueOf()                  | 返回指定对象的原始值，如果没有则将返回对象本身 |

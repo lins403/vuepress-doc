@@ -4,6 +4,19 @@
 
 ECMAScript没有函数重载
 
+## 原型
+
+每个函数都有个`prototype`属性，其`constructor`属性指向函数自身；
+
+每个函数都连接到(原型指针指向) `Function.prototype`，而这个原型本身连接到 `Object.prototype`
+
+```js
+function foo(){}
+foo.prototype.constructor === foo		//true
+foo.__proto__ === Function.prototype		//true
+Function.prototype.__proto__ === Object.prototype		//true
+```
+
 ## 基础
 
 ```js
@@ -116,10 +129,14 @@ inner()	//null
 
 ### 函数传参
 
-- 变量有按值和按引用访问，而传参则只有按值传递，不可能按引用传递参数
+实际参数(arguments) 与 形式参数(parameters)
+
+**按值传参**
+
+- 变量有按值和按引用访问，而函数传参则只有按值传递，不可能按引用传递参数。
 - 函数的参数就是局部变量
 
-如果把对象作为参数传递，那么传递的值就是这个对象的引用
+如果把对象作为参数传递，**复制**了参数在栈内存中的“指针”值，那么传递的值就是这个对象的引用（因为复制一个对象时是复制它栈内存中的内存地址，而不是堆内存上的分配的真实内存空间地址。）
 
 ```js
 function foo(value, obj){
@@ -129,8 +146,8 @@ function foo(value, obj){
 const v = 'hello world'
 const o = {}
 foo(v, o)
-console.log(v)	//'hello world'
-console.log(o)	//{a: 1}
+console.log(v)	//'hello world'，按值传递，所以传递的函数参数是独立的值
+console.log(o)	//{a: 1}，按值传递，所以传递的函数参数是独立的值，但传递的值是对o对象的引用值，即指针
 ```
 
 ### 函数声明与函数表达式
@@ -359,6 +376,53 @@ for(let i = 0; i < 3; i++) {
 }
 ```
 
+### 函数记忆
+
+memoization，利用闭包缓存运算结果，避免重复运算之前已经被处理的输入，以减少（递归）运算次数
+
+```js
+function fib(n) {
+  if (n < 2) return n
+  return fib(n - 1) + fib(n - 2)
+}
+
+// 尾调用优化
+function fib(n, a=0, b=1) {
+  "use strict";
+  if(n<1) return a
+  return fib(n-1, b, a+b);
+}
+
+// 函数记忆优化
+function fib(n){
+  const memo = [0, 1]
+  if(memo[n]) return memo[n]
+  const result = fib(n - 1) + fib(n - 2)
+  memo[n] = result
+  return result
+}
+```
+
+```js
+// 封装通用模式
+'use strict'
+var memoizer = function (memo, formula) {
+  const recur = function (n) {
+    if (memo[n]) return memo[n]
+    const result = formula(recur, n)
+    memo[n] = result
+    return result
+  }
+  return recur
+}
+function fib(recur, n) {
+  if (n < 2) return n
+  return recur(n - 1) + recur(n - 2)
+}
+var fib_memo = memoizer([0, 1], fib)
+console.log(fib_memo(7))
+```
+
 
 
 ## Skills
@@ -379,6 +443,12 @@ func()  // ✔️
 
 解释代码字符串
 
+Function构造器也是eval的一种形式。
+
+setTimeout和setInterval函数，可以接受字符串参数或函数参数，如果传递的是字符串参数，则会像eval那样去处理。
+
+eval与eval相关的语法，非必要则不使用。
+
 ```js
 let msg = "hello world";
   eval("console.log(msg)");  // "hello world"
@@ -393,6 +463,8 @@ eval("let msg = 'hello world';");
 在严格模式下，在 eval()内部创建的变量和函数无法被外部访问
 
 ### 函数柯里化
+
+柯里化允许把函数与传递给它的参数相结合，产生出一个新的函数
 
 #### 管道函数(简易版)
 

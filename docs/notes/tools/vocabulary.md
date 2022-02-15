@@ -21,6 +21,7 @@
 |                   |      |
 | ----------------- | ---- |
 | backslash/escape  | \    |
+| slash             | /    |
 | brace             | {}   |
 | bracket           | []   |
 | caret             | ^    |
@@ -31,7 +32,6 @@
 | hyphen            | -    |
 | parenthesis/paren | ()   |
 | semicolon         | ;    |
-| slash             | /    |
 | tilde             | ~    |
 
 
@@ -46,6 +46,7 @@
 | bespoke              | 定制的             | a hundred thousand          | 十万                 |
 |                      |                    | an abstract construct       | 抽象构造             |
 | braceless            | 没有括号的         | be tidied up                | 整理好               |
+| cascade              | 级联               |                             |                      |
 | circumvent           | 规避，绕开         | be geared towards           | 针对…                |
 | connoisseur          | 内行               | error-prone                 | 易于出错的           |
 | efficacy             | 功效               | error resistance            | 容错性               |
@@ -60,6 +61,7 @@
 | gurus                | 领袖，专家         |                             |                      |
 | gratis               | 免费地，无偿地     |                             |                      |
 | hassle               | 麻烦               |                             |                      |
+| invocation           | 调用               |                             |                      |
 | instill              | 灌输               |                             |                      |
 | intrigued            | 好奇的             |                             |                      |
 | intrude              | 侵入               |                             |                      |

@@ -34,9 +34,9 @@ function assert(condition, message) {
 assert(1>2, 'false~~')
 ```
 
-
-
 ## 2）void
+
+在很多语言中，void是一种类型，表示没有值。但是在JavaScript中，void是一个运算符，它接受一个运算数，并返回undefined。
 
 一些情况下 `undefined` 会被编译为 `void 0`，所以理论上后者要快一些
 
@@ -84,28 +84,76 @@ for(let i = arr.length; i--;) {...} // 注意 i-- 后面的分号别漏了
 ### 循环的几种方法
 
 ```
-1) forEach
+1) forEach（只能用在数组和类数组对象上）
   - break和return都不能中断循环
   - forEach 遍历数组会自动跳过空元素
 
-2) for-in
-  - 使用for in会遍历数组所有的可枚举属性，包括prototype上的原型和方法，例如keys、values、forEach、length、...
+2) for-in（遍历对象）
+  - 使用for in会遍历数组所有的可枚举属性，不包括symbol键，但会输出继承自原型的可枚举属性，即prototype上的原型和方法；可以使用hasOwnProperty进一步过滤出自身的可枚举属性
   - for in更适合遍历对象，不应该用来遍历数组或类数组对象。
 
-3) for-of
+3) for-of（遍历可迭代对象）
   - for (var value of myArray) { console.log(value) }
   - 按照可迭代对象的 next() 方法产生值的顺序进行迭代元素
   - ES2018进行了扩展，增加了 for-await-of 循环，以支持生成promise的异步可迭代对象
 ```
 
-### Array.prototype.forEach.call
+#### 🌰例子
 
 ```js
-function print(value, index) {
-  console.log(index + ' : ' + value);
+const arr = [11, , 22]
+for(let i = arr.length; i--;) {console.log(arr[i])}
+// 22
+// undefined
+// 11
+//=================================
+// forEach会跳过空元素，会影响索引；
+// forEach不会跳过falsy值（undefined、null、NaN、false、…）
+arr.forEach((item,key)=>{console.log(item, key)})
+// 11 0
+// 22 2
+```
+
+```js
+// 遍历字符串
+for(let i in 'foo'){ console.log(i) }	// 0 1 2
+for(let v of 'foo'){ console.log(v) }	// f o o
+Array.prototype.forEach.call('foo', (item,key)=>{console.log(item, key)})	// f 0 o 1 o 2
+
+// 遍历数组
+var arr = [123, true, ['hello', 2022]]
+for(let i in arr){ console.log(i) }	// 0 1 2
+for(let v of arr){ console.log(v) }	// 123 true ['hello', 2022]
+arr.forEach((item, index)=>{console.log(item, index)})
+
+// 遍历类数组对象(有索引和length属性)
+var arrLike = { 0:'hello', length: 3 }
+for(let i in arrLike){ console.log(i) }	// 0 length
+for(let v of arrLike){ console.log(v) }		// TypeError: arrLike is not iterable
+Array.prototype.forEach.call(arrLike, (item,key)=>{console.log(item, key)})	// hello 0
+
+// 遍历对象
+var obj = { foo:'bar', [Symbol()]:1, getFoo(){console.log(this.foo)} }
+for(let i in obj){ console.log(i) }	// foo getFoo //自身的可枚举属性，不包括symbol键，但会输出继承自原型的可枚举属性
+for(let v of obj){ console.log(v) }	// TypeError: obj is not iterable
+
+// 遍历可迭代对象(数组、字符串、部署了Symbol.iterator接口的对象、generator函数执行结果、matchAll匹配结果、…)
+var iter = {
+  *[Symbol.iterator](){
+    yield 'a'
+    yield 'b'
+    yield 'c'
+  }
 }
-Array.prototype.forEach.call("abc", print)
-Array.prototype.forEach.call([3,2,1], print)
+for(let i in iter){ console.log(i) }	//无结果
+for(let v of iter){ console.log(v) }	// a b c
+Array.prototype.forEach.call(iter, (item,key)=>{console.log(item, key)})	//无结果
+
+// generator函数生成的遍历器
+function* generatorFn() {
+  yield* ['a', 'b', 'c']
+}
+for (const x of generatorFn()) { console.log(x) }		// a b c
 ```
 
 

@@ -2,9 +2,18 @@
 
 ## 基础
 
+### 不可变性
+
+```js
+var lang = 'Java';
+lang[0] = 'H'
+lang
+// 'Java'
+```
+
 ### 编码
 
-JavaScript 字符串使用了两种 Unicode 编码混合的策略:UCS-2 和 UTF-16。对于可以采用 16 位编码的字符(Plane0区间: U+0000~U+FFFF)，这两种编码实际上是一样的。
+JavaScript 字符串使用了两种 Unicode 编码混合的策略:UCS-2 和 UTF-16。对于可以采用 16 位编码的字符(BMP即Plane0区间: U+0000~U+FFFF)，这两种编码实际上是一样的。
 
 所以实际上，JavaScript只支持 UTF-16 两字节的字符，不支持四字节的字符。
 

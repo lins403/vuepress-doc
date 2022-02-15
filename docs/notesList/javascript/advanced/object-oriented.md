@@ -2,7 +2,11 @@
 
 ## 基础
 
-> 每个构造函数都有一个**原型对象**`prototype`，原型有一个属性`constructor`指回构造函数，而实例有一个内部指针`[[prototype]]`（**原型指针**）指向原型 `person1.__proto__ === Person.prototype`
+> 每个构造函数都有一个**原型对象** `prototype`，原型对象有一个`constructor`属性指回构造函数。
+>
+> 而实例对象有一个内部指针`[[prototype]]`（**原型指针**）指向原型 `person1.__proto__ === Person.prototype`，并可以从中继承属性和方法。
+>
+> 要获取某个对象的属性值，但对象自身没有这个属性名时，JavaScript就会尝试，沿着**原型链**从原型对象上获取属性值，直到到达原型链终点`Object.prototype`。如果想要的属性完全不存在于原型链中，那么结果就是undefined值。
 
 ### 1）new操作符
 
@@ -26,6 +30,8 @@ function MyNew(Constructor, ...arg) {
   return newObj
 }
 ```
+
+如果没有使用new而直接调用构造函数时，则this不会被绑定到这个新对象上，导致this绑定的变量可能变成全局作用域，而破坏全局变量环境。
 
 #### new.target
 
@@ -293,7 +299,7 @@ console.log(person1.sayName == person2.sayName); // true
 SubType.prototype = new SuperType();
 ```
 
-JavaScript 的继承主要通过原型链来实现。原型链涉及把构造函数的原型赋值为另一个类型的实例。 这样一来，子类就可以访问父类的所有属性和方法，就像基于类的继承那样。
+原型继承（行为委托模式）：JavaScript 的继承主要通过原型链来实现。原型链涉及把构造函数的原型赋值为另一个类型的实例。 这样一来，子类就可以访问父类的所有属性和方法，就像基于类的继承那样。
 
 ### 模式
 

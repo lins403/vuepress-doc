@@ -358,7 +358,12 @@ location / {
 }
 ```
 
+### 修改上传大小限制
 
+```nginx
+# 在 http, server, location 任一区域内都可以使用
+client_max_body_size 10m;  # 改为你需要的大小，默认1M
+```
 
 ## 踩坑
 
