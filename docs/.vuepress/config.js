@@ -30,6 +30,7 @@ module.exports = {
           '/blogs/': blogSidebar(),
           '/interview/': interviewSidebar('前端基础', '进阶'),
           '/vue2-source-code/': sourceCodeSidebar('准备', '核心模块', '自问自答'),
+          '/notesList/data-structure-algorithm/': DataStructureSidebar('数据结构', '算法'),
           '/notesList/javascript/': JavaScriptSidebar('总览', '基础', 'ES6', '进阶'),
           '/notesList/typescript/': 'auto',
           '/notesList/packages/': [
@@ -380,6 +381,30 @@ function interviewSidebar(groupA,groupB){
         collapsable: false,
         children: [
           'advanced/performance',
+        ]
+      },
+    ]
+}
+
+function DataStructureSidebar(groupA,groupB){
+    return [
+      {
+        title: groupA,
+        collapsable: false,
+        children: [
+          'data-structures/',
+          'data-structures/线性表',
+          'data-structures/栈和队列',
+          'data-structures/串、数组和广义表',
+          'data-structures/树和二叉树',
+          'data-structures/图',
+        ]
+      },
+      {
+        title: groupB,
+        collapsable: false,
+        children: [
+          'algorithm/',
         ]
       },
     ]

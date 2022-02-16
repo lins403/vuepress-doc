@@ -14,8 +14,8 @@
 - 1997年，DHTML发布，允许动态改变网页内容。这标志着 **DOM** 模式正式应用。
 - 1998年，Netscape 公司开源了浏览器，这导致了 **Mozilla** 项目的诞生。
 - 1999年，IE 5部署了 **XMLHttpRequest** 接口，允许 JavaScript 发出 HTTP 请求
-- 2000年，HTTP协议的主要设计者之一、Apache基金会的第一任主席 Roy Thomas Fielding 在他2000年的博士论文中提出 **REST **(Representational State Transfer)。如果有一个互联网软件的架构符合REST原则，就称它为 **RESTful 架构**
-- 2001年，Douglas Crockford （也是《JavaScript语言精粹》和 JSLint 的作者）提出了 **JSON** 格式，用于取代 XML 格式进行服务器和网页之间的数据交换。
+- 2000年，HTTP协议的主要设计者之一、Apache基金会的第一任主席 Roy Thomas Fielding 在他2000年的博士论文中提出 **REST**(Representational State Transfer)。如果有一个互联网软件的架构符合REST原则，就称它为 RESTful 架构。
+- 2001年，Douglas Crockford （《JavaScript语言精粹》和 JSLint 的作者）提出了 **JSON** 格式，用于取代 XML 格式进行服务器和网页之间的数据交换。
 - 2002年，Mozilla 项目发布了它的浏览器的第一版，后来起名为 **Firefox**。
 - 2003年，Apple发布了 **Safari** 浏览器
 - 2004年，Google 发布了 Gmail，促成了 **Web Application** 这个概念的诞生。

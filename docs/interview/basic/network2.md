@@ -37,7 +37,7 @@
 - Token 验证（包括 JWT，SSO）
 - OAuth2.0（开放授权，如微信登录）
 
-（SSO，单点登录，在多个应用系统中，只需要登录一次，就可以访问其他相互信任的应用系统。）
+（SSO，Single sign-on，单点登录，在多个应用系统中，只需要登录一次，就可以访问其他相互信任的应用系统。）
 
 ## Cookie
 
@@ -115,20 +115,19 @@ Cookies.remove('name', { path: '' })	//如果添加时设置了path或domain，�
 
 > 后端将token传给前端，前端保存在本地，以后需要权限才可以访问的时候，就可以在请求头上携带这个token
 
-- Access Token
-  
+- `Access Token`
   - 服务端验证成功后，签发一个 token（将登录凭证做数字签名，加密之后得到token），把这个 token 发送给客户端。
   - 客户端收到 token 以后，将token保存在本地，比如cookie里或者 localStorage 里，以后每次请都携带这个token
   - 服务端验证请求里的token串（做解密和签名认证，判断其有效性），如果验证成功，就向客户端返回请求的数据
-
-- Refresh Token：用来刷新 access token
+  
+- `Refresh Token`：用来刷新 access token
 
 ### token 和 session 的区别
 
 - session_id跟token的作用比较类似
 - session使服务端有状态化，可以记录会话信息；而token是凭证，使服务端无状态化，不会存储会话信息。
 
-> 做的项目中存在本地（cookie）的是token而没用session_id，token值用的是前后端约定的字段名来传输。在登录成功后，前端将获取到的accessToken和refreshToken存到cookie中，在之后的每次请求中添加到请求头header上，交由后端验证，验证成功则返回请求的数据。
+> 做的项目中存在本地（cookie）的是token而没用session_id，token值用的是前后端约定的字段名来传输。在登录成功后，前端将获取到的accessToken和refreshToken存到cookie中，在之后的每次请求中添加到请求头header的`xxx-Auth`属性上，交由后端验证，验证成功则返回请求的数据。
 
 ## JWT
 
@@ -183,9 +182,9 @@ openWindow(url, thirdpart, 540, 540)
 
 Storage 类型只能存储字符串。非字符串数据在存储之前会自动转换为字符串（ toString() ）。
 
-- sessionStorage
+- `sessionStorage`
   - 跨会话的存储机制，浏览器当前窗口关闭后自动清除
-- localStorage
+- `localStorage`
   - 永久存储机制，保存在浏览器本地，数据不会过期也不会被清除，浏览器重启后依然还在
   - 会一直保留至通过 JavaScript 删除，或者用户清除浏览器缓存。
   - 和cookie一样在所有同源标签页和窗口之间共享
@@ -225,7 +224,7 @@ sessionStorage.setItem("name", "Nicholas");
 sessionStorage.book = "Professional JavaScript";
 ```
 
-在Storage.prototype上自定义方法实现：[给localStorage设置一个过期时间](https://www.jianshu.com/p/50b4c89d3be3)
+在Storage.prototype上自定义方法实现 [给localStorage设置一个过期时间](https://www.jianshu.com/p/50b4c89d3be3)
 
 ## 浏览器缓存
 

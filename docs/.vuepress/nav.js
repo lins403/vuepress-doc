@@ -4,7 +4,7 @@
  * @Date: 2021-09-19 22:14:49
  * @FilePath: /vuepress-doc/docs/.vuepress/nav.js
  * @LastEditors: lins14
- * @LastEditTime: 2022-01-08 11:34:41
+ * @LastEditTime: 2022-02-17 12:16:31
  */
 module.exports = [
   { text: 'Home', link: '/' },
@@ -15,6 +15,10 @@ module.exports = [
       {
         text: '综合',
         items: [
+          // {
+          //   text: '数据结构与算法',
+          //   link: '/notesList/data-structure-algorithm/'
+          // },
           {
             text: '前端工程化',
             link: '/notes/engineering/'

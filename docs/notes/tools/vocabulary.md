@@ -67,6 +67,7 @@
 | intrude              | 侵入               |                             |                      |
 | Kanji                | 日本汉字           |                             |                      |
 | latency              | 延迟               |                             |                      |
+| laggy                | 懒惰的、卡顿的     |                             |                      |
 | mandatory            | 强制的             | malicious scripts           | 恶意脚本             |
 | minimalistic         | 极简的             | minor tweaks                | 小调整               |
 | mojibake             | 乱码               | non-optimal                 | 不理想               |

@@ -144,6 +144,18 @@ console.log(getArgsArray(1, 2, 3, 4)); // [1, 2, 3, 4]
 
 [JavaScript中十种一步拷贝数组的方法](https://segmentfault.com/a/1190000018947028)
 
+| 方法                              | 说明 |        |
+| --------------------------------- | ---- | ------ |
+| 扩展运算符 `[...arr]`             |      | 浅拷贝 |
+| for、while循环遍历拷贝            |      | 浅     |
+| arr.map、arr.filter、arr.reduce   |      | 浅     |
+| arr.slice                         |      | 浅     |
+| arr.concat                        |      | 浅     |
+| Array.from                        |      | 浅     |
+| `JSON.parse(JSON.stringify(arr))` |      | 深拷贝 |
+
+
+
 ### 批量创建数组
 
 ```js
@@ -180,6 +192,14 @@ var m = [1, 2, 2], n = [2,3,3]
 combine(m,n)	//[1, 2, 3]
 ```
 
+### 清空数组
+
+```js
+arr = []	//只是赋值为一个空数组，原来的数组需要等待被垃圾回收
+arr.length = 0
+arr.splice(0, arr.length);
+```
+
 ### 序列生成器
 
 ```js
@@ -201,4 +221,6 @@ flatDeep(arr1)
 flatDeep(arr1, 2)
 flatDeep(arr1, Infinity)
 ```
+
+### 其它
 

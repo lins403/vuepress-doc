@@ -8,8 +8,6 @@ ECMAScript 5 定义了原生 JSON 对象，用于将 JavaScript 对象序列化�
 
 JSON 用来序列化对象、数组、数值、字符串、布尔值和 null
 
-undefined、任何函数以及symbol值在序列化过程中会被忽略，或转换为null
-
 ```js
 /**
  * @description: 将JavaScript序列化为JSON字符串
@@ -34,6 +32,28 @@ JSON.stringify(book, null, "--")
 var jsonText = JSON.stringify(book, ['title', 'edition'], 2)	//指定属性
 original_download(jsonText, 'demo.json')
 ```
+
+### 特殊情况
+
+1. 有Date、RegExp、Error对象，序列化的结果将只得到空对象
+2. undefined、任何函数以及symbol值在序列化过程中会被忽略
+3. NaN、Infinity和-Infinity 在序列化过程中会被转换为null
+4. 只能序列化对象的自身的可枚举属性，从原型上继承的属性会被忽略
+
+```js
+var obj = {
+  a: undefined,
+  b: null,
+  c: NaN,
+  d: Infinity,
+  e: Symbol(),
+  f: function(){ return 1 }
+}
+JSON.stringify(obj)		
+// '{"b":null,"c":null,"d":null}'
+```
+
+
 
 ### 过滤结果
 
