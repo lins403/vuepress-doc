@@ -4,7 +4,7 @@
 
 ### 1) 组件批量自动化注册
 
-`require.context`
+`require.context`是一个webpack的api，通过执行require.context函数获取一个特定的上下文，主要用来实现自动化导入模块。
 
 ```js
 require.context(/*要搜索的目录*/, /*是否搜索其子目录*/, /*匹配的正则*/)

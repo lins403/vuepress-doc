@@ -1,4 +1,8 @@
-# ThingJS
+# 3D扫盲
+
+[cesium](https://cesium.com/cesiumjs/)：用于显示三维地球和地图的开源js库
+
+## ThingJS
 
 ThingJS底层基于的是开源的three.js，都是对原生webGL的封装
 
@@ -16,7 +20,7 @@ thingjs-1.2.7-demo：[GitHub - loveyuxuan/Thingjs_Demo: 学习thingjs](https://g
 
 复杂场景demo：[prison/desc at master · lcpqwer/prison · GitHub](https://github.com/lcpqwer/prison/blob/master/desc)
 
-# WebGL
+## WebGL
 
 原理
 
@@ -25,7 +29,7 @@ thingjs-1.2.7-demo：[GitHub - loveyuxuan/Thingjs_Demo: 学习thingjs](https://g
 3. GPU，将一系列坐标生成一个个图元（primitives），图元被合成片元（fragments）
 4. 片元着色器，进行绘制像素，完成渲染
 
-# threejs
+## threejs
 
 封装了更底层的原生WebGL的api
 

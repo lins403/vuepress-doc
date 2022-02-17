@@ -37,7 +37,7 @@ rgb转hex：[颜色码转换器](https://www.sioe.cn/yingyong/yanse-rgb-16/)
   <span style="background-color: hsl(0, 0%, 50%);padding: .2em 2em;color:#fff;">hsl(0, 0%, 75%)</span>
   <span style="background-color: hsl(0, 0%, 100%);padding: .2em 2em;">hsl(0, 0%, 100%)</span>
 
-## 渐变色
+### 渐变色
 
 <div style="background: linear-gradient(90deg, #ff6e7f, #bfe9ff 80%);height: 50px;line-height:50px;text-align:center;">background: linear-gradient(90deg, #ff6e7f, #bfe9ff 80%);</div>
 
@@ -57,3 +57,41 @@ rgb转hex：[颜色码转换器](https://www.sioe.cn/yingyong/yanse-rgb-16/)
 蔚蓝色：<span style="background-color: azure;padding:.25em 2em;">azure</span>
 
 <span style="background-color: Aliceblue;padding:.25em 2em;">Aliceblue</span>
+
+
+
+## Utils
+
+### rgb值和16进制颜色值之间的转换
+
+```js
+/**
+ * 16进制颜色值转RGB
+ * @param  {String} hex 16进制颜色字符串
+ * @return {String}     RGB颜色字符串
+ */
+function hexToRGB(hex) {
+  var hexx = hex.replace('#', '0x')
+  var r = hexx >> 16
+  var g = (hexx >> 8) & 0xff
+  var b = hexx & 0xff
+  return `rgb(${r}, ${g}, ${b})`
+}
+```
+
+```js
+/**
+ * RGB颜色转16进制颜色
+ * @param  {String} rgb RGB进制颜色字符串
+ * @return {String}     16进制颜色字符串
+ */
+function RGBToHex(rgb) {
+  var rgbArr = rgb.split(/[^\d]+/)
+  var color = (rgbArr[1] << 16) | (rgbArr[2] << 8) | rgbArr[3]
+  return '#' + color.toString(16)
+}
+// -------------------------------------------------
+hexToRGB('#ffffff') // 'rgb(255,255,255)'
+RGBToHex('rgb(255,255,255)') // '#ffffff'
+```
+

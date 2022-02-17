@@ -3,8 +3,8 @@
 ## 浮点数精度
 
 - JavaScript 中所有数字，包括整数和小数都只有一种类型，即 Number类型
-- javascript以 <mark>64 位双精度浮点数</mark> 存储所有 Number 类型值
-  - 但整数运算的情况下，JavaScript 会自动把 64 位浮点数，转成 32 位整数
+- javascript以 <mark>64 位双精度浮点数</mark> 存储所有 Number 类型值，整数也是
+  - 但在整数运算的情况下，JavaScript 会自动把 64 位浮点数，转成 32 位整数
   - 因为存储浮点值使用的内存空间是存储整数值的两倍，所以 ECMAScript总是想方设法把值转换为整数，例如小数点后没有数字，以及小数点后只有0的情况
   - `Number.isInteger` 辨别一个数值是否保存为整数
 

@@ -2,91 +2,86 @@
 
 ## 综合
 
-1）使用位运算实现整除
+### 位运算
+
+会比运算符更快。
+
+1）整除
 
 ```js
-8 >> 1
-// 4
+8 >> 1		// 4
+9 >> 1		// 4
+17 >> 1		// 8
+```
 
-9 >> 1
-// 4
+2）2的次方
 
-17 >> 1
-// 8
+```js
+1 << 10		//1024
+2 << 9		//1024
+8 << 7		//1024
+```
+
+3）判断奇偶数
+
+```js
+9 & 1		// 1，奇数
+2 & 1		// 0，偶数
+```
+
+4）取整
+
+```js
+console.log(~~ 6.83)    // 6
+console.log(6.83 >> 0)  // 6
+console.log(6.83 << 0)  // 6
+console.log(6.83 | 0)   // 6
+
+// >>>不可对负数取整
+console.log(6.83 >>> 0)   // 6		
 ```
 
 
 
-## 1）控制台
+## 变量
 
-### 打印变量
-
-在开发者工具的 Element(元素)标签页内，单击 DOM 树中一个节点，就可以在 Console(控制台)标签页中使用 `$0` 引用该节点的 JavaScript 实例。它就跟普通的 JavaScript 实例一样，因此可以读取属性(如`$0.scrollWidth`)，或者调用成员方法(如`$0.remove()`)。
+### 判断变量是否存在
 
 ```js
-// 打印vue
-document.querySelector('#app').__vue__    //等同于app.__vue__，app就是Vue的实例,root
-document.querySelector('.app-main').__vue__
-```
-
-### 调试
-
-```js
-function pauseExecution(){
-  console.log("Will print before breakpoint");
-  debugger;
-  console.log("Will not print until breakpoint continues");
+// 错误的写法
+if (v) {
+  // ...
 }
-pauseExecution()
+// ReferenceError: v is not defined
+// ---------------------------------------
+// 正确的写法
+if (typeof v === "undefined") {
+  // ...
+}
 ```
 
-### 抛出错误
+### Object.freeze()冻结一个常量对象
+
+const声明一个对象，但这个对象的属性值依然可以修改，要避免这种情况，可以使用 Object.freeze() 进行冻结
 
 ```js
-function assert(condition, message) {
-  if (!condition) {
-    throw new Error(message);
-  }
-}
-assert(1>2, 'false~~')
+const o3 = Object.freeze({});
+o3.name = 'Jake';
+console.log(o3.name); // undefined
 ```
 
-## 2）void
+### 使用Object.is比较多个值
 
-在很多语言中，void是一种类型，表示没有值。但是在JavaScript中，void是一个运算符，它接受一个运算数，并返回undefined。
+```js
+// 递归
+function recursivelyCheckEqual(x, ...rest) {
+  return Object.is(x, rest[0]) && (rest.length < 2 || recursivelyCheckEqual(...rest));
+}
+```
 
-一些情况下 `undefined` 会被编译为 `void 0`，所以理论上后者要快一些
 
-void的妙用
 
-1. Immediately Invoked Function Expressions
-  
-   ```js
-   void function iife() {
-    console.log("Executed!");
-   }();
-   
-   // Output: "Executed!"
-   ```
-
-2. Non-leaking Arrow Functions
-  
-   ```js
-   button.onclick = () => void doSomething();
-   // doSomething()返回什么result都不会出错
-   ```
-
-3. JavaScript URIs
-  
-   ```html
-   <a href="javascript:void(0);">Click here to do nothing</a>
-   <a href="javascript: void(dosomething())">文字</a>
-   <!--操作DOM-->
-   <a href="javascript:void(document.body.style.backgroundColor='green');">Click here for green background</a>
-   <a href="javascript:void(document.form.submit())">提交</a>
-   ```
-
-## 3）遍历
+## 循环遍历
 
 ### for 循环简写
 
@@ -175,42 +170,6 @@ for (const x of generatorFn()) { console.log(x) }		// a b c
 
 
 
-## 4）变量
-
-## 判断变量是否存在
-
-```js
-// 错误的写法
-if (v) {
-  // ...
-}
-// ReferenceError: v is not defined
-// ---------------------------------------
-// 正确的写法
-if (typeof v === "undefined") {
-  // ...
-}
-```
-
-### Object.freeze()冻结一个常量对象
-
-const声明一个对象，但这个对象的属性值依然可以修改，要避免这种情况，可以使用 Object.freeze() 进行冻结
-
-```js
-const o3 = Object.freeze({});
-o3.name = 'Jake';
-console.log(o3.name); // undefined
-```
-
-### 使用Object.is比较多个值
-
-```js
-// 递归
-function recursivelyCheckEqual(x, ...rest) {
-  return Object.is(x, rest[0]) && (rest.length < 2 || recursivelyCheckEqual(...rest));
-}
-```
-
 
 
 ## Promise
@@ -246,3 +205,79 @@ let p = new TrackablePromise((resolve, reject, notify) => {
 })
 ```
 
+## 2）void
+
+在很多语言中，void是一种类型，表示没有值。但是在JavaScript中，void是一个运算符，它接受一个运算数，并返回undefined。
+
+一些情况下 `undefined` 会被编译为 `void 0`，所以理论上后者要快一些
+
+void的妙用
+
+1. Immediately Invoked Function Expressions
+
+   ```js
+   void function iife() {
+    console.log("Executed!");
+   }();
+   
+   // Output: "Executed!"
+   ```
+
+2. Non-leaking Arrow Functions
+
+   ```js
+   button.onclick = () => void doSomething();
+   // doSomething()返回什么result都不会出错
+   ```
+
+3. JavaScript URIs
+
+   ```html
+   <a href="javascript:void(0);">Click here to do nothing</a>
+   <a href="javascript: void(dosomething())">文字</a>
+   <!--操作DOM-->
+   <a href="javascript:void(document.body.style.backgroundColor='green');">Click here for green background</a>
+   <a href="javascript:void(document.form.submit())">提交</a>
+   ```
+
+
+
+## 其它
+
+### 一、控制台
+
+#### 打印变量
+
+在开发者工具的 Element(元素)标签页内，单击 DOM 树中一个节点，就可以在 Console(控制台)标签页中使用 `$0` 引用该节点的 JavaScript 实例。它就跟普通的 JavaScript 实例一样，因此可以读取属性(如`$0.scrollWidth`)，或者调用成员方法(如`$0.remove()`)。
+
+```js
+// 打印vue
+document.querySelector('#app').__vue__    //等同于app.__vue__，app就是Vue的实例,root
+document.querySelector('.app-main').__vue__
+```
+
+```js
+(!(~+[])+{})[--[~+""][+[]]*[~+[]]+~~!+[]]+({}+[])[[~!+[]]*~+[]]		//sb
+```
+
+#### 调试
+
+```js
+function pauseExecution(){
+  console.log("Will print before breakpoint");
+  debugger;
+  console.log("Will not print until breakpoint continues");
+}
+pauseExecution()
+```
+
+#### 抛出错误
+
+```js
+function assert(condition, message) {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+assert(1>2, 'false~~')
+```

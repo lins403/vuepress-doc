@@ -16,6 +16,16 @@
 | `OSS`    | Open-source software            |             |
 | `AFAIK`  | as far as I know                |             |
 
+## 公式
+
+| A    |                         |            |
+| ---- | ----------------------- | ---------- |
+| gcd  | Greatest common divisor | 最大公约数 |
+| lcm  | Least common multiple   | 最小公倍数 |
+|      |                         |            |
+
+
+
 ## 单词
 
 |                   |      |

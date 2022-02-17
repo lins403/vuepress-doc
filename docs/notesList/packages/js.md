@@ -10,6 +10,10 @@ deep equality check: [GitHub - epoberezkin/fast-deep-equal: The fastest deep equ
 
 immutable state: [immer vs immutable | npm trends](https://www.npmtrends.com/immer-vs-immutable)
 
+## 浏览器
+
+manage session history: [history](https://www.npmjs.com/package/history)
+
 ## 加密
 
 [GitHub - brix/crypto-js: JavaScript library of crypto standards.](https://github.com/brix/crypto-js)
@@ -25,3 +29,7 @@ immutable state: [immer vs immutable | npm trends](https://www.npmtrends.com/imm
 [rimraf](https://www.npmjs.com/package/rimraf)
 
 [node-pre-gyp](https://www.npmjs.com/package/node-pre-gyp)
+
+## React
+
+[classnames](https://www.npmjs.com/package/classnames): A simple JavaScript utility for conditionally joining classNames together.

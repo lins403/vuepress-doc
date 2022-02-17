@@ -4,6 +4,8 @@
 
 ECMAScript没有函数重载
 
+JavaScript 语言的函数是一种独立的数据类型，以及采用基于原型对象（prototype）的继承链。这是它与 Java 语法最大的两点区别。JavaScript 语法要比 Java 自由得多。
+
 ## 原型
 
 每个函数都有个`prototype`属性，其`constructor`属性指向函数自身；
@@ -345,6 +347,20 @@ console.log(object.getIdentityFunc()()); // 'The Window'
 
 立即调用的匿名函数又被称作立即调用的函数表达式(IIFE，Immediately Invoked Function Expression)。
 
+把函数声明转成表达式的形式来执行函数
+
+```js
+0 + (function(text) {
+  console.log(text)
+})('与数字相加变成表达式')
+
+true && (function(text) {
+  console.log(text)
+})('利用逻辑运算符变成表达式')
+
+// ...
+```
+
 #### 模拟块作用域
 
 ```js
@@ -423,9 +439,12 @@ var fib_memo = memoizer([0, 1], fib)
 console.log(fib_memo(7))
 ```
 
+### 纯函数
 
+- 给定相同的输入，始终返回相同的输出（不能依赖任何外部可变状态，例如随机数、time）
+- 不会产生副作用（无法更改任何外部状态）
 
-## Skills
+## Skills技巧
 
 ### 函数具名传参
 

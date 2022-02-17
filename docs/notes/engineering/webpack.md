@@ -2,6 +2,12 @@
 
 打包模块，解析模块依赖，构建你的 images、styles、assets、scripts 等静态资源
 
+## TODO
+
+[《了不起的 Webpack 构建流程学习指南》](https://juejin.cn/post/6844904196634837000)
+
+
+
 ## 工作原理
 
 > loader机制是webpack核心：

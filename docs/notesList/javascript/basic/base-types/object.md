@@ -182,28 +182,56 @@ var obj = Object.defineProperties({}, {
 
 ### 合并对象
 
- `Object.assign()`，将每个源对象中<u>可枚举</u>和<u>自有属性</u>复制到目标对象
+ `Object.assign()`，将每个源对象中<u>可枚举</u>和<u>自有属性</u>复制到目标对象。浅拷贝，后者覆盖前者。
 
-浅拷贝，后者覆盖前者
+`JSON.parse(JSON.stringify(obj))` 深拷贝，但是部分数据类型的值并不能成功被转换
 
 ### 完整的拷贝对象
+
+ES2017 - Object.create
+
+```js
+// 确保拷贝后的对象，与原对象具有同样的原型和实例属性，以及属性的描述对象
+function copyObject(orig) {
+  return Object.create(
+    Object.getPrototypeOf(orig),
+    Object.getOwnPropertyDescriptors(orig)
+  );
+}
+```
+
+兼容版
 
 ```js
 var extend = function (to, from) {
   for (var property in from) {
-    if (!from.hasOwnProperty(property)) continue;
-    Object.defineProperty(
-      to,
-      property,
-      Object.getOwnPropertyDescriptor(from, property)
-    );
+    if (!from.hasOwnProperty(property)) continue
+    Object.defineProperty(to, property, Object.getOwnPropertyDescriptor(from, property))
   }
-
   return to;
 }
 
 extend({}, { get a(){ return 1 } })
 // { get a(){ return 1 } })
+```
+
+### valueOf
+
+```js
+var obj = {
+  valueOf: function () {
+    return 1
+  },
+  toString(){
+    return 'hello~'
+  }
+}
+
+obj + 2
+// 3
+
+`${obj} Alex`
+// 'hello~ Alex'
 ```
 
 

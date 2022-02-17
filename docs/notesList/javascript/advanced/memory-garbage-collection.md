@@ -26,6 +26,41 @@
 - 定时器（setInterval）
 - 闭包
 
+## 栈内存和堆内存
+
+**multithreading**
+
+- 每个线程都有自己的栈，而堆是共享的
+
+**store**
+
+- 原始类型存储在栈中，引用类型存储在堆中
+
+**size**
+
+- 栈内存在线程创建时分配，被设置为固定大小，不能再多分配空间
+- 堆内存在应用启动时分配，可以被动态分配内存大小（can grow as space is needed (the allocator requests more memory from the operating system).）
+
+**faster**
+
+- 栈比堆快得多，这是因为在栈上分配内存就像向上移动栈指针一样简单
+- 栈上的频繁使用的数据会被处理器缓存（tends to be mapped to the processor's cache），从而更快
+- 堆的分配和回收更复杂（much more complex bookkeeping），且操作还需要多线程之间的协调（coordination）
+- 栈内分配和回收空间都只需要移动指针（栈指针？帧指针？）
+
+**memory deallocated**
+
+- 变量超出范围时，栈上的数据会被自动回收
+- 堆上的数据会被一直保留，需要程序员手动删除，或者语言提供**garbage collection**帮助自动回收
+
+**wrong**
+
+- 栈会导致*stack overflow*，而堆会出现内存碎片化 *fragmentation*，导致没有足够的连续空间用于存储
+
+> <http://www.programmerinterview.com/data-structures/difference-between-stack-and-heap/>
+>
+> <https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap>
+
 
 
 ## 垃圾回收

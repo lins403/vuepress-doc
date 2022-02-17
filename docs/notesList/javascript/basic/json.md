@@ -2,7 +2,7 @@
 
 JavaScript Object Notation，JSON 是 JavaScript 语法的子 集，但 JSON 不属于 JavaScript，也不是只能在 JavaScript 中使用，它是一种通用数据格式。JavaScript对象的字面量表示法是 JSON 的灵感来源。
 
-ECMAScript 5 定义了原生 JSON 对象，用于将 JavaScript 对象序列化为 JSON 字符串，以及将 JSON 数组解析为 JavaScript 对象。JSON.stringify()和 JSON.parse()方法分别用于实现这两种操作。这 两个方法都有一些选项可以用来改变默认的行为，以实现过滤或修改流程。
+ECMAScript 5 定义了原生 JSON 对象，用于将 JavaScript 对象序列化为 JSON 字符串，以及将 JSON 数组解析为 JavaScript 对象。`JSON.stringify()`和 `JSON.parse()`方法分别用于实现这两种操作。这两个方法都有一些选项可以用来改变默认的行为，以实现过滤或修改流程。
 
 ## JSON.stringify序列化
 
@@ -20,7 +20,7 @@ JSON.stringify(value[, replacer [, space]])
 ```
 
 ```js
-// 🌰
+// 🌰demo
 var book = {
   title: 'Professional JavaScript',
   authors: ['Nicholas C. Zakas'],
@@ -34,6 +34,8 @@ original_download(jsonText, 'demo.json')
 ```
 
 ### 特殊情况
+
+因为JSON是一个通用的文本格式，和语言无关，所以一些特殊格式的内容会被特殊处理。
 
 1. 有Date、RegExp、Error对象，序列化的结果将只得到空对象
 2. undefined、任何函数以及symbol值在序列化过程中会被忽略

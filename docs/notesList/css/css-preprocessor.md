@@ -208,6 +208,19 @@ p .sans
 - Extend/Inheritance
 - Math Operators
 
+```scss
+// 占位符选择器
+%foo{}
+@extend foo
+
+// 插值语句 #{}
+$name: foo;
+$attr: border;
+p.#{$name} {
+  #{$attr}-color: blue;
+}
+```
+
 #### Advanced
 
 ```scss

@@ -241,7 +241,6 @@ module.exports = {
                 'tools/website',
                 'tools/npm',
                 'tools/yarn',
-                'tools/regular',
                 'tools/online-coding',
                 'tools/vocabulary',
               ]
@@ -317,6 +316,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'basic/base-types/function',
         'basic/reference',
         'basic/call-apply',
+        'basic/regular',
         'basic/bom',
         'basic/dom',
         'basic/form',

@@ -142,17 +142,30 @@ console.log(getArgsArray(1, 2, 3, 4)); // [1, 2, 3, 4]
 
 ### 拷贝
 
-[JavaScript中十种一步拷贝数组的方法](https://segmentfault.com/a/1190000018947028)
+| 数组/对象方法                     |        |                                                              |
+| --------------------------------- | ------ | ------------------------------------------------------------ |
+| 扩展运算符 `[...arr]`             | 浅拷贝 |                                                              |
+| for、while循环遍历拷贝            | 浅     |                                                              |
+| arr.map、arr.filter、arr.reduce   | 浅     |                                                              |
+| arr.slice                         | 浅     |                                                              |
+| arr.concat                        | 浅     |                                                              |
+| Array.from                        | 浅     |                                                              |
+| `JSON.parse(JSON.stringify(arr))` | 深拷贝 | [特殊情况](https://lins403.github.io/vuepress-doc/notesList/javascript/basic/json.html#%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5) |
+| `lodash.cloneDeep(arr)`           | 深拷贝 | 递归拷贝                                                     |
 
-| 方法                              | 说明 |        |
-| --------------------------------- | ---- | ------ |
-| 扩展运算符 `[...arr]`             |      | 浅拷贝 |
-| for、while循环遍历拷贝            |      | 浅     |
-| arr.map、arr.filter、arr.reduce   |      | 浅     |
-| arr.slice                         |      | 浅     |
-| arr.concat                        |      | 浅     |
-| Array.from                        |      | 浅     |
-| `JSON.parse(JSON.stringify(arr))` |      | 深拷贝 |
+```js
+const users = [
+	{name: 'Alan', age: 18},
+  {name: 'Bruce', age: 28},
+]
+
+const users_shallow_copy = users.slice()
+console.log(users[0]===users_shallow_copy[0])		//true
+
+// 一种深拷贝的捷径思路：手动对第二层实现浅拷贝
+const users_deep_copy = users.map(obj => ({...obj}) )
+console.log(users[0]===users_deep_copy[0])	//false
+```
 
 
 

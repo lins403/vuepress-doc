@@ -14,11 +14,15 @@
 2. 松散耦合
 3. 编码惯例
 
+### UX
+
+user experience 用户体验
+
 ## 二、功能
 
 ### 伪变量
 
-Metasyntactic variable
+指的是在服务端执行虚拟DOM(一般用Node.js variable
 
  foobar, foo, bar, baz, qux, quux, quuz, corge, grault, garply, waldo, fred, plugh, xyzzy, and thud;
 
@@ -32,7 +36,29 @@ read-eval-print-loop，读取 - 求值 - 打印 - 循环
 
 浏览器控制台是个REPL运行时，与页面的 JavaScript 运行时并发。在控制台中执行的命令可以像页面级 JavaScript 一样访问全局和各种 API。控制台中可以执行任意数量的代码，与它可能会阻塞的任何页面级代码一样。修改、对象和回调都会保留在 DOM 和运行时中。
 
+### GWT
+
+Google Web Toolkit，是一个前端使用 JavaScript，后端使用 **Java** 的 AJAX framework
+
+GWT透过编译器将Java代码编译成JavaScript，可让开发人员使用Java程序设计语言，快速建置与维护复杂但高性能的JavaScript前端应用程序，借此减轻开发人员负担。
+
+### DSL
+
+DSL（domain specific language），即领域专用语言：专门解决某一特定问题的计算机语言，比如大家耳熟能详的 SQL 和正则表达式。
+
+
+
 ## 三、编程设计模式
+
+### 同构应用
+
+SSR：服务端渲染，指的是服务端直接吐出具有数据的HTML页面，而不是在客户端拼接的HTML。相对的则是CSR(客户端渲染)，客户端渲染指的是在客户端通过Ajax请求来拼装数据，此时所有页面是在客户端拼接好的。
+
+前端同构应用：指的是在服务端执行虚拟DOM(一般用Node.js，不过其它语言也具备这项能力，之前前端程序员用JS比较多)，此时前端和服务端的渲染层是同一套代码，因为服务端使用和前端相同的虚拟DOM的原理拼接HTML模板，所以前端同构应用一般也是SSR。
+
+同构渲染：一个前端项目里的组件，部分由服务端渲染后输出，部分由客户端异步渲染。这样可以保障网页渲染速度，也有利于搜索引擎 SEO。
+
+[前端同构应用和 SSR 有什么区别？](https://www.zhihu.com/question/379831174/answer/1085552892)
 
 ### 控制反转模式
 
@@ -80,3 +106,8 @@ do {
 } while (--iterations > 0);
 ```
 
+### 数据对齐
+
+- 数据对齐是指内存字节的对齐（现代计算机中内存空间都是按照byte划分），数据所在的内存地址必须是该数据长度的整数倍
+- 数据对齐并不是操作系统的内存结构的一部分，而是CPU结构的一部分
+- 数据对齐是为了读取数据的效率。当CPU访问正确对齐的数据时，它的运行效率最高
