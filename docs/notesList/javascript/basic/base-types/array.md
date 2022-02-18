@@ -91,9 +91,14 @@ shift()
 unshift()    // arr.unshift(1,2,3) //[1, 2, 3, 'a', 'b', 'c']
 reverse()
 sort()
-splice()  // arr.splice(1,2,'bbb')  //['a', 'bbb']
+splice()  // arr.splice(1,2,'bbb','ccc')  //['a', 'bbb', 'ccc']
 // splice()适合用于往数组中间插入元素的场景，可以是删除、插入、替换
 ```
+
+slice与splice
+
+- slice不会改变原数组，适合用于复制数组片段
+- splice会改变原数组，适用于插入、删除、替换的场景
 
 ### 静态方法
 

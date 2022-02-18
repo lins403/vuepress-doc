@@ -141,15 +141,18 @@ inner()	//null
 如果把对象作为参数传递，**复制**了参数在栈内存中的“指针”值，那么传递的值就是这个对象的引用（因为复制一个对象时是复制它栈内存中的内存地址，而不是堆内存上的分配的真实内存空间地址。）
 
 ```js
-function foo(value, obj){
+function foo(value, obj, arr){
 	value = 1
 	obj.a = 1
+  arr = [1,2,3]
 }
 const v = 'hello world'
 const o = {}
-foo(v, o)
+const a = ['nihao', 'Hola']
+foo(v, o, a)
 console.log(v)	//'hello world'，按值传递，所以传递的函数参数是独立的值
 console.log(o)	//{a: 1}，按值传递，所以传递的函数参数是独立的值，但传递的值是对o对象的引用值，即指针
+console.log(a)	//['nihao', 'Hola']
 ```
 
 ### 函数声明与函数表达式

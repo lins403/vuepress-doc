@@ -6,16 +6,39 @@
 
 ###  typeof
 
+js 在底层存储变量的时候，会在变量的机器码的低位1-3位存储其类型信息
+
+- 000：对象
+- 010：浮点数
+- 100：字符串
+- 110：布尔
+- 1：整数
+
 ```js
 typeof function(){}  //"function"
 typeof []  //"object"
 typeof undefined  //"undefined"
-typeof null  //"object"
+typeof null  //"object" 【因为null的机器码都是0，所以被当成了对象】
 typeof NaN  //"number"
 typeof Symbol()	//'symbol'
 ```
 
+```js
+// 📢使用 new 操作符时不同（除Function外的所有构造函数的类型都是'object'）
+var str = new String('String');
+var num = new Number(100);
+var func = new Function();
+
+typeof str; // object
+typeof num; // object
+typeof func; // function
+
+// 所以JavaScript中万物皆是对象，但是又分为普通对象和函数对象
+```
+
 ### instanceof
+
+判断一个实例对象的具体类型，原理是检测这个实例对象的原型链上，是否包含对应构造函数的 `prototype` 属性
 
 ```js
 typeof []  //"object"

@@ -1,12 +1,14 @@
 # 技巧
 
-## 综合
+## 语法
 
 ### 位运算
 
 会比运算符更快。
 
-1）整除
+注意位运算的符号优先级较低，比加减符号低
+
+1）整除2
 
 ```js
 8 >> 1		// 4
@@ -17,9 +19,9 @@
 2）2的次方
 
 ```js
+a << b //等同于 a * Math.pow(2, b)
 1 << 10		//1024
 2 << 9		//1024
-8 << 7		//1024
 ```
 
 3）判断奇偶数
@@ -43,9 +45,9 @@ console.log(6.83 >>> 0)   // 6
 
 
 
-## 变量
+### 变量
 
-### 判断变量是否存在
+#### 判断变量是否存在
 
 ```js
 // 错误的写法
@@ -60,7 +62,7 @@ if (typeof v === "undefined") {
 }
 ```
 
-### Object.freeze()冻结一个常量对象
+#### Object.freeze()冻结一个常量对象
 
 const声明一个对象，但这个对象的属性值依然可以修改，要避免这种情况，可以使用 Object.freeze() 进行冻结
 
@@ -70,7 +72,7 @@ o3.name = 'Jake';
 console.log(o3.name); // undefined
 ```
 
-### 使用Object.is比较多个值
+#### 使用Object.is比较多个值
 
 ```js
 // 递归
@@ -81,9 +83,9 @@ function recursivelyCheckEqual(x, ...rest) {
 
 
 
-## 循环遍历
+### 循环遍历
 
-### for 循环简写
+#### for 循环简写
 
 ```js
 // --- before ---
@@ -93,7 +95,7 @@ for(let i = 0; i < arr.length; i++) {...}
 for(let i = arr.length; i--;) {...} // 注意 i-- 后面的分号别漏了
 ```
 
-### 循环的几种方法
+#### 循环的几种方法
 
 ```
 1) forEach（只能用在数组和类数组对象上）
@@ -172,9 +174,9 @@ for (const x of generatorFn()) { console.log(x) }		// a b c
 
 
 
-## Promise
+### Promise
 
-### 进度追踪
+#### 进度追踪
 
 ```js
 class TrackablePromise extends Promise {
@@ -205,7 +207,7 @@ let p = new TrackablePromise((resolve, reject, notify) => {
 })
 ```
 
-## 2）void
+### 2）void
 
 在很多语言中，void是一种类型，表示没有值。但是在JavaScript中，void是一个运算符，它接受一个运算数，并返回undefined。
 
@@ -281,3 +283,7 @@ function assert(condition, message) {
 }
 assert(1>2, 'false~~')
 ```
+
+### 二、工程化
+
+- 引用js或css后加?v= 版本号，可以让浏览器客户端重新下载，起到刷新缓存的作用。
