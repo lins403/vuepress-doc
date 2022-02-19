@@ -33,7 +33,7 @@ typeof str; // object
 typeof num; // object
 typeof func; // function
 
-// 所以JavaScript中万物皆是对象，但是又分为普通对象和函数对象
+// 所以JavaScript中万物皆是对象，但是又分为”普通”对象和函数对象（伪）
 ```
 
 ### instanceof
