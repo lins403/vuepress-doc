@@ -6,6 +6,17 @@
 
 [Canvas 基础教程 - Canvas 基础教程 - 简单教程，简单编程](https://www.twle.cn/l/yufei/canvas/canvas-basic-index.html)
 
+### 基础
+
+```js
+// 不是style中的样式，而是标签属性
+<canvas width="100" height="100"></canvas>
+canvas.setAttribute("width",100);
+canvas.setAttribute("height",100);
+```
+
+
+
 ### CanvasRenderingContext2D
 
 `CanvasRenderingContext2D`接口是Canvas API的一部分，可为`<canvas>`元素的绘图表面提供2D渲染上下文。 它用于绘制形状，文本，图像和其他对象。

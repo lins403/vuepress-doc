@@ -9,6 +9,11 @@ ECMAScript 6 规范新增了两个高级特性:迭代器(/遍历器)和生成器
 > 2. Generator 函数返回一个生成器对象，生成器对象也实现了 Iterator 接口，因此通过`生成器对象`的next、throw、return等方法，实现在 Generator 函数执行遍历时，还能调整函数的行为
 > 3. 通过给生成器对象的`next`方法传参来给函数内部注入值，也可以使用`throw`方法抛出异常，或使用`return`的方式，提前终结 Generator 函数的遍历
 
+- 解构赋值、遍历 (for...of、Array.from、…) 会调用 `[Symbol.iterator]` 从而生成一个 `Iterator` (迭代器/遍历器)，所以可以自定义[Symbol.iterator]方法，让它返回一个自定义的Iterator。
+- `generator`函数执行结果会返回一个**生成器对象**，而生成器对象也实现了 Iterator 接口，可以用于遍历。所以将[Symbol.iterator]直接赋值为一个generator函数，返回结果也能用于遍历，这种方式比起自定义实现Iterator要更简便。
+- generator函数另外一个更大的用处是用于调整函数的行为，可以实现一系列异步操作的**自动执行**，它的`yield`可以暂停函数的执行，将控制权交出，而`next`方法则可以接过控制权，来恢复函数的执行。（与promise不一样，promise是为了解决回调地狱问题，而generator则使用回调方式或者是promise来实现自动执行器）
+- async/await 可以看作是 Generator 函数的语法糖，`*`对应`async`，`yield`对应`await`，但实际上async的实现原理是将 Generator 函数和自动执行器，包装在这个async函数里。
+
 ## 迭代器Iterator
 
 - 一种数据结构只要部署了 Iterator 接口，我们就称这种数据结构是“可遍历的”（iterable）
@@ -163,9 +168,9 @@ let obj = {
 - `Generator`函数就是迭代器生成函数，调用以后会返回一个迭代器对象
 - 以把`Generator`赋值给对象的`Symbol.iterator`属性，从而使得该对象具有 Iterator 接口
 
-> 调用生成器函数会产生一个生成器对象。生成器对象一开始处于暂停执行(suspended)的状态。与 迭代器相似，生成器对象也实现了 Iterator 接口，因此具有 next()方法。调用这个方法会让生成器 开始或恢复执行 ——《JavaScript高级程序设计（第4版）》
+> 调用生成器函数会产生一个生成器对象。生成器对象一开始处于暂停执行(suspended)的状态。与迭代器相似，生成器对象也实现了 Iterator 接口，因此具有 next()方法。调用这个方法会让生成器 开始或恢复执行 ——《JavaScript高级程序设计（第4版）》
 >
-> 我理解与迭代器最大的区别在于，生成器支持 yield 关键字，这个关键字能够 暂停执行生成器函数，其它感觉都一样没什么特殊的
+> 我理解与迭代器最大的区别在于，生成器支持 yield 关键字，这个关键字能够暂停执行生成器函数，其它感觉都一样没什么特殊的
 
 ### yield
 
@@ -389,7 +394,7 @@ Async-Await ≈ Generators + Promises
 
 - async 函数是 Generator 函数的语法糖，`*`对应`async`，`yield`对应`await`
 - async/await 的 polyfill 是通过 generator 实现
-- async 实现原理，就是将 Generator 函数和自动执行器，包装在这个async函数里
+- <u>async 实现原理，就是将 Generator 函数和自动执行器，包装在这个async函数里</u>
 
 JavaScript 运行时在碰 到 await 关键字时，会记录在哪里暂停执行。等到 await 右边的值可用了，JavaScript 运行时会向消息队列中推送一个任务，这个任务会恢复异步函数的执行。
 

@@ -64,5 +64,6 @@ Vendor prefixes
 
 - margin一般是用来设置兄弟元素之间的间距。padding一般是设置父子元素之间的间距
 - `background : url("//example.com/a/b/c/d.png");` 根据站点类型自动补上http或https
+- 页面百分百显示，需要同时设置html和body的 `width:100%;height:100%;`
 
 ### 
