@@ -20,7 +20,8 @@
 
 节流
 
-- 减少请求数/请求量
+- 减少请求数/请求量：合并
+- 降低请求带宽：压缩
 - 缓存
 
 开源
@@ -53,3 +54,8 @@ https://www.ahwgs.cn/vue-cli3-build.html
 compress > drop_console: true,
 
 ---
+
+- 文件合并，减少http请求
+- 文件压缩
+- 使用CDN托管
+- 缓存

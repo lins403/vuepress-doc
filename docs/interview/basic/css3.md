@@ -18,6 +18,16 @@
 
 图片边框：`border-image: image-source image-height image-width image-repeat`
 
+## 特殊应用
+
+### CSS Sprites
+
+- 图片精灵、雪碧图
+
+- 把背景图整合到一张图片，再利用css的background一族的属性进行偏移定位。
+
+- 可以减少图片请求，以降低系统请求资源的开销
+
 ## CSS函数
 
 ### clamp
@@ -64,6 +74,8 @@ Vendor prefixes
 
 - margin一般是用来设置兄弟元素之间的间距。padding一般是设置父子元素之间的间距
 - `background : url("//example.com/a/b/c/d.png");` 根据站点类型自动补上http或https
+- 可以被继承的样式：字体相关的（font-size、font-family、color、text-indent）
+- 不能被继承的样式：布局相关的（width、height、margin、border、padding）
 - 页面百分百显示，需要同时设置html和body的 `width:100%;height:100%;`
 - background-size:
   - contain: 

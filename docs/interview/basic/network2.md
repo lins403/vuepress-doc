@@ -50,6 +50,7 @@ console.log(document.cookie)
 - **客户端**保持状态
 - cookie默认随着http请求一起发送，除了用于认证授权，cookie还可用于存放用户的操作信息，改善用户体验，例如存放账号密码、用户偏好等等。使用github的cookie，有效期内访问授权登录的网站就不用重新授权登录
 - 重要属性：domain、path、maxAgecookie、expires、secure、httpOnly
+- 尽量不要在cookie中放入敏感信息；控制cookie的生命周期；加密cookie以降低被破解的可能性
 
 ### 特点
 
@@ -58,6 +59,7 @@ console.log(document.cookie)
 - 只要 `Domain` 和 `Path` 一致情况下，不同 Tab 之间即可相互读取
 - 移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
 - 使用Cookie需要防范XSS攻击（`secure`：只允许请求为https时发送cookie，`httponly`：禁止JS脚本访问cookie）
+- 数量和长度的限制：很多浏览器例如IE和Firefox会限制同一个站点的cookie数量不能超过50个，保存的数据不能超过4k
 
 ### cookie和webStorage
 
@@ -80,11 +82,9 @@ Cookies.remove('name', { path: '' })	//如果添加时设置了path或domain，�
 ## Session
 
 - **服务端**保持状态
-
+- 比cookie更适合用于存放重要信息
 - Session存储在服务器上，可以放在文件、数据库、Redis或内存中，一般只将**session的id**存储在cookie中。
-
 - session 的运行依赖 session id，而 SESSIONID 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但可通过其它方式实现，比如**在 url 中传递** session_id「sid」）
-
 - session 需要手动删除，通常服务器会在用户退出登录时删除，或者会为 session 设置一个失效时间，以便把 session 删除，节省存储空间
 
 ### cookie和session认证
@@ -183,8 +183,10 @@ openWindow(url, thirdpart, 540, 540)
 Storage 类型只能存储字符串。非字符串数据在存储之前会自动转换为字符串（ toString() ）。
 
 - `sessionStorage`
+  - 会话级别的存储。
   - 跨会话的存储机制，浏览器当前窗口关闭后自动清除
 - `localStorage`
+  - 持久化的本地存储。
   - 永久存储机制，保存在浏览器本地，数据不会过期也不会被清除，浏览器重启后依然还在
   - 会一直保留至通过 JavaScript 删除，或者用户清除浏览器缓存。
   - 和cookie一样在所有同源标签页和窗口之间共享

@@ -40,6 +40,10 @@ mid = (right - left >> 1) + left
 
 - [350. 两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
 
+**滑动窗口**：
+
+- [76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)
+
 ```js
 for(let i=0,j=s.length-1; i<j; i++,j--){	// 循环变量的自增/自减放在循环体中执行速度更快一些
   [s[i],s[j]] = [s[j],s[i]]		// 解构赋值的方式--交换两个值

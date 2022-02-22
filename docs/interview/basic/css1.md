@@ -12,9 +12,14 @@
 
 #### box-sizing
 
-`content-box`（标准盒模型）：占据的空间由 <u>设置的宽高 + padding + border </u>组成
+`content-box`（标准盒模型）
 
-`border-box`（IE盒模型）：设置的宽高包含了padding和border的大小
+- 元素实际占据的空间由 <u>设置的宽高 + padding + border</u> 组成
+
+`border-box`（IE盒模型）
+
+- 设置的宽高包含了 padding 和 border 的大小
+- width/height = content + padding + border
 
 #### margin
 
@@ -36,14 +41,15 @@
 
 伪类：Pseudo-classes
 
-- `:focus` `:hover` 
+- `:focus` `:hover`  `:checked`  `:enabled` `:disabled`
 - `:nth-child()`  `:nth-of-type()`
 - `:root`、`:visited`、`:not()`
 
 伪元素：Pseudo-element
 
-- `::first-line`  `::first-letter`
+- `::first-line`  `::first-letter` 
 - `::after (:after)`
+- `::selection`
 
 ### 权重优先级
 
@@ -51,14 +57,14 @@
 
 *从0开始，一个行内样式+1000，一个id选择器+100，一个属性选择器、class或者伪类+10，一个元素选择器，或者伪元素+1，通配符+0。* !important无限大
 
-| 选择器             | 权重   |
-| --------------- | ---- |
-| 通配符             | 0    |
-| 标签 / 伪元素        | 1    |
-| class / 伪类 / 属性 | 10   |
-| id              | 100  |
-| 行内样式            | 1000 |
-| !important      | ∞    |
+| 选择器                     |                                                 | 权重 |
+| -------------------------- | ----------------------------------------------- | ---- |
+| 通配符/相邻选择器/子选择器 | `*`    `h1+p`   `ul>li`                         | 0    |
+| 标签 / 伪元素              | `p::first-line`                                 | 1    |
+| class / 伪类 / 属性        | `a:hover`  `li:nth-child` / `a[rel="external"]` | 10   |
+| id                         | `#myId`                                         | 100  |
+| 行内样式                   |                                                 | 1000 |
+| !important                 |                                                 | ∞    |
 
 ### selector
 
@@ -125,7 +131,13 @@ animation：用来指定一组或多组动画，每组之间用逗号相隔
 @import "mobstyle.css" screen and (max-width: 768px);
 ```
 
-**<u>不要使用@import</u>**
+#### 与`<link>`的区别
+
+- link属于HTML标签，而@import属于css语法
+- 页面被加载时link会被同步加载，而@import要等到页面加载完成才会被加载
+- link中css样式的权重高于@import的css
+
+#### 不要使用@import
 
 1. 比 `<link>` 慢
 

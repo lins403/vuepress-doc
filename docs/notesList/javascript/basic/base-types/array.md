@@ -172,9 +172,9 @@ const users_deep_copy = users.map(obj => ({...obj}) )
 console.log(users[0]===users_deep_copy[0])	//false
 ```
 
+### 基础
 
-
-### 批量创建数组
+#### 批量创建数组
 
 ```js
 Array(5).map(()=>{console.log(1)})
@@ -188,7 +188,7 @@ Array.apply(null, { length: 5 }).map(()=>{console.log(1)})
 // 打印了5次1
 ```
 
-### 数组去重
+#### 数组去重
 
 ```js
 // 数组去重
@@ -210,7 +210,7 @@ var m = [1, 2, 2], n = [2,3,3]
 combine(m,n)	//[1, 2, 3]
 ```
 
-### 清空数组
+#### 清空数组
 
 ```js
 arr = []	//只是赋值为一个空数组，原来的数组需要等待被垃圾回收
@@ -218,7 +218,15 @@ arr.length = 0
 arr.splice(0, arr.length);
 ```
 
-### 序列生成器
+#### 数组求和
+
+```js
+arr.reduce((acc,cur)=>acc+cur)
+```
+
+### 进阶
+
+#### 序列生成器
 
 ```js
 const range = (start, end, step) => Array.from({ length: (end - start) / step + 1 }, (_, index) => start + index * step)
@@ -227,7 +235,7 @@ range(0, 4, 1)		// [0, 1, 2, 3, 4]
 range(1,10,2)		// [1, 3, 5, 7, 9]
 ```
 
-### flat的polyfill
+#### flat的polyfill
 
 ```js
 const flatDeep = (arr, depth = 1) => {

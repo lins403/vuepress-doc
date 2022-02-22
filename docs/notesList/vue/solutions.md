@@ -126,6 +126,51 @@ methods:{
 
 
 
+## vuejs
+
+### 1）数据嵌套太深无法响应式更新
+
+```vue
+<template>
+	<outer-component :config="config" />
+</template>
+
+<script>
+  export default {
+    data(){
+      return{
+        config: {
+          ...this.baseConfig,
+          data: []
+        }
+      }
+    },
+    mounted(){
+      const data = (await getData()).data.data
+      
+      /**** 无法响应式更新 ****/
+      this.config.data = data
+      this.config.data.push(...data)
+      this.config.data.splice(0, 1, ...data)
+      /**** 无法响应式更新 ****/
+      
+      /** 响应式更新整个对象 **/
+      this.config = {
+        ...this.baseConfig,
+        data
+      }
+      /** 响应式更新整个对象 **/
+      
+      /** 其它方法 **/
+      this.$forceUpdate()
+      
+    }
+  }
+</script>
+```
+
+
+
 ## 全局
 
 ### axios拦截器白名单

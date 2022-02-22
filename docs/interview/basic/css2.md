@@ -52,12 +52,14 @@
 ### position
 
 - `static`
+  - 默认值，没有定位，元素位于正常流的位置
   - top, right, bottom, left 和 z-index属性无效
+  
 - `relative`
   - 相对static正常位置时的偏移，不改变布局，即偏移后元素正常位置占据文档流不会变动
   - position:relative; left:20px;
 - `absolute`
-  - 相对于**最近的已定位<u>父元素</u>** （absolute / relative / fixed / sticky ），没有的话最终会相对于`<html>`
+  - 相对于**最近的已定位(非static)的<u>父/祖先元素</u>** （absolute / relative / fixed / sticky ），没有的话最终会相对于`<html>`
   - 会改变布局，元素脱离文档流，后面的元素会挤占它的空间，发生重叠
 - `fixed`
   - 相对浏览器窗口，元素脱离文档流
@@ -66,7 +68,7 @@
 
 ### 浮动
 
-float、absolute、fixed 属性可以使一个元素脱离标准文档流，但其中float不会脱离文本流，也就是后面的文本会跟在float的元素后面，而不是被覆盖。
+float、absolute、fixed 属性可以使一个元素脱离标准文档流，但其中<u>float不会脱离文本流</u>，也就是后面的文本会跟在float的元素后面，而不是被覆盖。
 
 float 需要使用块布局，会将 display 值为 inline 或 table 的布局，自动转为 **block**。
 
@@ -137,7 +139,7 @@ float 需要使用块布局，会将 display 值为 inline 或 table 的布局�
 1. flex-flow (flex-direction、flex-wrap)
 
 2. justify-content
-   
+  
    ```scss
    space-between  //首个元素放置于起点，末尾元素放置于终点
    space-around  //每个元素周围分配相同的空间
@@ -236,7 +238,7 @@ display：table、inline-table、table-caption、table-cell、table-row、table-
 思路：
 
 1. inline：
-   
+  
    - 水平：`text-align: center;`
    
    - 垂直
@@ -250,7 +252,7 @@ display：table、inline-table、table-caption、table-cell、table-row、table-
 2. 块block：`margin: auto`
 
 3. flexbox：
-   
+  
    - `margin: auto;`
    
    - `justify-content: center; align-items: center;`
