@@ -405,6 +405,8 @@ function DataStructureSidebar(groupA,groupB){
         collapsable: false,
         children: [
           'algorithm/',
+          'algorithm/查找',
+          'algorithm/排序',
         ]
       },
     ]

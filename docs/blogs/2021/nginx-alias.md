@@ -81,6 +81,7 @@ module.exports = {
    // package.json
    {
      "homepage": ".",
+     // 有时候要设置成https的全域名，否则静态资源被添加进public/index.html而使用相对路径时会出问题
    }
    ```
 

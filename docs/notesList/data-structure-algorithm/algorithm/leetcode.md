@@ -7,10 +7,19 @@
 [一套拳法👊刷掉n个遍历树的问题](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/solution/yi-tao-quan-fa-shua-diao-nge-bian-li-shu-de-wen--3/)
 
 - 无脑使用递归，或者是利用栈的方式实现迭代
+- 回溯动规分治等等，只要涉及递归的问题，都是树的问题。
+- 回溯算法就是个 N 叉树的前后序遍历问题
+
+### 多维数组
+
+- [566. 重塑矩阵](https://leetcode-cn.com/problems/reshape-the-matrix/)
+- [118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/)
+
+
 
 ## 方法
 
-### 二分法
+### 二分法（logN）
 
 [35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/)
 
@@ -68,13 +77,10 @@ for(let i=0,j=s.length-1; i<j; i++,j--){	// 循环变量的自增/自减放在�
 
 - [191. 位1的个数](https://leetcode-cn.com/problems/number-of-1-bits/)
 
-多维数组
-
-- [566. 重塑矩阵](https://leetcode-cn.com/problems/reshape-the-matrix/)
-- [118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/)
 
 
 
 
-
+> 一但要求下一个更大的元素，就是用单调栈解。
+>
 > 原地变换，或者在这个空间内求某个确定条件的情况，可以考虑使用哈希表

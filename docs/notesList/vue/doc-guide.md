@@ -22,6 +22,30 @@ watch: {
 },
 ```
 
+#### computed的getter和setter
+
+```js
+// ...
+computed: {
+  fullName: {
+    // getter
+    get: function () {
+      return this.firstName + ' ' + this.lastName
+    },
+    // setter
+    set: function (newValue) {
+      var names = newValue.split(' ')
+      this.firstName = names[0]
+      this.lastName = names[names.length - 1]
+    }
+  }
+}
+// ...
+// this.fullName = 'Hermes'
+```
+
+
+
 ## 指令
 
 ### v-for
@@ -883,6 +907,8 @@ vm.items[indexOfItem] = newValue // 不能起效
 vm.$set(vm.items, indexOfItem, newValue)
 // 方法二
 vm.items.splice(indexOfItem, 1, newValue)
+// 方法三
+this.$set(this.items, 1, newValue)
 ```
 
 ```js
@@ -893,6 +919,7 @@ vm.items.splice(newLength)
 ```
 
 ```js
+// 会改变原数组的方法
 const methodsToPatch = [
   'push',
   'pop',
