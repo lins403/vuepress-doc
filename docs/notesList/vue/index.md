@@ -40,7 +40,7 @@ data(){
 }
 ```
 
-`v-cloak` 
+#### `v-cloak` 
 
 - 斗篷、遮盖物，用于解决初始化慢导致页面闪动
 - 使用插值语法时，页面上显示的是原始值，例如{{message}}，直到vue创建完实例并编译模板时，DOM才会被更新，更新的过程会造成屏幕闪动
@@ -77,7 +77,15 @@ new Vue({
 </template>
 ```
 
+#### v-model
 
+语法糖
+
+```html
+<input v-model="searchText">
+<!-- 语法糖，等价于 -->
+<input :value="searchText" @input="searchText = $event.target.value">
+```
 
 ## 条件渲染与列表渲染
 
@@ -101,6 +109,8 @@ handleClick(message, event){
 
 ### 修饰符
 
+### 通用
+
 ```
 .stop
 .prevent
@@ -109,3 +119,114 @@ handleClick(message, event){
 .once
 ```
 
+### 表单v-model
+
+```js
+.lazy		//输入框内容变化时，v-model绑定的数据不会立即更新，要等到失焦的时候，或者按回车以后
+.number		//调用parseFloat，解析一个参数并返回一个浮点数
+.trim
+```
+
+## 组件
+
+### 单向数据流
+
+父组件通过props给子组件传递数据，但是子组件不能直接修改父组件的状态。
+
+从Vue2.x开始才实现了单向的数据流。`.sync`修饰符是在Vue1.x中引入来支持双向绑定。之所以这样设计，是为了尽可能的将父子组件解耦，避免子组件无意中修改了父组件的状态。
+
+```js
+// 当传入的props是个对象，子组件需要修改这个对象时，
+// 1. 常见方式有二：data中可以使用一个变量来保存然后对这个新变量进行修改，或者使用computed来计算变量；这两种方式都是复制的引用值，修改它们均无异于直接修改props值。
+// 2. 如果使用了.sync修饰符，要么在父组件传参时进行解构，要么在子组件中要对对象进行深拷贝
+export default {
+  props: {
+    post: {
+      type: Object,
+      default: () => ({id:1, title:''})
+    },
+    author: {
+      type: String,
+      default: 'foo'
+    }
+  },
+  data() {
+    return {
+      deepObj: JSON.parse(JSON.stringify(this.post)),
+      obj: this.post,
+      str: this.author
+    }
+  },
+  computed: {
+    item: {
+      get: function () {
+        return this.post
+      },
+      // setter
+      set: function (newValue) {
+        console.log(newValue)
+      }
+    }
+  },
+  created() {
+    console.log(this.obj === this.post)		// true
+    console.log(this.item === this.post)		// true
+    console.log(this.deepObj === this.post)		// false
+    
+    this.str = 'bar'
+    console.log(this.str, this.author)	// bar foo
+  }
+}
+```
+
+### 组件通信
+
+父子、兄弟、跨级
+
+```js
+1. props , events( $emit, $on, .sync, v-model )
+2. $parent , $children
+3. $attrs , $listeners
+4. ref $refs 
+5. provide/inject
+6. webStorage
+7. eventbus
+8. vuex
+9. Vue.observable
+```
+
+观察者模式 `$emit` `$on` `v-on`
+
+Vue1.x中的 `$diapath`、`$broadcast` 在Vue2.x中已经被废除
+
+`$refs` 只在组件渲染完成后才填充，并且它是非响应式的，因此应该避免用在模板或计算属性中。
+
+#### eventBus
+
+使用一个空的Vue实例作为中央事件总线（bus），可以用作任何组件之间通信的桥梁。
+
+可以扩展bus实例，给它添加data、methods、computed等选项，让组件之间共享数据。
+
+### slot内容分发
+
+transclusion，内容分发、嵌入
+
+> props传递数据、events触发事件、slot内容分发，这三者构成了Vue组件
+
+- 分发内容的作用域属于父组件
+- 作用域插槽：让父组件中使用子组件的数据，具体做法是将数据作为属性通过v-bind绑定在子组件的插槽`slot`上
+- 具名插槽
+- 通过 `$slots` 访问 slot，只要父组件有分发内容给子组件，子组件的 `$slots` 就会有值，然后使用`<slot>`来承接内容
+
+### 组件高级用法
+
+- 递归组件： `name` 选项
+- 内联模板： `inline-template` 属性
+- 动态组件： `<component :is="currentView" />`
+- 异步组件： 只在组件需要渲染时触发工厂函数，并且会缓存解析结果
+
+### 其它
+
+- `$nextTick` 与 DOM异步更新机制
+- X-Templates
+- 手动挂载实例

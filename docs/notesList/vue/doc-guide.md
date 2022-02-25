@@ -135,6 +135,35 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 >
 ```
 
+可以在自定义组件上使用 `v-model`，
+
+- 利用它的语法糖特性，在子组件中emit一个名为input的事件，然后父组件上可以直接使用v-model来监听事件
+
+- 修改model选项，创建自定义的表单输入组件
+
+```vue
+Vue.component('base-checkbox', {
+  model: {
+    prop: 'checked',		//default:'value'
+    event: 'change'		//default: 'input'
+  },
+  props: {
+    checked: Boolean
+  },
+  template: `
+    <input
+      type="checkbox"
+      v-bind:checked="checked"
+      v-on:change="$emit('change', $event.target.checked)"
+    >
+  `
+})
+
+<base-checkbox v-model="lovingVue"></base-checkbox>
+```
+
+
+
 ::: warning Vue3
 
 - 非兼容：用于自定义组件时，`v-model` prop 和事件默认名称已更改：
@@ -173,6 +202,22 @@ modifiers，事件修饰符：.stop, .prevent, .capture, .self, .native, .once, 
 <!-- 传入一个对象的所有 property，等价于 -->
 
 <blog-post v-bind:id="post.id" v-bind:title="post.title"></blog-post>
+
+
+props: {
+    post: {		//--->空的
+      type: Object,
+      default: () => ({})
+    },
+    id: {
+      type: Number,
+      default: 0
+    },
+    title: {
+      type: String,
+      default: ''
+    }
+},
 ```
 
 #### .sync
@@ -274,14 +319,40 @@ const MyDirective = {
 ### 注册
 
 - 全局注册
-
 - 局部注册
+
+#### 解析 DOM 模板时的注意事项
+
+```vue
+有些 HTML 元素，诸如 <ul>、<ol>、<table> 和 <select>，对于哪些元素可以出现在其内部是有严格限制的。而有些元素，诸如 <li>、<tr> 和 <option>，只能出现在其它某些特定的元素内部。
+
+<table>
+  <!-- 会被作为无效的内容提升到外部，并导致最终渲染结果出错。-->
+  <blog-post-row></blog-post-row>	
+  
+  <!-- 利用特殊的is属性做一个变通的办法 -->  
+  <tr is="blog-post-row"></tr>    
+</table>
+```
 
 ### 异步组件
 
-将异步组件和 <u>webpack 的 code-splitting</u> 功能一起配合使用，
+在大型应用中，我们可能需要将应用分割成小一些的代码块，并且只在需要的时候才从服务器加载一个模块。为了简化，Vue 允许你以一个工厂函数的方式定义你的组件，这个工厂函数会异步解析你的组件定义。Vue 只有在这个组件需要被渲染的时候才会触发该工厂函数，且<u>会把结果缓存起来</u>供未来重渲染。
 
-webpack 自动将你的构建代码切割成多个包，这些包会通过 Ajax 请求加载
+```js
+// 工厂函数
+Vue.component('async-example', function (resolve, reject) {
+  // 使用setTimeout模拟异步。
+  setTimeout(function () {
+    // （在收到从服务器下载的组件定义时）向 `resolve` 回调传递组件定义
+    resolve({
+      template: '<div>I am async!</div>'
+    })
+  }, 1000)
+})
+```
+
+将异步组件和 <u>webpack 的 code-splitting</u> 功能一起配合使用，webpack 自动将你的构建代码切割成多个包，这些包会通过 Ajax 请求加载
 
 ```js
 // 全局注册
@@ -299,7 +370,7 @@ new Vue({
   }
 })
 
-// 工厂函数
+// 处理状态的工厂函数
 const AsyncComponent = () => ({
   component: import('./MyComponent.vue'),
   loading: LoadingComponent,
@@ -338,6 +409,8 @@ const AsyncComponent = () => ({
   }
 </script>
 ```
+
+关于 ref 注册时间的重要说明：因为 ref 本身是作为渲染结果被创建的，在初始渲染的时候你不能访问它们 - 它们还不存在！`$refs` 也<u>不是响应式的</u>，因此应该避免用它在模板或计算属性中做数据绑定。
 
 ::: warning Vue3
 
@@ -392,6 +465,17 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 - **参考**： [基础 > Props](https://cn.vuejs.org/v2/guide/components-props.html)
 - **参考**： [API > props](https://cn.vuejs.org/v2/api/#props)
 
+### 递归组件
+
+组件是可以在它们自己的模板中调用自身的，不过它们只能通过 `name` 选项来做这件事。
+
+```js
+name: 'stack-overflow',
+template: '<div><stack-overflow></stack-overflow></div>'
+```
+
+请确保递归调用是条件性的 (例如使用一个最终会得到 `false` 的 `v-if`)，来限制递归数量，否则将会导致“max stack size exceeded”错误
+
 ### 函数式组件
 
 组件是比较简单，没有管理任何状态，也没有监听任何传递给它的状态，也没有生命周期方法。实际上，它只是一个接受一些 prop 的函数。用一个简单的 `render` 函数返回虚拟节点使它们渲染的代价更小。
@@ -423,20 +507,114 @@ inheritAttrs: false, // 设置为false时，默认行为将会被去掉，但不
 
 :::
 
-## 插槽 slot
+### inline-template
+
+当 `inline-template` 这个特殊的 attribute 出现在一个子组件上时，这个组件将会使用其里面的内容作为模板，而不是将其作为被分发的内容。这使得模板的撰写工作更加灵活。
 
 ```vue
+<template>
+  <my-component inline-template>
+    <div>
+      <p>These are compiled as the component's own template.</p>
+      <p>Not parent's transclusion content.</p>
+      <!-- 这里渲染的是子组件中的数据，'child-component' -->
+      <p>{{ message }}</p>
+    </div>
+  </my-component>
+</template>
+<script>
+import Vue from 'vue'
+Vue.component('my-component', {
+  data() {
+    return {
+      message: 'child-component'
+    }
+  },
+  created() {
+    console.log(this.$slots)	// {}
+  }
+})
+export default {
+  name: '',
+  data() {
+    return {
+      message: 'parent-component'
+    }
+  }
+}
+</script>
+```
+
+不过，`inline-template` 会让模板的作用域变得更加难以理解。所以作为最佳实践，请在组件内优先选择 `template` 选项或 `.vue` 文件里的一个 `<template>` 元素来定义模板。
+
+### X-Template
+
+适用于template内容较多的情况，我实测不能用，而且在工程项目中通常做法都是为子组件创建一个 `.vue` 文件并使用webpack来编译
+
+```vue
+<template>
+	<hello-world />
+	<script type="text/x-template" id="hello-world-template">
+    <p>Hello hello hello</p>
+  </script>
+</template>
+
+<script>
+  Vue.component('hello-world', {
+    template: '#hello-world-template'
+  })
+</script>
+```
+
+### 手动挂载实例
+
+如果实例化时没有 `el` 选项，则实例处于未挂载状态，可以使用`$mount`手动挂载实例，即关联到指定的DOM元素上。
+
+```html
+<div id="mount-point"></div>
+```
+
+```js
+// 使用 Vue.extend 创建构造器（“子类”）
+var Profile = Vue.extend({
+	//  el: '#mount-point',
+  template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+  data: function () {
+    return {
+      firstName: 'Walter',
+      lastName: 'White',
+      alias: 'Heisenberg'
+    }
+  }
+})
+// 创建 Profile 实例，并挂载到一个元素上。
+new Profile().$mount('#mount-point')
+
+// 另一种方式
+var component = new Profile().$mount()
+document.getElementById('mount-point').appendChild(component.$el)
+```
+
+
+
+## 插槽 slot
+
+slot分发的内容，其编译的作用域是在父组件上的，也就是绑定的父组件的数据，而并非子组件
+
+```vue
+<!-- 属性 url 则根据 inheritAttrs 配置，被作为组件内部属性使用 -->
 <navigation-link url="/profile">
-  Clicking here will send you to: {{ url }}
+  
   <!--
-    这里的 `url` 会是 undefined，因为其 (指该插槽的) 内容是传递给 <navigation-link> 的，
-    而不是在 <navigation-link> 组件内部定义的。
-    外部的 url 则根据 inheritAttrs 配置，被作为组件内部属性使用
+    这里的 `url` 会是 undefined，因为它属于父组件的编译作用域，
+		是父组件中定义的，而不是子组件<navigation-link>内部定义的。
   -->
+  Clicking here will send you to: {{ url }}
+  
 </navigation-link>
 ```
 
-规则：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。简单的情况就是父组件中 `<child> {{ childVariable }}</child>` 是不行的，父组件中要使用子组件的变量需要通过作用域插槽
+规则：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。简单的情况就是父组件中 `<child> {{ childVariable }}</child>` 是不行的，<u>父组件中要使用子组件的变量需要通过作用域插槽</u>
 
 ### 具名插槽
 
@@ -941,6 +1119,8 @@ const methodsToPatch = [
 
 Vue 在更新 DOM 时是**异步**执行的。只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际 (已去重的) 工作。
 
+如果使用for循环来动态修改数据100次，由于异步更新队列机制，实际上只会应用最后一次改变，否则就会导致DOM重绘100次，带来巨大的性能开销。
+
 ```js
 vm.someData = 'new value' 
 >>> update > queueWatcher > nextTick(flushSchedulerQueue)
@@ -952,6 +1132,8 @@ MutationObserver
 setImmediate
 setTimeout(fn, 0) // 如果执行环境不支持，则会采用
 ```
+
+`vm.$nextTick()` 的应用示例：
 
 ```js
 // 解决数据变化后需要操作 DOM 的情况
