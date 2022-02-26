@@ -1,6 +1,8 @@
 # Vue
 
-## 数据绑定
+## 基础
+
+### 数据绑定
 
 js操作DOM，一个是消耗高影响性能，另一个是导致js代码中包含过多HTML代码，也就是会导致视图代码和业务逻辑紧密耦合；
 
@@ -9,7 +11,7 @@ vue通过MVVM的模式，分离为视图层View和数据层Model。ViewModel层�
 - `{{}}`  Mustache语法插入表达式值
 - `v-bind`：动态更新HTML元素的属性，数据变化时会重新渲染
 
-## 指令
+### 指令
 
 在结点上使用 `v-pre` ，会跳过这个元素和它的子元素的编译过程。例如 {{}} 就不会被编译
 
@@ -77,7 +79,7 @@ new Vue({
 </template>
 ```
 
-#### v-model
+#### `v-model`
 
 语法糖
 
@@ -87,7 +89,17 @@ new Vue({
 <input :value="searchText" @input="searchText = $event.target.value">
 ```
 
-## 条件渲染与列表渲染
+#### 自定义指令
+
+我理解本质上就是利用了bind、inserted、update、componentUpdated、unbind这几个钩子，往其中添加自定义的处理方法或回调，可以修改数据、控制函数、操作DOM（例如修改el.innerHTML、修改input.value）等等
+
+举例几个应用场景：
+
+1. 定义一个 v-focus 指令用在 input 标签上，在 inserted 钩子中使用 el.focus()，实现元素插入父节点时调用focus自动聚焦输入框。
+2. 在 bind 钩子中使用 addEventListener 绑定DOM事件（click、scroll、input、），在 unbind 钩子中使用 removeEventListener 解绑。
+3. 结合 vuex 使用，例如实现一个 v-permission 用于HTML节点的权限过滤，store中的角色名不包含在传入的角色数组中时，将当前节点从父节点中移除。
+
+### 条件渲染与列表渲染
 
 vue在渲染元素时，处于效率考虑，会尽可能地复用已有的元素而并非重新渲染。
 
@@ -95,9 +107,9 @@ vue在渲染元素时，处于效率考虑，会尽可能地复用已有的元�
 
 `v-show`只是简单的 display 属性的切换，无论条件是否为真，都会被编译。所以 v-show 不能用在`<template>`上
 
-## 事件与修饰符
+### 事件与修饰符
 
-### $event
+#### $event
 
 ```vue
 <a href="https://www.youtube.com" @click="handleClick('coming', $event)">打开链接🔗</a>
@@ -107,19 +119,20 @@ handleClick(message, event){
 }
 ```
 
-### 修饰符
+#### 修饰符
 
-### 通用
+通用
 
-```
-.stop
-.prevent
+```js
+.stop		// event.stopPropagation()
+.prevent		// event.preventDefault()
 .capture
-.self
+.self		// if(event.target!==event.currentTarget) return
 .once
+.enter .13		// if(event.keyCode!==13) return
 ```
 
-### 表单v-model
+表单(v-model)
 
 ```js
 .lazy		//输入框内容变化时，v-model绑定的数据不会立即更新，要等到失焦的时候，或者按回车以后
@@ -230,3 +243,49 @@ transclusion，内容分发、嵌入
 - `$nextTick` 与 DOM异步更新机制
 - X-Templates
 - 手动挂载实例
+
+## Render函数
+
+[渲染函数 & JSX — Vue.js](https://cn.vuejs.org/v2/guide/render-function.html)
+
+Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM节点，提升渲染性能
+
+> 【对以前学习源码的总结】
+>
+> new Vue => init => $mount => compile => render => vnode => patch => DOM
+>
+> 创建一个Vue实例时，会进行init初始化，首先merge options，然后再调用 initState 初始化相关属性，将data、props、methods等等option添加到这个vue实例上，然后将实例 mount 挂载到DOM节点上。
+>
+> 在开始挂在前，会先判断是否有template模板，如果有的话就会进行 compile 编译，先 parse 解析成 AST对象，然后再 generate 生成对应的 render function，如果没有template的话则会将当前el节点与其后代元素（outerHTML）用于创建一个template模板。
+>
+> 执行编译生成的 render function，通过 createElement 方法生成 VNode，建立起来的整个 VNode 树就是 Virtual DOM。
+>
+> （TODO：确认一下update和patch的调用时机）如果是第一次渲染，则 patch 方法中直接调用 createElm 方法，基于VNode的信息，调用浏览器的 DOM API 来创建真实 DOM 并完成挂载。
+>
+> （这段有歧义，待完善）如果在这过程中数据发生变化，则会触发update更新，re-render重新渲染生成新的VNode，patch方法会将新旧 VNode 进行 Diff 计算生成补丁对象，遍历（深度优先）补丁对象，并递归调用 createElm 进行创建或更新DOM节点。
+
+将模板template解析成 AST 结构的JavaScript对象，通过 render 函数调用生成 VNode，通过 diff 算法比较新旧 VNode 然后生成补丁对象，遍历补丁对象，更新DOM节点。
+
+`createElement` 执行返回一个“虚拟节点 ( virtual node，VNode )”，包含创建DOM所需要的信息。
+
+“虚拟 DOM”是我们对由 Vue 组件树建立起来的整个 VNode 树的称呼。
+
+除了使用slot或者函数式组件以外的应用场景，我觉得template的可读性和开发效率都更高，工程化项目中webpack还会调用vue-template-compiler预编译为render function
+
+## webpack
+
+在工程项目中，任何静态资源都会被webpack当成模块，解析并处理这些模块之间的依赖关系，然后将它们打包起来。
+
+SPA，意味着最终只有一个HTML文件，其余都是静态资源
+
+#### 使用单文件组件SFC
+
+- vue-loader
+- vue-style-loader
+- @babel/core、babel-loader、
+- vue-template-compiler
+
+#### loader和plugin
+
+- html-webpack-plugin
+- terser-webpack-plugin

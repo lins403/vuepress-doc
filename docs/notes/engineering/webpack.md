@@ -37,6 +37,7 @@ mkdir webpack-demo
 cd webpack-demo
 git init
 npm init -y
+# webpack-cli 提供了许多命令来使 webpack 的工作变得更简单
 npm install webpack webpack-cli --save-dev
 code .
 echo "/node_modules" > .gitignore
@@ -54,7 +55,7 @@ echo "/node_modules" > .gitignore
 
 - 入口(entry)
 - 输出(output)
-- loader
+- 加载器(loader)
 - 插件(plugin)
 - 模式(mode): `'production'(默认) / 'development' / 'none'`
 
@@ -85,6 +86,10 @@ webpackConfig.module
 ```
 
 [Loaders | Webpack](https://webpack.docschina.org/loaders/)
+
+- css-loader、style-loader
+- url-loader
+- file-loader
 
 ### plugins
 
@@ -302,6 +307,8 @@ module.exports = {
 
 - 多页面打包的原理就是：配置多个 `entry` 和多个 `HtmlWebpackPlugin`
 - 应用场景：多页面之间比较独立，例如数据不同，但依赖模块相通的场景，或者可以独立部署的场景（活动页面；可视化大屏；不同角色定制页面入口）
+
+Vue CLI 支持使用 [`vue.config.js` 中的 `pages` 选项](https://cli.vuejs.org/zh/config/#pages)构建一个多页面的应用。
 
 ### 拆分webpack配置
 

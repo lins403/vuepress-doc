@@ -482,6 +482,21 @@ template: '<div><stack-overflow></stack-overflow></div>'
 
 在这样的场景下，我们可以将组件标记为 `functional`，这意味它无状态 (没有响应式数据)，也没有实例 (没有 `this` 上下文).
 
+```js
+Vue.component('my-component', {
+  functional: true,
+  // Props 是可选的
+  props: {
+    // ...
+  },
+  // 为了弥补缺少的实例，提供第二个参数 context 作为上下文
+  render: function (createElement, context) {
+    console.log(context.props, context.data)
+    console.log(context.children)	//this.$slots
+  }
+})
+```
+
 ::: tip 应用场景
 
 需要优化一个有很多节点的组件，其中节点都是状态组件，同时每个组件还嵌套了更多组件。
@@ -971,6 +986,111 @@ Vue.component('my-special-transition', {
 
 集合侦听器 `watch` 使用
 
+## render函数
+
+### createElement 参数
+
+`createElement` 执行返回一个“虚拟节点 ( virtual node，VNode )”，“虚拟 DOM”是我们对由 Vue 组件树建立起来的整个 VNode 树的称呼。
+
+#### 数据对象
+
+<https://cn.vuejs.org/v2/guide/render-function.html#深入数据对象>
+
+#### 约束
+
+组件树中所有的 VNode 必须是唯一的，也就是组件的render function中不能重复使用一个VNode，但是可以通过循环和工厂函数的方式重复渲染多个组件或元素（即生成多个VNode）
+
+```js
+render: function (createElement) {
+  var myParagraphVNode = createElement('p', 'hi')
+  return createElement('div', [
+    // 错误 - 重复的 VNode
+    myParagraphVNode, myParagraphVNode
+  ])
+}
+
+render: function (createElement) {
+  return createElement('div',
+    Array.apply(null, { length: 20 }).map(function () {
+      return createElement('p', 'hi')
+    })
+  )
+}
+```
+
+### 使用 JavaScript 代替模板功能
+
+#### `v-model`
+
+```js
+props: ['value'],
+render: function (createElement) {
+  var self = this
+  return createElement('input', {
+  	/**** domProps ****/
+    domProps: {
+      value: self.value
+    },
+    on: {
+      input: function (event) {
+        self.$emit('input', event.target.value)
+      }
+    }
+  })
+}
+```
+
+#### 事件 & 按键修饰符
+
+对于 `.passive`、`.capture` 和 `.once` 这些事件修饰符，Vue 提供了相应的前缀可以用于 `on`：
+
+| 修饰符                             | 前缀 |
+| :--------------------------------- | :--- |
+| `.passive`                         | `&`  |
+| `.capture`                         | `!`  |
+| `.once`                            | `~`  |
+| `.capture.once` 或 `.once.capture` | `~!` |
+
+例如：
+
+```js
+on: {
+  '!click': this.doThisInCapturingMode,
+  '~keyup': this.doThisOnce,
+  '~!mouseover': this.doThisOnceInCapturingMode
+}
+```
+
+## JSX
+
+### babel
+
+```js
+@vue/babel-preset-jsx > @vue/babel-preset-app > @vue/cli-plugin-babel
+
+// https://github.com/vuejs/vue-cli/blob/master/packages/@vue/cli-plugin-babel/preset.js
+module.exports = require('@vue/babel-preset-app')
+```
+
+```js
+// 所有的 Vue CLI 应用都使用 @vue/babel-preset-app，
+// 它包含了 babel-preset-env、JSX 支持以及为最小化包体积优化过的配置。
+
+// babel.config.js
+module.exports = {
+  presets: [
+    // https://github.com/vuejs/vue-cli/tree/master/packages/@vue/babel-preset-app
+    '@vue/cli-plugin-babel/preset'
+  ],
+}
+```
+
+### 使用
+
+**[Babel Preset JSX](https://github.com/vuejs/jsx)**
+
+
+
 ## 插件
 
 ### 开发插件
@@ -1034,33 +1154,7 @@ if (inBrowser && window.Vue) {
 }
 ```
 
-## JSX
 
-### babel
-
-```js
-@vue/babel-preset-jsx > @vue/babel-preset-app > @vue/cli-plugin-babel
-
-// https://github.com/vuejs/vue-cli/blob/master/packages/@vue/cli-plugin-babel/preset.js
-module.exports = require('@vue/babel-preset-app')
-```
-
-```js
-// 所有的 Vue CLI 应用都使用 @vue/babel-preset-app，
-// 它包含了 babel-preset-env、JSX 支持以及为最小化包体积优化过的配置。
-
-// babel.config.js
-module.exports = {
-  presets: [
-    // https://github.com/vuejs/vue-cli/tree/master/packages/@vue/babel-preset-app
-    '@vue/cli-plugin-babel/preset'
-  ],
-}
-```
-
-### 使用
-
-**[Babel Preset JSX](https://github.com/vuejs/jsx)**
 
 ## 深入响应式原理
 
@@ -1133,7 +1227,7 @@ setImmediate
 setTimeout(fn, 0) // 如果执行环境不支持，则会采用
 ```
 
-`vm.$nextTick()` 的应用示例：
+`Vue.$nextTick()`/`vm.$nextTick()` 的应用示例：
 
 ```js
 // 解决数据变化后需要操作 DOM 的情况

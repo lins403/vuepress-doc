@@ -4,7 +4,7 @@
 
 核心依赖
 
-- ## polyfill
+### polyfill
 
 ### presets
 
@@ -17,3 +17,7 @@
 .baelrc
 
 babel.config.js
+
+webpack会依赖此配置文件来使用babel进行编译SE6代码
+
+## 自定义babel

@@ -1,5 +1,9 @@
 # JavaScript
 
+## 数据结构
+
+队列：<https://github.com/datastructures-js/priority-queue>
+
 ## API
 
 [lodash vs ramda vs rxjs vs underscore | npm trends](https://www.npmtrends.com/lodash-vs-ramda-vs-underscore-vs-rxjs)

@@ -248,3 +248,10 @@ p.#{$name} {
 - Stylus 差异较大，采用缩进，其它特性的语法也偏简洁
 
 - 总之，SCSS 更面向编程，Less 只能说是 css 的拓展，不喜欢 Stylus 的风格，趋势热度上亦或是语法功能上，都倾向于选择 scss
+
+
+
+## webpack
+
+⚠️ Since webpack v4 the `extract-text-webpack-plugin` should not be used for css. Use [`mini-css-extract-plugin`](https://webpack.docschina.org/plugins/mini-css-extract-plugin#root) instead. 将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMaps 的按需加载。与 [`css-loader`](https://webpack.docschina.org/loaders/css-loader/) 一起使用。
+

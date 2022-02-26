@@ -5,6 +5,7 @@
 ### 链表
 
 - [21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+- [23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
 
 ### 树
 
@@ -14,10 +15,29 @@
 - 回溯动规分治等等，只要涉及递归的问题，都是树的问题。
 - 回溯算法就是个 N 叉树的前后序遍历问题
 
+#### 二叉堆
+
+二叉堆在逻辑上其实是一种特殊的二叉树（完全二叉树），只不过存储在数组里，我们把数组索引作为指针。
+
+二叉堆还分为最大堆和最小堆。
+
+- 最大堆的性质是：每个节点都大于等于它的两个子节点。
+- 最小堆的性质是：每个节点都小于等于它的子节点。
+
+应用：实现优先级队列（插入或者删除元素的时候，元素会自动排序）
+
 ### 多维数组
 
 - [566. 重塑矩阵](https://leetcode-cn.com/problems/reshape-the-matrix/)
 - [118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/)
+
+### 队列
+
+#### 优先队列
+
+[使用js刷题中的提示开启es6特性和使用priority-queue](https://leetcode-cn.com/circle/discuss/aVs6F0/)
+
+- [23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
 
 
 
@@ -39,19 +59,14 @@ mid = (right - left >> 1) + left
 逆向：
 
 - [167. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
-
-同向：
-
-- [283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)
+- [350. 两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
 
 快慢指针：
 
+- [283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)
+
 - [876. 链表的中间结点](https://leetcode-cn.com/problems/middle-of-the-linked-list/)
 - [19. 删除链表的倒数第 N 个结点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
-
-排序➕双指针：
-
-- [350. 两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
 
 **滑动窗口**：
 
@@ -70,6 +85,8 @@ for(let i=0,j=s.length-1; i<j; i++,j--){	// 循环变量的自增/自减放在�
 ### 综合多解题
 
 [53. 最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)【贪心、动态规划、分治法】
+
+[23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)【优先队列、分治】
 
 ## 其它
 
