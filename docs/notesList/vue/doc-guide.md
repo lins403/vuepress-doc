@@ -1093,7 +1093,11 @@ module.exports = {
 
 ## 插件
 
+插件通常用来为 Vue 添加全局功能。
+
 ### 开发插件
+
+插件的功能范围没有严格的限制
 
 ```js
 MyPlugin.install = function (Vue, options) {

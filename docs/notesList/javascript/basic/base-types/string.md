@@ -7,8 +7,9 @@
 ```js
 var lang = 'Java';
 lang[0] = 'H'
-lang
-// 'Java'
+console.log(lang)		// 'Java'
+lang.length = 2
+console.log(lang)		// 'Java'
 ```
 
 ### 编码
@@ -75,6 +76,12 @@ console.log(String(value3));  // "null"
 console.log(String(value4));  // "undefined"
 ```
 
+```js
+new String('A') == 'A'		//true
+new String('A') === 'A'		//false
+String('A') === 'A'		//true
+```
+
 ### Number.prototype.toString()
 
 ```js
@@ -125,6 +132,11 @@ trimRight()
 toString()
 valueOf()
 String.prototype[@@iterator]()	//用于迭代与解构，const iterator = str[Symbol.iterator]()
+```
+
+```js
+'12ab3cd'.split(/\d/)
+// ['', '', 'ab', 'cd']
 ```
 
 #### substring、substr、slice

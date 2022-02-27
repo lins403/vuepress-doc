@@ -63,10 +63,20 @@ function doAdd(num1, num2) {
   arguments[1] = 10;
   console.log(arguments[0] + num2);
 }
-doAdd(1, 2)	//11
+doAdd(1, 2)	// 11
 
 // arguments对象的长度是根据传入的参数个数，如果实参个数少于形参个数，那么arguments就不能同步修改
 doAdd(1)	//NaN	//(1+undefined)
+```
+
+- 使用默认参数值时，arguments不能与对应的命名参数同步
+
+```js
+function doAdd(num1, num2=0) {
+  arguments[1] = 10;
+  console.log(arguments[0] + num2);
+}
+doAdd(1, 2)	// 3
 ```
 
 #### `arguments.callee`

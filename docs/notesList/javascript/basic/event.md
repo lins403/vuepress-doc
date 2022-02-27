@@ -221,6 +221,14 @@ shiftKey、ctrlKey、altKey 和 metaKey
 
 ## 六、例子
 
+### 阻止事件冒泡的几种方式
+
+```
+1. event.cancelBubble = true;
+2. event.stopPropagation();
+3. return false;
+```
+
 ### 多事件处理(switch-case, event.type)
 
 ```js

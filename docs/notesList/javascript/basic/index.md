@@ -2,7 +2,7 @@
 
 [那些不常见，但却非常实用的js知识(整理不易)](https://segmentfault.com/a/1190000023111128)
 
-## 变量
+### 变量
 
 - 原始值(primitive value)就是最简单的数据
 - 引用值(reference value)则是由多个值构成的对象，引用类型的实例
@@ -12,7 +12,7 @@
   - 复制引用值只会复制指针，都指向同一个对象
 - 任何变量都存在于某个执行上下文中(也称为作用域)，这个上下文(作用域)决定了变量的生命周期，以及它们可以访问代码的哪些部分
 
-## 严格模式
+### 严格模式
 
 严格模式是 ES5 引入的，不属于 ES6
 
@@ -41,3 +41,7 @@
 ES6 的模块自动采用严格模式，不管你有没有在模块头部加上`"use strict";`。
 
 类的内部，默认就是严格模式，
+
+### 运算优先级
+
+[运算符优先级](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)

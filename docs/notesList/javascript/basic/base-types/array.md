@@ -86,7 +86,7 @@ slice()  // 适合用于复制数组片段，arr.slice(-2,-1)  //['b']
 
 // 会改变原数组
 pop()
-push()
+push()		//返回改变后的数组长度
 shift()
 unshift()    // arr.unshift(1,2,3) //[1, 2, 3, 'a', 'b', 'c']
 reverse()

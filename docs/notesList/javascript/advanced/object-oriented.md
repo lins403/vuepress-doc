@@ -85,9 +85,9 @@ var a = new A(); // logs "A"
 var b = new B(); // logs "B"
 ```
 
-
-
 ### 2）构造函数
+
+箭头函数不可以作为构造函数
 
 ```js
 // 作为构造函数
@@ -108,7 +108,12 @@ o.sayName(); // "Kristen"
 
 ### 3）原型prototype
 
-每个函数都会创建一个 `prototype` 属性，指向原型对象，使用这个构造函数创建的实例的内部`[[Prototype]]`指针指向这个原型对象
+除了箭头函数以外，每个函数都会创建一个 `prototype` 属性，指向原型对象，使用这个构造函数创建的实例的内部`[[Prototype]]`指针指向这个原型对象
+
+```js
+var Foo = () => {};
+console.log(Foo.prototype); // undefined
+```
 
 ```js
 // 1. 默认情况下，所有原型对象自动获得一个名为 constructor 的属性，指回与之关联的构造函数
@@ -218,6 +223,15 @@ person1 instanceof Person		//true
 person1 instanceof Object		//true
 person1 instanceof null		//TypeError: Right-hand side of 'instanceof' is not an object
 ```
+
+```js
+Person instanceof Function		// Person.__proto__===Function.prototype
+Person instanceof Object		// Person.__proto__.__proto__===Object.prototype
+Function instanceof Object		// Function.__proto__===Object.prototype
+Object instanceof Function		// Object.__proto__===Function.prototype
+```
+
+
 
 #### Object.create
 

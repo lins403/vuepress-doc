@@ -69,20 +69,24 @@
 1. 实时更新最小化
    - 访问 DOM 时，只要访问的部分是显示页面的一部分，就是在执行实时更新操作。每次这样的更新，浏览器需要为此重新计算数千项指标，之后才能执行更新，从而导致性能损失。需要减少实时更新的次数。
    - 多次操作DOM节点子元素时，可以使用[DocumentFragment](https://lins403.github.io/vuepress-doc/notesList/javascript/basic/dom.html#documentfragments)来构建 DOM 结构，然后再把构建好的 DOM 结构实时更新到文档中。可以减少浏览器重排。
-
 2. 使用 innerHTML
 
    - 在页面中创建新 DOM 节点的方式有两种: 使用 DOM 方法如 createElement()和 appendChild()， 以及使用 innerHTML。对于少量 DOM 更新，这两种技术区别不大，但对于大量 DOM 更新，使用 innerHTML 要比使用标准 DOM 方法创建同样的结构快很多。
    - 在给 innerHTML 赋值时，后台会创建 HTML 解析器，然后会使用原生 DOM 调用而不是 JavaScript 的 DOM 方法来创建 DOM 结构。原生 DOM 方法速度更快，因为该方法是执行编译代码而非解释代码。
    - 使用innerHTML可以提升性能，但也会暴露巨大的XSS攻击面。无论何时使用它填充不受控的数据，都有可能被攻击者注入可执行代码。此时必须要当心。
-
 3. 使用事件委托
-
 4. 注意 HTMLCollection
 
    - 在循环中使用 HTMLCollection 时，应该首先取得对要使用的元素的引用，从而避免在循环体内多次调用 [`HTMLCollection`](https://lins403.github.io/vuepress-doc/notesList/javascript/basic/dom.html#htmlcollection-%E4%B8%8E-nodelist) 
 
-   
+
+### 减少重排重绘
+
+A. 需要对元素进行复杂的操作时，可以先隐藏(display:"none")，操作完成后再显示
+
+B. 需要创建多个DOM节点时，使用DocumentFragment创建完后一次性的加入document
+
+C. 尽量避免用table布局(table元素一旦触发回流就会导致table里所有的其它元素回流)
 
 ## 压缩
 

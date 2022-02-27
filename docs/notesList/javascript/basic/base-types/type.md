@@ -71,13 +71,18 @@ Reflect.apply(target, thisArgument, argumentsList)
 Reflect.apply(Object.prototype.toString, [], [])		//'[object Array]'
 ```
 
-## undefined和null
+## undefined、null和NaN
 
 > `undefined` 原始值
 >
 > `null` 缺少值
 >
 > `NaN` 非数值
+>
+> > ```js
+> > undefined == null  //true
+> > typeof NaN		//'number'
+> > ```
 
 ```js
 undefined === undefined    //true
@@ -86,15 +91,15 @@ typeof undefined    //"undefined"
 null === null        // true
 typeof null            //"object"
 
+NaN == NaN		//false
+typeof NaN		//'number'
+
 undefined === null  //false
 undefined == null  //true
 
 Number('') // 0
 Number(null)  //0
 Number(undefined)  //NaN
-
-// Object.js() 相对比===和==的改进
-Object.is(NaN,NaN)    //true
 
 // 但不要将变量值直接与null或undefined进行比较
 if (values != null){}		// 不要!
@@ -104,6 +109,13 @@ if (typeof v === "undefined") {
   // ...
 }
 ```
+
+```js
+// Object.js() 相对比===和==的改进
+Object.is(NaN,NaN)    //true
+```
+
+
 
 ## falsy
 
@@ -120,3 +132,12 @@ if ('')
 if ("")
 if (``)
 ```
+
+1 == true
+
+```js
+0 == false	//true
+'' == false	//true
+0 == ''	//true
+```
+

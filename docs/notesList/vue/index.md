@@ -289,3 +289,16 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源
 
 - html-webpack-plugin
 - terser-webpack-plugin
+
+## 插件
+
+第三方库用的多，自己项目中很少用到，一般就按模块来处理，utils、directives等等集中管理，然后引入使用。不过有个项目中的eventBus是用插件封装的，然后挂载到Vue的原型上，作为全局方法。
+
+### Vue-router
+
+#### 前端路由
+
+- 利用URL的hash (即锚点#)，通过 hashChange 事件来监听 url 的变化
+- HTML5的 History 模式，需要服务端支持。
+  - 服务端在接受到所有的请求后，都指向同一个html文件，不然会出现404。
+  - 因此 SPA 只有一个html，整个网站所有的内容都在这个html里，通过JavaScript来处理，动态填充html中的内容和样式。
