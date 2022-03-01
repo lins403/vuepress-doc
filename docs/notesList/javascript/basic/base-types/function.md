@@ -200,6 +200,17 @@ foo()
 bar()		//ReferenceError: bar is not defined
 ```
 
+```js
+meili()		// meili
+function meili() {
+  console.log("meili")
+}
+mogu()	// TypeError: mogu is not a function
+var mogu = function() {
+  console.log("mogu")
+}
+```
+
 适合用于需要条件判断的函数创建，还是下文中的递归
 
 ```js

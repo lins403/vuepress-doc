@@ -84,8 +84,8 @@ for(var i of myIterable){ console.log(i) }
 ### Symbol.hasInstance
 
 - 用于判断某对象是否为某构造器的实例
-- `instanceof` 会使用 `Symbol.hasInstance` 函数来确定关系
-- 这个属性定义在 `Function` 的原型上，因此默认在所有函数和 类上都可以调用。
+- `instanceof` 会使用 `Symbol.hasInstance` 函数来确定关系，用于判断实例对象的原型链上是否包含这个构造函数
+- 这个属性定义在 `Function` 的原型上，因此默认在所有函数和类上都可以调用。
 
 ```js
 function Foo() {}

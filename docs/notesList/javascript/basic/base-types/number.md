@@ -113,6 +113,8 @@ Number.NaN: NaN
 ```js
 // 保留 digits 位小数
 toFixed(digits)
+2.toFixed(1)		// SyntaxError: Invalid or unexpected token
+(2).toFixed(1)		//'2.0'
 
 // 取 precision 位有效数字
 toPrecision(precision)

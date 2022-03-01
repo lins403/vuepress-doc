@@ -169,11 +169,23 @@ methods:{
 </script>
 ```
 
+### 2）传递数值
+
+```vue
+	<!-- 字面量语法，传递的是字符串 -->
+<child some-prop="1" />
+
+	<!-- 动态语法，传递的是数值 -->
+<child :some-prop="1" />
+```
+
 
 
 ## 全局
 
 ### axios拦截器白名单
+
+Vue1.x用的是 [vue-resource](https://npmjs.com/package/vue-resource) 
 
 ```js
 const statusWhiteList = []

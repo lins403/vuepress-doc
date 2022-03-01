@@ -37,7 +37,7 @@ ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意�
 
 ### API
 
-[对象属性的可枚举性和所有权](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)
+[对象属性的可枚举性和所有权](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Enumerability_and_ownership_of_properties#%E7%BB%9F%E8%AE%A1%E8%A1%A8)
 
 `in` 操作符判断，以下全部属性都符合。
 
@@ -54,8 +54,10 @@ var obj = new ColoredTriangle();
 ```
 
 ```js
-var obj = Object.create({ hello: 1, [Symbol()]: 2, getHello(){console.log(this.hello)} })
-obj = Object.assign(obj, { a:1, [Symbol()]:2, getA(){console.log(this.a)} })
+const s1 = Symbol()
+const s2 = Symbol()
+var obj = Object.create({ hello: 1, [s1]: 2, getHello(){console.log(this.hello)} })
+obj = Object.assign(obj, { a:1, [s2]:2, getA(){console.log(this.a)} })
 Object.defineProperty(obj, 'b', {
   value: 3,
   enumerable: false
@@ -73,6 +75,8 @@ Reflect.ownKeys(obj)		// ['a', 'getA', 'b', Symbol()]
 Object.hasOwn(obj, 'b')		// true
 Object.hasOwn(obj, 'hello')		// false
 
+obj.propertyIsEnumerable('a')		//true
+obj.propertyIsEnumerable(s2)		//true
 obj.propertyIsEnumerable('b')		//false
 obj.propertyIsEnumerable('hello')		//false
 
@@ -94,7 +98,7 @@ JSON.stringify(obj)		// '{"a":1}'
 | 实例方法                   |                                                |
 | -------------------------- | ---------------------------------------------- |
 | obj.hasOwnProperty()       | 自有属性（可枚举、不可枚举、symbol键）         |
-| obj.propertyIsEnumerable() | 可枚举属性                                     |
+| obj.propertyIsEnumerable() | 可枚举属性（包含symbol键）                     |
 | obj.isPrototypeOf()        | 判断当前对象是否为另一个对象的原型             |
 | valueOf()                  | 返回指定对象的原始值，如果没有则将返回对象本身 |
 | toString()                 | 返回一个表示该对象的字符串                     |
@@ -143,9 +147,17 @@ Object.getOwnPropertyDescriptors(o)	// ECMAScript2017
 var obj = Object.defineProperty({}, 'p', {
   value: 123,
   writable: false,
-  enumerable: true,
+  enumerable: false,
   configurable: false
 });
+```
+
+```js
+const student = {name: 'ZhangSan'}
+Object.defineProperty(student, 'age', {value: 22})
+Object.defineProperty(student, 'sex', {value: 'male', enumerable: true})
+console.log(student)		//{ name: 'ZhangSan', sex: 'male' }
+console.log(Object.keys(student))		//["name","sex"]
 ```
 
 #### `Object.defineProperties()`

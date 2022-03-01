@@ -87,6 +87,14 @@ function recursivelyCheckEqual(x, ...rest) {
 
 #### for 循环简写
 
+for循环的优势
+
+- 方便控制循环的起点和终点
+- 性能更高
+  - `for`：for循环没有额外的函数调用栈和上下文，所以它的实现最为简单。
+  - `forEach`：对于forEach来说，它的函数签名中包含了参数和上下文，所以性能会低于 `for` 循环。
+  - `map`：`map` 最慢的原因是因为 `map` 会返回一个新的数组，数组的创建和赋值会导致分配内存空间，因此会带来较大的性能开销。如果将`map`嵌套在一个循环中，便会带来更多不必要的内存消耗。当大家使用迭代器遍历一个数组时，如果不需要返回一个新数组却使用 `map` 是违背设计初衷的。
+
 ```js
 // --- before ---
 for(let i = 0; i < arr.length; i++) {...}
@@ -98,7 +106,7 @@ for(let i = arr.length; i--;) {...} // 注意 i-- 后面的分号别漏了
 #### 循环的几种方法
 
 ```
-1) forEach（只能用在数组和类数组对象上）
+1) forEach（遍历Set、Map、数组和类数组对象(String arguments NodeList)）
   - break和return都不能中断循环
   - forEach 遍历数组会自动跳过空元素
 
@@ -110,6 +118,10 @@ for(let i = arr.length; i--;) {...} // 注意 i-- 后面的分号别漏了
   - for (var value of myArray) { console.log(value) }
   - 按照可迭代对象的 next() 方法产生值的顺序进行迭代元素
   - ES2018进行了扩展，增加了 for-await-of 循环，以支持生成promise的异步可迭代对象
+  
+4）技巧
+	- for-in 和 for-of 可以使用continue或break循环
+	- forEach不能continue或break循环，但是可以通过try-catch包裹然后throw异常的方式中断循环
 ```
 
 #### 🌰例子
@@ -162,6 +174,7 @@ var iter = {
 for(let i in iter){ console.log(i) }	//无结果
 for(let v of iter){ console.log(v) }	// a b c
 Array.prototype.forEach.call(iter, (item,key)=>{console.log(item, key)})	//无结果
+// Array.from(iter) 和 new Set(iter) 都可以转换可迭代对象
 
 // generator函数生成的遍历器
 function* generatorFn() {
@@ -169,10 +182,6 @@ function* generatorFn() {
 }
 for (const x of generatorFn()) { console.log(x) }		// a b c
 ```
-
-
-
-
 
 ### Promise
 

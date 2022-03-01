@@ -417,7 +417,26 @@ location /wx {
 wss:<your-website-url>/wx
 ```
 
+### Whitelabel Error Page
 
+打开一个链接时出现 Whitelabel Error Page，可能是网站做了防盗链
+
+可以将 referrerpolicy 设置为 "no-referrer"
+
+```html
+<a href="https://www.bilibili.com" target="_blank" referrerpolicy="no-referrer">a标签跳转</a>
+```
+
+```js
+window.open('http://external.site', '_blank', 'noopener=yes,noreferrer=yes')
+```
+
+- `noopener`
+  - 当给链接加上 `target="_blank"` 后， 目标网页会在新的标签页中打开， 此时在新打开的页面中可通过 `window.opener` 获取到源页面的 `window` 对象， 这就埋下了安全隐患。
+- `noreferrer`
+  - 与 `noopener` 类似， 设置了 `rel="noreferrer"` 后新开页面也无法获取来源页面的 `window` 以进行攻击， 同时， 新开页面中还无法获取 `document.referrer` 信息， 该信息包含了来源页面的地址。
+
+- 都是用于限制获取 `window.opener` ，但考虑到兼容性， 因为一些老旧浏览器不支持 `noopener`。通常 `noopener` 和 `noreferrer` 会同时设置， `rel="noopener noreferrer"`。
 
 # 参考
 

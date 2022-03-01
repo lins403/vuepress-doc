@@ -6,6 +6,27 @@
 
 ###  typeof
 
+基本数据类型共有7种，但是 typeof 可以判断8种
+
+```js
+// 基本数据类型
+Boolean Number String undefined null Bigint Symbol
+
+// 引用数据类型
+Object对象(包括普通Object、Function、Array、Date、RegExp、Math)
+```
+
+```js
+typeof undefined  //"undefined"
+typeof ''		//'string'
+typeof true		//'boolean'
+typeof function(){}  //"function"
+typeof []  //"object"
+typeof NaN  //"number"
+typeof Symbol()	//'symbol'
+typeof 0n		//'bigint' （ES2020）
+```
+
 js 在底层存储变量的时候，会在变量的机器码的低位1-3位存储其类型信息
 
 - 000：对象
@@ -15,12 +36,7 @@ js 在底层存储变量的时候，会在变量的机器码的低位1-3位存�
 - 1：整数
 
 ```js
-typeof function(){}  //"function"
-typeof []  //"object"
-typeof undefined  //"undefined"
 typeof null  //"object" 【因为null的机器码都是0，所以被当成了对象】
-typeof NaN  //"number"
-typeof Symbol()	//'symbol'
 ```
 
 ```js

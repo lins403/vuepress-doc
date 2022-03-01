@@ -1,5 +1,7 @@
 # JavaScript引擎
 
+https://juejin.cn/post/7062645899956060174
+
 ## V8
 
 - 隐藏类
@@ -13,3 +15,4 @@
 ## QuickJS
 
 [QuickJS Javascript Engine](https://github.com/bellard/quickjs)
+

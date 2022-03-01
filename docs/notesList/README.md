@@ -14,6 +14,8 @@
 
 [Prototype](https://github.com/prototypejs/prototype)
 
+[throttle-debounce](https://www.npmjs.com/package/throttle-debounce)
+
 ## CSS
 
 ### CSS Tricks

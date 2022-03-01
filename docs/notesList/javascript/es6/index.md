@@ -4,8 +4,8 @@
 
 ### 限制
 
+- 不存在自己的this
 - 不能使用 arguments、super 和 new.target，也不能用作构造函数。
-
 - 没有 prototype 属性
 - 不能用来定义Generator函数
 

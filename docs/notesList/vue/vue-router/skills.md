@@ -82,8 +82,11 @@ routes: [
 <router-link to="/bar" target="_blank">bar</router-link>
 ```
 
-```kotlin
-const {href} = this.$router.resolve()
+```js
+const {href} = this.$router.resolve({
+  path: "/index",
+  query: {}
+})
 window.open(href, '_blank')
 ```
 

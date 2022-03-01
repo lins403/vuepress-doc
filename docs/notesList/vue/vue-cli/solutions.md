@@ -49,5 +49,22 @@ npm i eslint@7 -D
 
 解决：
 
-[webpack - You are using the runtime-only build of Vue where the template compiler is not available - Stack Overflow](https://stackoverflow.com/questions/47332728/you-are-using-the-runtime-only-build-of-vue-where-the-template-compiler-is-not-a)
+https://github.com/vuejs/vue-cli/issues/2754
+
+方式一：
+
+```js
+// vue.config.js
+module.exports = { runtimeCompiler: true, }
+```
+
+方式二：
+
+```js
+// change
+import Vue from 'vue'
+
+to
+import Vue from 'vue/dist/vue.js';
+```
 

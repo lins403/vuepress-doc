@@ -6,6 +6,8 @@
 
 ## computed & watch
 
+computed中定义的属性会通过Object.defineProperty的方式直接定义在实例上。
+
 computed 有缓存，watch 支持异步
 
 ```js
@@ -321,6 +323,23 @@ const MyDirective = {
 - 全局注册
 - 局部注册
 
+#### `Vue.component(id, [definition])`
+
+注册或获取全局组件
+
+```js
+// 注册组件，传入一个扩展过的构造器
+Vue.component('my-component', Vue.extend({ /* ... */ }))
+
+// 注册组件，传入一个选项对象 (自动调用 Vue.extend)
+Vue.component('my-component', { /* ... */ })
+
+// 获取注册的组件 (始终返回构造器)
+var MyComponent = Vue.component('my-component')
+```
+
+
+
 #### 解析 DOM 模板时的注意事项
 
 ```vue
@@ -339,6 +358,8 @@ const MyDirective = {
 
 在大型应用中，我们可能需要将应用分割成小一些的代码块，并且只在需要的时候才从服务器加载一个模块。为了简化，Vue 允许你以一个工厂函数的方式定义你的组件，这个工厂函数会异步解析你的组件定义。Vue 只有在这个组件需要被渲染的时候才会触发该工厂函数，且<u>会把结果缓存起来</u>供未来重渲染。
 
+可以实现动态的异步组件，以加载远程组件。远程组件就可以实现配置化，就可以脱离代码本身而进行前端的组件构建。
+
 ```js
 // 工厂函数
 Vue.component('async-example', function (resolve, reject) {
@@ -352,7 +373,7 @@ Vue.component('async-example', function (resolve, reject) {
 })
 ```
 
-将异步组件和 <u>webpack 的 code-splitting</u> 功能一起配合使用，webpack 自动将你的构建代码切割成多个包，这些包会通过 Ajax 请求加载
+将异步组件和 <u>webpack 的 code-splitting</u> 功能一起配合使用，webpack 自动将你的构建代码切割成多个包，这些包会通过 Ajax 请求加载。
 
 ```js
 // 全局注册
@@ -824,6 +845,7 @@ this.$slots.header()
 - 条件展示 (使用 `v-show`)
 - 动态组件 (`<component v-bind:is="view"></component>`)
 - 组件根节点
+- 使用v-for，在数据插入和删除时触发过渡
 
 2）类名和CSS
 
@@ -988,6 +1010,8 @@ Vue.component('my-special-transition', {
 
 ## render函数
 
+`Vue.compile(template)`将一个模板字符串编译成 render 函数。
+
 ### createElement 参数
 
 `createElement` 执行返回一个“虚拟节点 ( virtual node，VNode )”，“虚拟 DOM”是我们对由 Vue 组件树建立起来的整个 VNode 树的称呼。
@@ -1059,6 +1083,23 @@ on: {
   '~keyup': this.doThisOnce,
   '~!mouseover': this.doThisOnceInCapturingMode
 }
+```
+
+#### renderError
+
+只在开发者环境下工作。
+
+当 `render` 函数遭遇错误时，提供另外一种渲染输出。其错误将会作为第二个参数传递到 `renderError`。这个功能配合 hot-reload 非常实用。
+
+```js
+new Vue({
+  render (h) {
+    throw new Error('oops')
+  },
+  renderError (h, err) {
+    return h('pre', { style: { color: 'red' }}, err.stack)
+  }
+}).$mount('#app')
 ```
 
 ## JSX
@@ -1134,7 +1175,7 @@ MyPlugin.install = function (Vue, options) {
 ### 使用插件
 
 ```js
-// 调用 `MyPlugin.install(Vue)`
+// 如果插件是一个对象，则调用 `MyPlugin.install(Vue)`。如果插件是一个函数，它会被作为 install 方法
 Vue.use(MyPlugin)
 
 new Vue({
@@ -1231,6 +1272,8 @@ setImmediate
 setTimeout(fn, 0) // 如果执行环境不支持，则会采用
 ```
 
+nextTick() 用于在下次DOM更新后执行指定的回调函数
+
 `Vue.$nextTick()`/`vm.$nextTick()` 的应用示例：
 
 ```js
@@ -1261,13 +1304,43 @@ Vue.component('example', {
 })
 ```
 
+## 生命周期
+
+beforeCreate
+
+created
+
+beforeMount
+
+mounted
+
+beforeUpdate
+
+updated
+
+activated
+
+deactivated
+
+beforeDestroy
+
+destroyed
+
+errorCaptured
+
+- 在捕获一个来自后代组件的错误时被调用。
+- 此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。
+- 此钩子可以返回 `false` 以阻止该错误继续向上传播。
+
+> **服务器端渲染期间**只有beforeCreate、created、errorCaptured会被调用
+
 ## 延伸问题
 
 ::: details data必须是一个函数
 
 > 当一个**组件**被定义，`data` 必须声明为返回一个初始数据对象的函数，因为组件可能被用来创建多个实例。如果 `data` 仍然是一个纯粹的对象，则所有的实例将**共享引用**同一个数据对象！通过提供 `data` 函数，每次创建一个新实例后，我们能够调用 `data` 函数，从而返回初始数据的一个全新副本数据对象。（ initData --> getData --> data.call(vm,vm) ）
 >
-> > 组件可能被多次调用，data是一个函数可以避免不同组件修改自身数据时不会互相污染
+> > 组件可能被多次用于创建实例，data是一个函数，每次会调用生成一个新对象，可以避免不同组件修改自身数据时不会互相污染
 
 :::
 
@@ -1275,7 +1348,7 @@ Vue.component('example', {
 
 every component must have a single root element.
 
-> 
+> 因为`<template>`的内容将替换实例的挂载元素，所以模板的顶级元素始终是单个元素。
 
 :::
 
@@ -1311,57 +1384,65 @@ every component must have a single root element.
 ::: details extends 和 mixins 的区别
 
 > Vue.mixin(mixin) 会影响到所有组件，应该只在插件中使用
-> 
+>
 > Vue.extend(options) 组件构造器，在 Vue3 中已被移除。
-> 
+>
 > ```js
 > const Profile = Vue.extend({
-> template: '<p>hello {{name}}</p>',
-> data() {
-> return {
->     name: 'Aidan'
-> }
-> }
+>   template: '<p>hello {{name}}</p>',
+>   data() {
+>     return {
+>      name: 'Aidan'
+>     }
+>   }
 > })
 > // 创建一个 Profile 的实例，并将它挂载到一个元素上
 > new Profile().$mount('#app')
 > ```
-> 
+>
 > extends 选项用于扩展另一个组件，且继承该组件的options
-> 
-> ```
+>
+> ```js
 > var CompA = { ... }
 > 
 > // 在没有调用 `Vue.extend` 时候继承 CompA
 > var CompB = {
-> extends: CompA,
-> ...
+>   extends: CompA,
+>   ...
 > }
 > ```
-> 
+>
 > mixins 可以用于dispatch组件间的可复用功能
-> 
-> ```
+>
+> ```js
 > var myMixin = {
->     ...
+>  ...
 > }
 > new Vue({
-> mixins: [myMixin],
+> 	mixins: [myMixin],
 > })
 > ```
-> 
+>
 > 在 Vue 3 中，我们强烈建议使用 `Composition API` 来替代继承与 mixin。如果因为某种原因仍然需要使用组件继承，你可以使用 `extends` 选项 来代替 `Vue.extend`。
-> 
+>
 > ---
-> 
+>
 > ```js
 > extends: Object | Function
 > mixins: Array<Object>
 > ```
-> 
-> **总结：** extends 和 mixins 实现方式几乎一致，都用同样的选项合并策略，只是 extends 被用于需要考虑继承的情况，mixins 则用于复用功能，同时多个mixins时后面的会覆盖前面的。（早期版本vue中组件自身的options优先级比extends的高，比mixins的低，目前vue2.6中组件自身的options优先级最高）
-> 
-> > 项目的图标统计分析中应用较多
+>
+> **总结：** 
+>
+> extends 和 mixins 实现方式几乎一致，都用同样的选项合并策略。主要都是为了便于扩展单文件组件。
+>
+>  继承 extends 被用于需要考虑继承的情况，扩展另一个组件 (可以是一个简单的option对象或构造函数)，而无需使用 `Vue.extend`。
+>
+> 混合 mixins 则用于拆分或复用options，同时多个mixins时后面的options优先级更高，会覆盖前面的。
+>
+> 早期版本vue中组件自身的options优先级比extends的高，比mixins的低，目前vue2.6中组件自身的options优先级最高
+>
+> > 同质化较多的功能和页面，例如项目的图表统计分析中可以用到extends或mixins
 
 :::
 

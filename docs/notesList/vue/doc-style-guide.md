@@ -41,8 +41,8 @@ var myGreatMixin = {
 ```js
 // .vue 组件名大写，不要用驼峰，不要用驼峰
 components/
-|- MyComponent.vue        // PascalCase
-|- my-component.vue        // kebab-case    [DOM模板中使用，因为HTML大小写不敏感]
+|- MyComponent.vue        // PascalCase (帕斯卡)
+|- my-component.vue        // kebab-case (烤串)    [DOM模板中使用，因为HTML大小写不敏感]
 ```
 
 - **参考**： [模板中的组件名大小写](https://cn.vuejs.org/v2/style-guide/#模板中的组件名大小写强烈推荐)

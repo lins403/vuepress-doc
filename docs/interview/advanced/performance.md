@@ -59,3 +59,7 @@ compress > drop_console: true,
 - 文件压缩
 - 使用CDN托管
 - 缓存
+
+
+
+- SSR，UI在服务端渲染，减少请求量和客户端渲染

@@ -46,7 +46,7 @@ data(){
 
 - 斗篷、遮盖物，用于解决初始化慢导致页面闪动
 - 使用插值语法时，页面上显示的是原始值，例如{{message}}，直到vue创建完实例并编译模板时，DOM才会被更新，更新的过程会造成屏幕闪动
-- 在编译前先隐藏，编译结束后将v-cloak移除
+- 在编译前先隐藏未编译的Mustache标签，编译结束后将v-cloak移除
 
 ```scss
 // 避免使用插值语法时屏幕闪动
@@ -135,12 +135,18 @@ handleClick(message, event){
 表单(v-model)
 
 ```js
-.lazy		//输入框内容变化时，v-model绑定的数据不会立即更新，要等到失焦的时候，或者按回车以后
+.lazy		//输入框内容变化时，v-model绑定的数据不会立即更新，要等到失焦的时候，或者按回车以后（如果是lazy，则只监听change事件；没有设置lazy时，还监听input事件）
 .number		//调用parseFloat，解析一个参数并返回一个浮点数
 .trim
 ```
 
 ## 组件
+
+组件之间的数据传递方式
+
+1. props
+2. 组件通信
+3. slot
 
 ### 单向数据流
 
@@ -182,6 +188,7 @@ export default {
     }
   },
   created() {
+    console.log(this.$attrs)	//$attrs而不是$props
     console.log(this.obj === this.post)		// true
     console.log(this.item === this.post)		// true
     console.log(this.deepObj === this.post)		// false
@@ -243,6 +250,13 @@ transclusion，内容分发、嵌入
 - `$nextTick` 与 DOM异步更新机制
 - X-Templates
 - 手动挂载实例
+- keep-alive
+  - 保留组件的状态或者避免重新渲染
+  - 只会执行一次完整的生命周期
+  - 之后每次只会触发 `activated` 和 `deactivated` 钩子
+  - 通常用来包裹动态组件，如果这个特性存在，则重复创建组件时，会通过缓存机制来快速创建组件
+  - `<router-view />`  `<component :is=""`
+
 
 ## Render函数
 
@@ -276,7 +290,7 @@ Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM�
 
 在工程项目中，任何静态资源都会被webpack当成模块，解析并处理这些模块之间的依赖关系，然后将它们打包起来。
 
-SPA，意味着最终只有一个HTML文件，其余都是静态资源
+SPA，意味着最终只有一个HTML文件，其余都是静态资源，动态注入到html中。SPA的核心是前端路由
 
 #### 使用单文件组件SFC
 
@@ -292,8 +306,6 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源
 
 ## 插件
 
-第三方库用的多，自己项目中很少用到，一般就按模块来处理，utils、directives等等集中管理，然后引入使用。不过有个项目中的eventBus是用插件封装的，然后挂载到Vue的原型上，作为全局方法。
-
 ### Vue-router
 
 #### 前端路由
@@ -302,3 +314,45 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源
 - HTML5的 History 模式，需要服务端支持。
   - 服务端在接受到所有的请求后，都指向同一个html文件，不然会出现404。
   - 因此 SPA 只有一个html，整个网站所有的内容都在这个html里，通过JavaScript来处理，动态填充html中的内容和样式。
+
+如果要独立开发一个前端路由，需要考虑到页面的可插拔、页面的生命周期、内存管理等问题
+
+#### 使用
+
+- `<router-view>`会根据当前路由渲染对应的页面组件
+  - `<router-view>` 组件是一个 functional 组件，渲染路径匹配到的视图组件。
+  - `<router-view>` 渲染的组件还可以内嵌自己的 `<router-view>`，根据嵌套路径，渲染嵌套组件。
+
+- `<router-link>` 会被渲染为 `<a>`
+- 实例 `$router`
+
+### Vuex
+
+- state
+
+- mutation
+  - 在组件内，来自store的数据只能读取，不能直接修改，修改的唯一途径是显示地提交mutations
+  - 不能进行异步操作
+  - `this.$store.commit`
+- action
+  - 可以进行任意的异步操作
+  - actions不会直接修改数据，也是通过提交mutations的方式
+  - `this.$store.dispatch`
+- getters (可以看作是给组件共享的computed属性)
+- modules
+  - 可以将store分割到不同模块中，每个模块可以维护自己的state、mutation、action、getters
+  - 只是将代码分割，store依然是单例，全局唯一的
+
+### 自定义插件
+
+第三方库用的多，自己项目中很少用到，一般就按模块来处理，utils、directives等等集中管理，然后引入使用。不过有个项目中的eventBus是用插件封装的，然后挂载到Vue的原型上，作为全局方法，就可以不用在每个组件中都引入Bus。
+
+注意项：
+
+1. `$bus.on` 应该在 created 钩子内使用，如果是在mounted内使用，则可能接收不到其它组件在created时emit发出的事件。
+2. 在 beforeDestroy 钩子中解除事件监听 `$bus.off`
+
+- $on
+- $emit
+- $once
+- $off

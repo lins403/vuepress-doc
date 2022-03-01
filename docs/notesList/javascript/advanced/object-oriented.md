@@ -18,7 +18,7 @@ person1.__proto__ === person2.__proto__
 person1.__proto__.constructor === Person
 ```
 
-每个构造函数都连接到(其原型指针指向) `Function.prototype`，意义是为了给函数提供call、apply、bind等方法。而Function.prototype这个原型本身连接到 `Object.prototype`。原型对象除了Function.prototype是`function`类型外，其它的都是`object`类型，也就是只有Function.prototype是Function的实例，其它的原型对象都是Object的实例。
+每个构造函数都连接到(其原型指针指向) `Function.prototype`（子类构造函数先连接到父类原型），意义是为了给函数提供call、apply、bind等方法。而Function.prototype这个原型本身连接到 `Object.prototype`。原型对象除了Function.prototype是`function`类型外，其它的都是`object`类型，也就是只有Function.prototype是Function的实例，其它的原型对象都是Object的实例。
 
 要获取某个对象的属性值，但对象自身没有这个属性名时，JavaScript就会尝试沿着`原型链`从原型对象上获取属性值，直到到达原型链终点`Object.prototype`。如果想要的属性完全不存在于原型链中，那么结果就是undefined值。`isPrototypeOf`方法和`instanceof`关键字，都是基于原型链的判断（`typeof`的原理是 js 在底层存储变量的时候，会在变量的机器码(01二进制)的低位1-3位存储其类型信息 ）。
 
@@ -216,7 +216,9 @@ Object.prototype.isPrototypeOf(person1)	//true
 
 #### instanceof
 
-检测构造函数的 `prototype` 属性是否出现在某个实例对象的原型链上
+检测<u>构造函数的 `prototype` 属性</u>是否出现在某个<u>实例对象的原型链上</u>
+
+`instanceof` 操作符的问题在于，如果网页中存在多个 `iframe` ，那便会存在多个 `Array` 构造函数，此时判断是否是数组会存在问题.
 
 ```js
 person1 instanceof Person		//true
@@ -386,6 +388,10 @@ SubType.prototype = new SuperType();
    - 共享的原型属性被污染
      - 原型中包含的引用值会在所有实例间共享，所以属性通常会在构造函数中定义而不会定义在原型上
    - 子类型在实例化时不能给父类型的构造函数传参
+
+   ```js
+   SubType.prototype = SuperType.prototype
+   ```
 
 2. #### 盗用构造函数
 
