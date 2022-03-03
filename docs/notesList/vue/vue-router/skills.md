@@ -225,8 +225,9 @@ watch: {
 ```js
 export default new Router({
   mode: 'history',
+  // scrollBehavior: () => ({ y: 0 }),  //始终滚动到顶部
   scrollBehavior(to, from, savedPosition) {
-    // savedPosition 当且仅当 popstate 导航 (通过浏览器的 前进/后退 按钮触发) 时才可用
+    // savedPosition 当且仅当 popstate 导航 (通过浏览器的 前进/后退 按钮触发) 时才可用，也就是history模式下才可用
     if (savedPosition) {
       return savedPosition
     } else {
@@ -245,5 +246,11 @@ export default new Router({
 ```js
 // v4.x
 { left: 0, top: 0 }
+```
+
+### 路由跳转后修改标题
+
+```
+document.title = 'new title'
 ```
 

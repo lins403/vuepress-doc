@@ -245,3 +245,23 @@ goBack() {
 <componetent :key="$route.path" />
 ```
 
+### 路由切换
+
+当用户从 `/users/teacher` 导航到 `/users/student` 时，我们需要从前者路径对应的组件树，切换到后者路径对应的组件树。
+
+假如说路径对应着一对嵌套的`<router-view>`，那么可以重用 `users` 组件，然后让 `teacher` 组件停止工作 (deactivate)，并激活 (active) `student` 组件，解析过程会触发失活组件、被激活组件以及全局的导航
+
+####  导航解析过程
+
+1. 触发Navigation
+2. 在失活的组件 teacher  中调用 `beforeRouteLeave` 钩子 (guard守卫)
+3. 调用全局的 `beforeEach` 守卫
+4. 在重用的组件 users 里调用 `beforeRouteUpdate` 守卫
+5. 调用 `beforeEnter` 守卫
+6. 解析异步路由组件
+7. 在被激活的组件 student 里调用 `beforeRouteEnter`
+8. 调用全局的 `beforeResolve` 守卫
+9. 导航被确认
+10. 调用全局的 `afterEach` 钩子
+11. 触发 DOM 更新
+12. 调用 `beforeRouteEnter` 守卫中传给 `next` 的回调函数，创建好的组件实例会作为回调函数的参数传入

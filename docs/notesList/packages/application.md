@@ -22,3 +22,6 @@ bit-bin: [GitHub - teambit/bit: A tool for component-driven application developm
 
 
 
+## 工程化
+
+[fis3.baidu](https://github.com/fex-team/fis3)

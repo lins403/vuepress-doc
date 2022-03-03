@@ -271,6 +271,12 @@ this.$emit('update:title', newTitle)
 <a @[event]="doSomething"> ... </a>
 ```
 
+### `v-once`
+
+只渲染元素和组件**一次**。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
+
+Virtual DOM 的diff和patch过程可以跳过这个节点和它的子元素。
+
 ### 自定义指令
 
 - 全局指令：`Vue.directive`
@@ -1312,15 +1318,25 @@ created
 
 beforeMount
 
+- 调用时机在template编译成render函数之后、创建Watcher之前
+
 mounted
 
+- 调用时机在生成 DOM 树之后
+
 beforeUpdate
+
+- 调用时机在生成 Virtual DOM 之后、生成 DOM 树之前
 
 updated
 
 activated
 
+- 生成 DOM 树之后（keep-alive）
+
 deactivated
+
+- 实例销毁时（keep-alive）
 
 beforeDestroy
 

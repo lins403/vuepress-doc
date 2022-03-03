@@ -129,6 +129,24 @@ data () {
 
 index的值是按照绑定的数组的索引顺序，所以如果在数组头部或者中间再插入数据，则会导致原来的index顺序被打破，使得更新时需要计算更多的节点，更消耗性能
 
+### 3）给元素或组件使用v-once
+
+```vue
+<!-- 单个元素 -->
+<span v-once>This will never change: {{msg}}</span>
+<!-- 有子元素 -->
+<div v-once>
+  <h1>comment</h1>
+  <p>{{msg}}</p>
+</div>
+<!-- 组件 -->
+<my-component v-once :comment="msg"></my-component>
+<!-- `v-for` 指令-->
+<ul>
+  <li v-for="i in list" v-once>{{i}}</li>
+</ul>
+```
+
 
 
 ## 其它

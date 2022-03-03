@@ -1,5 +1,9 @@
 # Vue
 
+- 聚焦视图层
+- 响应式数据绑定
+- 组件系统
+
 ## 基础
 
 ### 数据绑定
@@ -262,7 +266,7 @@ transclusion，内容分发、嵌入
 
 [渲染函数 & JSX — Vue.js](https://cn.vuejs.org/v2/guide/render-function.html)
 
-Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM节点，提升渲染性能
+Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM节点，提升渲染性能。以及提供了服务端渲染技术。
 
 > 【对以前学习源码的总结】
 >
@@ -270,17 +274,19 @@ Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM�
 >
 > 创建一个Vue实例时，会进行init初始化，首先merge options，然后再调用 initState 初始化相关属性，将data、props、methods等等option添加到这个vue实例上，然后将实例 mount 挂载到DOM节点上。
 >
-> 在开始挂在前，会先判断是否有template模板，如果有的话就会进行 compile 编译，先 parse 解析成 AST对象，然后再 generate 生成对应的 render function，如果没有template的话则会将当前el节点与其后代元素（outerHTML）用于创建一个template模板。
+> 在开始挂在前，会先判断是否有template模板，如果有的话就会进行 compile 编译，先 parse 解析成 AST 对象，并且对AST进行 optimize 优化（深度遍历AST树，标记静态属性和静态节点）。然后再 generate 生成对应的 render function，如果没有template的话则会将当前el节点与其后代元素（outerHTML）用于创建一个template模板。
 >
 > 执行编译生成的 render function，通过 createElement 方法生成 VNode，建立起来的整个 VNode 树就是 Virtual DOM。
 >
 > （TODO：确认一下update和patch的调用时机）如果是第一次渲染，则 patch 方法中直接调用 createElm 方法，基于VNode的信息，调用浏览器的 DOM API 来创建真实 DOM 并完成挂载。
 >
-> （这段有歧义，待完善）如果在这过程中数据发生变化，则会触发update更新，re-render重新渲染生成新的VNode，patch方法会将新旧 VNode 进行 Diff 计算生成补丁对象，遍历（深度优先）补丁对象，并递归调用 createElm 进行创建或更新DOM节点。
+> 如果在这过程中数据发生变化，则会触发update更新，re-render重新渲染生成新的VNode，patch方法会将新旧 VNode 进行比较，首先通过 `sameVNode(oldVnode, vnode)`方法判断它们是否是相同的 VNode，来决定走不同的更新逻辑。如果新旧 `vnode` 不同，就替换掉已存在的节点，主要分为三步：创建新节点、更新父的占位符节点、
 
 将模板template解析成 AST 结构的JavaScript对象，通过 render 函数调用生成 VNode，通过 diff 算法比较新旧 VNode 然后生成补丁对象，遍历补丁对象，更新DOM节点。
 
 `createElement` 执行返回一个“虚拟节点 ( virtual node，VNode )”，包含创建DOM所需要的信息。
+
+VNode的生成方式，一种是由普通 DOM 元素生成，另一种是由 Vue 组件生成。
 
 “虚拟 DOM”是我们对由 Vue 组件树建立起来的整个 VNode 树的称呼。
 
@@ -341,7 +347,7 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源，动态�
 - getters (可以看作是给组件共享的computed属性)
 - modules
   - 可以将store分割到不同模块中，每个模块可以维护自己的state、mutation、action、getters
-  - 只是将代码分割，store依然是单例，全局唯一的
+  - 只是将代码拆分模块，store依然是单例，全局唯一的
 
 ### 自定义插件
 
@@ -356,3 +362,86 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源，动态�
 - $emit
 - $once
 - $off
+
+## 生命周期
+
+`beforeCreate`
+
+`created`
+
+`beforeMount`
+
+`mounted`
+
+`beforeUpdate`
+
+`updated`
+
+`activated`
+
+`deactivated`
+
+`beforeDestroy`
+
+`destroyed`
+
+## 组件更新
+
+`sameVnode` 的逻辑非常简单，如果两个 `vnode` 的 `key` 不相等，则是不同的；否则继续判断对于同步组件，则判断 `isComment`、`data`、`input` 类型等是否相同，对于异步组件，则判断 `asyncFactory` 是否相同。
+
+所以根据新旧 `vnode` 是否为 `sameVnode`，会走到不同的更新逻辑.
+
+如果新旧 `vnode` 不同，那么更新的逻辑非常简单，它本质上是要替换已存在的节点，大致分为 3 步
+
+- 创建新节点
+- 更新父的占位符节点
+  - vue 的组件在生成 vnode 的过程中，对于原生节点就直接生成 tag 为对应原生 tag 的vnode 节点，而对于组件节点就生成 tag 是`vue-component-1-App`的节点，这种节点就是占位符节点，或者叫 placeholder 节点。
+
+- 删除旧节点
+
+如果新旧节点相同，它会调用 `patchVNode` 方法，是把新的 `vnode` `patch` 到旧的 `vnode` 上，核心逻辑分为3步
+
+- 当更新的 `vnode` 是一个组件 `vnode` 的时候，会执行 `prepatch` 钩子函数
+- 执行所有 `module` 的 `update` 钩子函数以及用户自定义 `update` 钩子函数
+- 完成 `patch` 过程
+  - 如果 `vnode` 是个文本节点且新旧文本不相同，则直接替换文本内容。
+  - 如果不是文本节点，则判断它们的子节点，并分了几种情况处理
+
+- 执行 `postpatch` 钩子函数
+
+
+
+
+
+### Diff
+
+ 当新旧 VNode 同时存在 children，通过 updateChildren 对子节点做更新。
+
+```js
+let oldStartIdx = 0
+let newStartIdx = 0
+let oldEndIdx = oldCh.length - 1
+let oldStartVnode = oldCh[0]
+let oldEndVnode = oldCh[oldEndIdx]
+let newEndIdx = newCh.length - 1
+let newStartVnode = newCh[0]
+let newEndVnode = newCh[newEndIdx]
+
+while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
+  //
+}
+```
+
+只需要 `createElement` `insertBefore` 等实际DOM操作来完成更新，并且复用了DOM节点，比起 innerHTML 这类直接更改所有子节点的方式，开销低很多，节点越复杂，DOM更新的性能提升越明显
+
+
+
+## SSR
+
+1. 加快首屏渲染速度
+2. SEO
+3. 减少HTTP请求
+
+
+
+把 VNode 对象渲染成 DOM 元素

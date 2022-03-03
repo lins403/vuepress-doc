@@ -2,6 +2,8 @@
 
 ## 路由懒加载
 
+当用户访问某一个路由时，才会去服务端获取相应的组件代码。可以减少没有用到的代码却被加载的情况，加快页面渲染速度，同时可以节省流量。
+
 结合
 
 1. Vue的异步组件（[Async Components](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6)）

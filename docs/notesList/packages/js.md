@@ -34,6 +34,14 @@ manage session history: [history](https://www.npmjs.com/package/history)
 
 [node-pre-gyp](https://www.npmjs.com/package/node-pre-gyp)
 
+### 命令行
+
+[commander](https://www.npmjs.com/package/commander) 提供了一些接口，方便对命令行命令进行解析
+
+[inquirer](https://www.npmjs.com/package/inquirer) 用于用户与命令行的交互
+
+[ora](https://www.npmjs.com/package/ora) 用于在终端展示loading效果
+
 ## React
 
 [classnames](https://www.npmjs.com/package/classnames): A simple JavaScript utility for conditionally joining classNames together.
