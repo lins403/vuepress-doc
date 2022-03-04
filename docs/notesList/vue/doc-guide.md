@@ -1278,7 +1278,9 @@ setImmediate
 setTimeout(fn, 0) // 如果执行环境不支持，则会采用
 ```
 
-nextTick() 用于在下次DOM更新后执行指定的回调函数
+nextTick() 用于在下次DOM更新后执行指定的回调函数。
+
+换言之，如果我们的某些方法依赖了数据修改后的 DOM 变化，我们就必须在 `nextTick` 后执行，例如`$el`访问节点，操作DOM等
 
 `Vue.$nextTick()`/`vm.$nextTick()` 的应用示例：
 

@@ -116,6 +116,7 @@
 | 30 or so                 | 30左右                   | code compliance standards                 | 代码合规标准           |
 | around the corner        | 即将推出                 | you established for your application      |                        |
 | aside from               | 除了                     | compliance configuration                  | 合规性配置             |
+|                          |                          | get assigned a namespace                  | 被分配一个命名空间     |
 | be addressed             | 被解决                   | has grown exponentially                   | 呈指数增长             |
 | be leveraged for         | 被利用                   | hooking … up to existing code             | 将…与现有代码挂钩      |
 | be reflected in          | 反映在                   | how is it even possible?                  |                        |

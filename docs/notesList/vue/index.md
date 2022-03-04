@@ -252,6 +252,8 @@ transclusion，内容分发、嵌入
 ### 其它
 
 - `$nextTick` 与 DOM异步更新机制
+  - 主线程的执行过程就是一个 tick，而所有的异步结果都是通过 “任务队列” 来调度。 消息队列中存放的是一个个的任务（task）。 规范中规定 task 分为两大类，分别是 macro task 和 micro task，并且每个 macro task 结束后，都要清空所有的 micro task。
+
 - X-Templates
 - 手动挂载实例
 - keep-alive
@@ -395,8 +397,7 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源，动态�
 
 - 创建新节点
 - 更新父的占位符节点
-  - vue 的组件在生成 vnode 的过程中，对于原生节点就直接生成 tag 为对应原生 tag 的vnode 节点，而对于组件节点就生成 tag 是`vue-component-1-App`的节点，这种节点就是占位符节点，或者叫 placeholder 节点。
-
+  - vue 的组件在生成 vnode 的过程中，对于原生节点就直接生成 tag 为对应原生 tag 的vnode 节点，而对于组件节点就生成 tag 是`vue-component-1-App`的节点，这种节点就是占位符节点，或者叫 placeholder 节点。（也就是通过占位符来标识这一串DOM是属于哪个组件的）
 - 删除旧节点
 
 如果新旧节点相同，它会调用 `patchVNode` 方法，是把新的 `vnode` `patch` 到旧的 `vnode` 上，核心逻辑分为3步

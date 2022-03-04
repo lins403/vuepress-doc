@@ -1,10 +1,13 @@
 # 组件化
 
-## 概要
+## mountComponent
+
+`mountComponent` 核心就是先实例化一个`render Watcher`，在它的回调函数中会调用 `updateComponent` 方法，在此方法中调用 `vm._render` 方法先生成 `VNode`，最终调用 `vm._update` 更新 DOM。
+
+- `vm._render`
+- `vm._update`
 
 ## 文档内容
-
-<https://cn.vuejs.org/v2/guide/components.html>
 
 1. 组件基础
 2. 组件注册
@@ -14,13 +17,7 @@
 6. 动态组件&异步组件
 7. 处理边界情况
 
-## 指令
-
-1. parse > preTransformNode > processElement > processAttrs > addDirective > el.directives.push({ name, rawName, value, arg, modifiers })
-
-2. generate > genElement > genData > genDirectives
-
-3. patch > createPatchFunction / baseModules > updateDirectives , unbindDirectives > _update(oldVnode, vnode)
+3. 
 
 ## 问题
 

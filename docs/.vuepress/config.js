@@ -280,6 +280,7 @@ function sourceCodeSidebar (groupA, groupB, groupC) {
       children: [
         'core/',
         'core/data-driven',
+        'core/reactive',
         'core/reactivity',
         'core/components',
         'core/compile',
@@ -407,6 +408,7 @@ function DataStructureSidebar(groupA,groupB){
           'algorithm/',
           'algorithm/查找',
           'algorithm/排序',
+          'algorithm/recursion',
         ]
       },
     ]
