@@ -156,12 +156,14 @@ handleClick(message, event){
 
 父组件通过props给子组件传递数据，但是子组件不能直接修改父组件的状态。
 
+子组件不要直接修改props值，因为当父组件重新渲染时，会被父组件的props值覆盖回去。如果props值是个对象，则会修改到父组件的状态，导致父组件也会发生re-render。
+
 从Vue2.x开始才实现了单向的数据流。`.sync`修饰符是在Vue1.x中引入来支持双向绑定。之所以这样设计，是为了尽可能的将父子组件解耦，避免子组件无意中修改了父组件的状态。
 
 ```js
 // 当传入的props是个对象，子组件需要修改这个对象时，
 // 1. 常见方式有二：data中可以使用一个变量来保存然后对这个新变量进行修改，或者使用computed来计算变量；这两种方式都是复制的引用值，修改它们均无异于直接修改props值。
-// 2. 如果使用了.sync修饰符，要么在父组件传参时进行解构，要么在子组件中要对对象进行深拷贝
+// 2. 如果使用了.sync修饰符，要么在父组件传参时进行解构，要么在子组件中要对对象进行深拷贝；否则使用$emit
 export default {
   props: {
     post: {
@@ -252,10 +254,37 @@ transclusion，内容分发、嵌入
 ### 其它
 
 - `$nextTick` 与 DOM异步更新机制
+  
   - 主线程的执行过程就是一个 tick，而所有的异步结果都是通过 “任务队列” 来调度。 消息队列中存放的是一个个的任务（task）。 规范中规定 task 分为两大类，分别是 macro task 和 micro task，并且每个 macro task 结束后，都要清空所有的 micro task。
-
+  
+  - 异步更新机制，在更新时维护一个异步更新的watcher队列，只是去除重复的watcher，并不是只检查最终的结果。只有computed watcher才会只计算最终结果，来决定是否更新
+  
+    ```js
+    // 只有第一次点击才会触发beforeUpdate和updated钩子
+    handleClick() {
+      this.value = 50
+    }
+    
+    // 只有第一次点击才会触发beforeUpdate和updated钩子
+    handleClick() {
+      this.value = 50
+      this.value = 50
+    }
+    
+    // 每次点击都会触发更新的两个钩子
+    handleClick() {
+      this.value = 50
+      this.value = 20
+      this.value = 50
+    }
+    ```
+  
+    
+  
 - X-Templates
+
 - 手动挂载实例
+
 - keep-alive
   - 保留组件的状态或者避免重新渲染
   - 只会执行一次完整的生命周期
@@ -282,7 +311,7 @@ Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM�
 >
 > （TODO：确认一下update和patch的调用时机）如果是第一次渲染，则 patch 方法中直接调用 createElm 方法，基于VNode的信息，调用浏览器的 DOM API 来创建真实 DOM 并完成挂载。
 >
-> 如果在这过程中数据发生变化，则会触发update更新，re-render重新渲染生成新的VNode，patch方法会将新旧 VNode 进行比较，首先通过 `sameVNode(oldVnode, vnode)`方法判断它们是否是相同的 VNode，来决定走不同的更新逻辑。如果新旧 `vnode` 不同，就替换掉已存在的节点，主要分为三步：创建新节点、更新父的占位符节点、
+> 如果在这过程中数据发生变化，则会触发update更新，re-render重新渲染生成新的VNode，patch方法会将新旧 VNode 进行比较，首先通过 `sameVnode(oldVnode, vnode)`方法判断它们是否是相同的 VNode，来决定走不同的更新逻辑。如果新旧 `vnode` 不同，就替换掉已存在的节点，主要分为三步：创建新节点、更新父的占位符节点、
 
 将模板template解析成 AST 结构的JavaScript对象，通过 render 函数调用生成 VNode，通过 diff 算法比较新旧 VNode 然后生成补丁对象，遍历补丁对象，更新DOM节点。
 
@@ -365,28 +394,6 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源，动态�
 - $once
 - $off
 
-## 生命周期
-
-`beforeCreate`
-
-`created`
-
-`beforeMount`
-
-`mounted`
-
-`beforeUpdate`
-
-`updated`
-
-`activated`
-
-`deactivated`
-
-`beforeDestroy`
-
-`destroyed`
-
 ## 组件更新
 
 `sameVnode` 的逻辑非常简单，如果两个 `vnode` 的 `key` 不相等，则是不同的；否则继续判断对于同步组件，则判断 `isComment`、`data`、`input` 类型等是否相同，对于异步组件，则判断 `asyncFactory` 是否相同。
@@ -400,17 +407,18 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源，动态�
   - vue 的组件在生成 vnode 的过程中，对于原生节点就直接生成 tag 为对应原生 tag 的vnode 节点，而对于组件节点就生成 tag 是`vue-component-1-App`的节点，这种节点就是占位符节点，或者叫 placeholder 节点。（也就是通过占位符来标识这一串DOM是属于哪个组件的）
 - 删除旧节点
 
-如果新旧节点相同，它会调用 `patchVNode` 方法，是把新的 `vnode` `patch` 到旧的 `vnode` 上，核心逻辑分为3步
+如果新旧节点<u>相同</u>，它会调用 `patchVNode` 方法，是把新的 `vnode` `patch` 到旧的 `vnode` 上，核心逻辑分为3步
 
 - 当更新的 `vnode` 是一个组件 `vnode` 的时候，会执行 `prepatch` 钩子函数
 - 执行所有 `module` 的 `update` 钩子函数以及用户自定义 `update` 钩子函数
 - 完成 `patch` 过程
   - 如果 `vnode` 是个文本节点且新旧文本不相同，则直接替换文本内容。
   - 如果不是文本节点，则判断它们的子节点，并分了几种情况处理
-
+    - 如果子节点都存在且不同，则调用 **`updateChildren`** 方法进行Diff比较然后更新
+  
 - 执行 `postpatch` 钩子函数
 
-
+> 在旧vnode的子节点中尽量找到与新vnode的子节点相同 (sameVnode) 的节点
 
 
 

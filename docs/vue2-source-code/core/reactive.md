@@ -45,11 +45,19 @@ observe --> new Observer()
 
 > 在实例初始化时，需要将data、props、computed等属性添加到实例上，并给每一个被观察对象都添加一个 observer 实例，给对象的属性添加 getter 和 setter，用于依赖收集和派发更新。
 >
-> 创建observer实例时，会遍历对象的每个属性，并给每个属性调用`defineReactive`方法。每个属性都会添加一个dep实例，每个dep实例都维护一个订阅者容器 subscribers（subs）；然后使用 `Object.defineProperty` 方法，给对象属性添加 getter 和 setter。当对象触发getter时，通过 `dep.depend()` 进行依赖收集，将watcher实例添加进 subscribers 容器中。当对象数据发生变化时，触发setter，然后调用 `dep.notify()` ，遍历 subscribers 容器中的每个watcher，然后调用 watcher 中的方法进行更新，完成相应的逻辑处理。
->
-> 实例在 `mountComponent` 挂载时会首次渲染，然后生成一个 `render watcher`，递归访问实例的所有属性，并触发它们的getter。然后初始化的时候就会执行它们的回调函数
->
-> 初始化computed属性时，也会生成一个 `computed watcher`，不同于其它的watcher，computed watcher的内部做了优化，当计算属性的计算的最终值发生变化时，才会触发watcher并重新渲染，而不是计算属性依赖的值发生变化时就更新。
+> 创建observer实例时，会遍历对象的每个属性，并给每个属性调用`defineReactive`方法。每个属性都会添加一个dep实例，每个dep实例都维护一个订阅者容器 subscribers（subs）；然后使用 `Object.defineProperty` 方法，给对象属性添加 getter 和 setter。当对象触发getter时，通过 `dep.depend()` 进行依赖收集，将watcher实例添加进 subscribers 容器中，也就是把watcher收集到依赖中。当对象数据发生变化时，触发setter，然后调用 `dep.notify()` ，遍历 subscribers 容器中的每个watcher，然后调用 watcher 中的方法进行更新，完成相应的逻辑处理。
+
+#### Render Watcher
+
+实例在 `mountComponent` 挂载时会首次渲染，然后生成一个 `render watcher`，递归访问实例的所有属性，并触发它们的getter。在渲染的过程中完成对实例属性的依赖收集，~~然后初始化的时候就会执行它们的回调函数~~。
+
+Render Watcher被派发更新以后，会触发组件重新渲染生成新的vnode，然后patch更新到DOM上。Watcher内部有个id，在更新队列中会做排序，Render Watcher是最后被更新的。
+
+在渲染的时候访问过这个值，才会生成一个 `render watcher`，这样修改这个值的时候才会触发DOM更新，才会响应式更新视图。换句话说，没有绑定在视图(模板)上的响应式数据，即使更改了数据，也不会触发重新渲染和视图更新。
+
+#### computed watcher
+
+初始化computed属性时，也会生成一个 `computed watcher`，不同于其它的watcher，computed watcher的内部做了优化，当计算属性的计算的最终值发生变化时，才会触发watcher并重新渲染，而不是计算属性依赖的值发生变化时就更新。
 
 ## Watcher
 
@@ -134,5 +142,45 @@ function autorun (update) {
   }
   wrappedUpdate()
 }
+```
+
+## 父子组件
+
+
+
+### props
+
+会进行规范化、初始化，将props变为响应式数据.
+
+
+
+`this.$props` 
+
+- 当前组件接收到的 props 对象
+
+`vm.$attrs`
+
+- 包含了父作用域中不作为 prop 被识别 (且获取) 的 attribute 绑定 (`class` 和 `style` 除外)。
+
+
+
+修改props触发子组件重新渲染的情况有两种：
+
+1. `prop` 值被修改
+   - 子组件直接修改props值时，只会触发子组件的re-render，而且会有[Vue warn]告知当父组件重新渲染时，这个修改的值会被父组件的状态所覆盖
+   - 做依赖收集的是在子组件初始化的initProps时被添加到实例上的prop属性名，只要子组件模板中有使用，也就是在渲染时访问过这个属性名，它的render watcher就会被依赖所收集，在修改prop值触发setter时被派发更新，然后就会重新渲染子组件。
+2. 对象类型的 `prop` 内部属性的变化
+   - 当子组件直接修改对象类型的props时，会修改到父组件的状态，触发父组件和子组件的re-render
+   - 修改对象类型的props的属性时，与上面不同，子组件的这个prop值并不会触发setter，而是会修改到父组件的状态，从而触发父组件中的这个值的setter，由它来派发更新，但是只要子组件模板中有使用这个值，父组件和子组件的render watcher就都会被触发
+
+
+
+子组件的 `prop` 值始终指向父组件的 `prop` 值，只要父组件的 `prop` 值变化，就会触发子组件的重新渲染.
+
+通过`.sync`和`$emit`的方式修改props时，无论是基本数据类型或者是对象，都会触发父组件和子组件的re-render
+
+```vue
+<Child :post="post" :author.sync="post.author" :num.sync="num" />
+这种情况下，如果子组件中修改author，也会导致父组件的post中的author被修改
 ```
 

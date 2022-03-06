@@ -487,7 +487,8 @@ SubType.prototype = new SuperType();
 6. #### 寄生组合继承
 
    - 寄生组合继承被认为是实现基于类型继承的最有效方式
-
+   - `Vue.extend`也是这种方式的实现
+   
    ```js
    function SuperType(name){
      this.name = name;

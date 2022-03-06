@@ -2,12 +2,28 @@
 
 数据驱动视图。不用直接修改DOM，只需要修改数据，就可以修改视图。
 
+## 大致过程
+
+1. new Vue 实例化
+2. init 初始化
+3. $mount 实例挂载 【compileTofunctions、mountComponent  >>>  `vm._update(vm._render())` 】
+4. compile 编译 template 生成 render functions【compile（parse、generate）】
+5. render 生成 vnode【createElement、createComponent、new VNode】
+6. update 中调用 `vm.__patch__` 更新实例节点 vm.$el
+7. patch 中对新旧 vnode 进行 Diff，动态更新【patchVnode、updateChildren、createElm】
+8. createElm 中调用 DOM API 来创建真实DOM
+9. 最终的DOM
+
+**new Vue => init => $mount => compile => render => vnode => patch => DOM**
+
+
+
 ## new Vue
 
 ```js
 mergeOptions
 //========================================
-initProxy(vm)	// 利用ES6的Proxy特性，为vm实例设置一层代理，这层代理可以为vue在模板渲染成VNode时进行一层数据筛选 （vnode = render.call(vm._renderProxy, vm.$createElement) ）
+initProxy(vm)	// 利用ES6的Proxy特性，为vm实例设置一层代理，这层代理可以为vue在模板渲染成VNode时进行一层数据筛选 （vnode = render.call(vm._renderProxy, vm.$createElement) 在render阶段对不合法的数据做判断和处理 ）
 initLifecycle(vm)
 initEvents(vm)
 initRender(vm)
@@ -25,6 +41,18 @@ if (vm.$options.el) {
 }
 ```
 
+## mergeOptions
+
+`mergeOptions` 主要功能就是把 `parent` 和 `child` 这两个对象根据一些合并策略，合并成一个新对象并返回。
+
+比较核心的几步，先递归把 `extends` 和 `mixins` 合并到 `parent` 上，然后遍历 `parent`，调用 `mergeField`，然后再遍历 `child`，如果 `key` 不在 `parent` 的自身属性上，则调用 `mergeField`。
+
+`mergeField` 函数，它对不同的 `key` 有着不同的合并策略。
+
+- data/props/computed/methods/provide/inject，相同 key 的时候 child (instance options) 的值会覆盖 parent (extends、mixins) 的值
+- components/directives/filters，会进行三方合并（constructor、instance、parent）
+- watch/ lifecycle hooks，以数组的方式合并，依次执行，parent优先
+
 ## 挂载
 
 挂载的目的就是把模板渲染成最终的真实DOM
@@ -37,7 +65,7 @@ if (vm.$options.el) {
 
 实际会去调用 `mountComponent` 方法
 
-`mountComponent` 核心就是先实例化一个`render Watcher`，在它的回调函数中会调用 `updateComponent` 方法，在此方法中调用 `vm._render` 方法先生成 VNode，最终调用 `vm._update` 更新 DOM。
+`mountComponent` 核心就是先实例化一个`render Watcher`，在它的回调函数中会调用 `updateComponent` 方法，在此方法中调用 `vm._render` 方法先生成 `VNode`，最终调用 `vm._update` 更新 DOM。
 
 ### `vm._render` 
 
@@ -51,7 +79,7 @@ vnode = render.call(vm._renderProxy, vm.$createElement)
 
 #### createElement
 
-1. normalizeChildren，每一个 VNode 可能会有若干个子节点，首先需要对这些子节点进行规范化，例如处理函数式组件，或者编译slot、v-for时产生嵌套数组的情况。
+1. normalizeChildren，每一个 VNode 可能会有若干个子节点，首先需要对这些子节点进行规范化，例如处理函数式组件，或者编译slot、v-for时产生嵌套数组的情况。(组件的vnode没有children，普通元素节点的vnode才会有)
 2. 规范化 `children` 后，接下来会去创建一个 VNode 的实例
 
 ```js
@@ -71,13 +99,19 @@ vnode = createComponent(Ctor, data, context, children, tag)
 
 #### Virtual DOM
 
-> 每个组件或节点都会被编译和渲染生成VNode，整个页面的组件树就会变成由一个个 VNode 组成的 VNode 树，把它称为 Virtual DOM。所以 vdom 和 vnode 都在用一个原生对象去描述 DOM 树，一种抽象描述，包含了创建 DOM 所需要的信息。
+> 每个组件或节点都会被编译成render function，然后调用render函数渲染生成VNode，整个页面的组件树就会变成由一个个 VNode 组成的 VNode 树，把它称为 Virtual DOM。所以 vdom 和 vnode 都在用一个原生对象去描述 DOM 树，一种抽象描述，包含了创建 DOM 所需要的信息。
 
 真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 会造成很大的性能消耗。
 
 Virtual DOM 比创建一个 DOM 的代价要小很多。
 
 Virtual DOM 除了它的数据结构的定义，映射到真实的 DOM 实际上要经历 VNode 的 create、diff、patch 等过程。
+
+**虚拟DOM和真实的DOM的差异**：
+
+1. 资源消耗更低
+2. 执行效率更高。Diff算法比较，策略更新，减少了操作真实DOM的次数
+3. 可以跨平台。编译成其它平台的系统，例如android、ios
 
 ###  `vm._update`
 
@@ -95,26 +129,8 @@ return function patch (oldVnode, vnode, hydrating/*SSR*/, removeOnly/*给transit
 
 #### `vm.__patch__`
 
-- `createElm` 通过 VNode 创建真实的 DOM 并插入到它的父节点中，createChildren会递归调用createElm
+- patch 的过程会调用 `createElm` 创建元素节点。createElm 通过 VNode 创建真实的 DOM 并插入到它的父节点中，createChildren会递归调用createElm
 - 组件更新时也会调用 `vm._update` 方法，调用 `patch` 函数，判断新旧VNode的节点是否相同，如果不同则直接替换已存在的节点，如果相同则调用 `patchVNode` 进行Diff比较，按策略更新节点。
-
-
-
-
-
-## 大致过程
-
-1. new Vue 实例化
-2. init 初始化
-3. $mount 实例挂载 【compileTofunctions、mountComponent  >>>  `vm._update(vm._render())` 】
-4. compile 编译 template 生成 render functions【compile（parse、generate）】
-5. render 生成 vnode【createElement、createComponent、new VNode】
-6. update 中调用 `vm.__patch__` 更新实例节点 vm.$el
-7. patch 中对新旧 vnode 进行 Diff，动态更新【patchVnode、updateChildren、createElm】
-8. createElm 中调用 DOM API 来创建真实DOM
-9. 最终的DOM
-
-**new Vue => init => $mount => compile => render => vnode => patch => DOM**
 
 
 
