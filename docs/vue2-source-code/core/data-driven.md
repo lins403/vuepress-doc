@@ -26,7 +26,7 @@ mergeOptions
 initProxy(vm)	// 利用ES6的Proxy特性，为vm实例设置一层代理，这层代理可以为vue在模板渲染成VNode时进行一层数据筛选 （vnode = render.call(vm._renderProxy, vm.$createElement) 在render阶段对不合法的数据做判断和处理 ）
 initLifecycle(vm)
 initEvents(vm)
-initRender(vm)
+initRender(vm)	//初始化slot、vm._c、vm.$createElement、vm._vnode、vm.$vnode
 //========================================
 callHook(vm, 'beforeCreate')
 //========================================

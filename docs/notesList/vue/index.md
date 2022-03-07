@@ -332,6 +332,7 @@ transclusion，内容分发、嵌入
 - 手动挂载实例
 
 - keep-alive
+  - `<keep-alive>` 只处理第一个子元素，所以一般和它搭配使用的有 `component` 动态组件或者是 `router-view`
   - 保留组件的状态或者避免重新渲染
   - 只会执行一次完整的生命周期
   - 之后每次只会触发 `activated` 和 `deactivated` 钩子
@@ -464,6 +465,8 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源，动态�
   
 - 执行 `postpatch` 钩子函数
 
+> 当数据发送变化，在 `patch` 的过程中会执行 `patchVnode` 的逻辑，它会对比新旧 `vnode` 节点，甚至对比它们的子节点去做更新逻辑。
+>
 > 在旧vnode的子节点中尽量找到与新vnode的子节点相同 (sameVnode) 的节点
 
 

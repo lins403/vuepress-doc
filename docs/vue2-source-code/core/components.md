@@ -35,7 +35,7 @@ createElement根据render function创建vnode时，如果碰上组件节点，�
 
 ## createElm中调用的createComponent
 
-组件的 `patch` 过程中，会调用`createElm`方法来创建节点，其中会调用 createComponent 来创建和初始化子组件，与render function的 createComponent 方法不是同一个。
+组件的 `patch` 过程中，会执行`createElm`方法来创建节点，其中会调用 createComponent 来创建和初始化子组件，与render function的 createComponent 方法不是同一个。
 
 createElm中调用的`createComponent`方法
 
@@ -48,6 +48,8 @@ if (isDef(vnode.componentInstance)) {
 ```
 
 - 初始化组件，然后调用`vm.$mount`进行挂载，调用`mountComponent`方法，进而执行`vm._render()`方法。然后会绑定父子关系。
+
+  子组件的 `init` 时机是在父组件执行 `patch` 过程的时候，那这个时候父组件已经编译完成了。
 
   ```js
   /** Vue.prototype._render **/
@@ -149,3 +151,4 @@ App.vue中就是一个id为app的div容器，其中存放了`<router-view>`组�
 
 根组件和子组件略有不同，根组件在初始化时合并options，完成一系列初始化后，将template编译为render function，执行render生成组件vnode，也叫占位符vnode，最后使用patch方法将vnode渲染为真实DOM。在根组件的render过程中，如果是普通元素节点，就直接生成vnode；如果碰上组件节点，则会调用createComponent来创建子组件，并安装组件钩子函数，最后生成子组件的vnode。在patch渲染vnode创建DOM的时候，将子组件vnode添加进之前根组件的vnode队列中去，不断递归调用createElm的方式来构建整个组件树，最后insert插入到真实DOM中去。
 
+编译时发生在`vm.$mount`时，所以父组件先编译，然后再编译子组件。所以先触发父组件的beforeMount生命周期钩子。挂载的时候使用一个vnode队列来插入，所以顺序是反过来，子组件先完成挂载然后是父组件，先触发子组件的mounted生命周期钩子。

@@ -26,6 +26,11 @@ ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意�
 - 原型模式 `Object.create`
 
   ```js
+  // 创建一个无任何属性的对象
+  Object.create(null)
+  ```
+  
+  ```js
   const p1 = {name:'xiaomixi', age:24}
   const p2 = Object.create(p1)
   p2		//{}

@@ -6,24 +6,37 @@
 
 ## 二、响应式原理
 
-- Observer
-  - 数据劫持。给每个要被观察的对象添加一个observer实例，给对象的属性添加getter和setter，将其变为响应式对象
-- Watcher
-  - 观察者。共有4种类型的watcher实例，在派发更新时，调用watcher中的方法进行逻辑处理
-- Dep
-  - 给对象的每个属性添加一个dep实例，每个dep中都维护了一个用于管理watcher的subscribers
-- Object.defineProperty
-  - 给对象属性添加 getter 和 setter
-- 依赖收集、派发更新
-  - 当对象触发getter时，通过 `dep.depend()` 进行依赖收集，将watcher实例添加进 subscribers 容器中。
-  - 当对象数据发生变化时，触发setter，然后调用 `dep.notify()` ，遍历 subscribers 容器中的每个 watcher，然后调用 watcher 中的方法进行更新，完成相应的逻辑处理。
-- nextTick
-  - vue的异步更新机制
-  - 响应式数据发生变化时会派发更新，只是把 watcher 推送到一个队列中，在 `nextTick` 后才会真正执行 watcher 的回调函数
+### Observer
+
+- 响应式的核心，调度数据绑定，和数据变化的发布订阅。
+- 数据劫持。给每个要被观察的对象添加一个observer实例，使用`Object.defineProperty`给要观察对象的每个属性添加getter和setter，将其变为响应式对象。一旦属性被访问或者更新，就可以追踪到这些变化。
+
+### Watcher
+
+- 观察者。共有4种类型的watcher实例，在派发更新时，调用watcher中的方法进行逻辑处理
+
+### Dep
+
+- Dependency
+- 给对象的每个属性添加一个dep实例，每个 dep 中都维护了一个用于管理所有订阅 watcher 的 subscribers
+
+#### 依赖收集、派发更新
+
+- 当对象触发getter时，通过 `dep.depend()` 进行依赖收集，将 watcher 实例添加进 subscribers 容器中。(容器是dep实例的一个属性，watcher实例是通过 Dep.target 的方式插入)
+- 当对象数据发生变化时，触发setter，然后调用 `dep.notify()` 进行派发更新，遍历 subscribers 容器中的每个 watcher，然后调用 watcher 中的方法进行更新，完成相应的逻辑处理。
+
+#### nextTick
+
+- 异步更新机制
+- 响应式数据发生变化时会派发更新，但是把 watcher 推送到一个队列中，将同一事件循环内的所有数据变化缓存起来，在 `nextTick` 后才会真正执行 watcher 的回调函数。这样做的好处是一个watcher被重复触发，但是也只需要进行一次DOM更新。
   - Vue 在更新 DOM 时是**异步**执行的。只要侦听到数据变化，Vue 将开启一个队列 (queueWatcher)，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际 (已去重的) 工作。
-- computed & watch
-  - computed 计算属性本质上是 `computed watcher`，当计算的最终值发生变化时才会触发 watcher 并重新渲染
-  - 而 watch 侦听属性本质上是 `user watcher`，但通过设置 `deep` 或者 `immediate`，又可以衍生出深度遍历对象属性的 `deep watcher` ，与在当前 Tick 中同步执行 watcher 回调函数的 `sync watcher`
+- 只是过滤掉重复的watcher，每次只要修改响应式数据，就会派发更新给watcher，即使是重复修改成同一个数据。
+- 由于DOM异步更新的特性，所以不能再当前事件循环中直接操作这个DOM，可以在`$nextTick`的回调函数中操作更新后的DOM。
+
+#### computed & watch
+
+- computed 计算属性本质上是 `computed watcher`，当计算的最终值发生变化时才会触发 watcher 并重新渲染，算是一种优化。
+- 而 watch 侦听属性本质上是 `user watcher`，但通过设置 `deep` 或者 `immediate`，又可以衍生出深度遍历对象属性的 `deep watcher` ，与在当前 Tick 中同步执行 watcher 回调函数的 `sync watcher`
 
 ## 三、组件化
 

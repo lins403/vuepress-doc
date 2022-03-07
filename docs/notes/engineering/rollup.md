@@ -1,6 +1,6 @@
 # rollup.js
 
-
+ES6模块打包工具，采用Tree-shaking技术，利用ES6模块静态分析语法树的特性，只将需要的代码提取出来打包，大大减小了代码体积。RollUp在CommonJS模块下Tree-Shaking是不能工作的，但是可以通过插件将其转换为ES6模块。
 
 ## 与webpack
 

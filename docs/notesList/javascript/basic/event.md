@@ -157,7 +157,7 @@ var EventUtil = {
 - 键盘事件(`KeyboardEvent`): 使用键盘在页面上执行某些操作时触发，持续按住会重复触发。
   - keydown、keyup
   - ~~keypress~~ 只有按下字符键时在keydown之后触发，推荐改用 textInput 事件，只在可编辑区域上触发
-- 合成事件(`CompositionEvent`): 在使用某种 IME(Input Method Editor，输入法编辑器)输入字符时触发。
+- 合成/复合事件(`CompositionEvent`): 在使用某种 IME(Input Method Editor，输入法编辑器)输入字符时触发。
   - compositionstart、compositionupdate、compositionend
 - 拖拽事件(`DragEvent`): DragEvent --> MouseEvent --> UIEvent --> Event
 - ……

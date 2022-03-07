@@ -14,7 +14,7 @@
 
 observe --> new Observer()
 
-`Observer` 是一个类（”调度属性绑定和发布订阅“），每一个被观察对象都会被添加一个observer实例，它的作用是给对象的属性添加 getter 和 setter，用于依赖收集和派发更新；
+`Observer` 是一个类（”调度属性绑定和发布订阅“），每一个被观察对象都会被添加一个observer实例（将Observer实例绑定到data的`__ob__`属性上面去），它的作用是给对象的属性添加 getter 和 setter，用于依赖收集和派发更新；
 
 执行Observer构造函数时：
 
@@ -23,12 +23,27 @@ observe --> new Observer()
   - Dep是一个class，实际上就是对 `Watcher` 的一种管理，有一个静态属性 `target`，这是一个全局唯一的 `Watcher`
   - 通过Dep.target，保证在同一时间只能有一个全局的 `Watcher` 被计算
   - `Watcher` 是一个 Class，在它的构造函数中，定义了一些和 `Dep` 相关的属性，用于依赖收集
+  
 - 接着通过执行 `def` 函数把自身实例添加到数据对象 `value` 的 `__ob__` 属性上
-- `defineReactive` 的功能就是定义一个响应式对象，给对象动态添加 getter 和 setter
+
+- 如果是个数组，则会先进行数组遍历，（只）对每一个对象或数组的成员进行observe，但是可以通过使用`Vue.set`来拓展监听成员
+
+  ```js
+  arr: ['a', 'bb', 'ccc', { value: 1 }]	
+  
+  this.arr[0] = 0		// 无响应式更新
+  this.arr[3] = { value: 2 }		// 无响应式更新
+  this.arr[3].value = 2		// 可以响应式更新
+  ```
+
+- `defineReactive` 的功能就是定义一个响应式对象，使用`Object.defineProperty`给对象的每个属性添加 getter 和 setter
+
   - 目的就是为了在我们访问数据以及写数据的时候能自动执行一些逻辑
   - getter 做的事情是依赖收集，setter 做的事情是派发更新
 
-
+- `Dep.target`
+  -  the current target watcher being evaluated. This is globally unique because there could be only one watcher being evaluated at any time.
+  - watcher实例的evaluate方法only gets called for lazy watchers.
 
 ## getter和setter
 
@@ -184,3 +199,48 @@ function autorun (update) {
 这种情况下，如果子组件中修改author，也会导致父组件的post中的author被修改
 ```
 
+
+
+## 其它
+
+[Vue 数据更新了但页面没有更新的 7 种情况汇总及延伸总结](https://segmentfault.com/a/1190000022772025)
+
+1. 无法检测实例被创建时不存在于 `data` 中的 property
+2. 无法检测对象 property 的添加或移除
+3. 无法检测通过数组索引直接修改一个数组项
+4. 无法检测直接修改数组长度的变化
+5. 在异步更新执行之前操作 DOM 数据（`vm.$el`）不会变化
+6. 循环嵌套层级太深，视图不更新（vm.$forceUpdate()，但通常不应该用到）
+7. 路由参数变化时，页面不更新（组件被复用，数据不更新，可以监听 `$route`然后修改数据）
+
+只是没有被响应式立即更新，但是当下一次修改触发更新时，只要数据是变化的，那么之前没有响应式立即更新的视图也会被一起补上
+
+```js
+this.arr[1] = 'bbbb'
+this.arr[2] = 'cccc'
+// 上面两个修改都不能响应式更新视图
+// 但是当发生一个响应式修改时，上面的两个修改也会被应用上，即使不在同一个处理函数中，例如一个在mounted，一个在点击事件的回调
+// 所以改动数组或对象，只要保证最后一次修改能响应式更新即可
+this.items[0].text = 'some value'
+```
+
+```js
+  mounted() {
+    this.arr[1] = 1
+  },
+  methods: {
+    handleClick() {
+      this.arr.splice(0, 0, 0)
+    }
+  }
+```
+
+对数组的处理需要特化出来以提高性能。
+
+1）通过数组索引直接修改一个数组项
+
+本来Object.defineproperty()是可以劫持数组的，但是这样开销很大，所以没有使用。不过可以使用`Vue.set`指定成员进行监听。
+
+2）Object.defineproperty()监听不到数组的增加或删除的
+
+重写了数组的原型，修改数据原型上的方法，对数组的修改进行拦截，然后响应式修改

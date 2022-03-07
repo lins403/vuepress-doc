@@ -1,14 +1,18 @@
 # let 和 const
 
-使用let和const声明的变量，叫块级作用域变量
+使用let和const声明的变量，叫块级作用域变量。let声明的变量，只在let命令所在的代码块内有效。
+
+存在暂时性死区，在代码块内如果使用了let声明变量，那么在该条声明语句之前，该变量不可用。
+
+const在声明变量时就必须初始化。
 
 浏览器控制台下直接测试结果可能不一样，会带来歧义，最好利用nodejs或者codepen测试
 
 ```js
-console.log(a);
-console.log(b);
-var a = 'a';		// undefined
-let b = 'b';		// ReferenceError: Cannot access 'age' before initialization
+console.log(a);		// undefined
+console.log(b);		// ReferenceError: Cannot access 'age' before initialization
+var a = 'a';
+let b = 'b';
 ```
 
 ```js

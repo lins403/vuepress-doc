@@ -48,6 +48,8 @@ React 直接使用 CSS-in-JS ：[styled-components](https://github.com/styled-co
 
 ## PostCSS
 
+一个用JavaScript插件来转换CSS的工具。PostCSS可以将CSS转换为JavaScript能够处理的数据格式，为插件提供了接口，让JavaScript所写的插件来完成css的功能拓展，例如lint css、支持变量、mixins、内联图片等
+
 - Add vendor prefixes. » [autoprefixer](https://github.com/postcss/autoprefixer)
 - convert future syntax. » [postcss-preset-env](https://github.com/csstools/postcss-preset-env)
 - add suffix for selectors in a <u>css module</u> to avoid global namespace conflicts. » [css-modules](https://github.com/css-modules/css-modules)
@@ -65,7 +67,11 @@ VueCli 内置 postcss、postcss-loader、用于添加浏览器前缀的插件 au
 
 [@vue/cli-service > postcss配置](https://github.com/vuejs/vue-cli/blob/e661a923751c2f49a24cb065b5dd5999169e86af/packages/%40vue/cli-service/lib/config/css.js#L50)
 
+### 插件
 
+- autofixer 为CSS中的属性添加浏览器特定的前缀。
+- cssnext
+- stylelint
 
 ## SCSS
 

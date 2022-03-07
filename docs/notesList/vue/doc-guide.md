@@ -1,9 +1,5 @@
 # 基础
 
-::: danger warning
-临时笔记，搬运工，没有自己的整理
-:::
-
 ## computed & watch
 
 computed中定义的属性会通过Object.defineProperty的方式直接定义在实例上。
@@ -240,6 +236,8 @@ this.$emit('update:title', newTitle)
 <!-- 结合.sync, 传入所有属性 -->
 <text-document v-bind.sync="post"></text-document>
 ```
+
+- 都是语法糖，都可以实现父子组件中的数据的双向通信。但`v-model`只能用一次，`.sync`可以有多个。
 
 ::: warning Vue3
 
@@ -642,6 +640,8 @@ document.getElementById('mount-point').appendChild(component.$el)
 ## 插槽 slot
 
 slot分发的内容，其编译的作用域是在父组件上的，也就是绑定的父组件的数据，而并非子组件
+
+> 因为它渲染成 `vnode` 的时机的上下文是父组件的实例。
 
 ```vue
 <!-- 属性 url 则根据 inheritAttrs 配置，被作为组件内部属性使用 -->
@@ -1463,6 +1463,10 @@ every component must have a single root element.
 > > 同质化较多的功能和页面，例如项目的图表统计分析中可以用到extends或mixins
 
 :::
+
+Vue3
+
+- 没有特殊指令的标记 (`v-if/else-if/else`、`v-for` 或 `v-slot`) 的 `<template>` 现在被视为普通元素，并将渲染为（Web Components）原生的 `<template>` 元素，而不是渲染其内部内容。
 
 # 参考
 
