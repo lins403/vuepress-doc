@@ -103,7 +103,7 @@ new Vue({
 2. 在 bind 钩子中使用 addEventListener 绑定DOM事件（click、scroll、input、），在 unbind 钩子中使用 removeEventListener 解绑。
 3. 结合 vuex 使用，例如实现一个 v-permission 用于HTML节点的权限过滤，store中的角色名不包含在传入的角色数组中时，将当前节点从父节点中移除。
 
-### 条件渲染与列表渲染
+#### 条件渲染与列表渲染
 
 vue在渲染元素时，处于效率考虑，会尽可能地复用已有的元素而并非重新渲染。
 
@@ -143,6 +143,52 @@ handleClick(message, event){
 .number		//调用parseFloat，解析一个参数并返回一个浮点数
 .trim
 ```
+
+### 组件事件
+
+两种事件类型
+
+1. DOM事件
+2. 自定义事件
+
+只有组件节点才可以添加自定义事件，并且添加原生 DOM 事件需要使用 `native` 修饰符；而普通元素使用 `.native` 修饰符是没有作用的，也只能添加原生 DOM 事件。
+
+```vue
+<script>
+let Child = {
+  // 即使子组件没有监听click事件，父组件的@click.native还是能触发
+  template: '<button @click="clickHandler($event)">' + 'click me' + '</button>',
+  methods: {
+    clickHandler(e) {
+      console.log('Button clicked!', e);
+      this.$emit('select');
+    }
+  }
+};
+
+export default {
+  // 根元素如果能截胡掉native监听的事件，则事件会被静默。这时可以使用v-on="$listeners"的技巧合并事件监听器
+  template: `<div>
+      <child @select="selectHandler" @click.native.prevent="clickHandler" />
+    </div>`,
+  methods: {
+    clickHandler() {
+      console.log('Child clicked!');
+    },
+    selectHandler() {
+      console.log('Child select!');
+    }
+  },
+  components: {
+    Child
+  }
+};
+</script>
+```
+
+一个使用`v-on="$listeners"`的特殊技巧：[将原生事件绑定到组件](https://cn.vuejs.org/v2/guide/components-custom-events.html#将原生事件绑定到组件)
+
+Vue 提供了一个 `$listeners` property，它是一个对象，里面包含了作用在这个组件上的所有监听器。
 
 ## 组件
 

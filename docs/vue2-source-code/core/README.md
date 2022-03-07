@@ -7,9 +7,9 @@
 ## 二、响应式原理
 
 - Observer
-  - 给每个要被观察的对象添加一个observer实例，给对象的属性添加getter和setter，将其变为响应式对象
+  - 数据劫持。给每个要被观察的对象添加一个observer实例，给对象的属性添加getter和setter，将其变为响应式对象
 - Watcher
-  - 共有4种类型的watcher实例，在派发更新时，调用watcher中的方法进行逻辑处理
+  - 观察者。共有4种类型的watcher实例，在派发更新时，调用watcher中的方法进行逻辑处理
 - Dep
   - 给对象的每个属性添加一个dep实例，每个dep中都维护了一个用于管理watcher的subscribers
 - Object.defineProperty
@@ -67,3 +67,10 @@
 
 
 
+
+
+# 资料
+
+[Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/)
+
+[answershuto/learnVue: Vue.js 源码解析](https://github.com/answershuto/learnVue)

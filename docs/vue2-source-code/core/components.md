@@ -25,6 +25,8 @@
 
 ## 生成vnode的createComponent
 
+在 `render` 阶段，如果是一个组件节点，则通过 `createComponent` 创建一个组件 `vnode`
+
 createElement根据render function创建vnode时，如果碰上组件节点，则会调用createComponent来创建和构造组件，最终生成 <mark>placeholder vnode</mark>（组件vnode/占位符vnode）。
 
 1. 使用 `Vue.extend` 构造子类构造函数（组件初始化的时候是不传 el 的，因此组件是自己接管了 `$mount` 的过程）
