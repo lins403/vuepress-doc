@@ -42,8 +42,31 @@ observe --> new Observer()
   - getter 做的事情是依赖收集，setter 做的事情是派发更新
 
 - `Dep.target`
-  -  the current target watcher being evaluated. This is globally unique because there could be only one watcher being evaluated at any time.
+  - the current target watcher being evaluated. This is globally unique because there could be only one watcher being evaluated at any time.
+  
   - watcher实例的evaluate方法only gets called for lazy watchers.
+  
+    ```js
+    /*创建计算属性的getter*/
+    function createComputedGetter (key) {
+      return function computedGetter () {
+        const watcher = this._computedWatchers && this._computedWatchers[key]
+        if (watcher) {
+          /*实际是脏检查，在计算属性中的依赖发生改变的时候dirty会变成true，在get的时候重新计算计算属性的输出值*/
+          if (watcher.dirty) {
+            watcher.evaluate()
+          }
+          /*依赖收集*/
+          if (Dep.target) {
+            watcher.depend()
+          }
+          return watcher.value
+        }
+      }
+    }
+    ```
+  
+    
 
 ## getter和setter
 

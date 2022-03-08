@@ -1,5 +1,7 @@
 # PWA
 
+A PWA is not an API or a technology, but it is a web development approach that uses a combination of tools and technologies already available to create targeted ideal user experiences. It shows how to use service workers, APIs, and an application shell architecture for meaningful offline experiences, fast first load, and easy user reengagement upon repeat visits. — wiki
+
 - 可安装
   - 可以像原生APP在主屏幕上留有图标
     - Web app manifest  `manifest.json`

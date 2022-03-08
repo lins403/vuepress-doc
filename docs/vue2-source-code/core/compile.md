@@ -169,8 +169,9 @@ export function generate (
   ast: ASTElement | void,
   options: CompilerOptions
 ): CodegenResult {
+  // 以options对象为参数，新创建出一个代码生成阶段要使用的状态对象state。
   const state = new CodegenState(options)
-  // fix #11483, Root level <script> tags should not be rendered.
+  // genElement
   const code = ast ? (ast.tag === 'script' ? 'null' : genElement(ast, state)) : '_c("div")'
   return {
     render: `with(this){return ${code}}`,
@@ -193,6 +194,57 @@ export function generate (
 - genChildren  节点是 template 标签 && 该节点不是父组件里的插槽内容 
 - genSlot  节点是(子组件里的) slot 节点
 - genComponent  动态组件
+
+### 生成后的代码
+
+```vue
+<ul :class="bindCls" class="list" v-if="isShow">
+  <li v-for="(item,index) in data" @click="clickItem(index)">{{item}}:{{index}}</li>
+</ul>
+```
+
+```js
+with(this){
+  return (isShow) ?
+    _c('ul', {
+        staticClass: "list",
+        class: bindCls
+      },
+      _l((data), function(item, index) {
+        return _c('li', {
+          on: {
+            "click": function($event) {
+              clickItem(index)
+            }
+          }
+        },
+        [_v(_s(item) + ":" + _s(index))])
+      })
+    ) : _e()
+}
+```
+
+```js
+vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false)
+
+export function installRenderHelpers (target: any) {
+  target._o = markOnce
+  target._n = toNumber
+  target._s = toString
+  target._l = renderList
+  target._t = renderSlot
+  target._q = looseEqual
+  target._i = looseIndexOf
+  target._m = renderStatic
+  target._f = resolveFilter
+  target._k = checkKeyCodes
+  target._b = bindObjectProps
+  target._v = createTextVNode
+  target._e = createEmptyVNode
+  target._u = resolveScopedSlots
+  target._g = bindObjectListeners
+}
+```
 
 
 
