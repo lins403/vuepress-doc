@@ -124,7 +124,9 @@ methods:{
 }
 ```
 
+### 6）按钮防抖还是节流
 
+debounce+disabled
 
 ## vuejs
 

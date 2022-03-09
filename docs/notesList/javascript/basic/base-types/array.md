@@ -8,6 +8,7 @@
 
   ```js
   const colors = new Array("red", "blue", "green")
+  Array("red", "blue", "green")		// 没有new的时候会被自动补上
   
   Array(3).fill()	//[undefined, undefined, undefined]
   Array(3).fill(0)	//[0, 0, 0]
@@ -136,6 +137,18 @@ function getArgsArray() {
 }
 console.log(getArgsArray(1, 2, 3, 4)); // [1, 2, 3, 4]
 ```
+
+## 类数组对象
+
+一个拥有 length 属性和若干索引属性的对象就可以被称为类数组对象，类数组对象和数组类似，但是不能调用数组的方法。 
+
+常见的类数组对象有 arguments 和 DOM 方法的返回结果，函数也可以被看作是类数组对象，因为它含有 length 属性值，代表可接收的参数个数。
+
+```js
+Array.from(()=>{return 123})	//[]
+```
+
+
 
 ## 定型数组
 

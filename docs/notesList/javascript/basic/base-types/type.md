@@ -71,6 +71,8 @@ Array.isArray([]) // true
 
 ### toString
 
+对象的内部属性 [[Class]]
+
 ```js
 ({}).toString()		//'[object Object]'
 ([]).toString()		//'' 
@@ -89,9 +91,9 @@ Reflect.apply(Object.prototype.toString, [], [])		//'[object Array]'
 
 ## undefined、null和NaN
 
-> `undefined` 原始值
+> `undefined` 原始值，未定义
 >
-> `null` 缺少值
+> `null` 缺少值，空对象
 >
 > `NaN` 非数值
 >
@@ -103,6 +105,7 @@ Reflect.apply(Object.prototype.toString, [], [])		//'[object Array]'
 ```js
 undefined === undefined    //true
 typeof undefined    //"undefined"
+void 0 === undefined		//true
 
 null === null        // true
 typeof null            //"object"
@@ -149,11 +152,23 @@ if ("")
 if (``)
 ```
 
-1 == true
-
 ```js
+1 == true	//true
 0 == false	//true
 '' == false	//true
 0 == ''	//true
 ```
 
+### == 操作符的强制类型转换规则？
+
+（1）字符串和数字之间的相等比较，将字符串转换为数字之后再进行比较。
+
+（2）其他类型和布尔类型之间的相等比较，先将布尔值转换为数字后，再应用其他规则进行比较。
+
+（3）null 和 undefined 之间的相等比较，结果为真。其他值和它们进行比较都返回假值。
+
+（4）对象和非对象之间的相等比较，对象先调用内部的 Symbol.toPrimitive 抽象操作后，再进行比较。
+
+（5）如果一个操作值为 NaN ，则相等比较返回 false（ NaN 本身也不等于 NaN ）。
+
+（6）如果两个操作值都是对象，则比较它们是不是指向同一个对象。如果两个操作数都指向同一个对象，则相等操作符返回 true，否则，返回 false。

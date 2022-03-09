@@ -128,6 +128,14 @@ person1.__proto__.constructor === Person
 person1.__proto__ === person2.__proto__
 ```
 
+#### 获取原型的方法
+
+```js
+p.proto
+p.constructor.prototype
+Object.getPrototypeOf(p)
+```
+
 #### Function.prototype
 
 每个函数都连接到(原型指针指向) `Function.prototype`，意义是为了给函数提供call、apply、bind等方法，而这个原型本身连接到 `Object.prototype`.
@@ -164,6 +172,8 @@ typeof String.prototype		// 'object'
 typeof Function		// 'function'
 typeof Function.prototype		// 'function'	👆
 // 因为 Function.prototype = new Function() ，而 typeof new Function() 结果为 function
+
+Function.prototype.__proto__===Object.prototype		//true
 ```
 
 #### 原型的动态性
@@ -318,6 +328,8 @@ let person2 = createPerson("Greg", 27, "Doctor");
 ```
 
 ### 2. 构造函数模式
+
+与工厂模式的区别在于实例化时的new关键字，会创建一个实例对象，连接到构造函数的原型，让this指向这个实例对象，并让构造函数返回这个对象
 
 缺陷：原型方法不能在实例之间共享
 

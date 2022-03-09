@@ -22,6 +22,14 @@ user experience 用户体验
 
 TODO
 
+### 测试
+
+- Behavioral-Driven Development (BDD)
+- Test-Driven Development (TDD) 
+- Unit Test
+
+[《浅谈前端单元测试》](https://juejin.im/post/5b2da89cf265da597f1c7cab)
+
 ## 二、功能
 
 ### 伪变量

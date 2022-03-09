@@ -135,6 +135,7 @@ module.exports = {
                 'doc-style-guide',
                 'doc-skills',
                 'component-communication',
+                'vue-loader',
               ]
             },
             {
@@ -375,6 +376,8 @@ function interviewSidebar(groupA,groupB){
           'basic/css1',
           'basic/css2',
           'basic/css3',
+          'basic/javascript1',
+          'basic/javascript2',
         ]
       },
       {

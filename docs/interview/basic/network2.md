@@ -45,6 +45,10 @@
 console.log(document.cookie)
 ```
 
+> cookie 是服务器提供的一种用于维护会话状态信息的数据，通过服务器发送到浏览器，浏览器保存在本地，当下一次有同源的请求时，将保存的 cookie 值添加到请求头部，发送给服务端。这可以用来实现记录用户登录状态等功能。cookie 一般可以存储 4k 大小的数据，并且只能够被同源的网页所共享访问。
+>
+> 服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。一条cookie 包括了5个属性值 expires、domain、path、secure、HttpOnly。其中 expires 指定了 cookie 失效的时间，domain 是域名、path是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。secure 规定了 cookie 只能在确保安全的情况下传输，HttpOnly 规定了这个 cookie 只能被服务器访问，不能使用 js 脚本访问。
+
 ### 用途
 
 - **客户端**保持状态
@@ -239,14 +243,38 @@ sessionStorage.book = "Professional JavaScript";
 
 用户请求资源，浏览器发送请求前，检查是否存在缓存，如果存在，则先根据 response header 中的 `Cache-Control` 和 `Expires` 判断缓存是否过期，同时记录header中的 `etag` 和 `last-modified`，如果没有过期则直接使用浏览器缓存，如果过期，将 etag 值作为 `If-None-Match`，last-modified 值作为 `if-modified-since`，添加到request header 中发送给服务器校验。如果服务器判断缓存不需要更新，则会返还304状态码(Not Modified资源无更新)，不返回任何资源，让浏览器直接使用缓存
 
-- Cache-Control: max-age=31536000（使用相对时间，同时使用时优先级更高）
 - Expires: Wed, 19 Oct 2022 04:54:02 GMT（使用基于服务器的绝对时间）
+- Cache-Control: max-age=31536000（使用相对时间，同时使用时优先级更高）
+  - Expires 是 http1.0 中的方式，因为它的一些缺点，在 http 1.1 中提出了一个新的头部属性就是 Cache-Control 属性， 它提供了对资源的缓存的更精确的控制。
 
 精确度：Etag 要优于 Last-Modified（后者只能精确到秒的颗粒度）
 
 优先级：服务器校验优先考虑 Etag（例如适用于文件内容未修改但是修改时间变动的情况）
 
 性能上：Etag 要逊于 Last-Modified（etag需要每次服务端的读写，后者是个常量只要读取）
+
+> 【浏览器缓存】
+>
+> 浏览器缓存是针对http get请求的一种优化策略。当浏览器收到资源请求的响应后，在一段时间内都会保留它的副本，如果在设定的有效时间内，对这份资源再次请求，那么浏览器就会直接使用缓存的副本，而不用再发起一次完整的请求。好处是可以提高页面的打开速度，并降低对网络带宽的消耗。
+>
+> 浏览器缓存策略由服务器或代理服务器指定，分为强缓存策略和协商缓存策略。
+>
+> ​	使用强缓存策略时，如果缓存资源还有效，就直接使用缓存资源，不必再向浏览器发起请求。强缓存策略主要通过http headers中的 Expires 属性或者 Cache-Control 属性。后者是HTTP1.1中新引入的，精确度更高，用于替换前者，同时使用时后者的优先级也更高。
+>
+> ​	如果缓存已经过期，那么就需要使用协商缓存。浏览器会向服务器发送一个请求，如果服务器确认资源没有发生修改，则返回一个304状态，让浏览器使用本地的缓存副本。如果资源发生变化，就返回修改后的资源给客户端。协商缓存的设置是通过http headers 中的 Last-Modified 属性和 Etag 属性。`Last-Modified`值表示资源上一次更改的时间，它只能精确到秒级。而 `Etag` 是资源的唯一标识符，资源变化时这个值也会变化，所以用Etag判断会更加准确，优先级更高，但是性能比前者稍差。浏览器为了让服务器判断资源是否做了修改，就将前一次请求的response header 中的 last-modified 值作为 `if-modified-since`，将 etag 值作为 `If-None-Match`，添加到request header中，发送给服务器校验。同时使用时，If-None-Match的优先级别更高。
+>
+> 【如何禁用浏览器缓存】
+>
+> 客户端：
+>
+> - Ajax请求的request header中添加 `Cache-control: no-cache`或者`"If-Modified-Since","0"`
+> - 在URL后面加上一个属性，属性值使用一个随机数或者是时间戳
+> - `CTRL+Shift+R`手动刷新
+>
+> 服务器：
+>
+> - 给reponse header添加 `Cache-Control no-cache`或者`etag off`等等许多方式
+> - 代理服务器nginx也能设置
 
 # 参考
 

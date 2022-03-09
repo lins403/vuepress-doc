@@ -156,7 +156,7 @@ history.back();
 history.forward();
 ```
 
-
+pushState将一条 state 记录加入到 history 对象中。一条 state 记录包含了 url、title 和 content 属性，在 popstate 事件中可以获取到这个 state 对象，我们可 以使用 content 来传递数据。最后我们通过对 window.onpopstate 事件监听来响应浏览器的前进后退操作。
 
 ```js
 history.pushState(state, title[, url])

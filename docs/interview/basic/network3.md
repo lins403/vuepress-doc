@@ -20,9 +20,7 @@ DNS，*Domain Name System*，基于 UDP 协议
 
 ### 同源策略
 
-只允许URL路径不同，端口、协议、主机不同，都算是跨域
-
-[浏览器的同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
+浏览器的同源策略下，一个域下的 js 脚本在未经允许的情况下，不能够访问和修改另一个域的内容。只允许URL路径不同，协议、域名、主机名(计算机名+域名) 、端口不同，都算是跨域
 
 cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止跨域可以保证cookie与用户信息的相对安全性
 
@@ -40,7 +38,7 @@ cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止�
 
 ### CORS
 
-CORS，Cross-Origin Resource Sharing，跨域资源共享，定义了浏览器与服务器如何实现跨源通信。 
+CORS，Cross-Origin Resource Sharing，<u>跨域资源共享</u>，定义了浏览器与服务器如何实现跨源通信。 
 
 CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和服务器相互了解，以确实请求或响应应该成功还是失败。
 
@@ -81,8 +79,7 @@ CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和
 ### 代理
 
 - nginx
-
-- webpack devserver
+- webpack devserver 使用的nodejs中间件代理 http-proxy-middleware
 
 ---
 
@@ -93,6 +90,10 @@ CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和
 - 反向代理：服务端的代理，隐藏服务器
   - 保证内网的安全（如果服务器部署在内网，则可以反向代理作为公网访问地址）、负载均衡
 
+### 其它
+
+- postMessage 跨域
+- WebSocket 协议跨域
 
 ## 二、XHR、Promise、Ajax、Axios、Fetch
 
@@ -103,7 +104,7 @@ CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和
 ### AJAX
 
 - Asynchronous JavaScript And XML
-
+  - 指的是通过javascript的异步通信，从服务器获取XML文档，并从中提取数据，通过DOM动态更新到当前网页上，只需要局部刷新而不用刷新整个页面
 - 基于XHR的技术实践
 
 ### jQuery ajax

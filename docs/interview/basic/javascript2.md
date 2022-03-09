@@ -1,0 +1,9 @@
+# JavaScript进阶
+
+### 原型对象与原型链
+
+每个构造函数都有一个原型对象prototype，构造函数的实例对象有个属性`__proto__`，这个原型指针指向了其构造函数的prototype。prototype本身也是个对象，也有自己的原型，通过对象的原型指针串联起来的一层一层原型关系称为原型链。
+
+构造函数的prototype属性有一个属性constructor指向了构造函数本身，定义在prototype上的属性和方法，可以被所有实例共享。
+
+每个对象都会从prototype上继承属性和方法，当对象内也就是当前执行环境内找不到这个属性和方法时，就会从prototype中去找，prototype中没有时，就会继续顺着原型链往上找，直至终点Object.prototype.
