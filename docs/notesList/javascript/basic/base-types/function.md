@@ -507,12 +507,29 @@ eval("let msg = 'hello world';");
 
 ### 函数柯里化
 
-柯里化允许把函数与传递给它的参数相结合，产生出一个新的函数。
+柯里化允许把函数与传递给它的参数相结合，产生出一个新的函数。函数式编程中使用较多。
 
 - 动态创建函数，剥离重复的处理逻辑
 - 复用参数
 
-#### 管道函数(简易版)
+```js
+var curry = fn =>
+    judge = (...args) =>
+        args.length === fn.length
+            ? fn(...args)
+            : (arg) => judge(...args, arg)
+```
+
+```js
+// ES6递归+bind实现
+function curry(fn, ...args) {
+  return fn.length <= args.length ? fn(...args) : curry.bind(null, fn, ...args);
+}
+```
+
+
+
+### 管道函数(简易版)
 
 ```js
 const pipe = (...fns) => x => fns.reduce((acc, fn) => fn(acc), x)		//从左向右
@@ -547,3 +564,6 @@ const chains = compose(minus, positive)
 console.log(chains(2,1))	// true
 ```
 
+### 偏函数
+
+类似于Function.prototype.bind，区别在于不会传递this

@@ -148,6 +148,12 @@ console.log(getArgsArray(1, 2, 3, 4)); // [1, 2, 3, 4]
 Array.from(()=>{return 123})	//[]
 ```
 
+```js
+// 类数组对象不能被解构，但是函数的arguments对象可以，所以？
+var a = {0:1,length:1}
+[...a]		// TypeError: a is not iterable
+```
+
 
 
 ## 定型数组

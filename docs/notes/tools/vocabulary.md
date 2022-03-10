@@ -83,6 +83,7 @@
 | mojibake             | 乱码               | non-optimal                 | 不理想               |
 | mnemonics            | 助记符             | pertinent factors           | 相关因素             |
 | momentum             | 动力               |                             |                      |
+| monolithic           | 巨大的             |                             |                      |
 | opaque               | 不透明的           |                             |                      |
 | performant           | 高效的             | performance hit             | 性能消耗             |
 | palette              | 调色板，一组颜色   | requisites                  | 必需品               |

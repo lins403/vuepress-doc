@@ -66,6 +66,8 @@ svg-icons库：[Feather – Simply beautiful open source icons](https://featheri
 
 产品设计：[Product Hunt – The best new products in tech.](https://www.producthunt.com/)
 
+批量编辑图片：[iLoveIMG | 图像文件在线编辑工具](https://www.iloveimg.com/zh-cn)
+
 ## 代码辅助
 
 查看浏览器对新语法的支持性：[Can I use](https://caniuse.com/)

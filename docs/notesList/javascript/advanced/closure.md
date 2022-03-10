@@ -36,3 +36,20 @@ const once = function (fn) {
   }
 }
 ```
+
+```js
+// bind函数实现
+Function.prototype.myBind = function (context, ...args) {
+  if (typeof this !== 'function') {
+    throw new TypeError()
+  }
+  const fn = this
+  return function () {
+    return fn.apply(context, [...arguments].concat(args))
+  }
+}
+console.log(Math.max.myBind()(1, 2, 3))
+console.log(Math.max.myBind(null, 4, 5)(1, 2, 3))
+```
+
+IIFE封装局部变量、单例模式

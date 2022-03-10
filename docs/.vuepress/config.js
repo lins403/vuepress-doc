@@ -334,6 +334,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
       children: [
         'es6/',
         'es6/symbol',
+        'es6/promise',
         'es6/set-map',
         'es6/iterator-generator',
         'es6/class',

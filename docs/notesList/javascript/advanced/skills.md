@@ -81,7 +81,9 @@ function recursivelyCheckEqual(x, ...rest) {
 }
 ```
 
+#### 删除一个变量
 
+删除一个对象的属性时可以使用delete关键字，但删除一个普通变量时，我觉得最好通过赋值为null来解除引用，从而触发垃圾回收。
 
 ### 循环遍历
 
@@ -181,39 +183,6 @@ function* generatorFn() {
   yield* ['a', 'b', 'c']
 }
 for (const x of generatorFn()) { console.log(x) }		// a b c
-```
-
-### Promise
-
-#### 进度追踪
-
-```js
-class TrackablePromise extends Promise {
-  constructor(executor) {
-    const notifyHandlers = []
-    super((resolve, reject) => {
-      return executor(resolve, reject, (status) => {
-        notifyHandlers.map((handler) => handler(status)); });
-    })
-    this.notifyHandlers = notifyHandlers
-  }
-  notify(notifyHandler) {
-    this.notifyHandlers.push(notifyHandler)
-    return this
-  } 
-}
-
-let p = new TrackablePromise((resolve, reject, notify) => { 
-  function countdown(x) {
-    if (x > 0) {
-      notify(`${20 * x}% remaining`)
-      setTimeout(() => countdown(x - 1), 1000)
-    } else {
-      resolve()
-    }
-  }
-  countdown(5)
-})
 ```
 
 ### 2）void
