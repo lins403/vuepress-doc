@@ -18,6 +18,8 @@
 
 图片边框：`border-image: image-source image-height image-width image-repeat`
 
+为一个滚动框指定滚动行为：`scroll-behavior: smooth;`（平滑滚动）
+
 ## 特殊应用
 
 ### CSS Sprites

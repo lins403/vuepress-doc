@@ -157,6 +157,8 @@ console.log(htmlEscape('<p class="greeting">Hello world!</p>'))
 const maxLength = 16
 const reg = new RegExp(`(.{${maxLength}}).*`, 'g')
 value = value.replace(reg, '$1')    // 超过16位的字符被删除
+
+'abcdefghijklmnopqrstuvwxyz'.replace(eval(`/(.{${maxLength}}).*/g`), '$1')
 ```
 
 ## 易错

@@ -54,7 +54,7 @@ Promise.reject('会被catch的onRejected处理').then(console.log).catch(console
   - resolve方法接收一个值作为promise成功的处理结果，并且将promise状态更改为fulfilled
   - resolve方法接收一个值作为promise失败的处理结果，并且将promise状态更改为rejected
 - 定义实例方法then、finally、catch
-  - then方法接收两个处理函数onFulfilled和onRejected分别处理promise成功和失败的情况，将resolve时的处理结果result作为参数传递给onFulfilled，调用reject时的处理结果reason传给onRejected，通过判断promise当前状态，来选择调用onFulfilled或者onRejected来处理promise。
+  - then方法接收两个处理函数onFulfilled和onRejected分别处理promise成功和失败的情况，将resolve时的处理结果result作为参数传递给onFulfilled，调用reject时的处理结果reason传给onRejected，通过判断promise当前状态，来选择调用onFulfilled或者onRejected来处理promise。then最后要返回一个新的promise，用于链式处理。
   - catch方法会隐式调用then方法，then(undefined, onRejected)
 
 ## 技巧

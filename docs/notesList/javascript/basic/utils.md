@@ -45,6 +45,40 @@ function shuffle(arr) {
 
 ```
 
+### 对象深拷贝
+
+```js
+const deepClone = (obj, hash = new WeakMap()) => {
+  // 日期对象直接返回一个新的日期对象
+  if (obj instanceof Date){
+  	return new Date(obj);
+  } 
+  //正则对象直接返回一个新的正则对象     
+  if (obj instanceof RegExp){
+  	return new RegExp(obj);     
+  }
+  //如果循环引用,就用 weakMap 来解决
+  if (hash.has(obj)){
+  	return hash.get(obj);
+  }
+  // 获取对象所有自身属性的描述
+  let allDesc = Object.getOwnPropertyDescriptors(obj);
+  // 遍历传入参数所有键的特性
+  let cloneObj = Object.create(Object.getPrototypeOf(obj), allDesc)
+  
+  hash.set(obj, cloneObj)
+  for (let key of Reflect.ownKeys(obj)) { 
+    if(typeof obj[key] === 'object' && obj[key] !== null){
+    	cloneObj[key] = deepClone(obj[key], hash);
+    } else {
+    	cloneObj[key] = obj[key];
+    }
+  }
+  return cloneObj
+}
+// https://juejin.cn/post/7019090370814279693#heading-66
+```
+
 
 
 ## 算法
@@ -80,7 +114,29 @@ console.log(C)	//[1, 2, 3]
 最常见的应用场景
 
 1. `<input>` 输入后，等待 wait 毫秒以后，再触发处理方法
-2. 滚动事件
+2. debounce配合button的disabled属性
+
+```js
+const debounce = (fn, wait) => {
+  let timer = null
+
+  return function () {
+    let context = this,
+      args = arguments
+
+    if (timer) {
+      clearTimeout(timer)
+      timer = null
+    }
+
+    timer = setTimeout(() => {
+      fn.apply(context, args)
+    }, wait)
+  }
+}
+```
+
+
 
 ### throttle
 
@@ -88,7 +144,24 @@ console.log(C)	//[1, 2, 3]
 
 最常见的应用场景
 
-1. 按钮点击，等待 wait 毫秒以后点击才能触发事件，也就是 wait 毫秒内只能触发一次事件
+1. 短时间内多次触发但只执行一次处理（滚动事件）
+
+```js
+export const throttle = (fn, delay) => {
+  let curTime = Date.now()
+
+  return function () {
+    let context = this,
+      args = arguments,
+      nowTime = Date.now()
+
+    if (nowTime - curTime >= delay) {
+      curTime = Date.now()
+      return fn.apply(context, args)
+    }
+  }
+}
+```
 
 
 
@@ -103,5 +176,4 @@ console.log(C)	//[1, 2, 3]
 ```
 const pipe = ()
 ```
-
 

@@ -4,6 +4,23 @@
 
 一般来说，原始类型的值应该使用 `typeof` 检测，而对象值应该使用 `instanceof` 检测，需要得到具体类型名称时可以使用 `Object.prototype.toString.call(any)`
 
+```js
+const getType = value => {
+  if (value === null) {
+    return value + ''
+  }
+  // 判断数据是引用类型的情况
+  if (typeof value === 'object') {
+    return Object.prototype.toString.call(value).slice(8, -1).toLowerCase()
+  } else {
+    // 判断数据是基本数据类型的情况和函数的情况
+    return typeof value
+  }
+}
+```
+
+
+
 ###  typeof
 
 基本数据类型共有7种，但是 typeof 可以判断8种

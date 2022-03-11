@@ -98,6 +98,8 @@ props: {
 }
 // 而在模板和 JSX 中应该始终使用 kebab-case
 <WelcomeMessage greeting-text="hi"/>
+  
+// hello_world (snake case )
 ```
 
 ## computed

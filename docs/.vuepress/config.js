@@ -352,7 +352,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'advanced/memory-garbage-collection',
         'advanced/let-const',
         'advanced/design-pattern',
-        'advanced/libraries',
+        'advanced/lodash',
         'advanced/binary',
         'advanced/animation',
         'advanced/web-worker',
