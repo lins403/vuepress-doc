@@ -1,11 +1,23 @@
 # 数据类型
 
+:::tip 要点
+
+1. 如何判断数据类型
+2. typeof、instanceof、toString方法判断的原理
+3. undefined、null和NaN
+4. falsy虚值
+5. == 操作符的强制类型转换规则
+
+:::
+
 ## 判断数据类型
 
 一般来说，原始类型的值应该使用 `typeof` 检测，而对象值应该使用 `instanceof` 检测，需要得到具体类型名称时可以使用 `Object.prototype.toString.call(any)`
 
 ```js
+// 通用模板
 const getType = value => {
+  // 最先判断null
   if (value === null) {
     return value + ''
   }
@@ -19,11 +31,9 @@ const getType = value => {
 }
 ```
 
-
-
 ###  typeof
 
-基本数据类型共有7种，但是 typeof 可以判断8种
+基本数据类型共有7种，但是 typeof 可以判断8种（少了null，多了symbol和object）
 
 ```js
 // 基本数据类型
@@ -176,7 +186,7 @@ if (``)
 0 == ''	//true
 ```
 
-### == 操作符的强制类型转换规则？
+### == 操作符的强制类型转换规则
 
 （1）字符串和数字之间的相等比较，将字符串转换为数字之后再进行比较。
 
@@ -189,3 +199,13 @@ if (``)
 （5）如果一个操作值为 NaN ，则相等比较返回 false（ NaN 本身也不等于 NaN ）。
 
 （6）如果两个操作值都是对象，则比较它们是不是指向同一个对象。如果两个操作数都指向同一个对象，则相等操作符返回 true，否则，返回 false。
+
+
+
+## Recap
+
+【为什么 typeof null 是object】JS在底层存储变量时，会在变量机器码的前1-3位存储其类型信息。object类型变量的前三位是000，而null的机器码全为0，所以被typeof误判为object类型。
+
+【typeof、instanceof、toString方法判断的原理】`typeof`原理是根据变量在底层存储的机器码的前1-3位来判断变量类型。`instanceof`是执行构造函数的内置属性Symbol.hasInstance方法，来判断实例对象的原型链上是否包含这个构造函数。`Object.prototype.toString.call()`方法的原理是读取实例对象的内部属性 [[Class]]。
+
+【undefined、null和NaN】`undefined`表示原始值，变量未定义；`null`表示缺少值，变量为空对象；`NaN`属于number类型，表示一个非数值。NaN跟所有数都不相等，包括自身。最特殊的是`undefined == null`。

@@ -1,5 +1,15 @@
 # Object
 
+:::tip 要点
+
+1. 对象的几种创建方法
+2. 属性描述对象
+3. 控制对象状态
+4. 常用API
+5. 属性类型和查询某个对象是否有某个属性的方法
+
+:::
+
 ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意味着对象就是一组没有特定顺序的值
 
 ## 基础
@@ -36,6 +46,9 @@ ECMA-262 将对象定义为一组属性的无序集合。严格来说，这意�
   p2		//{}
   p2.name		//'xiaomixi'
   p2.__proto__		//{name: 'xiaomixi', age: 24}
+  
+  p1.sex='male'
+  p2.sex		//male
   ```
   
   
@@ -110,14 +123,14 @@ JSON.stringify(obj)		// '{"a":1}'
 
 ### 属性描述对象
 
-| 元属性           |                                                              |
-| ---------------- | ------------------------------------------------------------ |
-| [[Configurable]] | 属性的可配置性，是否可以通过 delete 删除并重新定义，是否可以改写它的属性描述对象 |
-| [[Enumerable]]   | 属性是否可以遍历，比如`for...in`循环、`Object.keys()`        |
-| [[Writable]]     | 属性的值是否可以被修改                                       |
-| [[Value]]        | 属性实际的值                                                 |
-| [[Get]]          | 在读取属性时调用                                             |
-| [[Set]]          | 在写入属性时调用                                             |
+| 元属性           |                                                              | 默认值 |
+| ---------------- | ------------------------------------------------------------ | ------ |
+| [[Configurable]] | 属性的可配置性，是否可以通过 delete 删除并重新定义，是否可以改写它的属性描述对象 | true   |
+| [[Enumerable]]   | 属性是否可以遍历，比如`for...in`循环、`Object.keys()`        | true   |
+| [[Writable]]     | 属性的值是否可以被修改                                       | true   |
+| [[Value]]        | 属性实际的值                                                 |        |
+| [[Get]]          | 在读取属性时调用                                             |        |
+| [[Set]]          | 在写入属性时调用                                             |        |
 
 #### `Object.getOwnPropertyDescriptor()`
 
@@ -260,6 +273,49 @@ var a = {}, b = {key:'123'}
 a[b] = 1
 console.log(a[b])		//1
 ```
+
+#### Number转换
+
+Number(一个对象)	
+
+- 调用valueOf()方法，如果转换结果是NaN，则调用toString()方法，再按照转换字符串的规则转换。
+
+```js
+Number({key:'123'})	//NaN
+Number({key:'123', toString(){return '456'}})	//456
+Number({key:'123', toString(){return '456'}, valueOf(){return '789'}})	//789
+Number({key:'123', toString(){return '456'}, valueOf(){return this.key}})	//123
+```
+
+String(一个对象)
+
+```js
+String(Number({key:'123', toString(){return '456'}, valueOf(){return '789'}}))		//'789'
+(Number({key:'123', toString(){return '456'}, valueOf(){return '789'}})).toString()		//456
+```
+
+## Recap
+
+【对象的创建方法】使用 new 操作符和 Object 构造函数创建一个实例，然后再给它添加属性和方法；使用对象字面量表示法创建；使用原型模式 `Object.create`创建；继承Object类来创建一个子类，实例化子类来创建新对象（适合量产对象，例如工厂模式、构造函数模式、组合模式、寄生组合模式等等）。
+
+【属性描述对象】原属性，描述对象属性的属性。[[Configurable]]可配置性，[[Enumerable]]可枚举性、[[Writable]]是否可以修改、[[Value]]属性值，以及[[Get]]和[[Set]]。`Object.getOwnPropertyDescriptor()`用于获取自身属性的描述对象，获取所有时使用Object.getOwnPropertyDescriptors。`Object.defineProperty()`用于定义对象的一个新属性，并定义属性的描述对象，批量定义时使用Object.defineProperties()。
+
+【控制对象状态】通过Object.preventExtensions、Object.seal、Object.freeze这三种方法不同程度上控制对象的扩展性。`Object.preventExtensions`使一个对象不能再添加新属性；`Object.seal`将元属性 configurable 设为 false，同时禁止新增或删除属性，并不影响修改某个属性的值；`Object.freeze`使一个对象无法添加、修改和删除属性，实际上就把对象变味了一个不可变的常量。三种方式都仅阻止添加自身的属性，原型依然可以添加和删除属性，所以需要将原型也冻结起来`Object.preventExtensions(Object.getPrototypeOf(obj))`。还有个局限性是只能冻结到第一层，也就是如果被冻结的属性值是个对象，则依然可以被修改。
+
+【常用API】实例方法obj.toString()、obj.valueOf()、obj.hasOwnProperty()、obj.propertyIsEnumerable()、obj.isPrototypeOf()；类方法Object.assign()、Object.create()、Object.is()、Object.getPrototypeOf()、Object.keys()、Object.entries()、Object.getOwnPropertyNames()、Object.getOwnPropertySymbols()、Object.defineProperty()
+
+【属性类型】自身的可枚举属性、不可枚举属性、Symbol 键；继承的可枚举属性、不可枚举属性、Symbol 键。
+
+【查询某个对象是否有某个属性的方法】
+
+- `obj.key` 直接用属性判断是否为undefined
+
+- `in` 操作符可以判断以上情况的全部属性
+- `for...in` 遍历自身的和继承的可枚举属性，不包含symbol键
+- `Object.keys` 仅包含自身的可枚举属性，不包含symbol键
+- `Object.getOwnPropertyNames` 包含自身的可枚举属性与不可枚举属性（除symbol键外的所有自身属性）
+- `obj.hasOwnProperty()` 和 `Object.hasOwn()` 用于判断所有的自身属性，包含symbol键
+- `obj.propertyIsEnumerable()` 用于判断自身的可枚举属性和symbol键
 
 
 

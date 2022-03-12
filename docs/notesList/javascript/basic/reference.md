@@ -1,8 +1,15 @@
 # 引用类型
 
+:::tip 要点
+
+1. 基本引用类型（Date、RegExp、原始值包装类型、单例内置对象）
+2. 集合引用类型（Object、Array、Map、WeakMap、Set、WeakSet）
+
+:::
+
 ## 基本引用类型
 
-### Date
+### 1、Date
 
 - `GMT` (**G**reenwich **M**ean **T**ime) 格林尼治平均时间
   - 格林尼治子午线为量度经度的本初子午线
@@ -48,11 +55,11 @@ new Date(2021, 11, 1).toString()	// 'Wed Dec 01 2021 00:00:00 GMT+0800 (中国�
 
 [date-fns vs dayjs vs moment | npm trends](https://www.npmtrends.com/date-fns-vs-dayjs-vs-moment)
 
-### RegExp
+### 2、RegExp
 
-[正则表达式 | 小眯嘻的文档博客](https://lins403.github.io/vuepress-doc/notes/tools/regular.html)
+[正则表达式](https://lins403.github.io/vuepress-doc/notes/tools/regular.html)
 
-### 原始值包装类型
+### 3、原始值包装类型
 
 #### 意义
 
@@ -111,7 +118,7 @@ new Object(!!123) instanceof Boolean		//true
 
 原始布尔值和 Boolean 对象之间存在较大区别，容易引起歧义，强烈建议永远不要使用 Boolean 对象
 
-### 单例内置对象
+### 4、单例内置对象
 
 当代码开始执行时，全局上下文中会存在两个内置对象
 
@@ -137,3 +144,17 @@ WeakMap
 Set
 
 WeakSet
+
+
+
+## Recap
+
+【GMT和UTC】GMT指格林尼治平均时间，因为地球自转的不规则和天文观测本身的缺陷，所以GMT被UTC取代，也就是协调世界时。Unix time表示纪元时间，1970-01-01 00:00:00 UTC，`Date.now()`方法返回自 Unix time 至今所经过的毫秒数。
+
+【Date对象的实例方法】getTime()返回时间戳，getDay()返回0-6从星期天开始，getMonth()返回0-11，toLocaleDateString()和toLocaleString()返回该地区常用格式的时间字符串。
+
+【原始值包装类型】共有3种原始值包装类型：Boolean、Number、String。原始包装类型的用处是，可以使得原始值被当成对象使用，从而可以继承对象原型的方法，也可以在自己的原型上定义方法。
+
+【单例内置对象】当代码开始执行时，全局上下文中包含的两个内置对象，Global和Math，但在浏览器中Global被实现为window对象。
+
+【集合引用类型】包含了Object、Array、Map、WeakMap、Set、WeakSet等数据类型。

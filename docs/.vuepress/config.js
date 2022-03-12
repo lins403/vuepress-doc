@@ -304,6 +304,8 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
       collapsable: false,
       children: [
         '',
+        'resources',
+        'memo',
       ]
     },
     {
@@ -319,9 +321,9 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'basic/reference',
         'basic/call-apply',
         'basic/regular',
-        'basic/bom',
-        'basic/dom',
         'basic/form',
+        'basic/dom',
+        'basic/bom',
         'basic/event',
         'basic/json',
         'basic/utils',
@@ -377,8 +379,10 @@ function interviewSidebar(groupA,groupB){
           'basic/css1',
           'basic/css2',
           'basic/css3',
+          'basic/javascript0',
           'basic/javascript1',
           'basic/javascript2',
+          'memo',
         ]
       },
       {

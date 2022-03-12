@@ -4,7 +4,7 @@
  * @Date: 2021-09-19 22:14:49
  * @FilePath: /vuepress-doc/docs/.vuepress/nav.js
  * @LastEditors: lins14
- * @LastEditTime: 2022-02-17 12:16:31
+ * @LastEditTime: 2022-03-12 08:13:44
  */
 module.exports = [
   { text: 'Home', link: '/' },
@@ -12,6 +12,40 @@ module.exports = [
     text: '系列笔记',
     ariaLabel: '系列笔记',
     items: [
+      {
+        text: '基础',
+        items: [
+          {
+            text: 'JavaScript',
+            link: '/notesList/javascript/'
+          },
+          {
+            text: 'CSS',
+            link: '/notesList/css/'
+          },
+          {
+            text: 'Node.js',
+            link: '/notesList/nodejs/'
+          },
+          {
+            text: 'TypeScript',
+            link: '/notesList/typescript/'
+          }
+        ]
+      },
+      {
+        text: 'Vue',
+        items: [
+          {
+            text: '全家桶',
+            link: '/notesList/vue/'
+          },
+          {
+            text: 'Vue2源码学习',
+            link: '/vue2-source-code/prepare/'
+          }
+        ]
+      },
       {
         text: '综合',
         items: [
@@ -31,40 +65,6 @@ module.exports = [
           {
             text: '可视化',
             link: '/notesList/visualization/'
-          }
-        ]
-      },
-      {
-        text: '基础',
-        items: [
-          {
-            text: 'CSS',
-            link: '/notesList/css/'
-          },
-          {
-            text: 'JavaScript',
-            link: '/notesList/javascript/'
-          },
-          {
-            text: 'TypeScript',
-            link: '/notesList/typescript/'
-          },
-          {
-            text: 'Node.js',
-            link: '/notesList/nodejs/'
-          }
-        ]
-      },
-      {
-        text: 'Vue',
-        items: [
-          {
-            text: '全家桶',
-            link: '/notesList/vue/'
-          },
-          {
-            text: 'Vue2源码学习',
-            link: '/vue2-source-code/prepare/'
           }
         ]
       }

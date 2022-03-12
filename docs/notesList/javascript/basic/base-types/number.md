@@ -1,5 +1,13 @@
 # Number
 
+:::tip 要点
+
+1. 浮点数精度
+2. 极限值
+3. 精度丢失问题
+
+:::
+
 ## 浮点数精度
 
 - JavaScript 中所有数字，包括整数和小数都只有一种类型，即 Number类型
@@ -53,7 +61,7 @@
 `Number.isFinite()`
 
 ```js
-Number.MAX_SAFE_INTEGER: 9007199254740991	// 2^53 - 1
+Number.MAX_SAFE_INTEGER: 9007199254740991	// 2^53 - 1（因为小数位52位，且整数不需要在小数点前面存1，所以共53位）
 Number.MIN_SAFE_INTEGER: -9007199254740991	// -2^53 + 1
 Number.EPSILON: 2.220446049250313e-16
 Number.MIN_VALUE: 5e-324
@@ -158,6 +166,11 @@ Number(一个对象)	//调用valueOf()方法，如果转换结果是NaN，则调
 Number({})	//NaN
 ```
 
+```js
+~~'123.1232'		//123
++'123.1232'		//123.1232
+```
+
 ### parseInt
 
 从给定的字符串中解析出的一个整数。
@@ -240,6 +253,7 @@ Infinity * Infinity	//Infinity
 -Infinity*Infinity	//-Infinity
 Infinity - Infinity	//NaN
 Infinity / Infinity	//NaN
+Infinity===Infinity	//true
 ```
 
 ### 其它
@@ -250,10 +264,18 @@ Infinity / Infinity	//NaN
 false == 0 && true == 1	//true
 ```
 
-  
-
 
 
 ## 参考
 
 [js精度丢失问题-看这篇文章就够了(通俗易懂)](https://zhuanlan.zhihu.com/p/100353781)
+
+
+
+## Recap
+
+【浮点数精度】javascript所有number类型的数据都是以64位双精度浮点数进行存储，在内存中占用8个字节（整数也是，但是在整数运算时会转换成32位进行运算）。符号位占用1位、指数(小数点移动的位数)11位、小数部分52位，位数不够就用0补齐。
+
+【精度丢失】计算机在存储时十进制数据时，需要将其转换为二进制进行存储，转换过程中可能出现无限循环，但因为最多只能存储64位，所以需要进行0舍1入操作，再转换成十进制的时候就出现了误差，如0.1。解决办法是可以使用number-precision库，原理是先将小数都放大转换为整数然后再进行计算，转换为整数的过程是先转换成字符串，replace掉小数点，然后再还原为数值。
+
+【极限值】安全整数，Number.isSafeInteger()判断一个数是否在-2^53 + 1与2^53 - 1之间。Number.EPSILON表示一个极小的常量，误差小于这个数时可以忽略。Number.isFinite()判断一个数不能为Infinity或者-Infinity。

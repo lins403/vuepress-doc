@@ -1,5 +1,14 @@
 # 正则表达式
 
+:::tip 要点
+
+1. 匹配规则
+2. 规则断言
+3. 正则表达式标志
+4. 常见用法
+
+:::
+
 ## 规则
 
 ```javascript
@@ -79,6 +88,7 @@ escapeRegExp('/$1 equals ￥6.44/g')        // '/\$1 equals ￥6\.44/g'
 
 ```javascript
 RegExp 
+		new RegExp()
     test()        // 返回 true 或 false
     exec()        // 返回一个数组，在未匹配到时会返回 null
 
@@ -178,6 +188,35 @@ var regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
 ```
 
 
+
+## Recap
+
+【正则表达式断言】
+
+```js
+(?:x)		匹配 'x' 但是不记住匹配项。非捕获组，不返回该组匹配的内容
+x(?=y)		匹配'x'仅当'x'后面着'y'，这种叫做先行断言。
+(?<=y)x		匹配'x'仅当'x'前面是'y'，这种叫做后行断言。
+x(?!y)		匹配'x'仅当'x'后面不是'y'，这被称为正向否定查找。
+(?<!y)x		匹配'x'仅当'x'前面不是'y'，这被称为反向否定查找。
+```
+
+【正则表达式标志】
+
+```js
+g	global 全局匹配
+i ignoreCase 忽略大小写
+m	multiline	多行匹配
+y	sticky	粘附模式，表示只查找从lastIndex开始及之后的字符串，需要手动设置正则实例的lastIndex属性
+u	Unicode	启用 Unicode 匹配
+s	dotAll	元字符`.`匹配任何字符(包括\n 或\r)
+```
+
+【常见用法】
+
+- new RegExp()
+- test() 、exec()    
+- match()、matchAll()、replace()、replaceAll()、search()、split()
 
 # 参考
 

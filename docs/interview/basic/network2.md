@@ -1,4 +1,4 @@
-# Cookie、Session、Token、Storage
+Cookie、Session、Token、Storage
 
 :::tip 摘要
 
@@ -259,7 +259,7 @@ sessionStorage.book = "Professional JavaScript";
 >
 > 浏览器缓存策略由服务器或代理服务器指定，分为强缓存策略和协商缓存策略。
 >
-> ​	使用强缓存策略时，如果缓存资源还有效，就直接使用缓存资源，不必再向浏览器发起请求。强缓存策略主要通过http headers中的 Expires 属性或者 Cache-Control 属性。后者是HTTP1.1中新引入的，精确度更高，用于替换前者，同时使用时后者的优先级也更高。
+> ​	使用强缓存策略时，如果缓存资源还有效，就直接使用缓存资源，不必再向浏览器发起请求。强缓存策略主要通过http headers中的 Expires 属性或者 Cache-Control 属性。后者是HTTP1.1中新引入的，精确度更高，用于替换前者，同时使用时后者的优先级也更高。先从内存加载缓存(from cache)，如果没有，则从磁盘中加载缓存(from disk)
 >
 > ​	如果缓存已经过期，那么就需要使用协商缓存。浏览器会向服务器发送一个请求，如果服务器确认资源没有发生修改，则返回一个304状态，让浏览器使用本地的缓存副本。如果资源发生变化，就返回修改后的资源给客户端。协商缓存的设置是通过http headers 中的 Last-Modified 属性和 Etag 属性。`Last-Modified`值表示资源上一次更改的时间，它只能精确到秒级。而 `Etag` 是资源的唯一标识符，资源变化时这个值也会变化，所以用Etag判断会更加准确，优先级更高，但是性能比前者稍差。浏览器为了让服务器判断资源是否做了修改，就将前一次请求的response header 中的 last-modified 值作为 `if-modified-since`，将 etag 值作为 `If-None-Match`，添加到request header中，发送给服务器校验。同时使用时，If-None-Match的优先级别更高。
 >

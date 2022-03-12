@@ -1,5 +1,14 @@
 # Array
 
+:::tip 要点
+
+1. 数组的几种创建方法
+2. 数组常用的类方法
+3. 数组常用的实例方法
+4. 定型数组
+
+:::
+
 ## 基础
 
 ### 创建方法
@@ -24,8 +33,12 @@
 
 - 使用ES6新增的静态方法 `Array.of`
 
-  ```
-  Array.of("red", "blue", "green")
+  ```js
+  Array.of(7);       // [7]
+  Array.of(1, 2, 3); // [1, 2, 3]
+  
+  Array(7);          // [ , , , , , , ]
+  Array(1, 2, 3);    // [1, 2, 3]
   ```
 
 
@@ -160,7 +173,7 @@ var a = {0:1,length:1}
 
 定型数组包含一套不同的引用类型，用于管理数值在内存中的类型。
 
-[二进制数据 > ArrayBuffer](https://lins403.github.io/vuepress-doc/notesList/javascript/basic/binary.html#arraybuffer)
+[二进制数据 > ArrayBuffer](https://lins403.github.io/vuepress-doc/notesList/javascript/advanced/binary.html#arraybuffer)
 
 ## Skills
 
@@ -269,3 +282,14 @@ flatDeep(arr1, Infinity)
 
 ### 其它
 
+
+
+## Recap
+
+【数组的几种创建方法】使用构造函数Array，没有new时也会被自动补上；使用字面量表示法；使用`Arra.from`用一个类数组对象或迭代器创建一个数组；使用`Array.of`接收一组参数并创建一个数组实例，我觉得这个设计是用来取代构造函数Array接收多个参数的情况，这样构造函数Array方法就只需要用于创建一个初始化长度为n位的空数组。
+
+【数组常用的实例方法】会改变原数组的有pop、push、shift、unshift、reverse、sort、splice。不会改变原数组的常用方法有fill；forEach、keys、values、entries；find、findIndex、includes、indexOf、lastIndexOf；every、some；flat、map、filter、reduce、reduceRight、slice等等。
+
+【slice与splice】`slice`不会改变原数组，适合用于复制数组片段；`splice`会改变原数组，适用于插入、删除、替换的场景。
+
+【定型数组】ArrayBuffer是原始的二进制数据，所有二进制数据处理的基础，定型数组是一种ArrayBuffer的视图，被设计用于提高与WebGL等原生库进行二进制数据交换的效率。例如使用Uint32Array来创建视图，就把buffer转换为一个32位整数的序列，每个整数4个字节，序列的长度就是buffer的长度除以4。定型数组更面向底层，js引擎针对做了优化，所以定型数组的速度非常快。

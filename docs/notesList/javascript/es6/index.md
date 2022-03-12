@@ -1,5 +1,20 @@
 # ES6
 
+<figure  style="text-align:center;">
+  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ecc8c31f52e848b396d05e2e8f2c9138~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" width="66%" class="zoom-imgs">
+  <figcaption>source: https://juejin.cn/post/7012412166254886942</figcaption>
+</figure>
+
+ES6的更新主要是体现在以下方面：
+
+- 表达式：变量声明，解构赋值
+- 内置对象：字符串拓展、数值拓展、对象拓展、数组拓展、函数拓展、正则拓展、Symbol、Set、Map、Proxy、Reflect
+- 语句与运算：Class、Module、Iterator
+- 异步编程：Promise、Generator、Async。
+
+
+
+
 ## 箭头函数
 
 ### 限制
@@ -347,3 +362,13 @@ console.log(s.description);	// foo
 ES2019 以前，浏览器厂商可以自由决定 Function.prototype.toString()返回什么。
 
 ES2019 要求这个方法尽可能返回函数的源代码，否则返回{ [native code] }。
+
+## ES2020
+
+空值合并运算符 `??`
+
+```js
+// 当 height 的值为 null 或 undefined 时，将 height 的值设置为 100
+height = height ?? 100;
+```
+

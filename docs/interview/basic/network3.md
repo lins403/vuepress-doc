@@ -153,6 +153,18 @@ fetch('/send-me-json', {
 
 - 基于Promise的http库，可以用在浏览器和nodejs中，底层实现还是基于XHR对象
 
+### Content-Type
+
+```js
+{
+  'Content-Type': 'application/json'		//后台使用@RequestBody注解
+  'Content-Type': 'application/x-ww-form-urlencoder'		//后台使用@RequestParam注解，前端需要进行序列化，例如使用qs.stringify()
+  'Content-Type': 'multipart/form-data'
+}
+```
+
+> encodeURIComponent不能序列化嵌套对象，qs.stringify()可以
+
 ## 三、网络攻击
 
 ### 类型

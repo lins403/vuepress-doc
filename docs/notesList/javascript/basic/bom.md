@@ -8,7 +8,7 @@
 - 使用 `screen` 对象了解客户端显示器的信息
 - 通过 `history` 对象操作浏览器历史
 
-## window对象
+## 1、window对象
 
 BOM 的核心是 window 对象，表示浏览器的实例。
 
@@ -64,7 +64,7 @@ innerWidth = clientWidth + border + 滚动条宽度
 - `screen.availWidth` 【屏幕可用宽高】
   - 不受浏览器缩放大小影响，和书签栏高度、标签页高度等等有关
 
-## location对象
+## 2、location对象
 
 `location`对象既是 window 的属性，也是 document 的属性。也就是说， `window.location` 和 `document.location` 指向同一个对象。
 
@@ -91,7 +91,7 @@ location.reload(true); // 重新加载，从服务器加载
 
 
 
-## navigator对象
+## 3、navigator对象
 
 ```js
 console.log(navigator)
@@ -115,7 +115,7 @@ if (/mobi/.test(ua)) {
 
 
 
-## screen对象
+## 4、screen对象
 
 ```js
 console.log(screen)
@@ -136,7 +136,7 @@ console.log(window.screen)
 
 
 
-## history对象
+## 5、history对象
 
 ```js
 console.log(history)
@@ -156,7 +156,7 @@ history.back();
 history.forward();
 ```
 
-pushState将一条 state 记录加入到 history 对象中。一条 state 记录包含了 url、title 和 content 属性，在 popstate 事件中可以获取到这个 state 对象，我们可 以使用 content 来传递数据。最后我们通过对 window.onpopstate 事件监听来响应浏览器的前进后退操作。
+pushState将一条 state 记录加入到 history 对象中。一条 state 记录包含了 url、title 和 content 属性，在 popstate 事件中可以获取到这个 state 对象，我们可以使用 content 来传递数据。最后我们通过对 window.onpopstate 事件监听来响应浏览器的前进后退操作。
 
 ```js
 history.pushState(state, title[, url])
@@ -168,6 +168,16 @@ history.pushState({ foo: "bar" }, "", "bar.html");
 
 window.onpopstate 事件
 ```
+
+## Recap
+
+【BOM】Browser Object Model，浏览器对象模型，核心是`window`对象，同时还包含了访问和操作导航的`location` 对象、访问浏览器信息的`navigator` 对象、显示器信息的`screen` 对象、访问历史的`history` 对象。
+
+【window对象】window 对象在浏览器中有两重身份，一个是表示JavaScript在浏览器环境中的 Global 对象，另一个则是作为浏览器窗口的 JavaScript 接口。
+
+【location对象】location对象既是 window 的属性，也是 document 的属性。location.assign()跳转新页面，location.reload()重载页面，location.replace()跳转后不会增加历史记录，所以调用之后用户不能回到前一页。
+
+【history对象】使用 back()、forward()、go() 方法来完成在用户历史记录中向后和向前的跳转。浏览器的前进后退操作会触发window上的onpopstate事件。pushState方法将一条 state 记录加入到 history 对象中，一条 state 记录包含了 url、title 和 content 等属性；replaceState方法会修改当前state，而不会产生新的历史记录。
 
 # 参考
 

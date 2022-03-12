@@ -1,5 +1,14 @@
 # String
 
+:::tip 要点
+
+1. 字符串的不可变性
+2. 字符串的编码方法
+3. 字符串的实例方法
+4. substring、substr、slice
+
+:::
+
 ## 基础
 
 ### 不可变性
@@ -7,6 +16,7 @@
 ```js
 var lang = 'Java';
 lang[0] = 'H'
+console.log(lang[0])		// 'H'
 console.log(lang)		// 'Java'
 lang.length = 2
 console.log(lang)		// 'Java'
@@ -178,3 +188,12 @@ text.slice(-3,-1)	//'ll'
 text.substr(-3,-1)	//''
 ```
 
+## Recap
+
+【字符串的不可变性】字符串作为一个基本数据类型，被存储在栈内存中一块固定大小的空间上，任何对字符串的修改都不会影响到它。
+
+【javascript的字符串编码】javascript的编码实现其实是UCS-2，每个编码占用两个字节，由于BMP空间的2^16个数不够用了，UCS-2后来被拓展为UTF-16，超出的部分每个编码占用4个字节。UTF-16是UCS-2的超集，对于Plane0区间的编码实现，UCS-2和UTF-16是一致的。由于历史原因，javascript只支持Plane0区间的编码，所以所有的字符都是占用两个字节。
+
+【常用的字符串实例方法】includes、indexOf、search、match、replace、repeat、slice、trim
+
+【substring、substr、slice】MDN中推荐使用substring来替代substr，但substring中所有负参数值都被转换为0，所以不能用于反向索引。觉得slice方法最易用，也不会有歧义。

@@ -59,7 +59,7 @@ console.log(view.byteLength) // 16，字节中的大小
 
 #### 2）定型数组TypedArray
 
-定型数组/类型化数是另一种形式的 ArrayBuffer 视图。
+定型数组/类型化数组是另一种形式的 ArrayBuffer 视图。
 
 **特点：**
 
