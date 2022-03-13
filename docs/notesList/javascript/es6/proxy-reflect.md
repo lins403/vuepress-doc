@@ -140,7 +140,7 @@ console.log(proxy.foo);   // TypeError
 
 ## 反射Reflect
 
-handler中所有可以捕获的方法都有对应的反射(Reflect) API 方法
+proxy代理对象的handler中所有可以捕获的方法都有对应的反射(Reflect) API 方法
 
 ### 方法
 
@@ -151,6 +151,10 @@ Reflect与Object的差异：[Comparing Reflect and Object methods - JavaScript |
 | `in`                  | has(target, property)                       | `Reflect.has()`       |
 | apply、call、直接调用 | apply(target, thisArg, ...argumentsList)    | `Reflect.apply()`     |
 | `new`                 | construct(target, argumentsList, newTarget) | `Reflect.construct()` |
+
+```js
+Reflect.toString.call([])		//'[object Array]'
+```
 
 
 

@@ -54,34 +54,7 @@ C. 两者都不存在变量提升，同时存在暂时性死区，只能在声�
 D. const可以先声明再初始化，可以后赋值
 ```
 
-7. 下面关于Promise说法正确的是(注意“返回结果”的意思包含成功或者失败) CD
-
-```js
-A. Promise.all在所有给定的promise都fulfilled后才返回结果		//传入promise都为空也可以输出结果
-B. Promise.race在给定的promise中，某个fulfilled后才返回结果		//rejected也会
-C. promise.then的回调函数中，可以返回一个新的promise
-D. 对于一个向后台获取数据已经产生结果的promise:p1，再次调用p1.then，不会去重新发起请求获取数据
-```
-
-```js
-// all 会被输出，而 race 不会被输出
-Promise.all([]).then((res) => {
-  console.log('all');
-});
-Promise.race([]).then((res) => {
-  console.log('race');
-});
-
-
-Promise.reject(0)
-  .catch(e => console.log('catch1: ',e))
-  .catch(e => console.log('catch2: ',e))
-  .then(e => console.log('then: ',e))
-// catch1:  0
-// then:  undefined
-```
-
-8. 输出结果
+7. 输出结果
 
 ```js
 var x = typeof x

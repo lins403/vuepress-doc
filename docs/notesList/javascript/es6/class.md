@@ -265,11 +265,11 @@ b.bar();  // bar
 b.baz();  // baz
 ```
 
-> 很多JavaScript框架(特别是React)已经抛弃混入模式，转向了组合模式(把方法提取到独立的类和辅助对象中，然后把它们组合起来，但不使用继承)。这反映了那个众 所周知的软件设计原则:“组合胜过继承(composition over inheritance)。”这个设计原则被很多人遵循，在代码设计中能提供极大的灵活性。
->
-> - 复用组件代码，React使用Composition，Vue使用slot
-> - 要在组件间复用非 UI 的功能，将其提取为一个单独的JavaScript模块，组件可以直接import引入而无需去extend继承
-> - Vue中的mixin模式其实是基于策略的对象合并，而非继承。Vue的mixin模式也存在缺陷，在Vue3中代码重用应该通过Composition API来实现
+很多JavaScript框架(特别是React)已经抛弃混入模式，转向了组合模式(把方法提取到独立的类和辅助对象中，然后把它们组合起来，但不使用继承)。这反映了那个众 所周知的软件设计原则: “组合胜过继承(composition over inheritance)。”这个设计原则被很多人遵循，在代码设计中能提供极大的灵活性。
+
+- 复用组件代码，React使用Composition，Vue使用slot
+- 要在组件间复用非 UI 的功能，将其提取为一个单独的JavaScript模块，组件可以直接import引入而无需去extend继承
+- Vue中的mixin模式其实是基于策略的对象合并，而非继承。Vue的mixin模式也存在缺陷，在Vue3中代码重用应该通过Composition API来实现
 
 # 参考
 

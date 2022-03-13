@@ -278,4 +278,4 @@ false == 0 && true == 1	//true
 
 【精度丢失】计算机在存储时十进制数据时，需要将其转换为二进制进行存储，转换过程中可能出现无限循环，但因为最多只能存储64位，所以需要进行0舍1入操作，再转换成十进制的时候就出现了误差，如0.1。解决办法是可以使用number-precision库，原理是先将小数都放大转换为整数然后再进行计算，转换为整数的过程是先转换成字符串，replace掉小数点，然后再还原为数值。
 
-【极限值】安全整数，Number.isSafeInteger()判断一个数是否在-2^53 + 1与2^53 - 1之间。Number.EPSILON表示一个极小的常量，误差小于这个数时可以忽略。Number.isFinite()判断一个数不能为Infinity或者-Infinity。
+【极限值】安全整数，Number.isSafeInteger()判断一个数是否在-2^53 + 1与2^53 - 1之间，使用ES11的BigInt时可以突破这个范围。Number.EPSILON表示一个极小的常量，误差小于这个数时可以忽略。Number.isFinite()判断一个数不能为Infinity或者-Infinity。

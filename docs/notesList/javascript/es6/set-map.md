@@ -150,11 +150,7 @@ class Foo {
 }
 ```
 
-
-
-## 前沿
-
-### WeakRef 
+## WeakRef 
 
 WeakSet 和 WeakMap 是基于弱引用的数据结构，[ES2021](https://github.com/tc39/proposal-weakrefs) 更进一步，提供了 WeakRef 对象，用于直接创建对象的弱引用。
 

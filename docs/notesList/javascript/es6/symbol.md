@@ -8,8 +8,8 @@ s.toString().match(/bar/)
 
 ## Symbol.for(key)
 
-- `Symbol.for(key)` 返回对应key的symbol，如果存在的话，否则新建一个对应的symbol，并放入全局 symbol 注册表中。
-- `Symbol.keyFor` 查询全局注册表
+- `Symbol.for(key)` 如果全局 symbol 注册表中存在的话，返回对应key的symbol，否则新建一个对应的symbol，并放入注册表中
+- `Symbol.keyFor(symbol)` 查询全局注册表
 
 ```js
 /* Symbol.for */
@@ -24,7 +24,7 @@ let s2 = Symbol('bar');
 console.log(Symbol.keyFor(s2)); // undefined
 ```
 
-## 作为属性值
+## 作为属性名
 
 ```js
 let s1 = Symbol('foo'),

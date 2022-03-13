@@ -2,7 +2,7 @@
 
 【ECMAScript 和 JavaScript】前者是后者的规范，后者是前者的实现，类似于Unicode和UTF系列的关系
 
-#### 数据类型
+## 数据类型
 
 【为什么 typeof null 是object】JS在底层存储变量时，会在变量机器码的前1-3位存储其类型信息。object类型变量的前三位是000，而null的机器码全为0，所以被typeof误判为object类型。
 
@@ -10,15 +10,15 @@
 
 【undefined、null和NaN】`undefined`表示原始值，变量未定义；`null`表示缺少值，变量为空对象；`NaN`属于number类型，表示一个非数值。NaN跟所有数都不相等，包括自身。最特殊的是`undefined == null`。
 
-#### number
+### number
 
 【浮点数精度】javascript所有number类型的数据都是以64位双精度浮点数进行存储，在内存中占用8个字节（整数也是，但是在整数运算时会转换成32位进行运算）。符号位占用1位、指数(小数点移动的位数)11位、小数部分52位，位数不够就用0补齐。
 
 【精度丢失】计算机在存储时十进制数据时，需要将其转换为二进制进行存储，转换过程中可能出现无限循环，但因为最多只能存储64位，所以需要进行0舍1入操作，再转换成十进制的时候就出现了误差，如0.1。解决办法是可以使用number-precision库，原理是先将小数都放大转换为整数然后再进行计算，转换为整数的过程是先转换成字符串，replace掉小数点，然后再还原为数值。
 
-【极限值】安全整数，`Number.isSafeInteger()`判断一个数是否在-2^53 + 1与2^53 - 1之间。`Number.EPSILON`表示一个极小的常量，误差小于这个数时可以忽略。`Number.isFinite()`判断一个数不能为Infinity或者-Infinity，Infinity与Infinity之间相等。
+【极限值】安全整数，`Number.isSafeInteger()`判断一个数是否在-2^53 + 1与2^53 - 1之间，使用ES11的BigInt时可以突破这个范围。`Number.EPSILON`表示一个极小的常量，误差小于这个数时可以忽略。`Number.isFinite()`判断一个数不能为Infinity或者-Infinity，Infinity与Infinity之间相等。
 
-#### string
+### string
 
 【字符串的不可变性】字符串作为一个基本数据类型，被存储在栈内存中一块固定大小的空间上，任何对字符串的修改都不会影响到它。
 
@@ -28,7 +28,7 @@
 
 【substring、substr、slice】MDN中推荐使用substring来替代substr，但substring中所有负参数值都被转换为0，所以不能用于反向索引。觉得slice方法最易用，也不会有歧义。
 
-#### array
+### array
 
 【数组的几种创建方法】使用构造函数Array，没有new时也会被自动补上；使用字面量表示法；使用`Arra.from`用一个类数组对象或迭代器创建一个数组；使用`Array.of`接收一组参数并创建一个数组实例，我觉得这个设计是用来取代构造函数Array接收多个参数的情况，这样构造函数Array方法就只需要用于创建一个初始化长度为n位的空数组。
 
@@ -38,7 +38,7 @@
 
 【定型数组】ArrayBuffer是原始的二进制数据，所有二进制数据处理的基础，定型数组是一种ArrayBuffer的视图，被设计用于提高与WebGL等原生库进行二进制数据交换的效率。例如使用Uint32Array来创建视图，就把buffer转换为一个32位整数的序列，每个整数4个字节，序列的长度就是buffer的长度除以4。定型数组更面向底层，js引擎针对做了优化，所以定型数组的速度非常快。
 
-#### object
+### object
 
 【对象的创建方法】使用 new 操作符和 Object 构造函数创建一个实例，然后再给它添加属性和方法；使用对象字面量表示法创建；使用原型模式 `Object.create`创建；继承Object类来创建一个子类，实例化子类来创建新对象（适合量产对象，例如工厂模式、构造函数模式、组合模式、寄生组合模式等等）。
 
@@ -46,11 +46,22 @@
 
 【控制对象状态】通过Object.preventExtensions、Object.seal、Object.freeze这三种方法不同程度上控制对象的扩展性。`Object.preventExtensions`使一个对象不能再添加新属性；`Object.seal`将元属性 configurable 设为 false，同时禁止新增或删除属性，并不影响修改某个属性的值；`Object.freeze`使一个对象无法添加、修改和删除属性，实际上就把对象变味了一个不可变的常量。三种方式都仅阻止添加自身的属性，原型依然可以添加和删除属性，所以需要将原型也冻结起来`Object.preventExtensions(Object.getPrototypeOf(obj))`。还有个局限性是只能冻结到第一层，也就是如果被冻结的属性值是个对象，则依然可以被修改。
 
+【常用API】<u>实例方法</u>obj.toString()、obj.valueOf()、obj.hasOwnProperty()、obj.propertyIsEnumerable()、obj.isPrototypeOf()；<u>类方法</u>Object.assign()、Object.create()、Object.is()、Object.getPrototypeOf()、Object.keys()、Object.entries()、Object.getOwnPropertyNames()、Object.getOwnPropertySymbols()、Object.defineProperty()
+
 【属性类型】自身的可枚举属性、不可枚举属性、Symbol 键；继承的可枚举属性、不可枚举属性、Symbol 键。
 
-【常用API】<u>实例方法 </u>obj.toString()、obj.valueOf()、obj.hasOwnProperty()、obj.propertyIsEnumerable()、obj.isPrototypeOf()；<u>类方法 </u>Object.assign()、Object.create()、Object.is()、Object.getPrototypeOf()、Object.keys()、Object.entries()、Object.getOwnPropertyNames()、Object.getOwnPropertySymbols()、Object.defineProperty()
+【查询某个对象是否有某个属性的方法】
 
-#### function
+- `obj.key` 直接用属性判断是否为undefined
+
+- `in` 操作符可以判断以上情况的全部属性
+- `for...in` 遍历自身的和继承的可枚举属性，不包含symbol键
+- `Object.keys` 仅包含自身的可枚举属性，不包含symbol键
+- `Object.getOwnPropertyNames` 包含自身的可枚举属性与不可枚举属性（除symbol键外的所有自身属性）
+- `obj.hasOwnProperty()` 和 `Object.hasOwn()` 用于判断所有的自身属性，包含symbol键
+- `obj.propertyIsEnumerable()` 用于判断自身的可枚举属性和symbol键
+
+### function
 
 【函数的原型】每个函数都有个`prototype`属性，然后它的`constructor`属性又指向了函数自身。函数也是一个对象，每个函数的原型链上都包含了 `Function.prototype`，这上面定义了name、arguments、call、apply、bind等等诸多函数通用的属性和方法，而这个原型自身又会连接到 `Object.prototype`
 
@@ -62,7 +73,7 @@
 
 【立即调用函数】IIFE，即立即调用的函数表达式。可以用于封装私有变量，模拟块作用域。
 
-【闭包】闭包指的是一个函数，引用了其它函数作用域中的变量。闭包中引用的变量会被保存在堆内存中，常驻内存。闭包的两个主要作用，一个是使用内部变量避免污染全局变量，另一个是基于变量常驻内存的特性，可以记住上一次调用的执行结果。闭包的应用场景非常多，例如用于回调函数例如setTimeout、结合IIFE模拟块作用域、函数柯里化、防抖节流等等。闭包的缺点是如果没有清除对闭包的引用，闭包不会被主动垃圾回收，就会常驻内存容易造成内存泄漏。
+【闭包】闭包指的是一个函数，引用了其它函数作用域中的变量。闭包中引用的变量会被保存在堆内存中，常驻内存。闭包的两个主要作用，一个是使用内部变量避免污染全局变量，另一个是基于变量常驻内存的特性，可以记住上一次调用的执行结果。闭包的应用场景非常多，例如用于回调函数例如setTimeout、结合IIFE模拟块作用域、函数柯里化、防抖节流等等。闭包的缺点是如果没有清除对闭包的引用，因为闭包(的作用域链)中仍然有对外层函数变量的引用，所以即使外层函数执行完成，其活动对象不会被主动垃圾回收，就会常驻内存容易造成内存泄漏。
 
 【递归与尾调用优化】函数每次递归都需要执行栈为其创建一个调用帧，容易造成栈溢出。而尾调用优化是ES6规范新增的一项内存管理优化机制，让JS引擎在满足条件的情况下可以重用调用帧（栈帧），这样在每次递归调用或者嵌套函数的调用时，栈内存上都只有一个栈帧，可以节省栈空间，还不会造成栈溢出。
 
@@ -74,7 +85,7 @@
 
 【管道函数】管道函数是指接收一系列处理函数，将前一个函数的结果直接传参给下一个的函数，从而省略了中间的赋值步骤，可以大量减少内存中的对象，节省内存。
 
-#### 引用类型
+### 引用类型
 
 【GMT和UTC】GMT指格林尼治平均时间，因为地球自转的不规则和天文观测本身的缺陷，所以GMT被UTC取代，也就是协调世界时。Unix time表示纪元时间，1970-01-01 00:00:00 UTC，`Date.now()`方法返回自 Unix time 至今所经过的毫秒数。
 
@@ -86,7 +97,21 @@
 
 【集合引用类型】包含了Object、Array、Map、WeakMap、Set、WeakSet等数据类型。
 
-#### 正则表达式
+## JSON
+
+【JSON与JavaScript】JSON是一种通用的数据交换格式，JavaScript语法中定义了JSON对象，但JSON不完全属于JavaScript，也不止能在JavaScript中使用。JSON.stringify()用于将 JavaScript 对象序列化为 JSON 字符串，JSON.parse()用于将 JSON 数组解析为 JavaScript 对象。
+
+【JSON.stringify序列化】JSON 用来序列化对象的自身的可枚举属性，可序列化的数据包括对象、数组、数值、字符串、布尔值和 null，其它数据格式的内容会被特殊处理。Date、RegExp、Error对象序列化的结果将只得到空对象；undefined、任何函数以及 symbol 值在序列化过程中会被忽略；NaN、Infinity和-Infinity 在序列化过程中会被转换为null。可以给对象的`toJSON`属性定义方法，JSON.stringify序列化对象时会调用这个方法。
+
+【JSON.parse解析】将 JSON 字符串解析为原生 JavaScript 值，第二个参数接收一个自定义转换规则的转换器。
+
+## 二进制数据
+
+【ArrayBuffer】
+
+【Blob】
+
+## 正则表达式
 
 【正则表达式断言】
 
@@ -115,11 +140,11 @@ s	dotAll	元字符`.`匹配任何字符(包括\n 或\r)
 - 正则实例：test() 、exec()    
 - 字符串：match()、matchAll()、replace()、replaceAll()、search()、split()
 
-#### Form
+## Form
 
 【表单序列化】将表单数据拼接成字符串，然后作为接口参数发送给后端。
 
-#### DOM
+## DOM
 
 【DOM】Document Object Model，文档对象模型，是 HTML 和 XML 文档的编程接口。DOM 表示由多层节点构成的文档，可以使用 JavaScript 访问和操作存储在 DOM 中的内容，从而实现操作网页内容。DOM由一系列节点类型构成，Node基础节点、文档节点(Document)、元素节点(Element)、注释节点(Comment)、文本节点(Text)、文档片段节点(DocumentFragments)等等，其中所有节点类型都继承自 Node 类型，不同节点类型对应不同的nodeType。
 
@@ -135,7 +160,7 @@ s	dotAll	元字符`.`匹配任何字符(包括\n 或\r)
 
 【DOM插入元素】innerHTML只会替换元素的子节点，outerHTML会将el元素及其子元素全部覆盖掉。可以使用insertAdjacentHTML()与 insertAdjacentText()在元素的指定位置插入。这几种方式插入元素时，被替换的元素上绑定的事件或属性仍会滞留在内存中，需要手动释放掉，否则容易造成内存泄漏。
 
-#### BOM
+## BOM
 
 【BOM】Browser Object Model，浏览器对象模型，核心是`window`对象，同时还包含了访问和操作导航的`location` 对象、访问浏览器信息的`navigator` 对象、显示器信息的`screen` 对象、访问历史的`history` 对象。
 
@@ -145,7 +170,7 @@ s	dotAll	元字符`.`匹配任何字符(包括\n 或\r)
 
 【history对象】使用 back()、forward()、go() 方法来完成在用户历史记录中向后和向前的跳转。浏览器的前进后退操作会触发window上的onpopstate事件。pushState方法将一条 state 记录加入到 history 对象中，一条 state 记录包含了 url、title 和 content 等属性；replaceState方法会修改当前state，而不会产生新的历史记录。
 
-#### 事件
+## 事件
 
 【事件流】JavaScript事件流，有事件捕获和事件冒泡两种机制，当年浏览器大战时，网景主张捕获方式，微软主张冒泡方式。后来 w3c 制定了统一的标准——先捕获再冒泡，这是针对事件流上的非target节点，而target节点上呢就是谁先注册就谁先。通常注册事件监听函数用的是addEventListener函数，其中第三个参数useCapture，表示是否使用捕获方式，默认是false也就是冒泡方式。然后事件委托，现在浏览器也都是默认用的冒泡机制。
 

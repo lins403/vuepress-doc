@@ -7,7 +7,7 @@
 
 ES6的更新主要是体现在以下方面：
 
-- 表达式：变量声明，解构赋值
+- 表达式：变量声明，解构赋值，箭头函数
 - 内置对象：字符串拓展、数值拓展、对象拓展、数组拓展、函数拓展、正则拓展、Symbol、Set、Map、Proxy、Reflect
 - 语句与运算：Class、Module、Iterator
 - 异步编程：Promise、Generator、Async。
@@ -95,61 +95,6 @@ function printPerson(foo, {name: personName, age: personAge}, bar) {
 	console.log(personName, personAge);
 }
 ```
-
-
-
-## Promise
-
-通过promise的链式调用，串行化异步任务，解决回调地狱问题
-
-### 状态
-
-1. pending
-2. fulfilled / resolved
-3. rejected
-
-![](https://mdn.mozillademos.org/files/8633/promises.png)
-
-### 方法
-
-| 实例方法                                        |                                                          |
-| ----------------------------------------------- | -------------------------------------------------------- |
-| Promise.prototype.then(onFulfilled, onRejected) | 添加成功或失败的回调到当前Promise, 并返回一个新的Promise |
-| Promise.prototype.catch(onRejected)             | 添加失败的回调到当前Promise, 并返回一个新的Promise       |
-| Promise.prototype.finally(onFinally)            | 添加一个回调到当前Promise（无论成功或者失败）            |
-
-| 静态方法                       |                                                              |
-| ------------------------------ | ------------------------------------------------------------ |
-| `Promise.resolve(value)`       | 返回一个以给定值解析后的Promise对象；如果这个值是：<br />1. 一个 promise ，那么将返回这个 promise； <br />2. thenable对象（即带有`"then" `方法），返回的promise会采用它的最终状态；<br />3. 其它，返回的promise将以此值完成 |
-| `Promise.reject(reason)`       | 返回一个状态为失败的Promise对象，并将给定的失败信息reason传递给对应的处理方法 |
-| `Promise.all(iterable)`        | 返回一个新的promise对象，在iterable参数对象里所有的promise对象都成功的时候才会触发成功 |
-| `Promise.allSettled(iterable)` | 返回一个新的promise对象，在iterable参数里所有Promises都完成后（包含成功和失败）返回 |
-| `Promise.any(iterable)`        | 只要其中的一个 promise 成功，就返回那个已经成功的 promise    |
-| `Promise.race(iterable)`       | 返回第一个完成后（包含成功和失败）的 promise                 |
-
-```js
-p.then(value => {
-  // fulfillment callback
-}, reason => {
-  // rejection callback
-})
-
-Promise.resolve('会被then的onFulfilled处理').then(console.log)
-Promise.reject('会被then的onRejected处理').then(console.log, console.warn)
-Promise.reject('只会被then的onRejected处理').then(console.log, console.warn).catch(console.error)
-Promise.reject('只会被catch的onRejected处理').catch(console.error).then(console.log, console.warn)
-Promise.reject('会被catch的onRejected处理').then(console.log).catch(console.error)
-// .then()和.catch()都是返回<fulfilled>状态的promise
-// 事实上, catch(onRejected) 内部会调用 then(undefined, onRejected)
-// 所以二者行为基本相同，谁在前就给谁处理
-```
-
-### 非重入特性
-
-- 每次 then / catch 方法都会返回一个新的 Promise 对象，从而实现**链式调用**。
-- 而本质上是在**微任务队列**进行执行，所以 then/catch/finally 等处理方法需要被当作微任务来排期（异步）执行，而非立即执行。这个特性被称为”非重入”(non-reentrancy)“ 特性
-
-[【技术分享】手写一个A+规范的完整版Promise，让异步处理更流畅](https://gzg.me/posts/2021/promise/)
 
 ## async/await
 
@@ -364,6 +309,22 @@ ES2019 以前，浏览器厂商可以自由决定 Function.prototype.toString()�
 ES2019 要求这个方法尽可能返回函数的源代码，否则返回{ [native code] }。
 
 ## ES2020
+
+可选链操作符`?.`
+
+```js
+a?.[x]
+// 等同于
+a == null ? undefined : a[x]
+
+a?.b()
+// 等同于
+a == null ? undefined : a.b()
+
+a?.()
+// 等同于
+a == null ? undefined : a()
+```
 
 空值合并运算符 `??`
 

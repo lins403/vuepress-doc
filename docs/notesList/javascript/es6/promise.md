@@ -27,6 +27,36 @@
 | `Promise.any(iterable)`        | 只要其中的一个 promise 成功，就返回那个已经成功的 promise    |
 | `Promise.race(iterable)`       | 返回第一个完成后（包含成功和失败）的 promise                 |
 
+#### Promise.resolve
+
+```js
+// 解析一个值，返回的promise将以此值完成
+const promise1 = Promise.resolve(123);
+promise1.then((value) => {
+  console.log(value);  // 123
+});
+
+// 解析一个promise，那么将返回这个promise
+const promise2 = Promise.resolve(promise1);
+promise2.then((value) => {
+  console.log(value);  // 123
+});
+
+// 解析一个thenable对象，返回的promise会采用它的最终状态
+const thenable = { 
+  then: function(resolve, reject) {
+    // resolve(123);
+    reject('failed')
+  }
+};
+const promise3 = Promise.resolve(thenable);
+promise3.then(()=>{}, (value) => {
+  console.log(value);  // failed
+});
+```
+
+#### then和catch
+
 ```js
 p.then(value => {
   // fulfillment callback
@@ -90,4 +120,31 @@ let p = new TrackablePromise((resolve, reject, notify) => {
 })
 ```
 
-### 
+### 错题
+
+1. 下面关于Promise说法正确的是(注意“返回结果”的意思包含成功或者失败) CD
+
+```js
+A. Promise.all在所有给定的promise都fulfilled后才返回结果		//传入promise都为空也可以输出结果
+B. Promise.race在给定的promise中，某个fulfilled后才返回结果		//rejected也会
+C. promise.then的回调函数中，可以返回一个新的promise
+D. 对于一个向后台获取数据已经产生结果的promise:p1，再次调用p1.then，不会去重新发起请求获取数据
+```
+
+```js
+// all 会被输出，而 race 不会被输出
+Promise.all([]).then((res) => {
+  console.log('all');
+});
+Promise.race([]).then((res) => {
+  console.log('race');
+});
+
+
+Promise.reject(0)
+  .catch(e => console.log('catch1: ',e))
+  .catch(e => console.log('catch2: ',e))
+  .then(e => console.log('then: ',e))
+// catch1:  0
+// then:  undefined
+```
