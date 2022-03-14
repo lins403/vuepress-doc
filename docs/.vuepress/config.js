@@ -304,8 +304,6 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
       collapsable: false,
       children: [
         '',
-        'resources',
-        'memo',
       ]
     },
     {
@@ -382,7 +380,9 @@ function interviewSidebar(groupA,groupB){
           'basic/javascript0',
           'basic/javascript1',
           'basic/javascript2',
+          'basic/vue1',
           'memo',
+          'resources',
         ]
       },
       {
@@ -390,6 +390,7 @@ function interviewSidebar(groupA,groupB){
         collapsable: false,
         children: [
           'advanced/performance',
+          'advanced/engineering1',
         ]
       },
     ]
