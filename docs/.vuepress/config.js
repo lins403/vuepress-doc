@@ -333,6 +333,7 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
       collapsable: false,
       children: [
         'es6/',
+        'es6/let-const',
         'es6/symbol',
         'es6/promise',
         'es6/set-map',
@@ -349,15 +350,15 @@ function JavaScriptSidebar (groupA, groupB, groupC, groupD) {
         'advanced/object-oriented',
         'advanced/engine',
         'advanced/execution-context',
+        'advanced/event-loop',
         'advanced/memory-garbage-collection',
-        'advanced/let-const',
-        'advanced/design-pattern',
-        'advanced/lodash',
         'advanced/binary',
         'advanced/animation',
         'advanced/web-worker',
         'advanced/skills',
         'advanced/applications',
+        'advanced/design-pattern',
+        'advanced/lodash',
       ]
     },
   ]

@@ -62,7 +62,7 @@ let requestID = window.requestAnimationFrame(() => {
 
 1. 递归动画渲染，支持暂停和恢复执行：[Using requestAnimationFrame](https://css-tricks.com/using-requestanimationframe/#aa-slightly-more-complex-example)
 
-2. 对scroll事件的节流
+2. 对scroll事件的节流（长列表渲染的时间分片）
 
 ```js
 let enabled = true;
@@ -83,4 +83,3 @@ window.addEventListener('scroll', () => {
   }
 });
 ```
-

@@ -107,9 +107,17 @@
 
 ## 二进制数据
 
-【ArrayBuffer】
+【ArrayBuffer】ArrayBuffer是对固定长度的连续内存空间的引用，是原始的二进制数据，所有二进制数据处理的基础。如要操作 ArrayBuffer，我们需要使用ArrayBuffer“视图”对象，如DataView或者TypedArray定型数组。
 
-【Blob】
+【Blob】*Binary large object*，二进制大对象，是 JavaScript 对不可变二进制数据的封装，表示一个类文件对象，可以按文本或者二进制的格式进行读取。Blob()构造函数接收一个数组用于创建blob，和一个options参数用于指定数组内容的MIME类型，并返回一个Blob对象。
+
+【TextDecoder 和 TextEncoder】TextDecoder 接口表示一个文本解码器，一个解码器只支持一种特定文本编码，它可以将字节流的内容读取到字符串中；TextEncoder与之相反，则是将字符串转换为字节，输出 UTF-8 字节流。
+
+【File】File对象继承自Blob对象，继承了blob的功能并扩展了与文件系统相关的功能，相当于特殊类型的Blob对象。通过File接口，可以查看有关文件的信息，并允许网页中的 JavaScript 访问文件内容。用户在一个 `<input>` 元素上选择文件后返回的 `FileList` 就是 `File` 对象。
+
+【fileReader】FileReader类型表示一种异步文件读取机制，FileReader是一个对象，其唯一目的是从 Blob 或 File 对象中读取数据。
+
+【MIME】Multipurpose Internet Mail Extensions，通常称为媒体类型，或 MIME 类型。是一种标准，用来表示文档、文件或字节流的性质和格式。常见的 MIME 类型有text/plain、text/html、image/png、application/json、multipart/form-data、…
 
 ## 正则表达式
 

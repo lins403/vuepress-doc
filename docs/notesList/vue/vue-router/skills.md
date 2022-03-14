@@ -145,6 +145,37 @@ const router = new VueRouter({
 
 ## 其它
 
+### 脚本计算渲染时间
+
+```js
+document.getElementById('button').addEventListener('click',function(){
+  // 记录任务开始时间
+  let now = Date.now();
+  
+  // 获取容器，将数据插入容器中
+  let ul = document.getElementById('container');
+  for (let i = 0; i < total; i++) {
+    let li = document.createElement('li');
+    li.innerText = ~~(Math.random() * 10000)
+    ul.appendChild(li);
+  }
+  
+  // 
+  console.log('JS运行时间：',Date.now() - now);
+	// setTimeout是宏任务，在下一次event loop中执行回调
+  setTimeout(()=>{
+    // DOM渲染的优先级高于宏任务执行，所以包含了渲染时间
+    console.log('总运行时间：',Date.now() - now);
+  },0)
+
+  // print JS运行时间： 38
+  // print 总运行时间： 957 
+})
+
+```
+
+
+
 ### 打开blank窗口
 
 方法一：`<router-link target="_blank" to="/login">登录</router-link>`

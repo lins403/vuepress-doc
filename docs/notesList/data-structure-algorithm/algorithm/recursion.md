@@ -115,7 +115,7 @@ const res = arr.map(item => {
 const arr2tree = (arr, id = null) =>
   arr
     .filter(item => item.parent_id === id)
-    .map(item => ({ ...item, children: nest(arr, item.id) }))
+    .map(item => ({ ...item, children: arr2tree(arr, item.id) }))
 console.log(arr2tree(arr, 0))
 ```
 

@@ -84,9 +84,15 @@ this.$nextTick(() => {
 
 ### 3）el-tree 长列表太卡
 
-[el-tree 长列表太卡的问题，我们解决了！](https://zhuanlan.zhihu.com/p/264350578)
+时间分片
 
-- 虚拟滚动
+- 使用`requestAnimationFrame`结合`DocumentFragment`来进行分批渲染
+- [「前端进阶」高性能渲染十万条数据(时间分片)](https://juejin.cn/post/6844903938894872589)
+
+虚拟滚动 **[ vue-virtual-scroll-list](https://github.com/tangbc/vue-virtual-scroll-list)**
+
+- [新手也能看懂的虚拟滚动实现方法](https://juejin.cn/post/6844904183582162957)
+- [「前端进阶」高性能渲染十万条数据(虚拟列表)](https://juejin.cn/post/6844903982742110216)
 
 ### 4）封装dialog的loading效果(loading service)
 

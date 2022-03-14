@@ -33,6 +33,12 @@ function shuffle(arr) {
 }
 ```
 
+### flat
+
+```js
+const deepFlatten = arr => [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)))
+```
+
 ### 扁平化数组转树🌲
 
 ```

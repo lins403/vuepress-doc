@@ -29,7 +29,7 @@ console.log(window.performance)
 
 ```js
 // 只适用于日期时间相关操作，而且是不要求计时精度的操作
-data.now()
+date.now()
 
 // 返回一个精确到毫秒的DOMHighResTimeStamp，但这个时间戳实际上并不是高精度的，为了降低安全威胁，浏览器做了不同程度上的四舍五入处理。
 performance.now()

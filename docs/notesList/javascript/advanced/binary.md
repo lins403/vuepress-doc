@@ -81,15 +81,19 @@ console.log(view.byteLength) // 16，字节中的大小
 
 ## Blob
 
-*Binary large object*，二进制大对象，是 JavaScript 对不可修改二进制数据的封装类型，
+*Binary large object*，二进制大对象，是 JavaScript 对不可修改二进制数据的封装类型。
 
-Blob表示一个不可变、原始数据的类文件对象，实际上是File的超类/父类
+`Blob` 对象表示一个不可变、原始数据的类文件对象。它的数据可以按文本或二进制的格式进行读取，也可以转换成 `ReadableStream` 来用于数据操作。 
 
  `Blob` 则表示“具有类型的二进制数据”，这样可以方便 `Blob` 用于在浏览器中常见的上传/下载操作。
 
 - XMLHttpRequest，fetch 等进行 Web 请求的方法可以自然地使用 `Blob`，也可以使用其他类型的二进制数据。
 
-- 我们可以轻松地在 `Blob` 和低级别的二进制数据类型之间进行转换：
+
+我们可以轻松地在 `Blob` 和低级别的二进制数据类型之间进行转换：
+
+- 可以使用 `new Blob(...)` 构造函数从一个类型化数组（typed array）创建 `Blob`
+- 可以使用 `FileReader` 从 `Blob` 中取回 `arrayBuffer`，然后在其上创建一个视图（view），用于低级别的二进制处理。
 
 ```js
 // 构造器，第一个参数必须是一个数组 [...]，并在其中指定 MIME 类型
