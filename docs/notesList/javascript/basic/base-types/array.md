@@ -90,7 +90,7 @@ toLocaleString()
 toString()
 valueOf()
 
-// 不会改变原数组
+// 不会改变原数组，遍历时会跳过数组空元素
 flat()
 map()
 filter()

@@ -167,6 +167,7 @@ flex: 1 1 auto;
 flex-grow: 1;    // 跨度扩展系数
 flex-shrink: 1;  // 默认宽度之和大于容器的时候才会发生收缩，不同情况下shrink和grow只有一个能生效
 flex-basis: auto;  // 主轴方向上的初始大小，grow和shrink的基础大小
+// flex: 1表示的含义就是等分剩余空间
 ```
 
 ```scss

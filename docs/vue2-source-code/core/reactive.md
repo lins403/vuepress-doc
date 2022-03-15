@@ -89,7 +89,7 @@ observe --> new Observer()
 
 实例在 `mountComponent` 挂载时会首次渲染，然后生成一个 `render watcher`，递归访问实例的所有属性，并触发它们的getter。在渲染的过程中完成对实例属性的依赖收集，~~然后初始化的时候就会执行它们的回调函数~~。
 
-Render Watcher被派发更新以后，会触发组件重新渲染生成新的vnode，然后patch更新到DOM上。Watcher内部有个id，在更新队列中会做排序，Render Watcher是最后被更新的。
+Render Watcher被派发更新以后，会调用在实例化watcher时传入的updateComponent方法，会触发组件更新并重新渲染生成新的vnode，然后patch更新到DOM上。Watcher内部有个id，在更新队列中会做排序，Render Watcher是最后被更新的。
 
 在渲染的时候访问过这个值，才会生成一个 `render watcher`，这样修改这个值的时候才会触发DOM更新，才会响应式更新视图。换句话说，没有绑定在视图(模板)上的响应式数据，即使更改了数据，也不会触发重新渲染和视图更新。
 

@@ -267,6 +267,13 @@ sessionStorage.book = "Professional JavaScript";
 >
 > 客户端：
 >
+> - 在 html 页面前面加 meta 标签
+>
+>   ```html
+>   <meta http-equiv="pragram" content="no-cache">
+>   <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+>   ```
+>
 > - Ajax请求的request header中添加 `Cache-control: no-cache`或者`"If-Modified-Since","0"`
 > - 在URL后面加上一个属性，属性值使用一个随机数或者是时间戳
 > - `CTRL+Shift+R`手动刷新
@@ -274,7 +281,14 @@ sessionStorage.book = "Professional JavaScript";
 > 服务器：
 >
 > - 给reponse header添加 `Cache-Control no-cache`或者`etag off`等等许多方式
+>
 > - 代理服务器nginx也能设置
+>
+>   ```nginx
+>   add_header Cache-Control "no-cache, no-store";
+>   ```
+>
+> - webpack中给css 和 js 的名字都加上哈希值，就会被当成新的资源而不会使用缓存，vue-cli 里已默认配置。
 
 # 参考
 

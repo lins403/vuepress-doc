@@ -147,6 +147,13 @@ open "http://www.google.com/search?q=$(ruby -rcgi -e 'print CGI.escape $<.read.c
 
 在 finder 中打开应用程序，找到对应的应用，右键选择打开
 
+#### 无法启动 Parallels Desktop，因为您的 Mac 操作系统缺少一些必需组件
+
+```sh
+export SYSTEM_VERSION_COMPAT=1
+open -a Parallels\ Desktop.app
+```
+
 ## 相关资源
 
 [GitHub - Louiszhai/tool: 开发效率提升：Mac生产力工具链推荐](https://github.com/Louiszhai/tool)

@@ -39,6 +39,21 @@ HTML 4.01 中有三种声明，在 HTML5 中只有一种：`<!DOCTYPE html>`
   - defer脚本<u>可以确保按照文档顺序执行</u>，即使第二个defer脚本先下载完成，也要等待第一个defer脚本下载完成后执行
   - <u>适用于需要整个 DOM 的脚本</u>，以及脚本的相对执行顺序很重要的时候
 
+异步加载JS方式，除了使用`defer` 和 `async` 属性，还可以使用匿名函数自调动态创建script标签加载js
+
+```js
+(function(){
+  var scriptEle = document.createElement("script");
+  scriptEle.type = "text/javasctipt";
+  scriptEle.async = true;
+  scriptEle.src = "http://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js";
+  var x = document.getElementsByTagName("head")[0];
+  x.insertBefore(scriptEle, x.firstChild);  
+})();
+```
+
+
+
 ### link 标签
 
 规定了当前文档与外部资源的关系
