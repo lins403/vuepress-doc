@@ -29,6 +29,15 @@ module.exports = {
 <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 ```
 
+### 4）使用public下的文件资源
+
+```js
+const result = axios.get('/data/mapData.js', {responseType: 'text/javascript'})
+const mapData = eval(`(${result.replace(/^.*?=(.*?)$/m, '$1')})`)
+```
+
+
+
 ## 踩坑
 
 ### 2）eslint8与vue-eslint-parser不兼容

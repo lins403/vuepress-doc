@@ -140,15 +140,15 @@ nginx 有静态压缩和实时压缩(always)两种方式
 - 如果 `gzip_static` 设置为 off 以后， `gzip` 能在webpack gzip已经压缩的结果上，进一步进行压缩
 
 ```nginx
+# http, server, location
 http {
     gzip on;
     gzip_static on;
-    gzip_min_length  1k;	#Default20，文件体积小于这个设置值时则不会进行精压缩
+    gzip_min_length  1k;	#Default20，文件体积小于这个设置值时则不会进行精压缩 (B)
     gzip_buffers     4 16k;
     gzip_http_version 1.1;
     gzip_comp_level 5;	#可选值1-9，数值越高压缩比也就越高。但需要考虑CPU资源消耗，按实际业务场景来选择，通常5就够了
-    gzip_types     text/plain application/javascript application/x-javascript         
-    text/javascript text/css application/xml;
+    gzip_types     text/plain application/javascript application/x-javascript		text/javascript text/css application/xml;
     gzip_vary on;
     gzip_proxied   expired no-cache no-store private auth;
     gzip_disable   "MSIE [1-6]\.";

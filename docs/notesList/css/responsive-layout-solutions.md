@@ -29,6 +29,14 @@
 
 [前端响应式布局原理与方案（详细版） - 掘金](https://juejin.cn/post/6844903814332432397)
 
+[HTML <link> media Attribute](https://www.w3schools.com/tags/att_link_media.asp)
+
+```html
+<link rel="stylesheet" href="styles.css"> <!-- blocking -->
+<link rel="stylesheet" href="print.css" media="print"> <!-- not blocking -->
+<link rel="stylesheet" href="mobile.css" media="screen and (max-width: 480px)"> <!-- not blocking on large screens -->
+```
+
 
 
 ## 利用 meta 标签对 viewport 进行控制

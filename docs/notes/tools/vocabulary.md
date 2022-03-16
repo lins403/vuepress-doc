@@ -109,36 +109,36 @@
 
 ## 短语
 
-|                          |                          |                                           |                            |
-| ------------------------ | ------------------------ | ----------------------------------------- | -------------------------- |
-|                          |                          | a divergence of interests between A and B | 利益分歧                   |
-| As i alluded             | 正如我提到的             | be a separate operation to                | 单独操作                   |
-|                          |                          | be named after                            | 以…命名                    |
-|                          |                          | create targeted ideal user experiences.   | 创建有针对性的理想用户体验 |
-| 30 or so                 | 30左右                   | code compliance standards                 | 代码合规标准               |
-| around the corner        | 即将推出                 | you established for your application      |                            |
-| aside from               | 除了                     | compliance configuration                  | 合规性配置                 |
-|                          |                          | get assigned a namespace                  | 被分配一个命名空间         |
-| be addressed             | 被解决                   | has grown exponentially                   | 呈指数增长                 |
-| be leveraged for         | 被利用                   | hooking … up to existing code             | 将…与现有代码挂钩          |
-| be reflected in          | 反映在                   | how is it even possible?                  |                            |
-| be more than happy to    | 很高兴                   | looks like it does the trick for me       | 看起来对我有用             |
-| case by case             | 个案的; 具体问题具体分析 |                                           |                            |
-| execute in parallel      | 并行执行                 | it keeps this in sync with …              | 与…保持同步                |
-| In a gist                | 总而言之                 | iteration and innovation stall            | 迭代和创新停滞             |
-| In a nutshell            | 简而言之                 | Erase the job log.                        | 清除作业日志               |
-| in the big picture       | 总体来看                 | no knowledge of them is required          | 不需要了解                 |
-| kick in                  | 起作用                   |                                           |                            |
-| kick off                 | 开始                     | pushed me into a state of the fret        | 烦恼                       |
-| from scratch             | 从头开始                 | makes testing a breeze                    | 让测试变得轻而易举         |
-| out of the box           | 开箱即用                 | proposed changes.                         | 提议的改变                 |
-| there's pros and cons    | 有利有弊                 | right off the bat                         | 立即行动/执行              |
-| stay tuned               | 敬请关注                 | ship features and deliver business value  | 交付功能和呈现业务价值     |
-| That is,                 | 也就是说                 | the rumoured upcoming sth.                | 传言中即将到来的           |
-| trumps over              | 胜过                     | that’s not always the case                | 并非总是如此               |
-| work around              | 解决                     | what problem does this solve for...       | 为…解决了什么问题          |
-| uses sth. under the hood | 底层使用…                | When rules evaluate to true,              | 当规则符合时               |
-|                          |                          | Yes, sort of.                             | 是的，有点                 |
+|                                |                          |                                           |                            |
+| ------------------------------ | ------------------------ | ----------------------------------------- | -------------------------- |
+| a rudimentary implemenation of | …的基本实现              | a divergence of interests between A and B | 利益分歧                   |
+| As i alluded                   | 正如我提到的             | be a separate operation to                | 单独操作                   |
+|                                |                          | be named after                            | 以…命名                    |
+|                                |                          | create targeted ideal user experiences.   | 创建有针对性的理想用户体验 |
+| 30 or so                       | 30左右                   | code compliance standards                 | 代码合规标准               |
+| around the corner              | 即将推出                 | you established for your application      |                            |
+| aside from                     | 除了                     | compliance configuration                  | 合规性配置                 |
+|                                |                          | get assigned a namespace                  | 被分配一个命名空间         |
+| be addressed                   | 被解决                   | has grown exponentially                   | 呈指数增长                 |
+| be leveraged for               | 被利用                   | hooking … up to existing code             | 将…与现有代码挂钩          |
+| be reflected in                | 反映在                   | how is it even possible?                  |                            |
+| be more than happy to          | 很高兴                   | looks like it does the trick for me       | 看起来对我有用             |
+| case by case                   | 个案的; 具体问题具体分析 |                                           |                            |
+| execute in parallel            | 并行执行                 | it keeps this in sync with …              | 与…保持同步                |
+| In a gist                      | 总而言之                 | iteration and innovation stall            | 迭代和创新停滞             |
+| In a nutshell                  | 简而言之                 | Erase the job log.                        | 清除作业日志               |
+| in the big picture             | 总体来看                 | no knowledge of them is required          | 不需要了解                 |
+| kick in                        | 起作用                   |                                           |                            |
+| kick off                       | 开始                     | pushed me into a state of the fret        | 烦恼                       |
+| from scratch                   | 从头开始                 | makes testing a breeze                    | 让测试变得轻而易举         |
+| out of the box                 | 开箱即用                 | proposed changes.                         | 提议的改变                 |
+| there's pros and cons          | 有利有弊                 | right off the bat                         | 立即行动/执行              |
+| stay tuned                     | 敬请关注                 | ship features and deliver business value  | 交付功能和呈现业务价值     |
+| That is,                       | 也就是说                 | the rumoured upcoming sth.                | 传言中即将到来的           |
+| trumps over                    | 胜过                     | that’s not always the case                | 并非总是如此               |
+| work around                    | 解决                     | what problem does this solve for...       | 为…解决了什么问题          |
+| uses sth. under the hood       | 底层使用…                | When rules evaluate to true,              | 当规则符合时               |
+|                                |                          | Yes, sort of.                             | 是的，有点                 |
 
 ## 例句
 

@@ -354,7 +354,7 @@ Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM�
 >
 > 创建一个Vue实例时，会进行init初始化，首先merge options，然后再调用 initState 初始化相关属性，将data、props、methods等等option添加到这个vue实例上，然后将实例 mount 挂载到DOM节点上。
 >
-> 在开始挂在前，会先判断是否有template模板，如果有的话就会进行 compile 编译，先 parse 解析成 AST 对象，并且对AST进行 optimize 优化（深度遍历AST树，标记静态属性和静态节点）。然后再 generate 生成对应的 render function，如果没有template的话则会将当前el节点与其后代元素（outerHTML）用于创建一个template模板。
+> 在开始挂载前，会先判断是否有template模板，如果有的话就会进行 compile 编译，先 parse 解析成 AST 对象，并且对AST进行 optimize 优化（深度遍历AST树，标记静态属性和静态节点）。然后再 generate 生成对应的 render function，如果没有template的话则会将当前el节点与其后代元素（outerHTML）用于创建一个template模板。
 >
 > 执行编译生成的 render function，通过 createElement 方法生成 VNode，建立起来的整个 VNode 树就是 Virtual DOM。
 >
@@ -362,7 +362,7 @@ Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM�
 >
 > 如果在这过程中数据发生变化，则会触发update更新，re-render重新渲染生成新的VNode，patch方法会将新旧 VNode 进行比较，首先通过 `sameVnode(oldVnode, vnode)`方法判断它们是否是相同的 VNode，来决定走不同的更新逻辑。如果新旧 `vnode` 不同，就替换掉已存在的节点，主要分为三步：创建新节点、更新父的占位符节点、
 
-将模板template解析成 AST 结构的JavaScript对象，通过 render 函数调用生成 VNode，通过 diff 算法比较新旧 VNode 然后生成补丁对象，遍历补丁对象，更新DOM节点。
+将模板template解析成 AST 结构的JavaScript对象，通过 render 函数调用 createElement 生成 VNode，通过 diff 算法比较新旧 VNode 然后生成补丁对象，遍历补丁对象，更新DOM节点。
 
 `createElement` 执行返回一个“虚拟节点 ( virtual node，VNode )”，包含创建DOM所需要的信息。
 
@@ -387,8 +387,13 @@ SPA，意味着最终只有一个HTML文件，其余都是静态资源，动态�
 
 #### loader和plugin
 
-- html-webpack-plugin
-- terser-webpack-plugin
+- html-webpack-plugin 将css文件和js文件自动注入到HTML文件中（打包后的bundle）
+- terser-webpack-plugin  压缩代码，还可以去掉console和debug信息，webpack5开始内置支持
+- mini-css-extract-plugin  从js文件中提取css代码到单独的文件中，对css代码进行代码压缩等（因为有时我们会把css给import进js文件）
+- @vue/preload-webpack-plugin 给资源的link添加Preload和Prefetch
+  - `<link rel="preload">`是一种 resource hint，用来指定页面加载后很快会被用到的资源，所以在页面加载的过程中，我们希望在浏览器开始主体渲染之前尽早 preload。会自动给初始化渲染需要的文件加上preload（预加载）
+  - `<link rel="prefetch">`是一种 resource hint，用来告诉浏览器在<u>页面加载完成后</u>，利用空闲时间提前获取用户未来可能会访问的内容。通过路由懒加载splitchunks方式生成的css和js都会被自动加上prefetch（预获取，类似于script标签的async，会比较消耗带宽）。
+
 
 ## 插件
 
