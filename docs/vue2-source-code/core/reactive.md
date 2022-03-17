@@ -122,7 +122,7 @@ if (options) {
 3. computed watcher
 4. sync watcher
    - `immediate: true`
-   - 当响应式数据发送变化后，触发了 `watcher.update()`，只是把这个 `watcher` 推送到一个队列中，在 `nextTick` 后才会真正执行 `watcher` 的回调函数。而一旦我们设置了 `immediate`，就可以在当前 `Tick` 中同步执行 `watcher` 的回调函数
+   - 当响应式数据发生变化后，触发了 `watcher.update()`，只是把这个 `watcher` 推送到一个队列中，在 `nextTick` 后才会真正执行 `watcher` 的回调函数。而一旦我们设置了 `immediate`，就可以在当前 `Tick` 中同步执行 `watcher` 的回调函数
 
 计算属性本质上是 `computed watcher`，而侦听属性本质上是 `user watcher`，但通过设置deep或者immediate，又可以衍生出 `deep watcher` 和 `sync watcher`
 

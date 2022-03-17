@@ -1,12 +1,14 @@
 # Vue基础
 
-【SPA】单页面应用，意味着最终只有一个HTML文件，其余都是静态资源，通过动态的方式注入到html中。SPA的核心是前端路由，路由变化时，在客户端实现页面内容的切换，从而不用刷新页面。
-
-【Vue的特点】渐进式、组件化、数据驱动DOM、虚拟DOM、单页面路由；单页面应用不利于SEO，首屏加载时间长
+【Vue的特点】渐进式、组件化、数据驱动DOM、虚拟DOM、单页面路由
 
 【Vue与React的异同点】都属于单页面应用的框架，都是组件化开发和单向数据流，都使用了Virtual DOM，并支持SSR。不同的地方在于，React的UI代码是通过 JSX 来写的而Vue是template，React数据是单向绑定而Vue可以双向绑定，React需要手动设置数据变化，而Vue在初始化时就实现了数据的响应式处理。Vue内置了很多API和指令，实现了丰富的功能，而React中需要开发人员自己实现。
 
-【MVVM】Model-View-ViewModel，将系统分离为数据层Model和视图层View，ViewModel层实现了数据的双向绑定，通过数据绑定的方式将数据更新到DOM，而通过事件监听，基于DOM上的变化更新数据。通过v-text、v-html、{{}}、v-bind等方式将数据绑定到视图，通过v-model实现双向绑定。总之，通过MVVM模式分离视图代码和业务逻辑，数据驱动DOM。
+【MVVM】Model-View-ViewModel，将系统分离为数据层Model和视图层View，ViewModel层实现了数据的双向绑定，通过数据绑定的方式将数据更新到DOM，而通过事件监听，基于DOM上的变化更新数据。通过v-text、v-html、{{}}、v-bind等方式将数据绑定到视图，通过v-model实现双向绑定。总之，通过MVVM模式分离视图代码和业务逻辑，数据驱动DOM。（视图=模板+数据=组件+数据模型）
+
+【SPA】单页面应用，意味着最终只有一个HTML文件，其余都是静态资源，通过动态的方式注入到html中。SPA的核心是前端路由，路由变化时，在客户端实现页面内容的切换，从而不用刷新页面。单页面应用程序除了首页外的页面加载速度更快，页面交互性更好。但是单页面应用不利于SEO，首屏加载时间长。
+
+【SSR/同构应用】网站的初始页面内容是在服务端渲染完成的，浏览器可以直接下载并使用已经渲染好数据的HTML文件。优势是利于SEO，首页加载快，也适用于静态网站，劣势是增加代码复杂度，需要占用更多的服务器资源，构建和部署也更加复杂。
 
 ## 应用
 
@@ -48,7 +50,13 @@
 
 【Vue-loader热更新】
 
-【Vuex】用于全局状态管理，store是一个全局单例对象，但是可以将store分割到不同模块中，每个模块可以维护自己的state、getters、mutations、actions。state是可以被所有组件共享的数据，通过Vue的响应式绑定
+【Vuex】用于全局状态管理，store是一个全局单例对象，但是可以将store分割到不同模块中，每个模块可以维护自己的state、getters、mutations、actions。state是可以被所有组件共享的数据，只能通过mutation来同步修改state，actions可以包含异步操作，最终也是通过提交mutations的方式来修改state。
+
+Vue.use安装Vuex的时候调用install方法，通过Vue.mixin混入beforeCreate钩子，通过Vue的init方法，将store数据绑定到this对象的`$store`属性上，子组件的`$store`属性来自于`$store`属性，以此嵌套，从而将这个store实例挂载到所有实例上。通过Vue的data属性绑定store，computed属性绑定getters，从而将store和getters的state变为响应式，而且getters还可以像computed那样缓存依赖。
+
+【Vuex插件】内置了 Logger 插件，记录state更改的前后状态，但是有dev-tools时就不需要了。
+
+dispatch和commit方法都是封装过的，commit根据传入的type获取并执行对应的mutations，dispatch则获取并执行对应的actions
 
 ## 源码
 
@@ -58,9 +66,11 @@
 
 【虚拟DOM】利用虚拟DOM的技术，大大提高了更新DOM时的性能。path方法是平台相关的，把虚拟DOM映射到真实DOM。
 
-【DOM异步更新机制与`$nextTick`】视图上的响应式数据更新的时候，会将更新派发给render watcher，会调用updateComponent方法，触发组件重新渲染生成vnode，然后patch更新到DOM上。但是watcher不是被立即执行更新，而是先将watcher放入一个队列中，相同的watcher只会被添加进一次队列，这里是一个优化点，做了watcher去重，避免了多余的计算和DOM操作。然后给队列做排序，以保证父组件的watcher比子组件先执行，更新的时候先渲染父组件。JavaScript是单线程的，基于事件循环机制，每一轮事件循环称作一个tick，在这轮的主线程执行完成后开启下一个tick，从微任务队列中取出微任务执行。然后这个watcher的队列会等到nextTick，也就是被当作一个微任务来执行，然后取出队列的watcher执行更新。所以从数据的变化到 DOM 的重新渲染是一个异步过程。（为什么要nextTick再更新呢，那就是等数据都修改完成，所有watcher都生成完了再做去重，然后最终patch的时候只需要做一遍DOM更新）
+【DOM异步更新机制】视图上的响应式数据更新的时候，会将更新派发给render watcher，会调用updateComponent方法，触发组件重新渲染生成vnode，然后patch更新到DOM上。但是watcher不是被立即执行更新，而是先将watcher放入一个队列中，相同的watcher只会被添加进一次队列，这里是一个优化点，做了watcher去重，避免了多余的计算和DOM操作。然后给队列做排序，以保证父组件的watcher比子组件先执行，更新的时候先渲染父组件。JavaScript是单线程的，基于事件循环机制，每一轮事件循环称作一个tick，在这轮的主线程执行完成后开启下一个tick，从微任务队列中取出微任务执行。然后这个watcher的队列会等到nextTick，也就是被当作一个微任务来执行，然后取出队列的watcher执行更新。所以从数据的变化到 DOM 的重新渲染是一个异步过程。（为什么要nextTick再更新呢，那就是等数据都修改完成，所有watcher都生成完了再做去重，然后最终patch的时候只需要做一遍DOM更新）
 
-全局 API `Vue.nextTick`，和实例上的方法 `vm.$nextTick`，完全一致，调用的是同一个方法，传给它的回调方法也会等到下一个tick才被执行，这时候就可以访问到更新以后的DOM了。nextTick内部调用的是promise.then方法，如果不支持promise，就是用MutationObserver，再到使用setImmediate(宏任务)，直至setTimeout。
+【`$nextTick`】全局 API `Vue.nextTick`，和实例上的方法 `vm.$nextTick`，完全一致，调用的是同一个方法，传给它的回调方法也会等到下一个tick才被执行，这时候就可以访问到更新以后的DOM了。nextTick内部调用的是promise.then方法，如果不支持promise，就是用MutationObserver，再到使用setImmediate(宏任务)，直至setTimeout。
+
+【组件更新】数据发生变化触发重新渲染，生成新的VNode，patch的时候，将新的vnode与旧的vnode进行比较节点是否相同，以决定是否需要复用节点。其中如果key不同，就会被当作不同的vnode，创建新节点然后删除旧节点。如果新旧节点相同，则会调用patchVnode方法，把新vnode patch到旧vnode上去。当新旧 VNode 同时存在 children，通过 updateChildren 对子节点做更新。在旧vnode的子节点中尽量找到与新vnode的子节点相同 (sameVnode) 的节点，复用旧的DOM以减少对DOM的操作。
 
 ## 其它
 
