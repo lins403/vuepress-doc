@@ -59,7 +59,7 @@ if (vm.$options.el) {
 
 ### `compiler` 版本的 `$mount` 实现
 
-没有定义 `render function`（hand-written render functions / JSX，后者我猜测通过loader直接编译为了渲染函数），则无论是 el 还是 template，最后都会被调用 compileToFunctions 编译成 render function
+没有定义 `render function`（hand-written render functions / JSX），则无论是 el 还是 template，最后都会被调用 compileToFunctions 编译成 render function
 
 ### `runtime` 版本的 `$mount` 实现
 

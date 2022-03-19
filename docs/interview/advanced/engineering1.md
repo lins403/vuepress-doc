@@ -1,5 +1,11 @@
 # 前端工程化
 
+## 浏览器
+
+### 页面渲染
+
+【像素管道】执行JavaScript、样式计算、布局、绘制、合成。首先执行JS代码来实现一些视觉变化的效果，例如requestAnimationFrame钩子方法会在重排重绘前被执行。然后进行样式计算，根据css规则计算每个元素的样式。布局时计算元素占据的空间大小以及在屏幕的位置。然后根据布局，进行像素填充，使用多个图层来绘制，最后将图层进行合并。
+
 ## Webpack
 
 ### 优化
@@ -8,7 +14,7 @@
 
 alias名称、devServer代理、svg配置loader、externals配置cdn、config.optimization.splitChunks
 
-【首页加载速度优化】最有效的是压缩文件，webpack中给生产环境默认启用了tree-shaking、terser代码压缩、compression压缩文件，经过webpack的压缩以后，nginx中还可以设置压缩，这个效果最明显。然后分割代码、使用路由懒加载；拆分打包构建后的bundle文件，将大的chunk拆分 (config.optimization.splitChunks)；图片懒加载 (vue-lazyload)；外部资源通过async和defer设置成异步加载而不影响DOM解析，也可以给资源使用preload和prefetch属性。首页白屏时间久还可以使用骨架图，尤其是移动端，SSR首页渲染也可以。剩余的是业务代码上的优化，例如图片懒加载、减少重排重绘。
+【首页加载速度优化】最有效的是压缩文件，webpack中给生产环境默认启用了tree-shaking、terser代码压缩、compression压缩文件，经过webpack的压缩以后，nginx中还可以设置压缩，这个效果最明显。然后分割代码、使用路由懒加载；拆分打包构建后的bundle文件，将大的chunk拆分 (config.optimization.splitChunks)；图片懒加载 (vue-lazyload)；外部资源通过async和defer设置成异步加载而不影响DOM解析，也可以给资源使用preload和prefetch属性；将静态资源部署到CDN上以支持高并发。首页白屏时间久还可以使用骨架图，尤其是移动端，SSR首页渲染也可以。剩余的是业务代码上的优化，例如图片懒加载、减少重排重绘。
 
 【打包构建优化】loader层面上，cache-loader缓存编译结果，thread-loader启用**多进程**进行编译。插件层面上，terser压缩代码、mini-css那个插件压缩css、compression压缩文件。使用cdn的方式，让Webpack不打包这些资源，然后在index.html中配置async和defer属性，让资源异步加载而不会阻塞页面解析；
 
@@ -30,11 +36,11 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
 
 ### loader
 
-`vue-loader`
+`vue-loader`：预编译生成render function；为每个组件模拟出 scoped CSS；支持热重载，实例在不刷新页面的情况下被替换，提升开发体验
 
 `file-loader`：把⽂件输出到⼀个⽂件夹中，在代码中通过相对 URL 去引⽤输出的⽂件（然后代码中就能引用使用相对路径的客户端本地资源，而不用使用http请求资源。例如图片的src和css的url中，相对路径可以在webpack配置alias别名，src或者js中也可以使用require引入资源作为一个模块被解析）
 
-`url-loader`：和 file-loader 类似，但是能在⽂件很⼩的情况下以 base64 的⽅式把⽂件内容注⼊到代码中去
+`url-loader`：和 file-loader 类似，但是能在⽂件很⼩的情况下以 base64 URL 的⽅式把⽂件内容注⼊到代码中 (当文件小于给定的阈值)，这会减少小文件的 HTTP 请求数。如果文件大于该阈值，会自动的交给 file-loader 处理。
 
 `source-map-loader`：加载额外的 Source Map ⽂件，以⽅便断点调试
 
