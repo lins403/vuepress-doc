@@ -32,7 +32,7 @@
 
 【数组的几种创建方法】使用构造函数Array，没有new时也会被自动补上；使用字面量表示法；使用`Arra.from`用一个类数组对象或迭代器创建一个数组；使用`Array.of`接收一组参数并创建一个数组实例，我觉得这个设计是用来取代构造函数Array接收多个参数的情况，这样构造函数Array方法就只需要用于创建一个初始化长度为n位的空数组。
 
-【数组常用的实例方法】会改变原数组的有pop、push、shift、unshift、reverse、sort、splice。不会改变原数组的常用方法有fill；forEach、keys、values、entries；find、findIndex、includes、indexOf、lastIndexOf；every、some；flat、map、filter、reduce、reduceRight、slice等等。
+【数组常用的实例方法】会改变原数组的有pop、push、shift、unshift、reverse、sort、splice。不会改变原数组的常用方法有fill；forEach、keys、values、entries；find、findIndex、includes、indexOf、lastIndexOf；every、some；flat、map、filter、reduce、reduceRight、slice等等。数组的原型Array.prototype是个数组.
 
 【slice与splice】`slice`不会改变原数组，适合用于复制数组片段；`splice`会改变原数组，适用于插入、删除、替换的场景。
 

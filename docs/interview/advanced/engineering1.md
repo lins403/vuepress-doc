@@ -14,7 +14,7 @@
 
 alias名称、devServer代理、svg配置loader、externals配置cdn、config.optimization.splitChunks
 
-【首页加载速度优化】最有效的是压缩文件，webpack中给生产环境默认启用了tree-shaking、terser代码压缩、compression压缩文件，经过webpack的压缩以后，nginx中还可以设置压缩，这个效果最明显。然后分割代码、使用路由懒加载；拆分打包构建后的bundle文件，将大的chunk拆分 (config.optimization.splitChunks)；图片懒加载 (vue-lazyload)；外部资源通过async和defer设置成异步加载而不影响DOM解析，也可以给资源使用preload和prefetch属性；将静态资源部署到CDN上以支持高并发。首页白屏时间久还可以使用骨架图，尤其是移动端，SSR首页渲染也可以。剩余的是业务代码上的优化，例如图片懒加载、减少重排重绘。
+【首页加载速度优化】最有效的是压缩文件，webpack中给生产环境默认启用了tree-shaking、terser代码压缩、compression压缩文件，经过webpack的压缩以后，nginx中还可以设置压缩，这个效果最明显。然后分割代码、使用路由懒加载；拆分打包构建后的bundle文件，将大的chunk拆分 (config.optimization.splitChunks)；图片懒加载 (vue-lazyload)；外部资源通过async和defer设置成异步加载而不影响DOM解析，也可以给资源使用preload和prefetch属性；将静态资源部署到CDN上以支持高并发。首页白屏时间久还可以使用骨架图，尤其是移动端，SSR首页渲染也可以。优化浏览器缓存配置。剩余的是业务代码上的优化，例如图片懒加载、减少重排重绘。
 
 【打包构建优化】loader层面上，cache-loader缓存编译结果，thread-loader启用**多进程**进行编译。插件层面上，terser压缩代码、mini-css那个插件压缩css、compression压缩文件。使用cdn的方式，让Webpack不打包这些资源，然后在index.html中配置async和defer属性，让资源异步加载而不会阻塞页面解析；
 

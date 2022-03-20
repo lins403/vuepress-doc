@@ -1,21 +1,21 @@
 # 发展史
 
-浏览器战争、Ajax&JQuery（交互，数据）、Node.js（server，工程化）、三大框架（组件化）、RN&Flutter跨平台框架
+浏览器战争、XHR&Ajax&JQuery (交互，web2.0)、Node.js (server，工程化、模块化)、三大框架 (组件化)、RN&Flutter (跨平台框架)
 
-- 1990年底，在互联网的基础上发明了**万维网**（World Wide Web），从此可以在网上浏览网页文件
+- 1990年底，在互联网的基础上发明了**万维网** (World Wide Web)，从此可以在网上浏览网页文件
 - 1992年底，开发了人类历史上**第一个浏览器Mosaic**
 - 1994年10月成立了 Mosaic 通信公司，不久后改名为 **Netscape**，同年12月发布了 Navigator 1.0 版
 - 1995年5月，Sun 公司的 **Java** 语言问世，Netscape与之合作，在Navigator中支持 Java
 - 1995年5月，Brendan Eich 以 Scheme 语言为蓝本，只用了10天，就设计完成了可以嵌入到Navigator浏览器中的网页脚本语言第一版。它是一个大杂烩，语法有多个来源，最初名字叫做 Mocha。同年9月改为 LiveScript。12月，Netscape与Sun达成协议，后者允许将这种语言叫做 **JavaScript**。
 - 1996年3月，Navigator 2.0 浏览器正式内置了 JavaScript 脚本语言。
 - 1996年11月，Netscape正式向ECMA提交语言标准。
-- 1997年6月，ECMA以JavaScript语言为基础制定了**ECMAScript**标准规范。
+- 1997年6月，ECMA以JavaScript语言为基础制定了 **ECMAScript** 标准规范。
 - 1996年12月，**CSS** 第一版发布。
 - 1997年，DHTML发布，允许动态改变网页内容。这标志着 **DOM** 模式正式应用。
 - 1998年，Netscape 公司开源了浏览器，这导致了 **Mozilla** 项目的诞生。
 - 1999年，IE 5部署了 **XMLHttpRequest** 接口，允许 JavaScript 发出 HTTP 请求
 - 2000年，HTTP协议的主要设计者之一、Apache基金会的第一任主席 Roy Thomas Fielding 在他2000年的博士论文中提出 **REST**(Representational State Transfer)。如果有一个互联网软件的架构符合REST原则，就称它为 RESTful 架构。
-- 2001年，Douglas Crockford （《JavaScript语言精粹》和 JSLint 的作者）提出了 **JSON** 格式，用于取代 XML 格式进行服务器和网页之间的数据交换。
+- 2001年，Douglas Crockford (《JavaScript语言精粹》和 JSLint 的作者) 提出了 **JSON** 格式，用于取代 XML 格式进行服务器和网页之间的数据交换。
 - 2002年，Mozilla 项目发布了它的浏览器的第一版，后来起名为 **Firefox**。
 - 2003年，Apple发布了 **Safari** 浏览器
 - 2004年，Google 发布了 Gmail，促成了 **Web Application** 这个概念的诞生。
@@ -32,7 +32,7 @@
 - 2010年，三个重要的项目诞生， NPM、BackboneJS 和 RequireJS，标志着 JavaScript 进入**模块化**开发的时代
 - 2011年，Dojo的创始人之一，Alex Russell 在Fronteers大会上首次提出 **Web Components**，Google于2013年开始标准化
 - 2011年10月，Google 发布了 **Dart** 语言，目的是为了结束 JavaScript 语言在浏览器中的垄断，提供更合理、更强大的语法和功能。
-- 2012年，**SPA**(single-page app framework)开始崛起，**AngularJS** 项目和 Ember 项目都发布了1.0版本。
+- 2012年，**SPA** (single-page app framework)开始崛起，**AngularJS** 项目和 Ember 项目都发布了1.0版本。
 - 2012年10月，微软发布 **TypeScript** 语言
 - 2013年5月，Facebook 发布 UI 框架库 **React**，使得 UI 层可以用组件开发
 - 2014年2月，尤雨溪发布了 **Vue**
@@ -49,7 +49,7 @@
 - 2018年6月，Vue 的 GitHub star 反超 React，同一周双方的 star 均突破 10W
 - 2019年2月，React 16.8 发布，引入了全新的API，**React Hooks**
 - 2019年5月，Google发布 **Flutter**，正式宣布 Flutter 成为全平台框架
-- 2019年12月，**WebAssembly**成为W3C的推荐，与 HTML，CSS 和 JavaScript 一起，成为 Web 的第四种语言
+- 2019年12月，**WebAssembly** 成为W3C的推荐，与 HTML，CSS 和 JavaScript 一起，成为 Web 的第四种语言
 - 2020年9月，Vuejs 3.0 正式版发布，代号：One Piece
 
 ---
