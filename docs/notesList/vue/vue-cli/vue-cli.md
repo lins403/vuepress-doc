@@ -55,6 +55,8 @@ module.exports = {
 > 3. split出来的chunk文件
 >
 > > chunk文件是经过webpack整合，多个module的合集。通过使用Promise、定时器等策略，以及浏览器的 preload 和 prefetch 属性，实现通过 JSONP 模式懒加载路由对应的 chunk 文件。chunk文件会被缓存，防止重复加载。
+> >
+> > 懒加载的组件代码js和css，会自动添加prefetch，但是等到最后才被加载，在defer属性的script标签之后
 
 ### index.html
 

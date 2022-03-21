@@ -33,9 +33,17 @@ ECMAScript 6 新增了一批引用类型:Map、WeakMap、Set 和 WeakSet。这�
 
 ### 异步编程
 
+promise本质上就是一个对象，为异步操作提供接口，连接了异步操作和回调函数。通过promise的链式调用，可以避免异步操作陷入回调地狱。
+
 【promise】promise的意义在于，通过promise的链式调用，串行化异步任务，解决回调地狱问题。promise有三种状态，`pending`、`fulfilled`、`rejected`。promise实例的`then()`方法，用于添加成功或失败的回调到当前Promise，并返回一个新的Promise，`catch()`方法会隐式调用then(undefined, onRejected)。then方法在promise成功或失败后，都将会被异步调用，然后返回一个新的promise，所以可以实现promise的链式调用。
 
 【Promise的方法】`Promise.resolve()`方法返回一个解析过的Promise对象；`Promise.reject()`方法返回一个带有拒绝原因的Promise对象；`Promise.all()`返回一个新的promise对象，在所有的promise对象都成功的时候才会触发成功；`Promise.allSettled()`返回一个新的promise对象，在所有Promises都完成后（包含成功和失败）返回；`Promise.race()`返回第一个完成后（包含成功和失败）的 promise；`Promise.any()`返回第一个成功的promise。
+
+【XHR与Ajax】通过 XMLHttpRequest 可以在不刷新页面的情况下请求特定 URL 从而获取数据。Ajax是基于XHR的实践，指的是通过JavaScript的异步通信，从服务器获取数据然后局部更新DOM，而不用刷新整个页面。XHR是一个用于与服务器交互的对象，而Ajax是一种基于XHR的技术实现。
+
+【Fetch】Fetch API 是原生的 JavaScript 方法，基于 ES6 的 import() 设计，会始终返回一个promise，被设计用来替代 XHR 技术。fetch中需要自行处理状态码来判断请求成功与否，fetch的优点是实现跨域比较简单。
+
+【axios】Axios是一个基于 Promise 的 HTTP 库，可以用在浏览器和 nodejs 中，但本质上也是对原生XHR对象的封装。axios可以拦截请求和响应，并且支持 promise API。
 
 #### 迭代器、生成器、async/await
 

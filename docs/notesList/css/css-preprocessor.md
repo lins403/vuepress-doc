@@ -188,7 +188,7 @@ disable complains：<https://stylelint.io/user-guide/ignore-code/>
 
 [Vue Loader >  stylelint](https://vue-loader.vuejs.org/zh/guide/linting.html#stylelint)
 
-stylelint 插件的设置中，添加 `vue` 文件的支持很多时候，例如使用模板字符串、或者使用带$的私有变量，会带来多余的complains，所以 lint-staged 中 .vue 文件也不使用 `stylelint --fix`
+~~stylelint 插件的设置中，添加 `vue` 文件的支持很多时候，例如使用模板字符串、或者使用带$的私有变量，会带来多余的complains，所以 lint-staged 中 .vue 文件也不使用 `stylelint --fix`~~
 
 ### 语法
 

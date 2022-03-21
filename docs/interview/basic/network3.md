@@ -118,9 +118,10 @@ CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和
 
 ### Fetch
 
-- Fetch API 是原生的JS，基于ES6的import设计，是现代浏览器引入的作为XHR的替代品。XMLHttpRequest 可以选择异步，而 Fetch API 则必须是异步
-- 返回一个Promise，无法处理HTTP状态码，错误处理也比较麻烦
-- Fetch发送post请求的时候，总是发送2次，第一次状态码是204，实际上是发送了一个Options请求，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求
+- Fetch API 是原生的 JavaScript 方法，基于 ES6 的 import 设计，是现代浏览器引入的作为 XHR 的替代品。XMLHttpRequest 可以选择异步，而 Fetch API 则必须是异步
+- 返回一个Promise，无法自动通过 HTTP 状态码来表示成功与否，需要去自定义处理，错误处理也比较麻烦
+- Fetch 发送 post 请求的时候，总是发送2次，第一次状态码是204，实际上是发送了一个Options请求，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求
+- 跨域请求比较方便，只需要在配置中添加 `mode： 'no-cors'`
 
 ```js
 // `fetch()`返回一个promise
@@ -151,7 +152,7 @@ fetch('/send-me-json', {
 
 ### Axios
 
-- 基于Promise的http库，可以用在浏览器和nodejs中，底层实现还是基于XHR对象
+- 基于Promise的http库，可以用在浏览器和nodejs中，底层实现还是对XHR对象的封装
 
 ### Content-Type
 
@@ -192,15 +193,38 @@ xss（Cross-site scripting，跨站脚本攻击），是一种代码注入攻击
 #### 防御策略
 
 - 防止攻击者提交恶意代码（输入过滤）
+
 - 防止浏览器执行~（开发者慎用 innerHTML、document.write()、v-html 等）
+
 - 启用 CSP (Content Security Policy，白名单机制，HTTP 头信息的`Content-Security-Policy`的字段）
+
+  - 让服务器在https headers中返回Content-Security-Policy，或者通过 `<meta>` 元素来配置
+
+    ```js
+    // 一个网站管理者想要所有内容均来自站点的同一个源
+    Content-Security-Policy: default-src 'self'
+    
+    // 添加受信任的域名
+    Content-Security-Policy: default-src 'self' *.trusted.com
+    
+    // 允许网页应用的用户在他们自己的内容中包含来自任何源的图片, 但是限制音频或视频需从信任的资源提供者获得，所有脚本必须从特定主机服务器获取可信的代码
+    Content-Security-Policy: default-src 'self'; img-src *; media-src media1.com media2.com; script-src userscripts.example.com
+    ```
+
+    ```html
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';">
+    ```
+
+    
+
+  
 
 ### CSRF
 
 CSRF（Cross-site request forgery, 跨站点请求伪造），黑客可以设法伪造带有正确 Cookie 的 HTTP 请求，就是利用用户的cookie骗过目标网站，让网站以为是用户自己的操作。
 
-- xss通过在网站植入恶意脚本，骗取的是用户对网站的信任；
-- csrf（骗取用户点击例如广告等然后盗取cookie）伪造真实用户的请求，骗取的是网站对用户（网页浏览器）的信任
+- `xss`通过在网站植入恶意脚本，骗取的是用户对网站的信任；
+- `csrf`（骗取用户点击例如广告等然后盗取cookie）伪造真实用户的请求，骗取的是网站对用户（网页浏览器）的信任
 
 cookie本身不能跨域，但是请求可能是CORS请求（Access-Control-Allow-Origin），而允许跨域的情况下浏览器的请求都会带上cookie，所以cookie不是被获取，而是被使用
 
@@ -208,8 +232,8 @@ cookie本身不能跨域，但是请求可能是CORS请求（Access-Control-Allo
 
 - 禁止外域使用cookie
   
-  - 同源检测（Header中的Referer，来源URL地址，告诉服务器用户访问当前资源之前的位置）
-  - 设置cookie的samesite属性（设置为Strict则禁止第三方使用该cookie，为Lax则禁止get以外的请求）
+  - 同源检测（Header中的 `Referer`，来源URL地址，告诉服务器用户访问当前资源之前的位置）
+  - 设置 cookie 的 `samesite` 属性（设置为Strict则禁止第三方使用该cookie，为Lax则禁止get以外的请求）
 
 - 添加校验token
 
@@ -217,7 +241,7 @@ cookie本身不能跨域，但是请求可能是CORS请求（Access-Control-Allo
 
 click Jacking，通常是用iframe或图片覆盖，伪造骗取用户点击
 
-防御：限制iframe的跨域；设置cookie的samesite属性
+防御：限制 iframe 的跨域；设置 cookie 的 samesite 属性
 
 # 参考
 

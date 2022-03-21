@@ -5,7 +5,7 @@
 | 子元素                      | 相对于                                                       |
 | --------------------------- | ------------------------------------------------------------ |
 | width / height              | 父元素的 width / height                                      |
-| top & bottom / left & right | 若为`relative`：参照父元素的 width / height<br />若为`absolute`：参照从父元素开始往上找，一直找到 position 为非static的祖先元素；<br />若为`fixed`：参照 body 元素大小<br />relative/absolute/fixed/sticky |
+| top & bottom / left & right | 为`relative`：参照父元素的 width / height<br />为`absolute`：参照从父元素开始往上，一直找到position为非static的祖先元素；<br />为`fixed`：参照 body 元素大小<br />relative/absolute/fixed/sticky |
 | padding & margin            | 水平或垂直方向，均参照于直接父元素的 width；<br />如果子元素脱离文本流，则参照上面top的那些情况，不过只需要width |
 | border-radius & translate   | 相对于自身width                                              |
 
@@ -15,7 +15,7 @@
 
 ## @media查询
 
-```css
+```scss
 @media 设备类型 and (设备特性-宽度) {    　　　// css 样式　} //设备类型有很多 这是screen是显示器的意思
 @media screen and (min-width:1200px){//>=1200px的设备} 
 @media screen and (min-width: 992px) and (max-width:1199px) {//<=1199px and >=960px的设备:PC端;}
@@ -29,7 +29,7 @@
 
 [前端响应式布局原理与方案（详细版） - 掘金](https://juejin.cn/post/6844903814332432397)
 
-[HTML <link> media Attribute](https://www.w3schools.com/tags/att_link_media.asp)
+[HTML `<link>` media Attribute](https://www.w3schools.com/tags/att_link_media.asp)
 
 ```html
 <link rel="stylesheet" href="styles.css"> <!-- blocking -->
@@ -254,10 +254,10 @@ body{
 
 ## 经验
 
-- 不考虑兼容性的情况下，优先使用flex或grid布局
-- 元素的font-size用rem避免混乱，宽度可以用百分比，有时候高度用vh、border用px，其他元素基本都用em
+- 不考虑兼容性的情况下，优先使用 flex 或 grid 布局
+- 元素的font-size用 rem 避免混乱，宽度可以用百分比，有时候高度用vh、border用px，其他元素基本都用em
 - 还可以使用clamp函数将值限制在一个范围内，例如 `font-size: clamp(1rem, 8vw - 2rem, 3rem);` 首选中间的，然后取边界值
-- 使用 max-width 或 img标签的srcset属性，实现图片响应式
+- 使用 max-width 或 img标签的 `srcset` 属性，实现图片响应式
 
 
 

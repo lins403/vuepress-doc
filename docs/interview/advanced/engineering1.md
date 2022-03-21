@@ -20,7 +20,11 @@ alias名称、devServer代理、svg配置loader、externals配置cdn、config.op
 
 【我的分包策略】拆分代码依赖的第三方的 library 或 "vendor" 代码，比如node_modules单独打包成一个chunk，还可以将其中例如elementUI、echarts这类比较大的依赖模块，如果没有cdn的方式，也单独打包成chunk，优先级设置的比node_modules高一些。项目的通用组件components也拆分成一个chunk。然后就是路由懒加载方式（es6的import或者webpack的require方法），将异步组件打包成chunk，可以设置webpackChunkName。最后就是webpack自己默认的分包策略，符合一定条件也会自行拆分chunk。
 
-【业务代码优化】减少重排重绘（DocumentFragment、css样式opacity、transform等等）、图片懒加载、图片切片比如背景图、雪碧图等等，css不要使用import，使用link方式然后放在head中，js放到body内的底部；优化DOM交互
+【业务代码优化】减少重排重绘（DocumentFragment、css样式opacity、transform等等）、图片懒加载、图片切片比如背景图、雪碧图等等，css不要使用import，使用link方式然后放在head中，js放到body内的底部；优化DOM交互。
+
+优化css，使用可以避免重排重绘的属性：`transform: translate()`、`transform: scale()`、`transform: rotate()`、`opacity`；
+
+使用 3D transform 会启用GPU加速，例如`translate3D`, `scaleZ` 之类；使用 `will-change` 告知浏览器该元素会有哪些变化的方法，这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作。
 
 ### 构建流程
 
@@ -63,7 +67,7 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
 - **`mini-css-extract-plugin`**  从js文件中提取css代码到单独的文件中，对css代码进行代码压缩等（因为有时我们会把css给import进js文件）
 - **`@vue/preload-webpack-plugin`** 给资源的link添加Preload和Prefetch
   - `<link rel="preload">`是一种 resource hint，用来指定页面加载后很快会被用到的资源，所以在页面加载的过程中，我们希望在浏览器开始主体渲染之前尽早 preload。会自动给初始化渲染需要的文件加上preload（预加载）
-  - `<link rel="prefetch">`是一种 resource hint，用来告诉浏览器在<u>页面加载完成后</u>，利用空闲时间提前获取用户未来可能会访问的内容。通过路由懒加载splitchunks方式生成的css和js都会被自动加上prefetch（预获取，类似于script标签的async，会比较消耗带宽）。
+  - `<link rel="prefetch">`是一种 resource hint，用来告诉浏览器在<u>页面加载完成后</u>，利用空闲时间提前获取用户未来可能会访问的内容。通过路由懒加载splitchunks方式生成的css和js都会被自动加上prefetch（预获取，类似于script标签的async，会比较消耗带宽）懒加载的组件代码等到最后才被加载，在defer属性的script标签之后。
 
 ### 原理
 

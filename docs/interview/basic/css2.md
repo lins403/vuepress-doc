@@ -147,17 +147,17 @@ float 需要使用块布局，会将 display 值为 inline 或 table 的布局�
    //...
    ```
 
-3. align-items
+3. align-items（start/end/center/stretch/…）
 
-4. align-content
+4. align-content（start/end/center/stretch/…）
 
 ### 容器的 item
 
 1. order
-2. flex (flex-grow、flex-shrink、flex-basis)
-3. align-self
+2. flex (flex-grow、flex-shrink、flex-basis)，设置缩放系数，表示如何等分剩余空间
+3. align-self（start/end/center/stretch/…）
 
-`justify-items 和 justify-self` 在 flexbox 中未被实现，水平方向上只能使用 justify-content，因为 flexbox 本质上是一维的，所以无法让其中的item单独在水平方向上做不一样的偏移
+`justify-items` 和 `justify-self` 在 flexbox 中未被实现，水平方向上只能使用 justify-content，因为 flexbox 本质上是一维的，所以无法让其中的item单独在水平方向上做不一样的偏移
 
 ```scss
 flex: 1;
@@ -315,8 +315,6 @@ Multi-clolumns Layout
 
 Masonry Layout
 
-TODO
-
 ### JS
 
 [蘑菇街PC首页瀑布流实践 - 掘金](https://juejin.cn/post/6844904032868253710)
@@ -347,9 +345,7 @@ TODO
 
 - 会改变页面布局
 
-## 层叠
-
-stacking
+## 层叠stacking
 
 ### 层叠上下文 (~ context)
 

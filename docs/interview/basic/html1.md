@@ -6,7 +6,7 @@
 
 `HTML`（HyperText Markup Language，超文本标记语言），是一种用于创建网页的标准标记语言。
 
-`DOM` （文档对象模型）是HTML 和 XML 文档的编程接口，但DOM 标准不仅是为了在浏览器中使用，而且还为了在桌面和服务器应用程序中处理 XML 数据结构
+`DOM` （文档对象模型）是HTML 和 XML 文档的编程接口，但 DOM 标准不仅是为了在浏览器中使用，而且还为了在桌面和服务器应用程序中处理 XML 数据结构
 
 `XHTML`（Extensible HyperText Markup Language，可扩展超文本标记语言），是使用 XML1.0 改写自 HTML4.01 的独立语言。它不再被作为单独标准开发。
 
@@ -16,7 +16,7 @@
 
 ### 语义化标签
 
-- `<head>`中的title和元数据meta标签等，利于SEO
+- `<head>`中的 title 和元数据 meta 标签等，利于SEO
 - aside、section、article、footer等，可读性，便于阅读和代码的规范性
 - code、pre、cite、blockquote等，有实际渲染意义，参照markdown
 
@@ -39,7 +39,7 @@ HTML 4.01 中有三种声明，在 HTML5 中只有一种：`<!DOCTYPE html>`
   - defer脚本<u>可以确保按照文档顺序执行</u>，即使第二个defer脚本先下载完成，也要等待第一个defer脚本下载完成后执行
   - <u>适用于需要整个 DOM 的脚本</u>，以及脚本的相对执行顺序很重要的时候
 
-异步加载JS方式，除了使用`defer` 和 `async` 属性，还可以使用匿名函数自调动态创建script标签加载js
+异步加载JS方式，除了使用`defer` 和 `async` 属性，还可以使用立即执行函数动态创建script标签然后加载外部js
 
 ```js
 (function(){
@@ -72,8 +72,12 @@ HTML 4.01 中有三种声明，在 HTML5 中只有一种：`<!DOCTYPE html>`
 
 `crossorigin`属性 — 表示该资源是否应该使用一个CORS请求来获取
 
+`href`属性
+
+`media`属性 — 规定了外部资源适用的媒体类型，资源将只在满足媒体条件的情况下才被加载进来
+
 ### 特殊标签
 
-- `<dt>`, `<dd>`
+- `<dt>`, `<dd>` description描述
 
-- `svg`, `<symbol>`, ...
+- `<svg>`, `<symbol>`, ...

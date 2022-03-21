@@ -16,7 +16,7 @@
 
 
 
-### 1）内容填充底部
+#### 1）内容填充底部
 
 ```scss
 parent{
@@ -28,12 +28,12 @@ child{
 }
 ```
 
-2）
+#### 2）字体
 
--webkit-text-stroke
+-webkit-text-stroke 设置字宽和颜色
 
 
 
-### 3）修改滚动条样式
+#### 3）修改滚动条样式
 
-https://segmentfault.com/a/1190000012800450
+[css scrollbar样式设置](https://segmentfault.com/a/1190000012800450)
