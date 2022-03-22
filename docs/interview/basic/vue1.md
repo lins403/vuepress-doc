@@ -54,7 +54,7 @@
 
 【Vue-loader热重载】指的是修改.vue文件可以动态更新组件内容而不用刷新整个页面。当编辑一个 template 的时候，组件会重新渲染，当编辑一个 script 的时候，组件会就地销毁并重新创建 (reload)，当编辑一个 style 的时候，通过 vue-style-loader自行热重载，并不影响状态。跟webpack的HMR的关系是，更新.vue文件时，借助devServer与middleware中间件来让浏览器更新文件，而更新策略是vue-loader来决定。
 
-【Vuex】用于全局状态管理，store是一个全局单例对象，但是可以将store分割到不同模块中，每个模块可以维护自己的state、getters、mutations、actions。state是可以被所有组件共享的数据，只能通过mutation来同步修改state，actions可以包含异步操作，最终也是通过提交mutations的方式来修改state。
+【Vuex】用于全局状态管理，store是一个全局单例对象，但是可以将store分割到不同模块中，每个模块可以维护自己的state、getters、mutations、actions。state是可以被所有组件共享的数据，只能通过mutation来同步修改state，actions可以包含异步操作，最终也是通过提交mutations的方式来修改state。从开发层面上来看，actions适合用于封装业务逻辑，自由度更高。
 
 Vue.use安装Vuex的时候调用install方法，通过Vue.mixin混入beforeCreate钩子，通过Vue的init方法，将store数据绑定到this对象的`$store`属性上，子组件的`$store`属性来自于`$store`属性，以此嵌套，从而将这个store实例挂载到所有实例上。通过Vue的data属性绑定store，computed属性绑定getters，从而将store和getters的state变为响应式，而且getters还可以像computed那样缓存依赖。
 
@@ -76,11 +76,13 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 【VNode】执行render function，调用createElement方法创建vnode。VNode是一个JavaScript对象，可以由一个普通DOM元素节点或者一个组件节点生成，整个页面的组件树就变成由一个个vnode组成的vnode树，把它称作虚拟DOM。vnode包含了创建DOM所需要的信息，vdom也是一个JavaScript对象，是对真实DOM的映射。
 
-【虚拟DOM】真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 也会造成很大的性能消耗。利用虚拟DOM的技术，大大提高了更新DOM时的性能。因为Virtual DOM只是一个JavaScript对象，创建它的资源消耗要比创建DOM低很多。而且页面需要更新时，会先经过vnode的diff比较，复用旧的节点，从而减少操作DOM的次数，所以执行效率更高。最后，patch方法用于将虚拟DOM映射到真实DOM，针对不同平台实现不同的patch方法，从而可以实现服务端渲染，以及应用的跨平台。
+【虚拟DOM】真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 也会造成很大的性能消耗。利用虚拟DOM的技术，大大提高了更新DOM时的性能。因为Virtual DOM只是一个JavaScript对象，创建它的资源消耗要比创建DOM低很多。而且页面需要更新时，会先经过vnode的diff算法，复用旧的节点，从而减少操作DOM的次数，所以执行效率更高。最后，patch方法用于将虚拟DOM映射到真实DOM，针对不同平台实现不同的patch方法，从而可以实现服务端渲染，以及应用的跨平台。
 
 【实例挂载】挂载的目的就是把模板渲染成最终的真实DOM，发生在实例的初始化状态以后。判断如果实例的option中有el节点属性，就会将实例去挂载到这个DOM节点上，子组件的el属性就是根组件节点。如果没有el属性的话，可以在实例化以后去手动挂载。挂载入口是从`$mount`方法开始，它有两个版本，一个是带有编译的compiler版本，另一个则是没有编译的runtime版本。前者会现将模板编译成render function，再交由后者处理，触发生命周期的beforeMount钩子后，创建render watcher，并执行render函数创建VNode，最终根据vnode的信息创建和更新真实DOM。
 
 【模板编译】有compiler的版本，如果没有定义render function，就会将template模板字符串parse解析生成AST，然后优化AST，标记AST中可以优化的节点，然后根据优化后的AST，generate生成render function。
+
+【Diff算法】将新旧Virtual DOM逐层比较，找出哪些节点需要更新，通过key值匹配从而复用旧节点。优点是可以做到只把变化的部分重新渲染，从而减少操作DOM，提高渲染效率。缺点是使用index作为key的时候，比较的时候会有bug，所以最好使用唯一的key值
 
 ### 响应式原理
 
@@ -96,7 +98,7 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 【user watcher】用户定义的watch属性能被用于创建user watcher，根据配置的方式，又可以衍生出deep属性为true时对应的可以深度监听的deep watcher，以及immediate属性为true时对应的同步立即更新的sync watcher。
 
-【数据劫持】数据劫持指的是使用 `Object.defineProperty` 劫持对象的访问和修改，数组中只有对象元素才会被劫持。因为对象的属性个数通常有限，拦截起来数量不多，但数组元素个数可能就会非常多，出于性价比考虑，显然数组并不适用于数据劫持。而且使用 Object.defineProperty劫持的方式也不能监听到数组长度的变化，也就是插入和删除元素不能监听到，所以对于数组元素的监听并不是进行劫持，而是重写数据原型上的方法。
+【数据劫持】数据劫持指的是使用 `Object.defineProperty` 劫持对象的访问和修改，数组中只有对象元素才会被劫持。因为对象的属性个数通常有限，拦截起来数量不多，但数组元素个数可能就会非常多，出于性价比考虑，显然数组并不适用于数据劫持。而且使用 Object.defineProperty劫持的方式也不能监听到数组长度的变化，也就是插入和删除元素不能监听到，所以对于数组元素的监听并不是进行劫持，而是重写数据原型上的方法，然后手动派发更新。
 
 ### 组件化
 

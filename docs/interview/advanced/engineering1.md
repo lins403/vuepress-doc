@@ -22,9 +22,19 @@ alias名称、devServer代理、svg配置loader、externals配置cdn、config.op
 
 【业务代码优化】减少重排重绘（DocumentFragment、css样式opacity、transform等等）、图片懒加载、图片切片比如背景图、雪碧图等等，css不要使用import，使用link方式然后放在head中，js放到body内的底部；优化DOM交互。
 
-优化css，使用可以避免重排重绘的属性：`transform: translate()`、`transform: scale()`、`transform: rotate()`、`opacity`；
+【重排重绘】会影响元素布局的就会引起重排重绘，例如修改窗口大小、字体大小、元素的宽度高度等等，不会影响布局的只是改变样式的则只会触发重绘，例如修改颜色、背景、visibility等等。重排的代价比重绘高很多，而且重排则必重绘。
 
-使用 3D transform 会启用GPU加速，例如`translate3D`, `scaleZ` 之类；使用 `will-change` 告知浏览器该元素会有哪些变化的方法，这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作。
+优化css，使用可以避免重排重绘的属性：`transform: translate()`、`transform: scale()`、`transform: rotate()`、`opacity`；让复杂动画的元素脱离文档流，例如设置position属性为absolute使它脱离文档流，否则会引起父元素及后续元素频繁回流。
+
+A. 需要对元素进行复杂的操作时，可以先隐藏(display:"none")，操作完成后再显示
+
+B. 需要创建多个DOM节点时，使用DocumentFragment创建完后一次性的加入document
+
+C. 尽量避免用table布局(table元素一旦触发回流就会导致table里所有的其它元素回流)
+
+使用 3D transform 会启用GPU加速，例如`translate3D`, `scaleZ` 之类；使用 `will-change` 告知浏览器该元素会有哪些变化的方法，这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作。（通过设置 CSS 的 will-change 可以转换为一个图层，调用 GPU 加速）
+
+现代浏览器针对重排重绘做了优化，有点类似于Vue的DOM异步更新机制，浏览器会维护一个队列，把所有引起回流和重绘的操作放入队列中，如果队列中的任务数量或者时间间隔达到一个阈值的，浏览器就会将队列清空，进行一次批处理，这样可以把多次回流和重绘变成一次。但是当访问高度宽度这类属性的时候，浏览器会立刻清空这个队列，执行重排重绘。
 
 ### 构建流程
 
@@ -89,7 +99,7 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
 
 ## 代码性能提升
 
-
+如果使用了http2，因为有多路复用功能，可以用同一个连接传输多个资源，进而使得http1.1中针对减少http请求数量的优化都是多余。比如使用雪碧图技术，将多张小图片合成一张大图片，或者是合并 css 和 js 来减少请求数。
 
 
 

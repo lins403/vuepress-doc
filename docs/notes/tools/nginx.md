@@ -365,6 +365,16 @@ location / {
 client_max_body_size 10m;  # 改为你需要的大小，默认1M
 ```
 
+### 配置HTTP1.1
+
+我的nginx/1.16.1事实上并不需要配置，就默认启用了1.1，然后响应header中会有`Connection: keep-alive`
+
+```nginx
+proxy_http_version    1.1;
+```
+
+
+
 ## 踩坑
 
 ### net::ERR_SSL_PROTOCOL_ERROR
