@@ -373,6 +373,12 @@ client_max_body_size 10m;  # 改为你需要的大小，默认1M
 proxy_http_version    1.1;
 ```
 
+### 设置代理缓存
+
+```
+proxy_cache_valid 168h;
+```
+
 
 
 ## 踩坑

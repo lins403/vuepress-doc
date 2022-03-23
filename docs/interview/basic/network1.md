@@ -87,13 +87,13 @@ HTTP/1.1 200 OK
 
 ### HTTP字段
 
-**`Accept`** 请求头用来告知（服务器）客户端可以处理的内容类型，这种内容类型用MIME类型来表示。
+**`Accept`** 请求头用来告知（服务器）客户端可以处理的内容类型，这种内容类型用MIME类型来表示。<u>数据格式</u>
 
-Content-Type
+Content-Type 、Accept-Charset <u>字符集</u>
 
-Content-Language 
+Content-Language 、Accept-Language <u>支持语言</u>
 
-**`Content-Encoding`** 取值可以是gzip、deflate、br (一种专门为 HTTP 发明的压缩算法)
+**`Content-Encoding`** 取值可以是gzip、deflate、br (一种专门为 HTTP 发明的压缩算法)、Accept-Encoding <u>压缩方式</u>
 
 ## 三、https
 
@@ -297,6 +297,8 @@ httpPost(url, JSON.stringify(formData), console.log)
 # 参考/推荐
 
 [HTTP/HTML/浏览器](https://www.nowcoder.com/tutorial/96/4700c6f1f3334c9191a38406002efa65)
+
+[（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系](https://juejin.cn/post/6935344608687685646)
 
 [互联网之父讲解互联网是如何工作的](https://www.bilibili.com/video/BV1nb411s7EG)
 

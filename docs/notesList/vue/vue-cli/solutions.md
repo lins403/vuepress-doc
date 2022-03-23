@@ -73,7 +73,7 @@ module.exports = { runtimeCompiler: true, }
 // change
 import Vue from 'vue'
 
-to
+// to（但是会影响到其他的依赖，例如element-ui）
 import Vue from 'vue/dist/vue.js';
 ```
 

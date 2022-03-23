@@ -92,7 +92,7 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 【watcher】依赖收集时watcher会被添加进subscribers容器中，当派发更新的时候，就会遍历subscribers容器中的watcher，然后执行watcher中的回调方法，完成相应的逻辑处理。主要有三个类型的watcher，用于响应式更新视图的render watcher，computed属性使用的computed watcher，以及用户定义的user watcher。
 
-【render watcher】实例在挂载时会进行首次渲染，创建一个`render watcher`，并递归访问render函数中使用到的实例上的属性，触发它们的getter进行依赖收集。当render watcher被派发更新以后，会调用updateComponent方法，触发组件重新渲染生成新的vnode，然后patch更新到DOM上。watcher在被执行以前会被进行排列，render watcher总是最后执行的。
+【render watcher】实例在挂载时会进行首次渲染，创建一个`render watcher`，并递归访问render函数中使用到的实例上的属性，触发它们的getter进行依赖收集。当render watcher被派发更新以后，会调用updateComponent方法，触发组件重新渲染生成新的vnode，然后patch更新到DOM上。watcher在被执行以前会被进行排列，render watcher总是最后执行的。数据是否能响应式更新与数据的嵌套无关，只要是首次挂载时被访问过，收集过依赖并添加render watcher的，更新数据的时候都会派发更新给render watcher，从而响应式更新视图。
 
 【computed watcher】初始化computed属性时，也会生成一个 `computed watcher`，computed watcher的内部做了优化，当计算属性的计算的最终值发生变化时，才会触发watcher并重新渲染，而不是计算属性依赖的值发生变化时就更新。
 

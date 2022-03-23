@@ -87,7 +87,9 @@ GWT透过编译器将Java代码编译成JavaScript，可让开发人员使用Jav
 
 DSL（domain specific language），即领域专用语言：专门解决某一特定问题的计算机语言，比如大家耳熟能详的 SQL 和正则表达式。
 
+### 域名分片
 
+在一个域名下分出多个二级域名，而它们都指向同样的一台服务器，比如 blog.xiaomixi.com 、code.xiaomixi.com。
 
 ## 三、编程设计模式
 
