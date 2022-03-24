@@ -2,12 +2,6 @@
 
 打包模块，解析模块依赖，构建你的 images、styles、assets、scripts 等静态资源
 
-## TODO
-
-[《了不起的 Webpack 构建流程学习指南》](https://juejin.cn/post/6844904196634837000)
-
-
-
 ## 工作原理
 
 > loader机制是webpack核心：
@@ -365,7 +359,7 @@ import XLSX from 'xlsx'
 
 ### webpack & HTTP/2
 
-https://medium.com/webpack/webpack-http-2-7083ec3f3ce6
+<https://medium.com/webpack/webpack-http-2-7083ec3f3ce6>
 
 ## 延伸问题
 
@@ -384,3 +378,5 @@ loader 用于转换某些类型的模块，而插件则可以用于执行范围�
 [详细的 webpack4 多入口配置](https://segmentfault.com/a/1190000021555875)
 
 [A mostly complete guide to webpack 5 (2020)](https://www.valentinog.com/blog/webpack/)
+
+[《了不起的 Webpack 构建流程学习指南》](https://juejin.cn/post/6844904196634837000)

@@ -381,6 +381,7 @@ function interviewSidebar(groupA,groupB){
           'basic/javascript0',
           'basic/javascript1',
           'basic/javascript2',
+          'basic/javascript3',
           'basic/vue1',
           'implement',
           'memo',
@@ -393,6 +394,7 @@ function interviewSidebar(groupA,groupB){
         children: [
           'advanced/performance',
           'advanced/engineering1',
+          'advanced/engineering2',
         ]
       },
     ]

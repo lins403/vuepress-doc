@@ -148,7 +148,7 @@ Module.prototype._compile = function(content, filename) {
 >
 > 我们使用 webpack 构建时，把各个模块的文件内容按照如下格式打包到一个 js 文件中，因为它是一个立即执行的匿名函数，所以可以在浏览器直接运行。
 
-```js{19-20}
+```js{20-21}
 // webpack 打包后的大致核心代码 bundle.js
 // IIFE，立即执行然后自动加载入口模块
 /*** CommonJS 依赖几个全局属性如 require 和 module.exports；将模块代码封装在函数闭包中，最终只提供一个文件，这样子就可以避免 CommonJS 代码在浏览器中执行时创建全局变量 ***/
@@ -205,9 +205,9 @@ webpack 相当于去 hack (模拟) 了commonjs 的功能
 
 ### 特点
 
-1. 独立的 <mark>模块作用域</mark> ，不会污染全局作用域
+1. 独立的<mark>模块作用域</mark> ，不会污染全局作用域
 
-2. <mark>同步</mark> 加载模块
+2. <mark>同步</mark>加载模块
 
 3. 模块加载 (require) 的 <mark>缓存</mark>
 
@@ -216,7 +216,7 @@ webpack 相当于去 hack (模拟) 了commonjs 的功能
    - 所有缓存的模块保存在`require.cache`之中。
    - 缓存只是根据 <u>绝对路径</u> 识别模块的
 
-4. 模块的加载机制是，输入的是被输出的值的 <mark>拷贝</mark>，输出以后模块内的变化不会影响到输出的这个值
+4. 模块的加载机制是，输入的是被输出的值的<mark>拷贝</mark>，输出以后模块内的变化不会影响到输出的这个值
 
 ```js
 // lib.js

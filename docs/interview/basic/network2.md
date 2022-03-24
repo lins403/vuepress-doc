@@ -54,7 +54,7 @@ console.log(document.cookie)
 - **客户端**保持状态，维持会话状态
 - 只能够被同源的网页所共享
 - cookie默认随着http请求一起发送，除了用于认证授权，cookie还可用于存放用户的操作信息，改善用户体验，例如存放账号密码、用户偏好等等。使用github的cookie，有效期内访问授权登录的网站就不用重新授权登录
-- 重要属性：domain、path、maxAgecookie、expires、secure、httpOnly
+- 重要属性：name/value、domain、path、Max-Age、Expires、secure、httpOnly
 - 尽量不要在cookie中放入敏感信息；控制cookie的生命周期；加密cookie以降低被破解的可能性
 
 ### 特点
@@ -74,7 +74,7 @@ console.log(document.cookie)
 
 ### js-cookie
 
-因为在 JavaScript 中读写 cookie 不是很直观，需要设置成拼接字符串，而且读写还需要进行URL编码，因此使用`js-cookie`库
+可以通过documen.cookie属性，直接在 JavaScript 中读写 cookie，但不是很直观，需要设置成拼接字符串，而且读写还需要进行URL编码，因此使用`js-cookie`库
 
 ```js
 import Cookies from 'js-cookie'

@@ -67,7 +67,7 @@ HTTP/1.1 200 OK
 - `1XX`- 信息型，服务器收到请求，需要请求者继续操作。
 - `2XX`- 成功型，请求成功收到，理解并处理。
   - 200 success
-  - 204 No Content 含义与 200 相同，但响应头后没有 body 数据。
+  - 204 No Content 含义与 200 相同，但响应头后没有 body 数据。（通常是CORS或者fetch的预检请求返回的成功响应）
 
 - `3XX` - 重定向，需要进一步的操作以完成请求。
   - **301** Moved Permanently - 永久重定向
@@ -298,7 +298,7 @@ httpPost(url, JSON.stringify(formData), console.log)
 
 [HTTP/HTML/浏览器](https://www.nowcoder.com/tutorial/96/4700c6f1f3334c9191a38406002efa65)
 
-[（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系](https://juejin.cn/post/6935344608687685646)
+[（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系](https://juejin.cn/post/6844904100035821575)
 
 [互联网之父讲解互联网是如何工作的](https://www.bilibili.com/video/BV1nb411s7EG)
 

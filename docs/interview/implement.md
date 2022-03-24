@@ -22,6 +22,8 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 【 HTTP 代理】用于实现缓存代理，将资源缓存在代理服务器中、负载均衡，分流，按策略分发请求，让每台服务器的负载尽量平均、保障安全，避免单机故障导致的服务终止。
 
+【http传输定长数据和不定长数据】对于定长包体而言，发送端在传输的时候一般会带上 `Content-Length`，来指明包体的长度；不定长包体则带上一个 http 头部字段：`Transfer-Encoding: chunked`，告诉浏览器会分块传输数据。
+
 【http中处理表单数据的提交】在 http 中有两种主要的表单提交的方式，体现在两种不同的`Content-Type`取值: application/x-www-form-urlencoded 和 multipart/form-data
 
 【get和post】get可以被浏览器缓存，但是get需要将参数进行url编码，然后通过url传递参数。这样做不安全，而且只能传递ASCII字符，因为浏览器对url长度的限制，所以参数的长度也会收到限制。post没有编码的限制，将数据放在请求体中，更适合传输敏感信息
@@ -46,11 +48,13 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 【沙箱/站点隔离】出于安全考虑，渲染进程都是运行在沙箱模式下。默认情况下，Chrome 会为每个 Tab 标签创建一个渲染进程。但如果从一个页面打开了另一个新页面，而新页面和当前页面属于同一站点的话，那么新页面会复用父页面的渲染进程。也就是浏览器的`站点隔离`手段，给每一个不同的站点(一级域名不同)分配了沙箱，互不干扰。而当某个页面崩溃的时候，也将导致同一站点的其他页面也崩溃。
 
+【像素管道】执行JavaScript、样式计算、布局、绘制、合成。首先执行JS代码来实现一些视觉变化的效果，例如requestAnimationFrame钩子方法会在重排重绘前被执行。然后进行样式计算，根据css规则计算每个元素的样式。布局时计算元素占据的空间大小以及在屏幕的位置。然后根据布局，进行像素填充，使用多个图层来绘制，最后将图层进行合并。
+
 ---
 
 【Cookie】cookie是一种用于维持会话状态的数据，通常是服务端将对应的状态信息，比如说是sessionId或者是token，发送给客户端，然后浏览器通过cookie保存在本地。当下一次有同源的请求时，就会将cookie携带到请求头中发送给服务端。当然cookie也可以通过js代码来设置，可以存放用户的信息比如账号密码，坐标位置等等，用于改善用户体验。但是cookie一般只能存储4k大小的数据，浏览器一般也会有数量的限制，而且cookie只能在同源页面之间使用。
 
-服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。一条cookie 包括了5个属性值 expires、domain、path、secure、HttpOnly。其中 expires 指定了 cookie 失效的时间，domain 是域名、path是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。secure 规定了 cookie 只能在https请求中传输，HttpOnly 规定了这个 cookie 只能被服务器访问，不能使用 js 脚本访问。
+服务器端可以使用 Set-Cookie 的响应头部来配置 cookie 信息。cookie 包括的重要属性值有 name/value、domain、path、secure、HttpOnly、expires、max-age。其中 `domain` 是域名、`path`是路径，domain 和 path 一起限制了 cookie 能够被哪些 url 访问。`secure` 规定了 cookie 只能在https请求中传输，`HttpOnly` 规定了这个 cookie 只能被服务器访问，不能使用 js 脚本访问。expires 和 max-age 指定了 cookie 失效的时间，`expires`的值是一个完整的绝对时间，而`max-age`的值是相对时间。如果没有被通过 set-cookie 指定 Expires 或 Max-Age 属性，那么这个 Cookie 就是 Session Cookie，即它只在本次对话存在，一旦用户关闭浏览器，浏览器就不会再保留这个 Cookie。
 
 【cookie和session认证方式】服务端验证用户的账号密码后，在session中保存用户信息，然后向浏览器返回一个sessionId，写入用户的cookie中，保存在客户端。随后用户的每次请求都会自动携带这个cookie，将sessionId发送给服务端，服务端只要根据sessionId找到对应的session，就可以取出之前保存的信息，从而维持会话状态。这种方式的缺点是不能实现跨域，而且影响扩展性，因为如果session保存在内存中，那么每次只能由同一台服务器来处理，就不适用于分布式应用中的负载均衡。
 
@@ -72,7 +76,7 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 ---
 
-【同源策略与跨域】浏览器的同源策略下，一个域下的js脚本不允许修改另一个域的内容。只允许URL路径不同，其它情况都算跨域。跨域实现方式中，JSONP利用的是img和script标签的src属性允许加载外域脚本；CORS本质上是浏览器与服务器的协商，从而允许使用跨域资源。CORS的配置方式只需要后端在response header上添加字段，而不需要前端再修改。CORS请求分为简单请求和复杂请求，复杂请求会多一次预检请求，服务器确认以后返回204状态码，然后就可以像简单请求一样正常访问。使用nginx反向代理，或者webpack的DevServer中使用的http-proxy-middleware中间件。
+【同源策略与跨域】浏览器的同源策略下，一个域下的js脚本不允许修改另一个域的内容。只允许URL路径不同，其它情况都算跨域。跨域实现方式中，`JSONP`利用的是img和script标签的src属性允许加载外域脚本；`CORS`跨域资源共享，本质上是浏览器与服务器的协商，从而允许使用跨域资源。CORS的配置方式只需要后端在response header上添加字段，而不需要前端再修改。CORS请求分为简单请求和复杂请求，复杂请求会多一次预检请求，服务器确认以后返回204状态码，然后就可以像简单请求一样正常访问。使用nginx反向代理，或者webpack的DevServer中使用的http-proxy-middleware中间件。
 
 ### 网络攻击
 

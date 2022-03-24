@@ -2,6 +2,8 @@
 
 [TypeScript playground](https://www.typescriptlang.org/zh/play)
 
+类型推导
+
 ## 从JavaScript快速上手
 
 ### Types by Inference

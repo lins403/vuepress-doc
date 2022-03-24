@@ -8,7 +8,9 @@
 
 ## Pakages
 
+[tailwindcss](https://github.com/tailwindlabs/tailwindcss)
 
+- 功能类（utility-first）
 
 ## Demo
 
