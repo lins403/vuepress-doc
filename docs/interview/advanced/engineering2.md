@@ -2,28 +2,32 @@
 
 ## Webpack
 
-【为什么要使用webpack】webpack是一个静态模块打包工具，将静态资源如图片、js、css文件都视作模块，解析模块依赖，然后将模块代码打包成一个或多个bundle文件，用于展示页面。
+【为什么要使用webpack】webpack是一个静态模块打包工具，将静态资源如图片、js、css文件都视作模块，解析模块依赖，然后将模块代码打包成一个或多个 js 格式的bundle文件，用于展示页面。
 
-解析模块依赖、打包静态资源、自动化构建代码、本地开发的代理和热重载
+解析模块依赖、打包静态资源、自动化构建代码、本地开发的代理和热重载、source map
 
-- 使用loader转换模块代码，比如babel转换ES6代码，转换ES Module代码
+- 使用loader转换模块代码，比如babel转换ES6代码
 - 压缩、tree-shaking、代码拆分，实现按需加载，便于构建复杂的 SPA
+
+【loaders和plugins】loaders主要用于加载和转换除JavaScript以外的文件，例如使用image-loader加载图片，还可以用于转译代码，例如使用ts-loader将ts编译为js，使用babel-loader将es6代码编译为es5。plugins用于自定义拓展webpack的构建过程，也就是让插件监听webpack构建过程的事件点，在触发事件节点的时候执行插件中添加的逻辑处理。webpack 的核心功能，也是抽离成很多个内部插件来实现的。
+
+【compiler和compilation】`compiler` 对象代表了完整的 webpack 环境配置，可以使用它来访问 webpack 的主环境。`compilation`对象代表了一次构建结果，也就是一次构建过程中的所有数据，包含了当前的模块资源、编译生成资源、变化的文件、以及被跟踪依赖的状态信息。运行过程中只有一个 `compiler`对象，但是当每次文件变更触发重新编译时，都会创建一个新的 `compilation` 对象。
+
+【如何自定义一个插件】创建一个插件类，添加一个实例方法apply，它会接受webpack的compiler对象作为参数
 
 ### 构建流程
 
 webpack的构建流程包括初始化`compile`对象、`make`编译模块、`build`构建模块依赖关系、`seal`组装chunk输出文件、`emit`输出到output，执行完这些阶段就完成了构建过程。
 
-1. 初始化参数：解析webpack配置，根据shell传入参数和webpack.config.js配置文件的参数，形成最后的配置结果
-2. 开始编译：将第一步初始化得到的参数用于初始化创建compiler对象，注册所有配置的插件（插件内部使用的就是compiler对象），插件监听webpack构建周期的事件节点，做出相应的逻辑处理，然后执行run方法开始编译（构建模块、收集依赖、输出文件）。
-3. 确定入口：通过打包入口entry (Vue-cli项目是src/main.js) 开始解析代码。利用babel的解析器将js源码解析成AST，遍历AST节点，收集模块依赖，同时根据babel-core以及presets，将ES6的代码转换成ES5，实现代码的polyfill。
-4. 编译模块：解析的过程中，将文件类型通过rule规则的判断，使用对应的loader对文件进行转换。递归解析和编译模块，直到依赖图所有对应的模块文件都转换完成。
-5. 输出：将loader转换以后的模块，根据模块之间的依赖关系，组装成一个个包含多个模块的代码块chunk，然后将chunk转换成一个单独的文件，输出到文件系统。
-
-
+> 首先是初始化阶段，根据webpack配置文件的参数和shell命令行的参数，初始化然后创建 `Compiler` 实例对象，并且去加载插件，然后执行 `compiler` 对象的 `run` 方法开始编译。开始构建时，会从entry入口文件开始解析代码，用babel的解析器将代码解析成AST，然后遍历AST节点收集模块依赖，并递归解析依赖模块，调用对应的loader来处理。递归完成以后就会得到整个应用的模块依赖关系图，以及被loader转换过的模块内容。最后的输出阶段，会根据入口和模块之间的依赖关系，组装成一个个包含多个模块的chunk，再把每个chunk转换成一个单独的文件，写入文件系统。
 
 ### loader
 
-`vue-loader`：预编译生成render function；为每个组件模拟出 scoped CSS；支持热重载，实例在不刷新页面的情况下被替换，提升开发体验
+`vue-loader`：加载并编译vue组件；预编译生成render function；为每个组件模拟出 scoped CSS；支持热重载，实例在不刷新页面的情况下被替换，提升开发体验
+
+`raw-loader`：加载文件原始内容（utf-8）（将文件导入为字符串）
+
+`val-loader`：将代码作为模块执行，并将 exports 转为 JS 代码
 
 `file-loader`：把⽂件输出到⼀个⽂件夹中，在代码中通过相对 URL 去引⽤输出的⽂件（然后代码中就能引用使用相对路径的客户端本地资源，而不用使用http请求资源。例如图片的src和css的url中，相对路径可以在webpack配置alias别名，src或者js中也可以使用require引入资源作为一个模块被解析）
 
@@ -40,6 +44,8 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
 `style-loader`：把 CSS 代码注⼊到 JavaScript 中，通过 DOM 操作去加载 CSS。
 
 `eslint-loader`：通过 ESLint 检查 JavaScript 代码
+
+`ts-loader`：将ts转译为js
 
 ### Plugin
 
@@ -134,4 +140,3 @@ EditorConfig统一不同操作系统不同IDE的代码格式，例如缩进、�
 
 [webpack 十连问你能接住几题](https://juejin.cn/post/7002839760792190989)
 
-[《了不起的 Webpack 构建流程学习指南》](https://juejin.cn/post/6844904196634837000)

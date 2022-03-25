@@ -24,7 +24,7 @@
 
 【ES Modules的语法】import、export、export default、import()。import()方法用于动态加载，在运行时才会去加载对应的模块，所以可以用于实现按需加载、条件加载、动态表达式的路径等等，并且依然是异步加载，而且返回一个promise对象。import()方法可以加载一个Commonjs模块，Commonjs模块中也可以使用import()方法来引入一个ES模块(.mjs文件)。
 
-【如何使用ES Module】在浏览器中使用时，可以在script标签上添加`type="module"`字段，和defer属性一样，异步下载然后等到DOM解析完成才会被执行，但是跟defer不一样，它可以在script标签内嵌入代码。如果引用本地文件，则依然需要开启一个server，否则就会受到跨域的限制。如果用在node服务端，则需要在package.json文件中添加`"type": "module"`字段，或者给模块文件使用`.mjs`后缀名。Rollup和Vite都是基于ES Modules进行打包。
+【如何使用ES Module】在浏览器中使用时，可以在script标签上添加`type="module"`字段，和defer属性一样，异步下载然后等到DOM解析完成才会被执行，但是跟defer不一样，它可以在script标签内嵌入代码。如果引用本地文件，则依然需要开启一个server，否则就会受到跨域的限制。如果用在node服务端，webpack的工程化项目可以直接使用，也可以在package.json文件中添加`"type": "module"`字段让所有文件都使用 ECMAScript 模块，或者给模块文件使用`.mjs`后缀名。Rollup和Vite都是基于ES Modules进行打包。
 
 babel
 

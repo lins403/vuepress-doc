@@ -76,12 +76,23 @@ CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和
 - 返回状态码204，通过预检请求后就像简单请求一样正常访问。
 - 预检请求返回后，结果会按响应指定的时间缓存一段时间。换句话说，只有第一次发送这种类型的 请求时才会多发送一次额外的 HTTP 请求。
 
+### `crossorigin`
+
+在 HTML5 中，一些 HTML 元素提供了对 CORS 的支持， 例如 `<audio>`、 `<img>`、 `<link>`、 `<script>`和 `<video>` 均有一个跨域属性 (`crossOrigin` property)，它允许你配置元素获取数据的 CORS 请求。 
+
+script标签的src本就支持跨域，但设置 `crossorigin`属性后相当于开启了CORS校验。script标签去请求资源的时候request会带上origin头，然后会要求服务器进行cors校验。
+
+- `anonymous`  对此元素的 CORS 请求将不设置凭据标志。
+  - 同域会带上cookie，跨域请求则不会带上cookie
+- `use-credentials` 对此元素的 CORS 请求将设置凭证标志；这意味着请求将提供凭据。
+  - 跨域也会带上cookie，这种情况下跨域的response header 需要设置`'Access-Control-Allow-Credentials' = true`，否则cors失败。
+
+设置了crossorigin以后，跨域脚本就允许被我们访问，当我们引用的资源在报错的时候，onerror事件就能得到完整的错误信息，而不只是一个script error。
+
 ### 代理
 
 - nginx
 - webpack devserver 使用的nodejs中间件代理 http-proxy-middleware
-
----
 
 正向代理和反向代理的概念
 

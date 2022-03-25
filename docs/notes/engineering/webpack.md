@@ -53,6 +53,27 @@ echo "/node_modules" > .gitignore
 - 插件(plugin)
 - 模式(mode): `'production'(默认) / 'development' / 'none'`
 
+### 核心流程
+
+1. 初始化
+   1. **初始化参数**：解析webpack配置，从配置文件、 配置对象、Shell 参数中读取，与默认配置结合得出最终的参数
+   2. **创建编译器对象**：用初始化得到的配置参数来创建 `Compiler` 对象
+   3. **初始化编译环境**：包括注入内置插件、注册各种模块工厂、初始化 RuleSet 集合、加载配置的插件等
+   4. **开始编译**：执行 `compiler` 对象的 `run` 方法
+   5. **确定入口**：根据配置中的 `entry` 找出所有的入口文件，调用 `compilition.addEntry` 将入口文件转换为 `dependence` 对象
+
+2. 构建阶段：
+
+3. 1. **编译模块(make)**：根据 `entry` 对应的 `dependence` 创建 `module` 对象，调用 `loader` 将模块转译为标准 JS 内容，调用 JS 解释器将内容转换为 AST 对象，从中找出该模块依赖的模块，再 递归 本步骤直到所有入口依赖的文件都经过了本步骤的处理
+   2. **完成模块编译**：上一步递归处理所有能触达到的模块后，得到了每个模块被翻译后的内容以及它们之间的 **依赖关系图**
+
+4. 生成阶段：
+
+5. 1. **输出资源(seal)**：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 `Chunk`，再把每个 `Chunk` 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会
+   2. **写入文件系统(emitAssets)**：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
+
+
+
 ### loader
 
 webpack 默认只能解析 JavaScript 和 JSON 文件，但支持使用 loader 对其他类型的文件(扩展名)进行预处理，从而这些静态资源转换为模块，然后就可以被作为模块依赖引用
@@ -99,6 +120,14 @@ module.exports = {
 ```
 
 [Webpack Plugins](https://webpack.docschina.org/plugins/)
+
+webpack 插件由以下组成：
+
+- 一个 JavaScript 命名函数或 JavaScript 类。
+- 在插件函数的 prototype 上定义一个 `apply` 方法。
+- 指定一个绑定到 webpack 自身的[事件钩子](https://webpack.docschina.org/api/compiler-hooks/)。
+- 处理 webpack 内部实例的特定数据。
+- 功能完成后调用 webpack 提供的回调。
 
 ## 配置
 
@@ -361,6 +390,16 @@ import XLSX from 'xlsx'
 
 <https://medium.com/webpack/webpack-http-2-7083ec3f3ce6>
 
+### DLL
+
+Dynamic-link library，动态链接库。所谓动态链接，就是把一些经常会共享的代码制作成 DLL 档，当可执行文件调用到 DLL 档内的函数时，Windows 操作系统才会把 DLL 档加载存储器内，DLL 档本身的结构就是可执行档，当程序有需求时函数才进行链接。透过动态链接方式，存储器浪费的情形将可大幅降低。
+
+事先把常用但又构建时间长的代码提前打包好（例如 react、react-dom），取个名字叫 dll。后面再打包的时候就跳过原来的未打包代码，直接用 dll。这样一来，构建时间就会缩短，提高 webpack 打包速度。其实就是缓存。
+
+`DllPlugin` 和 `DllReferencePlugin` 用某种方法实现了拆分 bundles，同时还大幅度提升了构建的速度。
+
+
+
 ## 延伸问题
 
 :::details loader 和 plugin 的区别
@@ -373,10 +412,8 @@ loader 用于转换某些类型的模块，而插件则可以用于执行范围�
 
 [webpack5 中文文档](https://webpack.docschina.org/)
 
-[webpack多页面打包实践](https://juejin.cn/post/6844904074421207047)
-
-[详细的 webpack4 多入口配置](https://segmentfault.com/a/1190000021555875)
-
 [A mostly complete guide to webpack 5 (2020)](https://www.valentinog.com/blog/webpack/)
 
 [《了不起的 Webpack 构建流程学习指南》](https://juejin.cn/post/6844904196634837000)
+
+[[万字总结] 一文吃透 Webpack 核心原理](https://zhuanlan.zhihu.com/p/363928061)

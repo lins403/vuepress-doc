@@ -50,6 +50,8 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 【像素管道】执行JavaScript、样式计算、布局、绘制、合成。首先执行JS代码来实现一些视觉变化的效果，例如requestAnimationFrame钩子方法会在重排重绘前被执行。然后进行样式计算，根据css规则计算每个元素的样式。布局时计算元素占据的空间大小以及在屏幕的位置。然后根据布局，进行像素填充，使用多个图层来绘制，最后将图层进行合并。
 
+【requestAnimationFrame】属于宏任务。先执行微任务，然后执行requestAnimationFrame，然后开始计算样式和重排重绘
+
 ---
 
 【Cookie】cookie是一种用于维持会话状态的数据，通常是服务端将对应的状态信息，比如说是sessionId或者是token，发送给客户端，然后浏览器通过cookie保存在本地。当下一次有同源的请求时，就会将cookie携带到请求头中发送给服务端。当然cookie也可以通过js代码来设置，可以存放用户的信息比如账号密码，坐标位置等等，用于改善用户体验。但是cookie一般只能存储4k大小的数据，浏览器一般也会有数量的限制，而且cookie只能在同源页面之间使用。
@@ -74,9 +76,17 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 【Cache-Control】`max-age`值表示在这多少秒的时间以内缓存仍然有效；`s-maxage`用来设置代理服务器的缓存有效时间；`public`表示浏览器和代理服务器都可以缓存；`private`则表示只有浏览器可以缓存；`no-cache`则会跳过强缓存，直接使用协商缓存；`no-store`则会禁止掉缓存。
 
+Pragma字段是http1.0的产物，而从http1.1开始就使用Cache-Control
+
 ---
 
-【同源策略与跨域】浏览器的同源策略下，一个域下的js脚本不允许修改另一个域的内容。只允许URL路径不同，其它情况都算跨域。跨域实现方式中，`JSONP`利用的是img和script标签的src属性允许加载外域脚本；`CORS`跨域资源共享，本质上是浏览器与服务器的协商，从而允许使用跨域资源。CORS的配置方式只需要后端在response header上添加字段，而不需要前端再修改。CORS请求分为简单请求和复杂请求，复杂请求会多一次预检请求，服务器确认以后返回204状态码，然后就可以像简单请求一样正常访问。使用nginx反向代理，或者webpack的DevServer中使用的http-proxy-middleware中间件。
+【同源策略与跨域】浏览器的同源策略下，一个域下的js脚本不允许修改另一个域的内容。只允许URL路径不同，其它情况都算跨域。跨域实现方式中，`JSONP`利用的是img和script标签的src属性允许加载外域脚本；
+
+【CORS】`CORS`跨域资源共享，本质上是浏览器与服务器的协商，从而允许使用跨域资源。CORS的配置方式只需要后端在response header上添加字段，而不需要前端再修改。CORS请求分为简单请求和复杂请求，复杂请求会多一次预检请求，服务器确认以后返回204状态码，然后就可以像简单请求一样正常访问。使用nginx反向代理，或者webpack的DevServer中使用的http-proxy-middleware中间件。可以通过 `<script>`、 `<link>`、`<audio>`、 `<img> `和 `<video>` 的 `crossorigin`属性，在请求头上携带Origin字段，开启CORS，得到允许后就可以访问和操作这份跨域脚本资源，onerror捕获脚本具体的错误信息。值为`anonymous`时在跨域的时候不会携带cookie，值为`use-credentials` 时会在跨域请求携带cookie，并且需要服务端开启CORS，否则就会跨域失败。
+
+【多标签页之间的通信】localStorage、WebSocket、ShareWorker、postMessage
+
+【浏览器的孤儿进程和僵尸进程】孤儿进程是指父进程退出了，而它的一个或多个子进程还在运行。僵尸进程就是子进程比父进程先结束，而父进程又没有释放子进程占用的资源。
 
 ### 网络攻击
 
@@ -86,7 +96,7 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 【CSRF】CSRF（Cross-site request forgery, 跨站点请求伪造）是设法伪造带有 cookie 的 HTTP 请求，比如骗取用户点击从而盗取用户的cookie。cookie本身不能跨域，但是CORS的请求会自动使用cookie，所以需要再额外限制外域对cookie的使用，比如同源检测，通过header中的`Referer`字段检测用户之前的位置是否是同源，还可以让服务器通过 `Set-Cookie` 字段，设置cookie的`samesite`属性限制第三方cookie。
 
-- SameSite可以设置为三个值，`Strict` (浏览器完全禁止第三方请求携带Cookie，即完全禁止跨域)、`Lax` (只能在get方法提交表单况或者a 标签发送 get 请求的情况下可以携带Cookie，其他情况均不能) 和 `None` (默认模式，请求会自动携带上 Cookie，不过前提是设置了`Secure`属性，在https域名下使用)。
+- SameSite可以设置为三个值，`Strict` (浏览器完全禁止第三方请求携带Cookie，即完全禁止跨域)、`Lax` (只能在get方法提交表单的情况或者a 标签发送 get 请求的情况下可以携带Cookie，其他情况均不能) 和 `None` (默认模式，请求会自动携带上 Cookie，不过前提是设置了`Secure`属性，在https域名下使用)。
 
 【XSS与CSRF】`XSS`是将恶意代码植入网站中，骗取的是用户对网站的信任；而`CSRF`盗用 cookie 伪造用户请求，骗取的是网站对用户的信任。
 
@@ -200,3 +210,9 @@ body{
 【PostCSS】postcss把css转换成js能处理的数据格式，然后将接口提供给js插件，让js插件来完成css的拓展功能，例如lint校验、使用变量、mixins等等。最常用的是autofixer插件，会根据browserify配置支持的浏览器，来自动给css添加浏览器特定的前缀。stylelint插件校验css代码，然后还有用来转换新语法的preset插件等等
 
 【less、sass、stylus】Less 和 Stylus 都是用 JavaScript 写的，Sass 用 Dart 写的，但是npm的发布的package也是js，所以都能直接运行。语法上Stylus采用缩进语法，语法功能偏简洁；less和sass的语法都像css，但是sass更面向编程，功能更加强大， 比如还支持ifelse条件语句、extend继承、自定义函数等等less并不支持的。趋势热度上，sass热度最高，less次之，所以我选sass，然后3.0以后sass就改名为scss了
+
+
+
+## 其它
+
+【进程和线程】进程process是资源分配的最小单位，线程thread是程序执行的最小单位。线程是依附于进程的，一个程序至少有一个进程，一个进程至少有一个线程。进程之间的通信和切换比较麻烦，但是线程之间的通信和切换更方便。

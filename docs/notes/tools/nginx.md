@@ -410,9 +410,9 @@ location /yourPath {
 
 ```nginx
 location /your-api {
-	#rewrite ^/iot-large/login/(.*)$ /$1 break;
+	#rewrite ^/your-api/login/(.*)$ /$1 break;
 	#proxy_pass http://remote_ip:1234/api;
-  rewrite ^/iot-large/login/(.*)$ /api/$1 break;
+  rewrite ^/your-api/login/(.*)$ /api/$1 break;
   proxy_pass http://remote_ip:1234;
 }
 ```
