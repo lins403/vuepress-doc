@@ -187,6 +187,98 @@ debounce+disabled
 <child :some-prop="1" />
 ```
 
+### 3）watch监听一个对象时，如何排除某些属性的监听
+
+```vue
+<script>
+  export default{
+    mounted() {
+      Object.keys(this.params)
+        .filter(_ => !["c", "d"].includes(_)) // 排除对c，d属性的监听
+        .forEach(_ => {
+        this.$watch((vm) => vm.params[_], handler, {
+          deep: true,
+        });
+      });
+    },
+    data() {
+      return {
+        params: {
+          a: 1,
+          b: 2,
+          c: 3,
+          d: 4
+        },
+      };
+    }
+  }
+</script>
+```
+
+### 4）computed如何实现传参
+
+```js
+// html
+<div>{{ total(3) }}</div>
+
+// js
+computed: {
+  total() {
+    return function(n) {
+      return n * this.num
+    }
+  },
+}
+```
+
+### 5）使用hooks
+
+```js
+<script>
+export default {
+  mounted() {
+    this.fun1()
+  },
+  methods: {
+    fun1() {
+      let timer = setInterval(() => {
+        // 需要做的事情
+        console.log(11111)
+      }, 1000)
+      this.$once('hook:beforeDestroy', () => {
+        clearInterval(timer)
+        timer = null
+      })
+    }
+  }
+}
+</script>
+```
+
+6）获取原始数据
+
+```js
+export default {
+  data() {
+    return {
+      num: 10
+    }
+  },
+  mounted() {
+    this.num = 1000
+    this.howMuch()
+  },
+  methods: {
+    howMuch() {
+      // 计算出num增加了多少，那就是1000 - 初始值
+      // 可以通过this.$options.data().xxx来获取初始值
+      console.log(1000 - this.$options.data().num)
+    }
+  }
+}
+</script>
+```
+
 
 
 ## 全局
@@ -231,3 +323,8 @@ handleError(err){
 }
 ```
 
+
+
+# 参考
+
+[「自我检验」熬夜总结50个Vue知识点](https://juejin.cn/post/6984210440276410399)

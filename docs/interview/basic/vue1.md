@@ -12,6 +12,8 @@
 
 【同构应用】服务端运行代码（渲染虚拟DOM）生成HTML发送给浏览器，浏览器收到后进行页面展示，然后加载JS代码，执行JS代码并接管页面的操作。（同构应用最好在服务端上添加CSS，避免客户端执行JS再渲染所造成的页面闪动）
 
+【兼容性】Vue是基于 Object.defineProperty 来实现数据响应的，而 Object.defineProperty 是 ES5 中一个无法 shim 的特性，所以不支持IE8以下版本的浏览器。
+
 ## 应用
 
 【为什么data是个函数并且返回一个对象呢？】因为组件可能被多次用于创建实例，如果data属性是一个对象，则这个对象会被所有实例所共享引用，组件实例修改数据时就会造成数据污染。将data设置为一个函数，每次会调用就会生成一个新对象，就可以避免造成的数据污染。
@@ -22,7 +24,9 @@
 
 【`.native`】只有组件节点才可以添加自定义事件，并且添加原生 DOM 事件需要使用 `native` 修饰符。而普通元素使用 `.native` 修饰符是没有作用的，也只能添加原生 DOM 事件。
 
-【使用过哪些Vue的内部指令呢？】v-bind、v-model、v-on、`v-show`（v-show只是简单的 display 属性的切换，无论条件是否为真，都会被编译，所以 v-show 不能使用在`<template>`上）、v-if、v-else、v-else-if、v-for、v-slot、v-once、`v-pre`（跳过节点元素和子元素的编译过程）、v-cloak（用于解决初始化慢导致页面闪动，在编译前先隐藏未编译的Mustache标签，编译结束后将v-cloak移除）、v-html、v-text
+【使用过哪些Vue的内部指令呢？】v-bind、v-model、v-on、`v-show`（v-show只是简单的 display 属性的切换，无论条件是否为真，都会被编译，所以 v-show 不能使用在`<template>`上）、v-if、v-else、v-else-if、v-for (Vue2中v-for优先级高于v-if，Vue3中改成v-if高于v-for)、v-slot、v-once、`v-pre`（跳过节点元素和子元素的编译过程）、v-cloak（用于解决初始化慢导致页面闪动，在编译前先隐藏未编译的Mustache标签，编译结束后将v-cloak移除）、v-html、v-text
+
+【为什么不建议v-for和v-if同时存在】因为v-for的优先级更高，会渲染无用的节点，增加无用的dom操作，建议在computed属性中使用数组的filter方法进行过滤。
 
 【如何设置动态class，动态style？】v-bind动态绑定，可以使用数组语法，或者对象语法。
 
@@ -34,8 +38,8 @@
 
 - 父子通信最常用的方式props+$emit，父组件传值给子组件，子组件使用`props`进行接收。子组件使用`$emit`一个事件给父组件传值，父组件通过v-on监听事件。
 - 语法糖`.sync` 和 `v-model` ，`.sync` 相当于在父作用域上添加了一个update事件的监听，`v-model`则相当于v-bind绑定表单数据，同时基于表单事件更新数据。一个组件上只能使用一个`v-model`但是可以使用多个`.sync` 。
-- 适合用于多级组件嵌套的`$attrs`和`$listeners`，经常用在组件的二次封装。`$attrs`包含父作用域中class和style除外，以及不作为prop的属性。`$listeners`包含了父作用域中的 v-on 事件监听器（作用在这个组件上的所有事件监听器），除了通过.native方式绑定的原生事件。
-- 适合用于多级组件的还有`provide`和`inject`依赖注入，就像react的context特性
+- 适合用于多级组件嵌套的`$attrs`和`$listeners`，经常用在组件的二次封装，实现批量传递数据。`$attrs`包含父作用域中class和style除外，以及不作为prop的属性。`$listeners`包含了父作用域中的 v-on 事件监听器（作用在这个组件上的所有事件监听器），除了通过.native方式绑定的原生事件。
+- 适合用于多级组件的还有`provide`和`inject`依赖注入，就像react的context特性（但是provide的引用类型数据才能响应式更新到inject中）
 - 通过 `$refs`、 `$parent`和`$children` 这些API，获取对应的组件实例，从而可以访问实例数据。
 - 跨组件通信可以使用eventBus，用借鸡生蛋的方式，直接实例化Vue来创建一个事件中心，利用vue的on和emit的API，来实现事件的发布订阅，通过事件来传递数据。（`bus.$on` 应该在 created 钩子内使用，如果是在mounted内使用，则可能接收不到其它组件在created时emit发出的事件。然后在 beforeDestroy 钩子中解除事件监听 `bus.$off`）
 - 还可以使用`Vuex`来实现状态的全局管理，使用`Vue.observable()`来添加一个响应式对象然后在组件之间使用，使用indexDB或者webStorage来存储数据等等方式
@@ -44,7 +48,11 @@
 
 【单向数据流】父组件通过props给子组件传递数据，但是子组件不能直接修改父组件的状态。如果父组件通过props传递的是一个引用值，那么子组件修改它的时候也会更新父组件的状态，但是这种做法是不安全的，在只有父组件重新渲染的时候，子组件中修改的值就会被父组件原来的值覆盖掉。所以如果是个引用值，子组件就应该先对其进行深拷贝，然后再修改。
 
-【keep-alive】用于保留组件的状态。keep-alive只处理第一个子元素，所以一般和它搭配使用的有 `component` 动态组件或者是 `router-view`。只会执行一次完整的生命周期，然后会缓存组件的实例vnode，如果命中缓存，就直接使用这份vnode，在patch的时候通过vnode的el属性直接使用缓存的DOM，通过这种方式来快速创建组件。缓存组件被激活时触发 `activated` 钩子，失活的时候触发 `deactivated` 钩子。
+【keep-alive】用于保留组件的状态。keep-alive只处理第一个子元素，所以一般和它搭配使用的有 `component` 动态组件或者是 `router-view`。只会执行一次完整的生命周期，然后会缓存组件的实例vnode，如果命中缓存，就直接使用这份vnode，在patch的时候通过vnode的el属性直接使用缓存的DOM，通过这种方式来快速创建组件。缓存组件被激活时触发 `activated` 钩子，失活的时候触发 `deactivated` 钩子。include添加一个白名单，exclude添加一个黑名单，max表示最多缓存多少个组件实例
+
+【函数式组件】没有实例、没有自己的状态和生命周期，所以初始化速度很快，性能好。除了性能更好以外，函数式组件还可以返回多个根组件。
+
+【Vue.use】使用Vue.use来安装插件，会调用插件的install方法，并将Vue传入，这样在插件中就能访问到Vue。
 
 ## 生态
 
@@ -61,6 +69,10 @@ Vue.use安装Vuex的时候调用install方法，通过Vue.mixin混入beforeCreat
 【Vuex插件】内置了 Logger 插件，记录state更改的前后状态，但是有dev-tools时就不需要了。
 
 dispatch和commit方法都是封装过的，被注入过store，所以可以使用commit根据传入的type获取并执行对应的mutations，dispatch则获取并执行对应的actions
+
+【vue-router的钩子函数/导航守卫】分为全局守卫、路由守卫以及组件守卫三种。
+
+【导航解析过程】页面路由跳转时需要切换对应的组件，需要激活新的组件，并且旧的组件可能被销毁或者复用。被失活的组件会触发`beforeRouteLeave`钩子，被复用的组件则触发`beforeRouteUpdate`钩子。然后触发全局钩子`beforeEach`，和路由的`beforeEnter`钩子。如果是懒加载的路由，则解析异步路由组件。然后在被激活的组件里调用 `beforeRouteEnter`，调用全局的 `beforeResolve` 守卫。导航被确认以后会调用全局的 `afterEach` 钩子，然后完成 DOM 更新。
 
 ## 源码
 
@@ -82,11 +94,19 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 【模板编译】有compiler的版本，如果没有定义render function，就会将template模板字符串parse解析生成AST，然后优化AST，标记AST中可以优化的节点，然后根据优化后的AST，generate生成render function。
 
-【Diff算法】将新旧Virtual DOM逐层比较，找出哪些节点需要更新，通过key值匹配从而复用旧节点。优点是可以做到只把变化的部分重新渲染，从而减少操作DOM，提高渲染效率。缺点是使用index作为key的时候，比较的时候会有bug，所以最好使用唯一的key值
+【Diff算法】深度遍历+递归+双指针的方式。watcher的颗粒度只有做到组件级别，所以节点属性的更新不能被侦听到，就需要进行Diff比较。将新旧Virtual DOM逐层比较，找出哪些节点需要更新，借助key可以非常精确找到相同节点，从而尽可能复用旧节点，实现高效更新。
+
+同层比较，因为不同层的话就不是sameNode，就会直接销毁旧的vnode，渲染新的vnode
+
+Diff算法的优点是可以做到只把变化的部分重新渲染，从而减少操作DOM，提高渲染效率。缺点是使用index作为key的时候，比较的时候会有bug，所以最好使用唯一的key值
+
+【key的作用与原理】key用来标识vnode节点，主要作用是优化Diff算法，在patch的时候可以通过key判断新旧vnode是否是同一个节点，如果key一样那么就可以复用旧节点，减少DOM操作提高性能。当改变key的时候，节点会被强制触发重新渲染并替换掉。
+
+如果v-for中没有使用key，则会默认采用“就地复用”策略，如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。
 
 ### 响应式原理
 
-【响应式原理】源码中实现响应式原理的核心是Observer类，通过它来实现数据绑定和数据变化的发布订阅。被观察的对象都会被添加一个observer实例，在实例化Observer的时候会遍历对象，通过Object.defineProperty方法给对象的每个属性添加getter和setter，用于依赖收集和派发更新。
+【响应式原理】源码中实现响应式原理的核心是Observer类，通过它来实现数据绑定和数据变化的观察者模式。被观察的对象都会被添加一个observer实例，在实例化Observer的时候会遍历对象，通过Object.defineProperty方法给对象的每个属性添加getter和setter，用于依赖收集和派发更新。
 
 【依赖收集和派发更新】在实例化一个Observer的时候，会创建一个dep容器，用于管理watcher。在访问数据触发其getter的时候，会通过dep的depend方法进行依赖收集，将当前的watcher添加进dep容器中维护的一个订阅者容器subscribers。当数据发生变化触发setter时，就会通过dep的notify方法，将subscribers容器中的watcher拿出来执行其中的逻辑处理，以实现数据变化的派发更新。
 
@@ -98,29 +118,44 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 【user watcher】用户定义的watch属性能被用于创建user watcher，根据配置的方式，又可以衍生出deep属性为true时对应的可以深度监听的deep watcher，以及immediate属性为true时对应的同步立即更新的sync watcher。
 
-【数据劫持】数据劫持指的是使用 `Object.defineProperty` 劫持对象的访问和修改，数组中只有对象元素才会被劫持。因为对象的属性个数通常有限，拦截起来数量不多，但数组元素个数可能就会非常多，出于性价比考虑，显然数组并不适用于数据劫持。而且使用 Object.defineProperty劫持的方式也不能监听到数组长度的变化，也就是插入和删除元素不能监听到，所以对于数组元素的监听并不是进行劫持，而是重写数据原型上的方法，然后手动派发更新。
+【为什么只对对象劫持，而要对数组进行方法重写】数据劫持指的是使用 `Object.defineProperty` 劫持对象的访问和修改，数组中只有对象元素才会被劫持。因为对象的属性个数通常有限，拦截起来数量不多，但数组元素个数可能就会非常多，出于性价比考虑，显然数组并不适用于数据劫持。而且使用 Object.defineProperty劫持的方式也不能监听到数组长度的变化，也就是插入和删除元素不能监听到，所以对于数组元素的监听并不是进行劫持，而是重写数据原型上的方法，然后手动派发更新。
 
-### 组件化
+【Vue.set】使用set方法添加一个响应式属性，如果被添加的是一个数组，则会调用数组的splice方法然后触发响应式更新。如果被添加的是一个对象，就会使用defineReactive将它绑定为响应式属性，并且手动的派发更新。
 
 【DOM异步更新机制】视图上的响应式数据更新的时候，会将更新派发给render watcher，会调用updateComponent方法，触发组件重新渲染生成vnode，然后patch更新到DOM上。但是watcher不是被立即执行更新，而是先将watcher放入一个队列中，相同的watcher只会被添加进一次队列，这里是一个优化点，做了watcher去重，避免了多余的计算和DOM操作。然后给队列做排序，以保证父组件的watcher比子组件先执行，更新的时候先渲染父组件。JavaScript是单线程的，基于事件循环机制，每一轮事件循环称作一个tick，在这轮的主线程执行完成后开启下一个tick，从微任务队列中取出微任务执行。然后这个watcher的队列会等到nextTick，也就是被当作一个微任务来执行，然后取出队列的watcher执行更新。所以从数据的变化到 DOM 的重新渲染是一个异步过程。（为什么要nextTick再更新呢，那就是等数据都修改完成，所有watcher都生成完了再做去重，然后最终patch的时候只需要做一遍DOM更新）
 
-【`$nextTick`】全局 API `Vue.nextTick`，和实例上的方法 `vm.$nextTick`，完全一致，调用的是同一个方法，传给它的回调方法也会等到下一个tick才被执行，这时候就可以访问到更新以后的DOM了。nextTick内部调用的是promise.then方法，如果不支持promise，就是用MutationObserver，再到使用setImmediate(宏任务)，直至setTimeout。
+【`$nextTick`】全局 API `Vue.nextTick`，和实例上的方法 `vm.$nextTick`，完全一致，调用的是同一个方法，传给它的回调方法也会等到下一个tick才被执行，这时候就可以访问到更新以后的DOM了。nextTick内部调用的是promise.then方法，如果不支持promise，就是用MutationObserver，再到使用setImmediate(宏任务)，直至setTimeout。Vue采用的是异步更新的策略，通俗点说就是，同一事件循环内多次修改，会统一进行一次视图更新，以节省开销提升性能。
+
+---
+
+【对象新属性无法更新视图，删除属性无法更新视图】因为`Object.defineProperty`没有对对象的新属性进行数据劫持，删除属性的时候不能触发setter。使用`Vue.$set`方法添加新属性，在内部对新属性进行数据劫持，使用`Vue.$delete`方法删除属性，然后手动派发更新，以此更新视图。
+
+【直接arr[index] = xxx无法更新视图】Vue没有对数组的非对象元素进行`Object.defineProperty`的属性劫持，可以使用`splice`方法，或者使用`Vue.$set`，在内部也是去调用splice方法来更新数组。
+
+### 组件化
+
+【谈谈对组件的理解】组件化开发 (高内聚、低耦合、单向数据流) 能够解耦复杂的代码逻辑，提高代码的开发效率、复用性与测试性。常用的组件化技术有props或者attrs传递数据、events自定义事件、slot插槽。组件化开发颗粒度更细，数据变化时需要渲染的内容就更少。
+
+【组件的渲染流程】创建组件vnode，然后创建真实节点，并插入到页面中
 
 【组件更新】数据发生变化触发重新渲染，生成新的VNode，patch的时候，将新的vnode与旧的vnode进行比较节点是否相同，以决定是否需要复用节点。其中如果key不同，就会被当作不同的vnode，创建新节点然后删除旧节点。如果新旧节点相同，则会调用patchVnode方法，把新vnode patch到旧vnode上去。当新旧 VNode 同时存在 children，通过 updateChildren 对子节点做更新。在旧vnode的子节点中尽量找到与新vnode的子节点相同 (sameVnode) 的节点，复用旧的DOM以减少对DOM的操作。
 
 【组件注册】每个组件的创建都是通过 `Vue.extend` 继承而来，然后将组件的 options 和全局构造函数Vue的 options 进行 merge 合并。根组件和子组件的merge options的时机略有不同，根组件是在初始化时合并配置，子组件是在执行生成 vnode 的时候 (createComponent)
 
+【父子组件的生命周期】父beforeCreate -> 父created -> 父beforeMount -> 子beforeCreate -> 子created -> 子beforeMount -> 子mounted -> 父mounted （先实例化父组件，在挂载父组件的时候才会去实例化子组件，然后先完成子组件的挂载）
+
 【父组件和子组件的更新顺序】编译时发生在`vm.$mount`时，所以父组件先编译，然后再编译子组件。所以先触发父组件的beforeMount生命周期钩子。挂载的时候使用一个vnode队列来插入，队列中添加到顺序是先子后父，所以子组件先完成挂载然后是父组件，先触发子组件的mounted生命周期钩子。
+
+【异步组件】只在组件需要渲染时触发工厂函数进行加载，并且会把加载结果缓存起来。本质上是 2 次渲染，第一次渲染生成一个注释节点，当异步获取组件成功后，再通过 `$forceUpdate` 方法强制重新渲染
+
+【自定义指令】在编译的时候会给组件实例添加directives属性，然后在generate生成render函数的时候，通过genDirectives方法生成指令代码
 
 ## 其它
 
 【Vue2】Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM节点，提升渲染性能。以及提供了服务端渲染技术。
 
-【组件】props传递数据、events触发事件、slot内容分发，这三者构成了Vue组件
-
 【组件递归】必须添加name选项
 
 【动态组件】 `<component :is="currentView" />`
 
-【异步组件】只在组件需要渲染时触发工厂函数，并且会缓存解析结果。
-
+【性能优化】数据层级不要太深，使用`Object.freeze`冻结不需要响应式的对象数据；不要使用索引作为`key`值；给元素或组件使用`v-once`；不要在同一个节点上使用v-for和v-if；input表单输入的v-lazy；采用性能更好的函数式组件；使用keep-alive缓存组件；借助webpack实现路由懒加载；
