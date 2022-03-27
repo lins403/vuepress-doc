@@ -591,7 +591,7 @@ console.log(chains(2,1))	// true
 
 【函数的原型】每个函数都有个`prototype`属性，然后它的`constructor`属性又指向了函数自身。函数也是一个对象，每个函数的原型链上都包含了 `Function.prototype`，这上面定义了name、arguments、call、apply、bind等等诸多函数通用的属性和方法，而这个原型自身又会连接到 `Object.prototype`
 
-【arguments对象】函数传参是按值传参，`arguments`表示实参，而形参通常被称为`parameters`。在非严格模式且没有使用默认参数值的情况下，arguments对象的值会和形参对应的值保持同步，有歧义所以不应该直接修改arguments对象，可以先复制一份再进行操作。`arguments.callee`属性就是当前正在执行的函数，适合用于匿名函数的递归。
+【arguments对象】函数传参是按值传参，`arguments`表示实参，而形参通常被称为`parameters`。在非严格模式且没有使用默认参数值的情况下，arguments对象的值会和形参对应的值保持同步，有歧义所以不应该直接修改arguments对象，可以使用一个变量保存再进行操作。`arguments.callee`属性就是当前正在执行的函数，适合用于匿名函数的递归。
 
 【this对象】普通函数中的this指向的是调用该函数的上下文对象，通常是个活动对象或者全局对象window或者global，所以普通函数的this值在函数运行时才会被确定，但通过call、apply和bind方法，可以控制调用函数的上下文，也就是修改函数中的this指向。箭头函数的this指向比较特殊，保留的是定义该函数时的上下文，即词法作用域。
 

@@ -150,6 +150,8 @@ Diff算法的优点是可以做到只把变化的部分重新渲染，从而减�
 
 【自定义指令】在编译的时候会给组件实例添加directives属性，然后在generate生成render函数的时候，通过genDirectives方法生成指令代码
 
+
+
 ## 其它
 
 【Vue2】Vue2.x 与 Vue1.x 最大的区别在于 2.x 使用了 Virtual DOM 来更新DOM节点，提升渲染性能。以及提供了服务端渲染技术。

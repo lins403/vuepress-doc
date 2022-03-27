@@ -308,12 +308,12 @@ String(Number({key:'123', toString(){return '456'}, valueOf(){return '789'}}))		
 
 【查询某个对象是否有某个属性的方法】
 
-- `obj.key` 直接用属性判断是否为undefined
-
+- `obj.key` 直接按判断是否为undefined
 - `in` 操作符可以判断以上情况的全部属性
 - `for...in` 遍历自身的和继承的可枚举属性，不包含symbol键
 - `Object.keys` 仅包含自身的可枚举属性，不包含symbol键
 - `Object.getOwnPropertyNames` 包含自身的可枚举属性与不可枚举属性（除symbol键外的所有自身属性）
+- `Object.getOwnPropertySymbols()` 仅包含symbol类型的自身属性
 - `obj.hasOwnProperty()` 和 `Object.hasOwn()` 用于判断所有的自身属性，包含symbol键
 - `obj.propertyIsEnumerable()` 用于判断自身的可枚举属性和symbol键
 
