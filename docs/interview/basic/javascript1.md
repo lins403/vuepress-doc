@@ -11,13 +11,15 @@
 
 【暂时性死区】temporal dead zone，在代码块内如果使用了let声明变量，那么在该条声明语句之前，该变量不可用。
 
-【箭头函数】this指向函数定义时外层的this值；不能使用 arguments、super 和 new.target，也不能用作构造函数；没有 prototype 属性；不能用来定义Generator函数。
+【箭头函数】this指向函数定义时外层的this值；不能使用 arguments；不能用作构造函数，不能使用super 和 new.target；没有 prototype 属性；不能用来定义Generator函数。
 
 【Symbol】symbol表示表示独一无二的值，属于Symbol类型的属性名都是独一无二的，可以保证不会与其他属性名产生冲突。作为对象的属性名时，通过`Object.getOwnPropertySymbols(obj)`和`Reflect.ownKeys(obj)`方法获取到对象的属性名包含symbol键。JavaScript语言内部也有很多地方内置了symbol值，比如使用`Symbol.iterator`定义返回一个对象默认迭代器的方法，以及Symbol.hasInstance、Symbol.toPrimitive。
 
-【代理Proxy】`Proxy`对象用于创建一个对象的代理，拦截对目标对象的基本操作，添加自定义的额外行为。
+【代理Proxy】`Proxy`对象用于创建一个对象的代理，拦截对目标对象的基本操作，添加自定义的额外行为。缺点是被代理对象的方法中的this会丢失原来的指向，从指向这个对象变成指向proxy，而且好像Date对象的方法没法代理。
 
-【反射Reflect】指对Object的反射，Reflect对象被设计用于调整Object的行为，让其行为变得更加合理。更多的用处是结合proxy对象使用，proxy对象要完成对象的默认行为时，proxy代理对象的handler中所有可以捕获的方法都有对应的反射(Reflect) API 方法，使用Reflect的方法更直观，功能也更强大。
+【反射Reflect】指的是对Object类的反射，Reflect对象被设计用于调整Object的行为，让其行为变得更加合理。更多的用处是结合proxy对象使用，proxy对象要完成对象的默认行为时，proxy代理对象的handler中所有可以捕获的方法都有对应的反射(Reflect) API 方法，使用Reflect的方法更直观，功能也更强大。
+
+【proxy和reflect】用`Proxy`对象给一个目标对象做代理，对目标对象进行操作的时候就会被代理拦截，并且我们可以定义它的处理方法，然后添加额外的行为；通常处理方法handler中可以使用`Reflect`的API来实现对象的默认行为，更加简便而且功能更强大
 
 ### Set和Map
 
@@ -25,11 +27,11 @@ ECMAScript 6 新增了一批引用类型:Map、WeakMap、Set 和 WeakSet。这�
 
 【Map和Object】Object 的键值只能是string或symbol，而 Map 中各种类型的值（包括对象）都可以当作键。Map的内存占用更小，插入和删除性能更佳，但是查找操作Object有时候可能更好。
 
-【WeakMap】WeakMap 只接受对象作为键名（`null`除外），不接受其他类型的值作为键名，且键不可迭代。而且 WeakMap 的键名对所指向的对象的引用是弱引用，不计入垃圾回收机制，有助于防止内存泄漏。适用于想给对象上添加数据，但又不干扰对这个对象的垃圾回收，适合用于保存关联元数据。例如使用WeakMap结构来添加对DOM的引用关系，当该DOM元素被清除时，其所对应的WeakMap记录就会自动被移除。
+【WeakMap】WeakMap <u>只接受对象作为键名</u>（`null`除外），不接受其他类型的值作为键名，且键不可迭代。而且 WeakMap 的键名对所指向的对象的引用是弱引用，不计入垃圾回收机制，有助于防止内存泄漏。适用于想给对象上添加数据，但又不干扰对这个对象的垃圾回收，适合用于保存关联元数据。例如使用WeakMap结构来添加对DOM的引用关系，当该DOM元素被清除时，其所对应的WeakMap记录就会自动被移除。
 
 【Set】Set函数可以接受一个数组（或者具有 iterable 接口的可迭代对象）作为参数，用来初始化。
 
-【WeekSet】WeakSet 中的成员只能是对象，且值不可迭代；WeakSet 中的对象都是弱引用。与WeakMap同理，可以用于存储DOM节点，而不用担心这些节点从文档移除时，需要手动释放引用以避免可能引发内存泄漏。
+【WeekSet】WeakSet中的<u>成员只能是对象</u>，且值不可迭代；WeakSet 中的对象都是弱引用。与WeakMap同理，可以用于存储DOM节点，而不用担心这些节点从文档移除时，需要手动释放引用以避免可能引发内存泄漏。
 
 ### 异步编程
 

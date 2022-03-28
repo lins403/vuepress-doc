@@ -77,7 +77,7 @@ setTimeout(function() {
 
 但是，在 unload 事件处理程序中创建的任何异步请求都会被浏览器取消。为此，异步 XMLHttpRequest 或 fetch()不适合这个任务。分析工具可以使用同步 XMLHttpRequest 强制发送请求，但这样做会导致用户体验问题。浏览器会因为要等待 unload 事件处理程序完成而延迟导航到下一个页面。
 
-为解决这个问题，W3C 引入了补充性的 Beacon API，这个 API 给 navigator 对象增加了一个 sendBeacon()方法
+为解决这个问题，W3C 引入了补充性的 Beacon API，这个 API 给 navigator 对象增加了一个 sendBeacon() 方法
 
 信标（Beacon ）请求使用HTTP协议中的POST方法，请求通常不需要响应。这个请求被保证在页面的unload状态，从发起到完成之前被发送。
 

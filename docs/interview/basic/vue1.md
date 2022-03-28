@@ -1,6 +1,6 @@
 # Vue基础
 
-【Vue的特点】渐进式、组件化、数据驱动DOM、虚拟DOM、单页面路由
+【Vue的特点】渐进式、单页面路由、组件化、数据驱动DOM、虚拟DOM
 
 【Vue与React的异同点】都属于单页面应用的框架，都是组件化开发和单向数据流，都使用了Virtual DOM，并支持SSR。不同的地方在于，React的UI代码是通过 JSX 来写的而Vue是template，React数据是单向绑定而Vue可以双向绑定，React需要手动设置数据变化，而Vue在初始化时就实现了数据的响应式处理。Vue内置了很多API和指令，实现了丰富的功能，而React中需要开发人员自己实现。
 
@@ -37,7 +37,7 @@
 【组件之间的传值方式有哪些？】
 
 - 父子通信最常用的方式props+$emit，父组件传值给子组件，子组件使用`props`进行接收。子组件使用`$emit`一个事件给父组件传值，父组件通过v-on监听事件。
-- 语法糖`.sync` 和 `v-model` ，`.sync` 相当于在父作用域上添加了一个update事件的监听，`v-model`则相当于v-bind绑定表单数据，同时基于表单事件更新数据。一个组件上只能使用一个`v-model`但是可以使用多个`.sync` 。
+- 语法糖`.sync` 和 `v-model` ，`.sync` 相当于在父作用域上添加了一个<u>update事件</u>的监听，会接收子组件emit的值然后更新绑定的变量。`v-model`则相当于v-bind绑定表单数据，同时基于表单事件更新数据。一个组件上只能使用一个`v-model`但是可以使用多个`.sync` 。
 - 适合用于多级组件嵌套的`$attrs`和`$listeners`，经常用在组件的二次封装，实现批量传递数据。`$attrs`包含父作用域中class和style除外，以及不作为prop的属性。`$listeners`包含了父作用域中的 v-on 事件监听器（作用在这个组件上的所有事件监听器），除了通过.native方式绑定的原生事件。
 - 适合用于多级组件的还有`provide`和`inject`依赖注入，就像react的context特性（但是provide的引用类型数据才能响应式更新到inject中）
 - 通过 `$refs`、 `$parent`和`$children` 这些API，获取对应的组件实例，从而可以访问实例数据。
@@ -46,13 +46,15 @@
 
 【slot】组件之间的数据传递方式除了组件通信外，还有使用slot内容分发。将父组件作用域的内容通过slot或具名插槽分发给子组件，将子组件的数据绑定在子组件的slot上，父组件就能通过作用域插槽的方式使用子组件的数据。如果父组件有分发内容给子组件，那么子组件的 `$slots` 就会有值，然后使用`<slot>`来承接内容。
 
-【单向数据流】父组件通过props给子组件传递数据，但是子组件不能直接修改父组件的状态。如果父组件通过props传递的是一个引用值，那么子组件修改它的时候也会更新父组件的状态，但是这种做法是不安全的，在只有父组件重新渲染的时候，子组件中修改的值就会被父组件原来的值覆盖掉。所以如果是个引用值，子组件就应该先对其进行深拷贝，然后再修改。
+【单向数据流】父组件通过props给子组件传递数据，但是子组件不能直接修改父组件的状态。如果父组件通过props传递的是一个引用值，那么子组件修改它的时候也会更新父组件的状态，但是这种做法是不安全的，在只有父组件重新渲染的时候，子组件中修改的值就会被父组件原来的值覆盖掉。所以如果props值如果是个原始值，就使用一个变量来保存，是个引用值，子组件就应该先对其进行深拷贝，然后再修改。
 
-【keep-alive】用于保留组件的状态。keep-alive只处理第一个子元素，所以一般和它搭配使用的有 `component` 动态组件或者是 `router-view`。只会执行一次完整的生命周期，然后会缓存组件的实例vnode，如果命中缓存，就直接使用这份vnode，在patch的时候通过vnode的el属性直接使用缓存的DOM，通过这种方式来快速创建组件。缓存组件被激活时触发 `activated` 钩子，失活的时候触发 `deactivated` 钩子。include添加一个白名单，exclude添加一个黑名单，max表示最多缓存多少个组件实例
+【keep-alive】用于保留组件的状态。keep-alive只处理第一个子元素，所以一般和它搭配使用的有 `component` 动态组件或者是 `router-view`。只会执行一次完整的生命周期，然后会缓存组件的实例vnode，如果下一次命中缓存的时候，就直接使用这份vnode，在patch的时候通过vnode的el属性直接使用缓存的DOM，通过这种方式来快速创建组件。缓存组件被激活时触发 `activated` 钩子，失活的时候触发 `deactivated` 钩子。include添加一个白名单，exclude添加一个黑名单，max表示最多缓存多少个组件实例
 
 【函数式组件】没有实例、没有自己的状态和生命周期，所以初始化速度很快，性能好。除了性能更好以外，函数式组件还可以返回多个根组件。
 
 【Vue.use】使用Vue.use来安装插件，会调用插件的install方法，并将Vue传入，这样在插件中就能访问到Vue。
+
+
 
 ## 生态
 
@@ -74,21 +76,23 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 【导航解析过程】页面路由跳转时需要切换对应的组件，需要激活新的组件，并且旧的组件可能被销毁或者复用。被失活的组件会触发`beforeRouteLeave`钩子，被复用的组件则触发`beforeRouteUpdate`钩子。然后触发全局钩子`beforeEach`，和路由的`beforeEnter`钩子。如果是懒加载的路由，则解析异步路由组件。然后在被激活的组件里调用 `beforeRouteEnter`，调用全局的 `beforeResolve` 守卫。导航被确认以后会调用全局的 `afterEach` 钩子，然后完成 DOM 更新。
 
+
+
 ## 源码
 
 ### 数据驱动
 
 【new Vue发生了什么】一个vue项目从 new Vue 实例化开始。首先进行init初始化，先mergeOptions然后再初始化内部方法以及各种状态（将数据通过Object.defineProperty的方式代理到vm实例上，并通过Observer完成响应式绑定），完成实例的初始化以后就开始挂载实例。如果实例有template选项，就需要将template进行compile编译。首先将template解析成AST，遍历收集AST的可优化信息，然后将优化后的AST生成render function。工程化项目中通常会使用vue-loader，它可以帮忙将单文件组件的template编译成render function。得到render函数以后，就会执行然后调用createElement方法来创建生成节点元素的vnode，包含了创建真是DOM所需要的信息。通过每个节点建立起来vnode树就是Virtual DOM，它是对真实DOM的映射。然后patch方法将根据vnode信息来调用浏览器的DOM API 来创建真实DOM，以此完成渲染和挂载。
 
-【merge options】实例化Vue时，首先进行mergeOptions合并选项，合并来自于组件自身的实例options，全局构造函数Vue的options，以及使用extends和mixins拓展的options，然后返回这个合并的对象。针对不同的option会使用不同的合并策略。data、props、computed这些属性，来自实例的option值会覆盖掉拓展的(混入和继承)，components、directives、filters这些则会把全局Vue中的也合并进来，watch属性以及生命周期的钩子方法，则会以数组的方式进行合并，然后依次执行，先执行拓展的再执行实例的。
+【merge options】实例化Vue时，首先进行mergeOptions合并选项，合并来自于组件自身的实例options，全局构造函数Vue的options，以及使用extends和mixins拓展的options，然后返回这个合并的对象。针对不同的option会使用不同的合并策略。data、props、methods、computed这些属性，来自实例的option值会覆盖掉拓展的(混入和继承)，components、directives、filters这些则会把全局Vue中的也合并进来，watch属性以及生命周期的钩子方法，则会以数组的方式进行合并，然后依次执行，先执行拓展的再执行实例的。
 
-【初始化状态】初始化状态最主要做了两件事情，一个是将props、computed以及methods经过标准化以后，通过Object.defineProperty方法绑定到实例上，就能作为实例属性直接访问；第二个是对它们以及data中的属性进行数据劫持，把它们变成响应式对象。完成这个阶段的初始化以后，就会触发生命周期的created钩子，这时候代码就能访问到数据了。
+【初始化状态】初始化状态最主要做了两件事情，一个是将props、computed以及methods经过标准化以后，通过Object.defineProperty方法绑定到实例上，就能作为实例属性直接访问；第二个是对它们以及data中的属性进行数据劫持，把它们变成响应式对象。完成这个阶段的初始化以后，就会触发生命周期的created钩子，这时候代码就能访问到实例数据了。
 
 【render function】render function用于创建VNode。创建一个vue实例，在初始化以后会进行挂载。在开始挂载前，会先判断实例是否包含template模板，如果有的话就需要先进行编译。parse解析模板生成AST，在优化AST以后，generate生成对应的render function。我们也可以自己手写render function，但是除了使用slot或者是组件封装以外，通常手写render function复杂而且不直观，可以使用JSX书写UI代码然后通过babel编译，或者工程化项目中使用template，webpack会使用Vue-loader然后调用模板编译器（vue-template-compiler）将template预编译为render function。
 
 【VNode】执行render function，调用createElement方法创建vnode。VNode是一个JavaScript对象，可以由一个普通DOM元素节点或者一个组件节点生成，整个页面的组件树就变成由一个个vnode组成的vnode树，把它称作虚拟DOM。vnode包含了创建DOM所需要的信息，vdom也是一个JavaScript对象，是对真实DOM的映射。
 
-【虚拟DOM】真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 也会造成很大的性能消耗。利用虚拟DOM的技术，大大提高了更新DOM时的性能。因为Virtual DOM只是一个JavaScript对象，创建它的资源消耗要比创建DOM低很多。而且页面需要更新时，会先经过vnode的diff算法，复用旧的节点，从而减少操作DOM的次数，所以执行效率更高。最后，patch方法用于将虚拟DOM映射到真实DOM，针对不同平台实现不同的patch方法，从而可以实现服务端渲染，以及应用的跨平台。
+【虚拟DOM】真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 也会造成很大的性能消耗。利用虚拟DOM的技术，大大提高了更新DOM时的性能。因为Virtual DOM只是一个JavaScript对象，创建它的资源消耗要比创建DOM低很多。而且页面需要更新并重新渲染的时候，会先经过vnode的diff算法，尽量去复用旧的节点，找出变化的节点然后更新，从而减少操作DOM的次数，所以执行效率更高。最后，vue内部的patch方法用于将虚拟DOM映射到真实DOM，针对不同平台实现不同的patch方法，从而可以实现服务端渲染，以及vue应用的跨平台。
 
 【实例挂载】挂载的目的就是把模板渲染成最终的真实DOM，发生在实例的初始化状态以后。判断如果实例的option中有el节点属性，就会将实例去挂载到这个DOM节点上，子组件的el属性就是根组件节点。如果没有el属性的话，可以在实例化以后去手动挂载。挂载入口是从`$mount`方法开始，它有两个版本，一个是带有编译的compiler版本，另一个则是没有编译的runtime版本。前者会现将模板编译成render function，再交由后者处理，触发生命周期的beforeMount钩子后，创建render watcher，并执行render函数创建VNode，最终根据vnode的信息创建和更新真实DOM。
 

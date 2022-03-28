@@ -109,7 +109,7 @@ for(let i = arr.length; i--;) {...} // 注意 i-- 后面的分号别漏了
 
 ```
 1) forEach（遍历Set、Map、数组和类数组对象(String arguments NodeList)）
-  - break和return都不能中断循环
+  - break和return都不能中断整个循环，return可以跳过当轮循环
   - forEach 遍历数组会自动跳过空元素
 
 2) for-in（遍历对象）
@@ -123,7 +123,7 @@ for(let i = arr.length; i--;) {...} // 注意 i-- 后面的分号别漏了
   
 4）技巧
 	- for-in 和 for-of 可以使用continue或break循环
-	- forEach不能continue或break循环，但是可以通过try-catch包裹然后throw异常的方式中断循环
+	- forEach不能continue或break循环，但是可以通过try-catch包裹然后throw异常的方式实现break，使用return的方式实现continue
 ```
 
 #### 🌰例子
