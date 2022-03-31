@@ -31,7 +31,7 @@ loads the resources asynchronously without delaying page rendering.
 
 1. 首先安装webpack的可视化资源分析工具（Vue-cli内置了依赖）
 
-   ```
+   ```sh
    npm i webpack-bundle-analyzer -D
    ```
 

@@ -108,7 +108,7 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
    - 需要创建多个DOM节点时，使用DocumentFragment创建完成以后再一次性的添加进DOM中
    - 尽量避免用table布局 (table元素一旦触发回流就会导致table里所有的其它元素回流)
    - 优化css，使用可以避免重排重绘的属性：`transform: translate()`、`transform: scale()`、`transform: rotate()`、`opacity`
-   - 让复杂动画的元素脱离文档流，例如设置position属性为absolute使它脱离文档流，否则会引起父元素及后续元素频繁回流。
+   - 让复杂动画的元素脱离文档流，例如设置position属性为absolute使它脱离文档流，否则会引起父元素及后续元素频繁回流。（脱离文档流的元素不会影响其它元素的重排重绘？）
 2. 使用事件委托
 3. 注意 HTMLCollection。每次访问HTMLCollection时都会重新查询，所以在循环中使用 HTMLCollection 时，应该首先取得对要使用的元素的引用，从而避免在循环体内多次调用 `HTMLCollection`
 

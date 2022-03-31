@@ -226,3 +226,15 @@ body{
 【web1.0和web2.0】web1.0 是网站单向消息推送，比如门户资讯网站；web2.0 是用户与网站的可交互行为，比如博客网站和论坛。
 
 【长轮询和短轮询】短轮询去服务端查询的时候，不管库存量有没有变化，服务器就立即返回结果了，所以其实很浪费服务器的资源。而长轮询则不是，在长轮询中，服务器如果检测到库存量没有变化的话，将会把当前请求挂起一段时间（这个时间也叫作超时时间，一般是几十秒）。在这个时间里，服务器会去检测库存量有没有变化，检测到变化就立即返回，否则就一直等到超时为止。
+
+【npm命令的算法】如果本地已经有node_modules目录，就会去磁盘加载node_modules目录，然后构建依赖树，再结合package.json的依赖，添加到这棵依赖树上，然后深度遍历依赖树，深度优先，去安装没有被安装的依赖。依赖会尽可能被安装到底层域，而且不会重复安装相同的依赖。
+
+【nginx】以事件驱动的方式实现的，支持高并发，性能非常好。稳定，并且支持热部署。可以做静态资源服务器、反向代理服务器、负载均衡（按权重值、连接数、响应时间、客户端IP）、虚拟主机（设置二级域名）
+
+【png和jpg】png无损压缩，jpg有损压缩
+
+【性能监控工具】LightHouse生成网站性能评测报告、JMeter测试并发效果、可以在控制台的network上看请求的大小和时间、使用Performance API，用它的mark()和measure()来计算时间差，在页面 `onload` 以后利用 `performance.getEntriesByType('resource')` 获取所有资源加载时间。
+
+performance有一些属性可以用于数据采集，例如，`performance.memory`获取内存使用情况；在页面unload的时候通过浏览器navigator对象的beacon API发送给服务器。
+
+performance.getEntriesByType('resource').filter(resource=> resource.initiatorType == 'img')

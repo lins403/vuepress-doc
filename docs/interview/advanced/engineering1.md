@@ -28,5 +28,5 @@
 
 babel
 
-【ES Module和CommonJS】ES Modules的依赖模块会在编译时就会被加载，CommonJS则是运行时加载。ES Modules 的加载、解析和执行都是异步的，而 require() 的过程是同步的。CommonJS 模块输出的是值的拷贝，ES Modules 输出的是值的引用。CommonJS更适用于浏览器，而ES Module则对浏览器和客户端都使用，并且基于ES Module的特性，可以实现更多的高级功能，例如tree-shaking、异步加载等等。浏览器的属性和方法可以通过模块来输出，而不用添加到一个命名空间的对象上，例如Math对象、navigator对象等等。
+【ES Module和CommonJS】ES Modules的依赖模块会在编译时就会被加载，CommonJS则是运行时加载。ES Modules 的加载、解析和执行都是异步的，而 require() 的过程是同步的。CommonJS 模块输出的是值的拷贝，ES Modules 输出的是值的引用。CommonJS更适用于服务端，而ES Module则对浏览器和客户端都使用，并且基于ES Module的特性，可以实现更多的高级功能，例如tree-shaking、异步加载等等。浏览器的属性和方法可以通过模块来输出，而不用添加到一个命名空间的对象上，例如Math对象、navigator对象等等。
 
