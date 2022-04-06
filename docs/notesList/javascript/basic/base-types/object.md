@@ -298,7 +298,7 @@ String(Number({key:'123', toString(){return '456'}, valueOf(){return '789'}}))		
 
 【对象的创建方法】使用 new 操作符和 Object 构造函数创建一个实例，然后再给它添加属性和方法；使用对象字面量表示法创建；使用原型模式 `Object.create`创建；继承Object类来创建一个子类，实例化子类来创建新对象（适合量产对象，例如工厂模式、构造函数模式、组合模式、寄生组合模式等等）。
 
-【属性描述对象】原属性，描述对象属性的属性。[[Configurable]]可配置性，[[Enumerable]]可枚举性、[[Writable]]是否可以修改、[[Value]]属性值，以及[[Get]]和[[Set]]。`Object.getOwnPropertyDescriptor()`用于获取自身属性的描述对象，获取所有时使用Object.getOwnPropertyDescriptors。`Object.defineProperty()`用于定义对象的一个新属性，并定义属性的描述对象，批量定义时使用Object.defineProperties()。
+【属性描述对象】元属性，描述对象属性的属性。[[Configurable]]可配置性，[[Enumerable]]可枚举性、[[Writable]]是否可以修改、[[Value]]属性值，以及[[Get]]和[[Set]]。`Object.getOwnPropertyDescriptor()`用于获取自身属性的描述对象，获取所有时使用Object.getOwnPropertyDescriptors。`Object.defineProperty()`用于定义对象的一个新属性，并定义属性的描述对象，批量定义时使用Object.defineProperties()。
 
 【控制对象状态】通过Object.preventExtensions、Object.seal、Object.freeze这三种方法不同程度上控制对象的扩展性。`Object.preventExtensions`使一个对象不能再添加新属性；`Object.seal`将元属性 configurable 设为 false，同时禁止新增或删除属性，并不影响修改某个属性的值；`Object.freeze`使一个对象无法添加、修改和删除属性，实际上就把对象变味了一个不可变的常量。三种方式都仅阻止添加自身的属性，原型依然可以添加和删除属性，所以需要将原型也冻结起来`Object.preventExtensions(Object.getPrototypeOf(obj))`。还有个局限性是只能冻结到第一层，也就是如果被冻结的属性值是个对象，则依然可以被修改。
 

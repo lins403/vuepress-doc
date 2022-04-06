@@ -384,6 +384,7 @@ function interviewSidebar(groupA,groupB){
           'basic/javascript3',
           'basic/vue1',
           'implement',
+          'monitor',
           'memo',
           'resources',
         ]

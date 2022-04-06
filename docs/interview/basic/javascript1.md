@@ -17,9 +17,9 @@
 
 【代理Proxy】`Proxy`对象用于创建一个对象的代理，拦截对目标对象的基本操作，添加自定义的额外行为。缺点是被代理对象的方法中的this会丢失原来的指向，从指向这个对象变成指向proxy，而且好像Date对象的方法没法代理。
 
-【反射Reflect】指的是对Object类的反射，Reflect对象被设计用于调整Object的行为，让其行为变得更加合理。更多的用处是结合proxy对象使用，proxy对象要完成对象的默认行为时，proxy代理对象的handler中所有可以捕获的方法都有对应的反射(Reflect) API 方法，使用Reflect的方法更直观，功能也更强大。
+【反射Reflect】指的是对Object类的反射，Reflect对象被设计用于调整Object的行为，让其行为变得更加合理。更多的用处是结合proxy对象使用，proxy对象要完成对象的默认行为时，proxy代理对象的handler中所有可以捕获的方法都有对应的反射(Reflect) API 方法，使用Reflect的方法更直观，功能也更强大。比如说in关键字，在Reflect对象中对应的就是Reflect.has方法
 
-【proxy和reflect】用`Proxy`对象给一个目标对象做代理，对目标对象进行操作的时候就会被代理拦截，并且我们可以定义它的处理方法，然后添加额外的行为；通常处理方法handler中可以使用`Reflect`的API来实现对象的默认行为，更加简便而且功能更强大
+【proxy和reflect】用`Proxy`对象给一个目标对象做代理，对目标对象进行操作的时候就会被代理拦截，并且我们可以定义它的处理方法，然后添加额外的行为；Reflect对象被用于改善Object的方法，使用Reflect对象以后很多操作会更合理且更易读。通常proxy拦截对象的处理方法handler中比如get、set、deleteProperty等等，可以使用`Reflect`的API来实现对象的默认行为，更加简便而且功能更强大。
 
 ### Set和Map
 
@@ -41,7 +41,7 @@ promise本质上就是一个对象，为异步操作提供接口，连接了异�
 
 【Promise的方法】`Promise.resolve()`方法返回一个解析过的Promise对象；`Promise.reject()`方法返回一个带有拒绝原因的Promise对象；`Promise.all()`返回一个新的promise对象，在所有的promise对象都成功的时候才会触发成功；`Promise.allSettled()`返回一个新的promise对象，在所有Promises都完成后（包含成功和失败）返回；`Promise.race()`返回第一个完成后（包含成功和失败）的 promise；`Promise.any()`返回第一个成功的promise。
 
-【XHR与Ajax】通过 XMLHttpRequest 可以在不刷新页面的情况下请求特定 URL 从而获取数据。Ajax是基于XHR的实践，指的是通过JavaScript的异步通信，从服务器获取数据然后局部更新DOM，而不用刷新整个页面。XHR是一个用于与服务器交互的对象，而Ajax是一种基于XHR的技术实现。
+【XHR与Ajax】通过 XMLHttpRequest 可以在不刷新页面的情况下发送HTTP请求从而动态向服务器获取数据。Ajax是基于XHR的实践，指的是通过JavaScript的异步通信，从服务器获取数据然后局部更新DOM，而不用刷新整个页面。XHR是一个用于与服务器交互的对象，而Ajax是一种基于XHR的技术实现。
 
 【Fetch】Fetch API 是原生的 JavaScript 方法，基于 ES6 的 import() 设计，会始终返回一个promise，被设计用来替代 XHR 技术。fetch中需要自行处理状态码来判断请求成功与否，fetch的优点是实现跨域比较简单。
 
@@ -55,11 +55,11 @@ ES6规范新增了两个高级特性：迭代器(/遍历器)和生成器。使�
 
 【生成器】`Generator`函数执行结果会返回一个**生成器对象**，而生成器对象也实现了 Iterator 接口，可以用于遍历。所以将[Symbol.iterator]直接赋值为一个generator函数，返回结果也能用于遍历，这种方式比起自定义实现Iterator要更简便。与迭代器最大的区别在于，生成器支持 yield 关键字，可以用于暂停执行Generator函数。
 
-【generator函数的异步应用】generator函数另外一个更大的用处是用于调整函数的行为，可以实现一系列异步操作的**自动执行**，它的`yield`可以暂停函数的执行，将控制权交出，而generator函数返回的生成器对象的`next`方法则可以接过控制权，来恢复函数的执行。（与promise不一样，promise是为了解决异步任务产生的回调地狱问题，而generator则使用回调方式或者是promise来实现异步任务的自动执行）。通过给生成器对象的`next`方法传参来给函数内部注入值，也可以使用`throw`方法抛出异常，或使用`return`的方式，提前终结 Generator 函数的遍历。
+【generator函数的异步应用】generator函数另外一个更大的用处是用于调整函数的行为，可以实现一系列异步操作的**自动执行**，它的`yield`可以暂停函数的执行，将控制权交出，而generator函数返回的生成器对象的`next`方法则可以接过控制权，给函数注入值并且恢复函数的执行。（与promise不一样，promise是为了解决异步任务产生的回调地狱问题，而generator则使用回调方式或者是promise来实现异步任务的自动执行）。通过给生成器对象的`next`方法传参来给函数内部注入值，也可以使用`throw`方法抛出异常，或使用`return`的方式，提前终结 Generator 函数的遍历。
 
 【async/await】async/await可以看作是 Generator 函数的语法糖，`*`对应`async`，`yield`对应`await`，但实际上async的实现原理是将 Generator函数和自动执行器，包装在这个async函数里。
 
-【async/await和Promise的区别】async/await是基于Promise实现的，前者以同步的方式执行异步任务，而promise需要以链式方式处理。
+【async/await和Promise的区别】async/await是基于Promise实现的，前者以同步的方式执行异步任务，而promise不能自动执行，需要以链式方式处理回调。
 
 ### 类Class
 

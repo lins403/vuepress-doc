@@ -8,7 +8,7 @@
 
 【typeof、instanceof、toString方法判断的原理】`typeof`原理是根据变量在底层存储的机器码的前1-3位来判断变量类型。`instanceof`是执行构造函数的内置属性Symbol.hasInstance方法，来判断实例对象的原型链上是否包含这个构造函数。`Object.prototype.toString.call()`方法的原理是读取实例对象的内部属性 [[Class]]。
 
-【undefined、null和NaN】`undefined`表示原始值，变量未定义；`null`表示缺少值，通常将赋值为null表示一个空对象，也可以手动赋值null用于释放对象的引用，便于垃圾回收；`NaN`属于number类型，表示一个非数值。NaN跟所有数都不相等，包括自身。最特殊的是`undefined == null`。
+【undefined、null和NaN】`undefined`表示原始值，变量未定义；`null`表示缺少值，通常将赋值为null表示一个空对象，也可以手动赋值null用于释放对象的引用，或者用于解除事件监听，便于垃圾回收；`NaN`属于number类型，表示一个非数值。NaN跟所有数都不相等，包括自身。最特殊的是`undefined == null`。
 
 ### number
 
@@ -40,9 +40,9 @@
 
 ### object
 
-【对象的创建方法】使用 new 操作符和 Object 构造函数创建一个实例，然后再给它添加属性和方法；使用对象字面量表示法创建；使用原型模式 `Object.create`创建；继承Object类来创建一个子类，实例化子类来创建新对象（适合量产对象，例如工厂模式、构造函数模式、组合模式、寄生组合模式等等）。
+【对象的创建方法】使用 new 操作符和 Object 构造函数创建一个实例，然后再给它添加属性和方法；使用对象字面量表示法创建；使用原型模式 `Object.create`创建；继承Object类来创建一个子类，实例化子类来创建新对象（适合量产对象，例如工厂模式、构造函数模式、原型链模式、组合模式、寄生组合模式等等）。
 
-【属性描述对象】原属性，描述对象属性的属性。[[Configurable]]可配置性，[[Enumerable]]可枚举性、[[Writable]]是否可以修改、[[Value]]属性值，以及[[Get]]和[[Set]]。`Object.getOwnPropertyDescriptor()`用于获取自身属性的描述对象，获取所有时使用Object.getOwnPropertyDescriptors。`Object.defineProperty()`用于定义对象的一个新属性，并定义属性的描述对象，批量定义时使用Object.defineProperties()。
+【属性描述对象】元属性，描述对象属性的属性。[[Configurable]]可配置性，[[Enumerable]]可枚举性、[[Writable]]是否可以修改、[[Value]]属性值，以及[[Get]]和[[Set]]。`Object.getOwnPropertyDescriptor()`用于获取自身属性的描述对象，获取所有时使用Object.getOwnPropertyDescriptors。`Object.defineProperty()`用于定义对象的一个新属性，并定义属性的描述对象，批量定义时使用Object.defineProperties()。
 
 【控制对象状态】通过Object.preventExtensions、Object.seal、Object.freeze这三种方法不同程度上控制对象的扩展性。`Object.preventExtensions`使一个对象不能再添加新属性；`Object.seal`将元属性 configurable 设为 false，同时禁止新增或删除属性，并不影响修改某个属性的值；`Object.freeze`使一个对象无法添加、修改和删除属性，实际上就把对象变味了一个不可变的常量。三种方式都仅阻止添加自身的属性，原型依然可以添加和删除属性，所以需要将原型也冻结起来`Object.preventExtensions(Object.getPrototypeOf(obj))`。还有个局限性是只能冻结到第一层，也就是如果被冻结的属性值是个对象，则依然可以被修改。
 
@@ -63,7 +63,7 @@
 
 ### function
 
-【函数的原型】每个函数都有个`prototype`属性，然后它的`constructor`属性又指向了函数自身。函数也是一个对象，每个函数的原型链上都包含了 `Function.prototype`，这上面定义了name、arguments、call、apply、bind等等诸多函数通用的属性和方法，而这个原型自身又会连接到 `Object.prototype`
+【函数的原型】每个函数都有个`prototype`属性，然后它的`constructor`属性又指向了函数自身。然后这个构造函数创建的实例对象的原型指针，指向这个构造函数原型。函数也是一个对象，每个函数的原型链上都包含了 `Function.prototype`，这上面定义了name、arguments、call、apply、bind等等诸多函数通用的属性和方法，而这个原型自身又会连接到 `Object.prototype`
 
 【arguments对象】函数传参的方式是<u>按值传参</u>，也就是在函数内部修改参数的时候，并不会影响到传递的真实参数（对象等引用类型除外）。`arguments`表示实参，而形参通常被称为`parameters`。在非严格模式且没有使用默认参数值的情况下，arguments对象的值会和形参对应的值保持同步，有歧义所以不应该直接修改arguments对象，可以使用一个变量保存再进行操作。`arguments.callee`属性就是当前正在执行的函数，适合用于匿名函数的递归。
 
@@ -160,9 +160,9 @@ s	dotAll	元字符`.`匹配任何字符(包括\n 或\r)
 
 【DocumentFragments】表示文档片段，因为文档片段存在于内存中，并不在DOM树中，所以将子元素插入到文档片段时，不会引起页面的重排和重绘。通常的做法是创建文档片段，先将元素插入到文档片段中，然后将文档片段附加到DOM树上，就可以避免多次插入子元素带来的页面多次渲染的性能消耗。
 
-【HTMLCollection 与 NodeList】NodeList 是一个类数组对象，是静态的，不受 DOM 树元素变化的影响，相当于是一份 DOM 树的快照。HTMLCollection 是一个动态集合，每次访问它都会执行一次新的查询。常用的方法中，getElementsByClassName和querySelectorAll查询结果返回一个NodeList，而getElementsByName、getElementsByTagName则返回一个HTMLCollection。常用属性中，childNodes返回NodeList且包含空元素，children返回HTMLCollection且不包含空元素。
+【HTMLCollection 与 NodeList】`NodeList` 是一个类数组对象，是静态的，不受 DOM 树元素变化的影响，相当于是一份 DOM 树的快照。`HTMLCollection` 是一个动态集合，每次访问它都会执行一次新的查询。常用的方法中，getElementsByClassName和querySelectorAll查询结果返回一个NodeList，而getElementsByName、getElementsByTagName则返回一个HTMLCollection。常用属性中，childNodes返回NodeList且包含空元素，children返回HTMLCollection且不包含空元素。
 
-【MutationObserver】MutationObserver 接口可以用于监控DOM变化。MutationObserver对目标节点是弱引用，不影响目标节点的垃圾回收，而目标节点对MutationObserver是强引用，需要移除目标节点才能自动释放MutationObserver实例。
+【MutationObserver】`MutationObserver` 接口可以用于监控DOM变化。MutationObserver对目标节点是<u>弱引用</u>，不影响目标节点的垃圾回收，而目标节点对MutationObserver是强引用，需要移除目标节点才能自动释放MutationObserver实例。
 
 【dataset】element元素的dataset属性，可以访问其元素节点上的自定义属性。
 

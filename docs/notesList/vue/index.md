@@ -531,7 +531,7 @@ SSR只需要浏览器下载HTML文档，就可以直接显示页面。
 
 JavaScript、样式计算、布局、绘制、合成
 
-- JavaScript：使用 JavaScript 来实现一些视觉变化的效果，例如使用requestAnimationFrame钩子，在浏览器下一次重排重绘以前执行其中的callback
+- JavaScript：使用 JavaScript 来实现一些视觉变化的效果，JavaScript代码中可能影响DOM或样式；例如使用requestAnimationFrame钩子，在浏览器下一次重排重绘以前执行其中的callback
 
 - Style calculations：匹配selectors，应用css规则，计算每个元素的最终样式
 

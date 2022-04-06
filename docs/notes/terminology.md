@@ -1,5 +1,14 @@
 # 术语
 
+### 职位
+
+- PM: Product Manager，产品经理
+- RD: Research and Development engineer，研发工程师
+- QA: Quality Assurance，品质保证
+- WLB: Work and Life Balance
+
+
+
 ### 幂等性
 
 表示执行相同的操作，结果也是相同的。例如 HTTP 中 GET 请求是幂等的，而 POST 请求不是
@@ -105,6 +114,8 @@ DSL（domain specific language），即领域专用语言：专门解决某一�
 ### 域名分片
 
 在一个域名下分出多个二级域名，而它们都指向同样的一台服务器，比如 blog.xiaomixi.com 、code.xiaomixi.com。
+
+
 
 ## 三、编程设计模式
 
