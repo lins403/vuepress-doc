@@ -2,14 +2,14 @@
 
 ## Webpack
 
-【为什么要使用webpack】webpack是一个静态模块打包工具，将静态资源如图片、js、css文件都视作模块，解析模块依赖，然后将模块代码打包成一个或多个 js 格式的bundle文件，用于展示页面。
+【为什么要使用webpack】webpack是一个静态模块打包工具，将静态资源如图片、js、css文件都视作模块，<u>解析模块依赖</u>，然后将模块代码打包成一个或多个 js 格式的bundle文件，用于展示页面。
 
 解析模块依赖、打包静态资源、自动化构建代码、本地开发的代理和热重载、source map
 
 - 使用loader转换模块代码，比如babel转换ES6代码
 - 压缩、tree-shaking、代码拆分，实现按需加载，便于构建复杂的 SPA
 
-【loaders和plugins】loaders主要用于加载和转换除JavaScript以外的文件，例如使用image-loader加载图片，还可以用于转译代码，例如使用ts-loader将ts编译为js，使用babel-loader将es6代码编译为es5。plugins用于自定义拓展webpack的构建过程，也就是让插件监听webpack构建过程的事件点，在触发事件节点的时候执行插件中添加的逻辑处理。webpack 的核心功能，也是抽离成很多个内部插件来实现的。
+【loaders和plugins】`loaders`主要用于加载和转换除JavaScript以外的文件，例如使用image-loader加载图片，还可以用于转译代码，例如使用ts-loader将ts编译为js，使用babel-loader将es6代码编译为es5。`plugins`用于自定义拓展webpack的构建过程，也就是让插件监听webpack构建过程的事件点，在触发事件节点的时候执行插件中添加的逻辑处理。webpack 的核心功能，也是抽离成很多个内部插件来实现的。
 
 【compiler和compilation】`compiler` 对象代表了完整的 webpack 环境配置，可以使用它来访问 webpack 的主环境。`compilation`对象代表了一次构建结果，也就是一次构建过程中的所有数据，包含了当前的模块资源、编译生成资源、变化的文件、以及被跟踪依赖的状态信息。运行过程中只有一个 `compiler`对象，但是当每次文件变更触发重新编译时，都会创建一个新的 `compilation` 对象。
 
@@ -19,7 +19,7 @@
 
 webpack的构建流程包括初始化`compile`对象、`make`编译模块、`build`构建模块依赖关系、`seal`组装chunk输出文件、`emit`输出到output，执行完这些阶段就完成了构建过程。
 
-> 首先是初始化阶段，根据webpack配置文件的参数和shell命令行的参数，初始化然后创建 `Compiler` 实例对象，并且去加载插件，然后执行 `compiler` 对象的 `run` 方法开始编译。开始构建时，会从entry入口文件开始解析代码，用babel的解析器将代码解析成AST，然后遍历AST节点收集模块依赖，并递归解析依赖模块，调用对应的loader来处理。递归完成以后就会得到整个应用的模块依赖关系图，以及被loader转换过的模块内容。最后的输出阶段，会根据入口和模块之间的依赖关系，组装成一个个包含多个模块的chunk，再把每个chunk转换成一个单独的文件，写入文件系统。
+> 首先是<u>初始化阶段</u>，根据webpack配置文件的参数和shell命令行的参数，初始化然后创建 `Compiler` 实例对象，并且去加载插件，然后执行 `compiler` 对象的 `run` 方法开始编译。然后是<u>编译构建阶段</u>，开始构建时，会从entry入口文件开始解析代码，用babel的解析器**将代码解析成AST**，然后遍历AST节点收集模块依赖，并**递归解析依赖模块**，调用对应的loader来处理。递归完成以后就会得到整个应用的模块依赖关系图，以及被loader转换过的模块内容。最后的<u>输出阶段</u>，会根据入口和模块之间的依赖关系，组装成一个个包含多个模块的chunk，再把每个chunk转换成一个单独的文件，写入文件系统。
 
 ### loader
 
@@ -60,7 +60,7 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
 
 ### 原理
 
-【HMR热替换】webpack的devServer其实是开启了一个express的server，它会与浏览器建立websocket的连接，文件变化时webpack重新编译完成以后，通过socket消息通知浏览器更新。webpack通过中间件webpack-dev-middleware，将生成文件发送给server，通过对比生成文件的hash值更新对应模块，而不用刷新整个页面
+【HMR热替换】webpack的devServer其实是开启了一个使用express框架的server，它会与浏览器建立websocket连接，文件变化时webpack重新编译完成以后，通过socket消息通知浏览器更新。webpack通过中间件webpack-dev-middleware，将生成文件发送给server，通过对比生成文件的hash值更新对应模块，而不用刷新整个页面。
 
 【manifest】webpack 的 runtime 和 manifest，管理所有模块的交互。
 
@@ -132,7 +132,7 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
 
 EditorConfig + Eslint + Prettier + Stylelint + Husky + lint-staged + commitlint
 
-EditorConfig统一不同操作系统不同IDE的代码格式，例如缩进、换行符等；eslint校验代码，prettier格式化代码，prettier是约定大于配置，与eslint结合使用可以使得不符合prettier规则的代码，以eslint的方式进行提示错误。stylelint基于postcss，用于校验代码，可以专门为less或scss配置。husky可以方便我们使用git的hooks，也就是不同生命周期的处理方法，lint-staged可以校验git暂存区的代码，二者通常结合使用，在代码提交以前，也就是在pre-commit这个钩子上执行lint-staged的配置，进行代码校验。commitlint则用于限制git提交信息的书写规范。
+EditorConfig统一不同操作系统不同IDE的代码格式，例如缩进、换行符等；eslint校验代码，prettier格式化代码，prettier是约定大于配置，与eslint结合使用可以使得不符合prettier规则的代码，以eslint的方式进行提示错误。stylelint基于postcss，用于校验代码，可以专门为less或scss配置。husky可以方便我们使用git的hooks，也就是不同生命周期的处理方法，lint-staged可以校验git暂存区的代码，二者通常结合使用，在代码提交以前，就是在pre-commit这个钩子上执行lint-staged的配置，进行代码校验。commitlint则用于限制git提交信息的书写规范。
 
 代码风格：
 

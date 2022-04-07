@@ -32,7 +32,7 @@
 
 【如何实现自定义指令？】可以添加全局指令或局部指令，在节点的bind、inserted、update、componentUpdated、unbind这几个生命周期钩子中可以获取到指令绑定的元素节点，和节点编译生成的vnode，在钩子中针对元素节点或vnode添加处理逻辑，例如操作DOM或修改实例数据。例如在元素节点上添加指令，在bind钩子中添加DOM事件监听，在unbind时移除事件监听，在inserted钩子添加输入框的focus等等。还可以结合vuex实现权限过滤，如果当前角色权限不符合时，就将节点移除。
 
-【关于条件渲染和列表渲染，以及为什么要使用key？】vue在重新渲染DOM元素的时候，出于效率考虑，会尽可能地复用已存在的元素。如果不想要让vue复用元素，可以使用key属性。patch更新时，如果key不同则会被认为是新节点，就直接替换掉旧节点。key相同才会考虑复用旧节点。如果没有key，则会遍历查找对应的节点。
+【关于条件渲染和列表渲染，以及为什么要使用key？】vue在页面更新需要重新渲染DOM元素的时候，出于效率考虑，会尽可能地复用已存在的元素。如果不想要让vue复用元素，可以使用key属性。在patch更新的时候，通过Diff算法进行比较，如果key不同则会被认为是新节点，就直接替换掉旧节点。key相同时会复用旧节点，如果没有key，则会使用双指针遍历尽可能找到对应相同的节点，所以使用key可以提升Diff算法的效率。v-for如果没有使用key，则会采用“就地复用”策略。
 
 【组件之间的传值方式有哪些？】
 
@@ -42,7 +42,7 @@
 - 适合用于多级组件的还有`provide`和`inject`依赖注入，就像react的context特性（但是provide的引用类型数据才能响应式更新到inject中）
 - 通过 `$refs`、 `$parent`和`$children` 这些API，获取对应的组件实例，从而可以访问实例数据。
 - 跨组件通信可以使用eventBus，用借鸡生蛋的方式，直接实例化Vue来创建一个事件中心，利用vue的on和emit的API，来实现事件的发布订阅，通过事件来传递数据。（`bus.$on` 应该在 created 钩子内使用，如果是在mounted内使用，则可能接收不到其它组件在created时emit发出的事件。然后在 beforeDestroy 钩子中解除事件监听 `bus.$off`）
-- 还可以使用`Vuex`来实现状态的全局管理，使用`Vue.observable()`来添加一个响应式对象然后在组件之间使用，使用indexDB或者webStorage来存储数据等等方式
+- 还可以使用`Vuex`来实现状态的全局管理，使用`Vue.observable()`来添加一个响应式对象然后在组件之间使用，使用浏览器的存储例如indexDB或者webStorage来存储数据等等方式
 
 【slot】组件之间的数据传递方式除了组件通信外，还有使用slot内容分发。将父组件作用域的内容通过slot或具名插槽分发给子组件，将子组件的数据绑定在子组件的slot上，父组件就能通过作用域插槽的方式使用子组件的数据。如果父组件有分发内容给子组件，那么子组件的 `$slots` 就会有值，然后使用`<slot>`来承接内容。
 
@@ -58,13 +58,13 @@
 
 ## 生态
 
-【路由模式】`hash`模式，更改URL中#符号后面的内容时，触发hashchange事件，实现路由切换。优点是跳转只需要客户端就能实现，浏览器的兼容性也更好。缺点是页面发生跳转也只是location.hash的变化，URL实际没有变化就没有发起新的http请求，所以不利于SEO。`history`模式下，利用history对象的pushState和replaceState方式来完成跳转，URL会发生变化，产生新的http请求，所以需要服务端支持，让服务端在接收到所有的请求后都指向同一个html文件，以实现单页面应用在路由跳转时不刷新页面。
+【路由模式】`hash`模式，更改URL中#符号后面的内容时，触发hashchange事件，实现路由切换。优点是跳转只需要客户端就能实现，浏览器的兼容性也更好。缺点是页面发生跳转也只是location.hash的变化，URL实际没有变化就没有发起新的http请求，所以不利于SEO。`history`模式下，利用浏览器BOM的history对象的pushState和replaceState方式来完成跳转，URL会发生变化，产生新的http请求，所以需要服务端支持，让服务端在接收到所有的请求后都指向同一个html文件，以实现单页面应用在路由跳转时不刷新页面。
 
 【<router-view\>和\<router-link>】`<router-view>`是一个函数式组件，会根据当前路由渲染对应的页面组件。`<router-link>` 会被渲染为 `<a>`
 
 【Vue-loader热重载】指的是修改.vue文件可以动态更新组件内容而不用刷新整个页面。当编辑一个 template 的时候，组件会重新渲染，当编辑一个 script 的时候，组件会就地销毁并重新创建 (reload)，当编辑一个 style 的时候，通过 vue-style-loader自行热重载，并不影响状态。跟webpack的HMR的关系是，更新.vue文件时，借助devServer与middleware中间件来让浏览器更新文件，而更新策略是vue-loader来决定。
 
-【Vuex】用于全局状态管理，store是一个全局单例对象，但是可以将store分割到不同模块中，每个模块可以维护自己的state、getters、mutations、actions。state是可以被所有组件共享的数据，只能通过mutation来同步修改state，actions可以包含异步操作，最终也是通过提交mutations的方式来修改state。从开发层面上来看，actions适合用于封装业务逻辑，自由度更高。
+【Vuex】用于全局状态管理，store是一个**全局单例对象**，但是可以将store分割到不同模块中，每个模块可以维护自己的state、getters、mutations、actions。state是可以被所有组件共享的数据，只能通过mutation来同步修改state，actions可以包含异步操作，最终也是通过提交mutations的方式来修改state。从开发层面上来看，actions适合用于封装业务逻辑，自由度更高。
 
 Vue.use安装Vuex的时候调用install方法，通过Vue.mixin混入beforeCreate钩子，通过Vue的init方法，将store数据绑定到this对象的`$store`属性上，子组件的`$store`属性来自于`$store`属性，以此嵌套，从而将这个store实例挂载到所有实例上。通过Vue的data属性绑定store，computed属性绑定getters，从而将store和getters的state变为响应式，而且getters还可以像computed那样缓存依赖。
 
@@ -72,7 +72,7 @@ Vue.use安装Vuex的时候调用install方法，通过Vue.mixin混入beforeCreat
 
 dispatch和commit方法都是封装过的，被注入过store，所以可以使用commit根据传入的type获取并执行对应的mutations，dispatch则获取并执行对应的actions
 
-【vue-router的钩子函数/导航守卫】分为全局守卫、路由守卫以及组件守卫三种。
+【vue-router的钩子函数/导航守卫】分为全局守卫、路由守卫以及组件守卫三种，接受三个参数 to, from, next
 
 【导航解析过程】页面路由跳转时需要切换对应的组件，需要激活新的组件，并且旧的组件可能被销毁或者复用。被失活的组件会触发`beforeRouteLeave`钩子，被复用的组件则触发`beforeRouteUpdate`钩子。然后触发全局钩子`beforeEach`，和路由的`beforeEnter`钩子。如果是懒加载的路由，则解析异步路由组件。然后在被激活的组件里调用 `beforeRouteEnter`，调用全局的 `beforeResolve` 守卫。导航被确认以后会调用全局的 `afterEach` 钩子，然后完成 DOM 更新。
 
@@ -82,7 +82,7 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 ### 数据驱动
 
-【new Vue发生了什么】一个vue项目从 new Vue 实例化开始。首先进行init初始化，先mergeOptions然后再初始化内部方法以及各种状态（将数据通过Object.defineProperty的方式代理到vm实例上，并通过Observer完成响应式绑定），完成实例的初始化以后就开始挂载实例。如果实例有template选项，就需要将template进行compile编译。首先将template解析成AST，遍历收集AST的可优化信息，然后将优化后的AST生成render function。工程化项目中通常会使用vue-loader，它可以帮忙将单文件组件的template编译成render function。得到render函数以后，就会执行然后调用createElement方法来创建生成节点元素的vnode，包含了创建真是DOM所需要的信息。通过每个节点建立起来vnode树就是Virtual DOM，它是对真实DOM的映射。然后patch方法将根据vnode信息来调用浏览器的DOM API 来创建真实DOM，以此完成渲染和挂载。
+【new Vue发生了什么】一个vue项目从 new Vue 实例化开始。首先进行<u>init初始化</u>，先mergeOptions然后再初始化内部方法以及各种状态（将数据通过Object.defineProperty的方式代理到vm实例上，并通过Observer完成响应式绑定），完成实例的初始化以后就开始<u>挂载实例</u>。如果实例有template选项，就需要将template进行compile编译。首先将template解析成**AST**，遍历收集AST的可优化信息，然后将优化后的AST生成**render function**。工程化项目中通常会使用vue-loader，它可以帮忙将.vue文件的template编译成render function。得到render函数以后，就会执行然后调用createElement方法来创建生成节点元素的**vnode**，包含了创建真是DOM所需要的信息。通过每个节点建立起来vnode树就是**Virtual DOM**，它是对真实DOM的映射。然后patch方法将根据vnode信息来调用浏览器的DOM API 来创建真实DOM，以此完成渲染和挂载。
 
 【merge options】实例化Vue时，首先进行mergeOptions合并选项，合并来自于组件自身的实例options，全局构造函数Vue的options，以及使用extends和mixins拓展的options，然后返回这个合并的对象。针对不同的option会使用不同的合并策略。data、props、methods、computed这些属性，来自实例的option值会覆盖掉拓展的(混入和继承)，components、directives、filters这些则会把全局Vue中的也合并进来，watch属性以及生命周期的钩子方法，则会以数组的方式进行合并，然后依次执行，先执行拓展的再执行实例的。
 
@@ -92,31 +92,31 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 【VNode】执行render function，调用createElement方法创建vnode。VNode是一个JavaScript对象，可以由一个普通DOM元素节点或者一个组件节点生成，整个页面的组件树就变成由一个个vnode组成的vnode树，把它称作虚拟DOM。vnode包含了创建DOM所需要的信息，vdom也是一个JavaScript对象，是对真实DOM的映射。
 
-【虚拟DOM】真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 也会造成很大的性能消耗。利用虚拟DOM的技术，大大提高了更新DOM时的性能。因为Virtual DOM只是一个JavaScript对象，创建它的资源消耗要比创建DOM低很多。而且页面需要更新并重新渲染的时候，会先经过vnode的diff算法，尽量去复用旧的节点，找出变化的节点然后更新，从而减少操作DOM的次数，所以执行效率更高。最后，vue内部的patch方法用于将虚拟DOM映射到真实DOM，针对不同平台实现不同的patch方法，从而可以实现服务端渲染，以及vue应用的跨平台。
+【虚拟DOM】VirtualDOM是Vue2才被引进的，主要是两个用处，跨平台以及更好的更新性能。真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 也会造成很大的性能消耗。利用虚拟DOM的技术，大大提高了更新DOM时的性能。因为Virtual DOM只是一个JavaScript对象，创建它的资源消耗要比创建DOM低很多。而且页面需要更新并重新渲染的时候，会先<u>经过vnode的diff算法，尽量去复用旧的节点，找出变化的节点然后更新，从而减少操作DOM的次数</u>，所以执行效率更高。最后，vue内部的patch方法用于将虚拟DOM映射到真实DOM，针对不同平台实现不同的patch方法，从而可以实现服务端渲染，以及vue应用的跨平台。
 
-【实例挂载】挂载的目的就是把模板渲染成最终的真实DOM，发生在实例的初始化状态以后。判断如果实例的option中有el节点属性，就会将实例去挂载到这个DOM节点上，子组件的el属性就是根组件节点。如果没有el属性的话，可以在实例化以后去手动挂载。挂载入口是从`$mount`方法开始，它有两个版本，一个是带有编译的compiler版本，另一个则是没有编译的runtime版本。前者会现将模板编译成render function，再交由后者处理，触发生命周期的beforeMount钩子后，创建render watcher，并执行render函数创建VNode，最终根据vnode的信息创建和更新真实DOM。
+【实例挂载】挂载的目的就是<u>把模板渲染成最终的真实DOM</u>，发生在实例的初始化状态以后。判断如果实例的option中有`el`节点属性，就会将实例去挂载到这个DOM节点上，子组件的el属性就是根组件节点。如果没有el属性的话，可以在实例化以后去手动挂载。挂载入口是从`$mount`方法开始，它有两个版本，一个是带有编译的compiler版本，另一个则是没有编译的runtime版本。前者会现将模板编译成render function，再交由后者处理，触发生命周期的beforeMount钩子后，创建render watcher，并执行render函数创建VNode，最终patch方法中根据vnode的信息来创建和更新真实DOM。
 
-【模板编译】有compiler的版本，如果没有定义render function，就会将template模板字符串parse解析生成AST，然后优化AST，标记AST中可以优化的节点，然后根据优化后的AST，generate生成render function。
+【模板编译】有compiler的版本，如果没有定义render function，就会将template模板字符串parse解析生成AST，然后优化AST，标记AST中可以优化的节点（标记静态节点，也就是没有绑定响应式数据，不会再更新的结点，会在后续的Diff算法中跳过比较），然后根据优化后的AST，generate生成render function。
 
-【Diff算法】深度遍历+递归+双指针的方式。watcher的颗粒度只有做到组件级别，所以节点属性的更新不能被侦听到，就需要进行Diff比较。将新旧Virtual DOM逐层比较，找出哪些节点需要更新，借助key可以非常精确找到相同节点，从而尽可能复用旧节点，实现高效更新。
+【Diff算法】深度遍历+逐层比较+递归+双指针的方式。watcher的颗粒度只有做到组件级别，所以节点属性的更新不能被侦听到，就需要进行Diff比较。将新旧Virtual DOM逐层比较，找出哪些节点需要更新，借助key可以非常精确找到相同节点，从而尽可能复用旧节点，实现**高效更新**。
 
 同层比较，因为不同层的话就不是sameNode，就会直接销毁旧的vnode，渲染新的vnode
 
-Diff算法的优点是可以做到只把变化的部分重新渲染，从而减少操作DOM，提高渲染效率。缺点是使用index作为key的时候，比较的时候会有bug，所以最好使用唯一的key值
+Diff算法的优点是<u>可以尽量复用旧节点，做到只把变化的部分重新渲染，从而减少操作DOM，提高渲染效率</u>。缺点是使用index作为key的时候，比较的时候会有bug，所以最好使用唯一的key值
 
-【key的作用与原理】key用来标识vnode节点，主要作用是优化Diff算法，在patch的时候可以通过key判断新旧vnode是否是同一个节点，如果key一样那么就可以复用旧节点，减少DOM操作提高性能。当改变key的时候，节点会被强制触发重新渲染并替换掉。
+【key的作用与原理】key用来<u>标识vnode节点</u>，主要作用是<u>优化Diff算法</u>，在patch的时候可以通过key判断新旧vnode是否是同一个节点，如果key一样那么就可以复用旧节点，减少DOM操作提高性能。当改变key的时候，节点会被强制触发重新渲染并替换掉。
 
 如果v-for中没有使用key，则会默认采用“就地复用”策略，如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。
 
 ### 响应式原理
 
-【响应式原理】源码中实现响应式原理的核心是Observer类，通过它来实现数据绑定和数据变化的观察者模式。被观察的对象都会被添加一个observer实例，在实例化Observer的时候会遍历对象，通过Object.defineProperty方法给对象的每个属性添加getter和setter，用于依赖收集和派发更新。
+【响应式原理】源码中实现响应式原理的核心是`Observer`类，通过它来实现数据绑定和数据变化的观察者模式。被观察的对象都会被添加一个observer实例，在实例化Observer的时候会<u>遍历对象</u>，通过Object.defineProperty方法给对象的每个属性添加getter和setter，用于依赖收集和派发更新。
 
-【依赖收集和派发更新】在实例化一个Observer的时候，会创建一个dep容器，用于管理watcher。在访问数据触发其getter的时候，会通过dep的depend方法进行依赖收集，将当前的watcher添加进dep容器中维护的一个订阅者容器subscribers。当数据发生变化触发setter时，就会通过dep的notify方法，将subscribers容器中的watcher拿出来执行其中的逻辑处理，以实现数据变化的派发更新。
+【依赖收集和派发更新】收集的依赖就是watcher，派发更新的也是将watcher从收集的容器中取出执行。在实例化一个Observer的时候，会创建一个**`dep`**容器，用于管理watcher。在访问数据触发其getter的时候，会通过dep的`depend`方法进行依赖收集，将当前的watcher添加进dep容器中维护的一个订阅者容器subscribers。当数据发生变化触发setter时，就会通过dep的`notify`方法，将subscribers容器中的watcher拿出来执行其中的逻辑处理，以实现数据变化的派发更新。
 
 【watcher】依赖收集时watcher会被添加进subscribers容器中，当派发更新的时候，就会遍历subscribers容器中的watcher，然后执行watcher中的回调方法，完成相应的逻辑处理。主要有三个类型的watcher，用于响应式更新视图的render watcher，computed属性使用的computed watcher，以及用户定义的user watcher。
 
-【render watcher】实例在挂载时会进行首次渲染，创建一个`render watcher`，并递归访问render函数中使用到的实例上的属性，触发它们的getter进行依赖收集。当render watcher被派发更新以后，会调用updateComponent方法，触发组件重新渲染生成新的vnode，然后patch更新到DOM上。watcher在被执行以前会被进行排列，render watcher总是最后执行的。数据是否能响应式更新与数据的嵌套无关，只要是首次挂载时被访问过，收集过依赖并添加render watcher的，更新数据的时候都会派发更新给render watcher，从而响应式更新视图。
+【render watcher】实例在挂载时会进行首次渲染，创建一个`render watcher`，并递归访问render函数中使用到的实例上的属性，触发它们的getter进行依赖收集。当render watcher被派发更新以后，会调用updateComponent方法，触发组件重新渲染生成新的vnode，然后patch更新到DOM上。watcher在被执行以前会被进行排列，render watcher<u>总是最后执行</u>。数据是否能响应式更新与数据的嵌套无关，只要是首次挂载时被访问过，收集过依赖并添加render watcher的，更新数据的时候都会派发更新给render watcher，从而响应式更新视图。
 
 【computed watcher】初始化computed属性时，也会生成一个 `computed watcher`，computed watcher的内部做了优化，当计算属性的计算的最终值发生变化时，才会触发watcher并重新渲染，而不是计算属性依赖的值发生变化时就更新。
 
@@ -124,11 +124,13 @@ Diff算法的优点是可以做到只把变化的部分重新渲染，从而减�
 
 【为什么只对对象劫持，而要对数组进行方法重写】数据劫持指的是使用 `Object.defineProperty` 劫持对象的访问和修改，数组中只有对象元素才会被劫持。因为对象的属性个数通常有限，拦截起来数量不多，但数组元素个数可能就会非常多，出于性价比考虑，显然数组并不适用于数据劫持。而且使用 Object.defineProperty劫持的方式也不能监听到数组长度的变化，也就是插入和删除元素不能监听到，所以对于数组元素的监听并不是进行劫持，而是重写数据原型上的方法，然后手动派发更新。
 
-【Vue.set】使用set方法添加一个响应式属性，如果被添加的是一个数组，则会调用数组的splice方法然后触发响应式更新。如果被添加的是一个对象，就会使用defineReactive将它绑定为响应式属性，并且手动的派发更新。
+【Vue.set】使用set方法添加一个响应式属性，如果被添加的是一个数组，则会调用数组的`splice`方法然后触发响应式更新。如果被添加的是一个对象，就会使用`defineReactive`将它绑定为响应式属性，并且<u>手动的派发更新</u>。
 
 【DOM异步更新机制】视图上的响应式数据更新的时候，会将更新派发给render watcher，会调用updateComponent方法，触发组件重新渲染生成vnode，然后patch更新到DOM上。但是watcher不是被立即执行更新，而是先将watcher放入一个队列中，相同的watcher只会被添加进一次队列，这里是一个优化点，做了watcher去重，避免了多余的计算和DOM操作。然后给队列做排序，以保证父组件的watcher比子组件先执行，更新的时候先渲染父组件。JavaScript是单线程的，基于事件循环机制，每一轮事件循环称作一个tick，在这轮的主线程执行完成后开启下一个tick，从微任务队列中取出微任务执行。然后这个watcher的队列会等到nextTick，也就是被当作一个微任务来执行，然后取出队列的watcher执行更新。所以从数据的变化到 DOM 的重新渲染是一个异步过程。（为什么要nextTick再更新呢，那就是等数据都修改完成，所有watcher都生成完了再做去重，然后最终patch的时候只需要做一遍DOM更新）
 
-【`$nextTick`】全局 API `Vue.nextTick`，和实例上的方法 `vm.$nextTick`，完全一致，调用的是同一个方法，传给它的回调方法也会等到下一个tick才被执行，这时候就可以访问到更新以后的DOM了。nextTick内部调用的是promise.then方法，如果不支持promise，就是用MutationObserver，再到使用setImmediate(宏任务)，直至setTimeout。Vue采用的是异步更新的策略，通俗点说就是，同一事件循环内多次修改，会统一进行一次视图更新，以节省开销提升性能。
+这是一种节流的思想，<u>同一事件循环内多次修改，会统一进行一次视图更新，以节省开销提升性能</u>。修改数据时会触发setter，从而派发更新给对应的watcher。除了我们定义的watch中指定了immediate以外，其它的watcher不会被立即执行，而是被添加进一个watcher队列中。watcher队列会去重并且进行排序，render watcher被放到最后执行。然后呢，等到这一轮的同步任务都执行完成，相当于都修改完数据了，再触发事件循环的next tick，来执行watcher更新。nextTick这个api会生成一个微任务，事件循环机制也是优先读取的微任务。
+
+【`$nextTick`】全局 API `Vue.nextTick`，和实例上的方法 `vm.$nextTick`，完全一致，调用的是同一个方法，<u>传给它的回调方法也会等到下一个tick才被执行，这时候就可以访问到更新以后的DOM了</u>。nextTick内部调用的是`promise.then`方法，如果不支持promise，就是用`MutationObserver`，再到使用setImmediate(宏任务)，直至setTimeout。Vue采用的是异步更新的策略，通俗点说就是，同一事件循环内多次修改，会统一进行一次视图更新，以节省开销提升性能。
 
 ---
 
@@ -138,7 +140,7 @@ Diff算法的优点是可以做到只把变化的部分重新渲染，从而减�
 
 ### 组件化
 
-【谈谈对组件的理解】组件化开发 (高内聚、低耦合、单向数据流) 能够解耦复杂的代码逻辑，提高代码的开发效率、复用性与测试性。常用的组件化技术有props或者attrs传递数据、events自定义事件、slot插槽。组件化开发颗粒度更细，数据变化时需要渲染的内容就更少。
+【谈谈对组件的理解】组件化开发 (高内聚、低耦合、单向数据流) 能够解耦复杂的代码逻辑，提高代码的开发效率、复用性与测试性。常用的组件化技术有props或者attrs传递数据、events自定义事件、slot插槽。组件化开发颗粒度更细，数据变化时需要渲染的内容就更少，从而提升重新渲染的性能。
 
 【组件的渲染流程】创建组件vnode，然后创建真实节点，并插入到页面中
 
@@ -146,13 +148,13 @@ Diff算法的优点是可以做到只把变化的部分重新渲染，从而减�
 
 【组件注册】每个组件的创建都是通过 `Vue.extend` 继承而来，然后将组件的 options 和全局构造函数Vue的 options 进行 merge 合并。根组件和子组件的merge options的时机略有不同，根组件是在初始化时合并配置，子组件是在执行生成 vnode 的时候 (createComponent)
 
-【父子组件的生命周期】父beforeCreate -> 父created -> 父beforeMount -> 子beforeCreate -> 子created -> 子beforeMount -> 子mounted -> 父mounted （先实例化父组件，在挂载父组件的时候才会去实例化子组件，然后先完成子组件的挂载）
+【父子组件的生命周期】父beforeCreate -> 父created -> 父beforeMount -> 子beforeCreate -> 子created -> 子beforeMount -> 子mounted -> 父mounted （<u>先实例化父组件，在挂载父组件的时候才会去实例化子组件，然后先完成子组件的挂载</u>）
 
 【父组件和子组件的更新顺序】编译时发生在`vm.$mount`时，所以父组件先编译，然后再编译子组件。所以先触发父组件的beforeMount生命周期钩子。挂载的时候使用一个vnode队列来插入，队列中添加到顺序是先子后父，所以子组件先完成挂载然后是父组件，先触发子组件的mounted生命周期钩子。
 
 【异步组件】只在组件需要渲染时触发工厂函数进行加载，并且会把加载结果缓存起来。本质上是 2 次渲染，第一次渲染生成一个注释节点，当异步获取组件成功后，再通过 `$forceUpdate` 方法强制重新渲染
 
-【自定义指令】在编译的时候会给组件实例添加directives属性，然后在generate生成render函数的时候，通过genDirectives方法生成指令代码
+【自定义指令】在编译的时候会给组件实例添加directives属性，然后在generate生成render函数的时候，通过`genDirectives`方法生成指令代码
 
 
 

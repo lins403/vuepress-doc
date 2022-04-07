@@ -80,7 +80,7 @@ IndexedDB 背后的思想是创造一套 API，方便 JavaScript 对象的存储
 
 - 都是实现了客户端的离线存储，但是数据默认都没有加密，谨慎使用敏感信息
 - localStorage兼容IE8+，indexDB兼容IE10+
-- localStorage仅支持存储字符串，而indexDB几乎可以任何格式，包括图片的Blob数据（IE需要考虑兼容性）
+- localStorage仅支持存储字符串，所以需要先序列化；而indexDB几乎可以任何格式，包括图片的Blob数据（IE需要考虑兼容性）
 - indexDB可以在web workers 和 service workers中使用
 - 使用 IndexedDB 执行的操作是异步执行的，而webStorage是同步阻塞的
 
