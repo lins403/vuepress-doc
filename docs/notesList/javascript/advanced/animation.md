@@ -83,3 +83,23 @@ window.addEventListener('scroll', () => {
   }
 });
 ```
+
+3.
+
+```js
+(function looper() {
+  if (!isRecordingStarted) {
+    return setTimeout(looper, 500);
+  }
+
+  Promise.resolve().then(function(canvas) {
+    // ...
+    
+    if (isStoppedRecording) {
+      return;
+    }
+    requestAnimationFrame(looper);
+  });
+})();
+```
+

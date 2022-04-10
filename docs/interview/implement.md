@@ -94,7 +94,7 @@ Pragma字段是http1.0的产物，而从http1.1开始就使用Cache-Control
 
 网络攻击的类型有代码注入、钓鱼，以及DDOS。
 
-【XSS】XSS（Cross-site scripting, 跨站脚本攻击）是一种代码注入攻击，会在目标网站注入恶意脚本，当用户访问时就会执行恶意脚本，从而窃取敏感信息。可能通过表单提交让恶意代码被保存到数据库中，也可能构造一个包含恶意代码的URL，然后URL中的恶意脚本可能被服务端处理以后拼接到HTML中去，或者被JavaScript代码取出并执行。**防御策略**有，输入过滤，比如过滤掉script标签；前端开发谨慎使用innerHTML、document.write()这类动态修改DOM的方式；还可以给网站使用 `CSP` 策略，添加白名单，限制网站使用的资源和脚本的来源。
+【XSS】XSS（Cross-site scripting, 跨站脚本攻击）是一种代码注入攻击，会在目标网站注入恶意脚本，当用户访问时就会执行恶意脚本，从而窃取敏感信息。可能通过表单提交让恶意代码被保存到数据库中，也可能构造一个包含恶意代码的URL，然后URL中的恶意脚本可能被服务端处理以后拼接到HTML中去，或者被JavaScript代码取出并执行。**防御策略**有，输入过滤，比如过滤掉script标签，或者通常做法是进行转义；前端开发谨慎使用innerHTML、document.write()这类动态修改DOM的方式；还可以给网站使用 `CSP` 策略，添加白名单，限制网站使用的资源和脚本的来源。
 
 【CSRF】CSRF（Cross-site request forgery, 跨站点请求伪造）是设法伪造带有 cookie 的 HTTP 请求，比如骗取用户点击从而盗取用户的cookie。cookie本身不能跨域，但是CORS的请求会自动使用cookie，所以需要再额外限制外域对cookie的使用，比如同源检测，通过header中的`Referer`字段检测用户之前的位置是否是同源，还可以让服务器通过 `Set-Cookie` 字段，设置cookie的`samesite`属性限制第三方cookie。
 

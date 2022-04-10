@@ -71,7 +71,6 @@ performance.getEntriesByType('resource').filter(resource=> resource.initiatorTyp
 **JavaScript**
 
 - requestAnimationFrame（例如渲染长列表时的时间分片，分段渲染数据，每次任务放在这个API中）
-
 - 尾调用优化
 - 循环优化
 - 不使用with语句
@@ -90,7 +89,7 @@ performance.getEntriesByType('resource').filter(resource=> resource.initiatorTyp
 - 手工埋点：优点是可定制化，缺点是工作量大且容易出错，更新成本也很大
   - 前端埋点用来记录用户在客户端的操作行为，后端埋点用来记录客户端进行服务器请求的日志。
   - 被访问次数最多的地方，用户在页面的停留时长、浏览深度
-  - 通过 sendBeacon 上报，不兼容的情况就用 gif 上报
+  - 通过 sendBeacon 上报，不兼容的情况就用 gif 上报（利用html2canvas结合setTimeout和requestAnimationFrame进行定时截图，或者使用webrtc录制屏幕并结合gifshot将视频转换为gif）
 
 - 无埋点：通过设置一段定义好的SDK代码，前端会自动全量采集全部事件并上报埋点数据
 - 可视化埋点：通过第三方平台来设置埋点，实现可视化的页面交互手段来代替编写代码

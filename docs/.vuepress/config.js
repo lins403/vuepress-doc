@@ -383,6 +383,7 @@ function interviewSidebar(groupA,groupB){
           'basic/javascript2',
           'basic/javascript3',
           'basic/vue1',
+          'basic/vue2',
           'implement',
           'memo',
           'resources',
@@ -392,8 +393,11 @@ function interviewSidebar(groupA,groupB){
         title: groupB,
         collapsable: false,
         children: [
+          'advanced/integration',
           'advanced/engineering1',
           'advanced/engineering2',
+          'advanced/component',
+          'advanced/project',
           'advanced/monitor',
           'advanced/performance',
         ]

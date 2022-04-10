@@ -214,6 +214,13 @@ var obj = Object.defineProperties({}, {
 
  `Object.assign()`，将每个源对象中<u>可枚举</u>和<u>自有属性</u>复制到目标对象。浅拷贝，后者覆盖前者。
 
+```js
+// 浅拷贝
+var obj = {a:1, b:2, c:{bool: true}}
+var foo = Object.assign({}, obj)
+obj.c === foo.c		// true
+```
+
 `JSON.parse(JSON.stringify(obj))` 深拷贝，但是部分数据类型的值并不能成功被转换
 
 ### 完整的拷贝对象

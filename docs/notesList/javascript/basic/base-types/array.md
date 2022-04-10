@@ -199,6 +199,9 @@ const users = [
 const users_shallow_copy = users.slice()
 console.log(users[0]===users_shallow_copy[0])		//true
 
+var foo = [].concat(users)
+console.log(users[0]===foo[0])		//true
+
 // 一种深拷贝的捷径思路：手动对第二层实现浅拷贝
 const users_deep_copy = users.map(obj => ({...obj}) )
 console.log(users[0]===users_deep_copy[0])	//false
