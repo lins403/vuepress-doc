@@ -104,17 +104,18 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
 ### 优化DOM交互
 
 1. <mark>减少重排重绘</mark>
-   - 需要对元素进行复杂的操作时，可以先隐藏(display:"none")，操作完成后再显示
-   - 需要创建多个DOM节点时，使用DocumentFragment创建完成以后再一次性的添加进DOM中
+   - 减少对DOM的操作
+     - 需要对元素进行复杂的操作时，可以先隐藏(display:"none")，操作完成后再显示
+     - 需要创建多个DOM节点时，使用DocumentFragment创建完成以后再一次性的添加进DOM中
    - 尽量避免用table布局 (table元素一旦触发回流就会导致table里所有的其它元素回流)
    - 优化css，使用可以避免重排重绘的属性：`transform: translate()`、`transform: scale()`、`transform: rotate()`、`opacity`
-   - 让复杂动画的元素脱离文档流，例如设置position属性为absolute使它脱离文档流，否则会引起父元素及后续元素频繁回流。（脱离文档流的元素不会影响其它元素的重排重绘？）
+   - 让复杂动画的元素脱离文档流，限制重绘的影响范围。例如设置position属性为absolute使它脱离文档流，否则会引起父元素及后续元素频繁重绘。
 2. 使用事件委托
 3. 注意 HTMLCollection。每次访问HTMLCollection时都会重新查询，所以在循环中使用 HTMLCollection 时，应该首先取得对要使用的元素的引用，从而避免在循环体内多次调用 `HTMLCollection`
 
+### 重排重绘
 
-
-【重排重绘】会影响元素布局的就会引起重排重绘，例如修改窗口大小、字体大小、元素的宽度高度等等，不会影响布局的只是改变样式的则只会触发重绘，例如修改颜色、背景、visibility等等。重排的代价比重绘高很多，而且重排则必重绘。
+会影响元素布局的就会引起重排重绘，例如修改窗口大小、字体大小、元素的宽度高度等等，不会影响布局的只是改变样式的则只会触发重绘，例如修改颜色、背景、visibility等等。重排的代价比重绘高很多，而且重排则必重绘。
 
 现代浏览器针对重排重绘做了优化，有点类似于Vue的DOM异步更新机制，浏览器会维护一个队列，把所有引起回流和重绘的操作放入队列中，如果队列中的任务数量或者时间间隔达到一个阈值的，浏览器就会将队列清空，进行一次批处理，这样可以把多次回流和重绘变成一次。但是当访问高度宽度这类属性的时候，浏览器会立刻清空这个队列，执行重排重绘。
 
@@ -135,6 +136,81 @@ EditorConfig + Eslint + Prettier + Stylelint + Husky + lint-staged + commitlint
 EditorConfig统一不同操作系统不同IDE的代码格式，例如缩进、换行符等；eslint校验代码，prettier格式化代码，prettier是约定大于配置，与eslint结合使用可以使得不符合prettier规则的代码，以eslint的方式进行提示错误。stylelint基于postcss，用于校验代码，可以专门为less或scss配置。husky可以方便我们使用git的hooks，也就是不同生命周期的处理方法，lint-staged可以校验git暂存区的代码，二者通常结合使用，在代码提交以前，就是在pre-commit这个钩子上执行lint-staged的配置，进行代码校验。commitlint则用于限制git提交信息的书写规范。
 
 代码风格：
+
+
+
+## 性能优化
+
+工程化层面和代码层面
+
+### 工程化方面
+
+**自带的**：tree-shaking减少没有使用到的代码、terser代码压缩、gzip文件压缩、preload打包后的bundle被预加载、prefetch异步加载的bundle在浏览器空闲的时候加载
+
+- 打包构建速度方面：cache-loader缓存loader转换结果、thread-loader开启多进程充分利用多核CPU
+- 代码压缩（删除空格和换行、删除注释、缩短变量名、函数名和其他标识符）
+
+**Nginx**
+
+- 配置Gzip开启HTTP压缩
+- 配置一个静态资源服务器，指定目录下的静态资源就可以被通过http的方式访问，并且nginx会自行做缓存
+
+**浏览器**
+
+- 浏览器缓存，cache-control设置为no-cache使用协商缓存，还有个public值让代理服务器也可以缓存。
+
+**打包构建方面**
+
+- splitchunks拆分代码，使用路由懒加载，调整默认打包策略的阈值
+- 使用CDN的方式剥离部分第三方依赖文件
+- 将资源设置为异步加载，避免阻塞页面的解析，例如给script脚本添加async或defer属性
+
+### 代码方面
+
+**综合**
+
+- 时间分片（分批渲染，利用requestAnimationFrame和DocumentFragments，需要兼容IE10以上）
+- 虚拟滚动（懒加载，按需渲染，实现更复杂但优点是兼容性更好）
+
+**Vue**
+
+- 图片懒加载，图片到了页面的可视区域时才会被加载
+- 数据层级不要太深，使用`Object.freeze`冻结不需要响应式的对象数据
+- 组件方面，使用keep-alive缓存组件，采用性能更好的函数式组件，以及借助webpack实现路由懒加载等等
+- 指令相关的，例如给不需要动态变化的元素使用v-once
+- 合理使用key会加快渲染效率，不要用数组索引作为key值，因为会导致Diff算法的bug
+
+**DOM交互**（非首页）
+
+- 替换HTML节点的时候，要注意移除原节点上的监听事件
+
+- 事件委托
+
+- 减少重排重绘
+
+  - 需要对元素进行复杂的操作时，可以先隐藏(display:"none")，操作完成后再显示
+
+  - 需要创建多个DOM节点时，使用DocumentFragment创建完后一次性的加入document
+
+  - 多次操作DOM节点子元素时，可以使用`DocumentFragment`来构建 DOM 结构，创建完成以后一次性的加入DOM中，可以减少浏览器重排。
+
+  - 尽量避免用table布局(table元素一旦触发回流就会导致table里所有的其它元素回流)
+
+**JavaScript**
+
+- requestAnimationFrame（例如渲染长列表时的时间分片，分段渲染数据，每次任务放在这个API中）
+- 尾调用优化
+- 循环优化
+- 不使用with语句
+- 通过临时变量来缓存查询结果，避免重复查询（例如HTMLCollection、嵌套过深的对象属性）
+- 一些方法上的选择，例如不需要返回一个新数组的时候，就优先选择性能更好的forEach而不是map
+
+**CSS**
+
+- css中使用`transform`属性，不会引发重排重绘
+- `will-change`、transform3D变化例如`translate3D`, `scaleZ` 之类，它们都会启用GPU加速（浏览器是一个多进程架构，GPU进程、渲染进程，都是独立的进程）
+
+
 
 # 参考
 

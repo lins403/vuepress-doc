@@ -45,7 +45,7 @@ https://developers.google.com/web/fundamentals/performance/rendering?hl=zh-cn
 
 https://www.ahwgs.cn/vue-cli3-build.html
 
-# [从渲染原理谈前端性能优化](https://segmentfault.com/a/1190000019504744)
+###### [从渲染原理谈前端性能优化](https://segmentfault.com/a/1190000019504744)
 
 清除console.log 
 

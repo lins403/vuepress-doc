@@ -3,6 +3,7 @@
 ## 性能监控
 
 - Chrome的 `Lighthouse` 可以对网站的质量进行审查，会给出性能评分以及对应的优化建议
+- 一直用的最新的Chrome，现在版本都100了，Chrome的开发工具可太强大了，还可以分析页面的性能、内存、图层、性能监控、渲染、网络状况
 
 ### 监控工具
 
@@ -19,68 +20,6 @@ performance.getEntriesByType('resource').filter(resource=> resource.initiatorTyp
 ```
 
 > 通过这些优化，取得比较明显的提升效果，页面的加载效果也好了很多，我们通过埋点计算出来的，首页的白屏时间和页面加载时间都比较合理。通过这次实践，也是去完整的学习了nginx和webpack的构建和配置，加深了对语言和框架、http、以及浏览器的理解和应用
-
-### 性能优化
-
-**自带的**：tree-shaking减少没有使用到的代码、terser代码压缩、gzip文件压缩、preload打包后的bundle被预加载、prefetch异步加载的bundle在浏览器空闲的时候加载
-
-- 打包构建速度方面：cache-loader缓存loader转换结果、thread-loader开启多进程充分利用多核CPU
-- 代码压缩（删除空格和换行、删除注释、缩短变量名、函数名和其他标识符）
-
-**Nginx**
-
-- 配置Gzip开启HTTP压缩
-- 配置一个静态资源服务器，指定目录下的静态资源就可以被通过http的方式访问，并且nginx会自行做缓存
-
-**浏览器**
-
-- 浏览器缓存，cache-control设置为no-cache使用协商缓存，还有个public值让代理服务器也可以缓存。
-
-**打包构建方面**
-
-- splitchunks拆分代码，使用路由懒加载，调整默认打包策略的阈值
-- 使用CDN的方式剥离部分第三方依赖文件
-- 将资源设置为异步加载，避免阻塞页面的解析，例如给script脚本添加async或defer属性
-
-#### 代码方面
-
-**Vue**
-
-- 图片懒加载，图片到了页面的可视区域时才会被加载
-- 数据层级不要太深，使用`Object.freeze`冻结不需要响应式的对象数据
-- 组件方面，使用keep-alive缓存组件，采用性能更好的函数式组件，以及借助webpack实现路由懒加载等等
-- 指令相关的，例如给不需要动态变化的元素使用v-once
-- 合理使用key会加快渲染效率，不要用数组索引作为key值，因为会导致Diff算法的bug
-
-**DOM交互**（非首页）
-
-- 替换HTML节点的时候，要注意移除原节点上的监听事件
-
-- 事件委托
-
-- 减少重排重绘
-
-  - 需要对元素进行复杂的操作时，可以先隐藏(display:"none")，操作完成后再显示
-
-  - 需要创建多个DOM节点时，使用DocumentFragment创建完后一次性的加入document
-
-  - 多次操作DOM节点子元素时，可以使用`DocumentFragment`来构建 DOM 结构，创建完成以后一次性的加入DOM中，可以减少浏览器重排。
-
-  - 尽量避免用table布局(table元素一旦触发回流就会导致table里所有的其它元素回流)
-
-**JavaScript**
-
-- requestAnimationFrame（例如渲染长列表时的时间分片，分段渲染数据，每次任务放在这个API中）
-- 尾调用优化
-- 循环优化
-- 不使用with语句
-- 通过临时变量来缓存查询结果，避免重复查询（例如HTMLCollection、嵌套过深的对象属性）
-- 一些方法上的选择，例如不需要返回一个新数组的时候，就优先选择性能更好的forEach而不是map
-
-**CSS**
-
-- css中使用`transform`属性，不会引发重排重绘
-- `will-change`、transform3D变化例如`translate3D`, `scaleZ` 之类，它们都会启用GPU加速（浏览器是一个多进程架构，GPU进程、渲染进程，都是独立的进程）
 
 
 
