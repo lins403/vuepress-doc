@@ -62,9 +62,9 @@ webpack的构建流程包括初始化`compile`对象、`make`编译模块、`bui
 
 【HMR热替换】webpack的devServer其实是开启了一个使用express框架的server，它会与浏览器建立websocket连接，文件变化时webpack重新编译完成以后，通过socket消息通知浏览器更新。webpack通过中间件webpack-dev-middleware，将生成文件发送给server，通过对比生成文件的hash值更新对应模块，而不用刷新整个页面。
 
-【manifest】webpack 的 runtime 和 manifest，管理所有模块的交互。
+【manifest】webpack 的 runtime 和 manifest，管理所有模块的交互。manifest数据会保留所有模块的详细要点，当完成打包并发送到浏览器时，runtime 会通过 manifest 来解析和加载模块。也就是说<u>打包以后将bundle发给浏览器，浏览器根据manifest数据里保留的模块的信息，来解析和加载模块。</u>
 
-【hash码】三种计算方式，`hash`、`chunkhash`、`contenthash`
+【hash码】三种计算方式，`hash`（每次构建都会生成新的值，不管文件是否发生变化）、`chunkhash`（chunk依赖发生变化的时候才会更新）、`contenthash`（文件内容发生变化时更新），一般我们使用chunkhash
 
 ### 其它
 
@@ -157,7 +157,7 @@ EditorConfig统一不同操作系统不同IDE的代码格式，例如缩进、�
 
 **浏览器**
 
-- 浏览器缓存，cache-control设置为no-cache使用协商缓存，还有个public值让代理服务器也可以缓存。
+- 浏览器缓存，cache-control设置为no-cache使用协商缓存，还有个public值让代理服务器（nginx中设置proxy_cache）也可以缓存。
 
 **打包构建方面**
 
@@ -176,24 +176,18 @@ EditorConfig统一不同操作系统不同IDE的代码格式，例如缩进、�
 
 - 图片懒加载，图片到了页面的可视区域时才会被加载
 - 数据层级不要太深，使用`Object.freeze`冻结不需要响应式的对象数据
-- 组件方面，使用keep-alive缓存组件，采用性能更好的函数式组件，以及借助webpack实现路由懒加载等等
+- 组件方面，使用`keep-alive`缓存组件，采用性能更好的函数式组件，以及借助webpack实现路由懒加载等等
 - 指令相关的，例如给不需要动态变化的元素使用v-once
 - 合理使用key会加快渲染效率，不要用数组索引作为key值，因为会导致Diff算法的bug
 
 **DOM交互**（非首页）
 
 - 替换HTML节点的时候，要注意移除原节点上的监听事件
-
 - 事件委托
-
 - 减少重排重绘
 
   - 需要对元素进行复杂的操作时，可以先隐藏(display:"none")，操作完成后再显示
-
-  - 需要创建多个DOM节点时，使用DocumentFragment创建完后一次性的加入document
-
   - 多次操作DOM节点子元素时，可以使用`DocumentFragment`来构建 DOM 结构，创建完成以后一次性的加入DOM中，可以减少浏览器重排。
-
   - 尽量避免用table布局(table元素一旦触发回流就会导致table里所有的其它元素回流)
 
 **JavaScript**

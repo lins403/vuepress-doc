@@ -10,9 +10,9 @@ HTTP (请求方法(get、post、delete、put、head)、状态码、http缓存、
 
 【HTTP1.1】http1.1 中引入了 keepalive 机制来建立**持久连接**，默认所有请求都是长连接，允许多个HTTP请求复用一个TCP连接。在请求头中增加了**Host**字段，表示接收请求的服务器的主机名和端口，如果缺少host则会收到400的状态码。http1.1中支持了请求的**管道化**(pipelining)特性，可以将多条请求放入队列中，当第一条请求发往服务器的时候，第二条请求也可以开始发送了，而不用等到第一条请求响应回来，可以解决请求的队头阻塞问题。**但是服务器的响应必须按次序返回**，所以在实际应用过程中，使用pipeline没有什么显著收益，因此很少有浏览器或者服务器真正使用pipeline的原因。
 
-【HTTP2.0】二进制帧传输 (请求信息不再是明文传输，都由二进制帧组成，传输完成以后再进行组装；并且还可以给数据设置优先级，优先级高的服务端优先处理)、头部压缩 (为了避免每次都发送重复的header；采用HPACK算法，实现类似于维护一份索引表，里面保存了常用的header字段和值，使用索引值比完整的文本小得多，可以加快请求速度，还可以减少网络带宽)、多路复用 (一个连接可以处理多个请求)、服务端推送 (服务端可以主动向客户端发送资源)
+【HTTP2.0】**二进制帧传输** (请求信息不再是明文传输，都由二进制帧组成，传输完成以后再进行组装；并且还可以给数据设置优先级，优先级高的服务端优先处理)、**头部压缩** (为了避免每次都发送重复的header；采用HPACK算法，实现类似于维护一份索引表，里面保存了常用的header字段和值，使用索引值比完整的文本小得多，可以加快请求速度，还可以减少网络带宽)、**多路复用** (一个连接可以处理多个请求)、**服务端推送** (服务端可以主动向客户端发送资源)
 
-【HTTP2的缺点】HTTP/2 的缺点是仍然存在队头阻塞问题，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。但是丢包出现的概率小，http2中出现的队头阻塞问题影响性也比http1.1中来的小。http2好像是不支持并发多开连接，这样就会导致在资源不能并发加载，比如说一张图片对应一个请求，使用http2的时候多张图片就只能一张一张的显示。因为http1.1可以开启多个长连接，实际上http1.1并发连接的性能比单个http2连接的性能更好，所以项目中用的是http1.1+https。
+【HTTP2的缺点】HTTP/2 的缺点是仍然存在队头阻塞问题，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。但是丢包出现的概率小，http2中出现的队头阻塞问题影响性也比http1.1中来的小。http2好像是不支持并发多开连接，这样就会导致在资源不能并发加载，比如说一张图片对应一个请求，使用http2的时候多张图片就只能一张一张的显示。因为http1.1可以开启多个长连接，实际上http1.1并发连接的性能比单个http2连接的主要是后端在做，后端性能更好，所以项目中用的是http1.1+https。
 
 【HTTP3】与 HTTP/2 相比，HTTP/3 有很大的性能改进，这主要是因为它将底层传输协议从 TCP 改为基于 UDP 改进的 QUIC (快速UDP网络连接)，最主要的动机是为了解决队头阻塞问题。http3仍然是草案状态。
 
@@ -23,6 +23,8 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 ---
 
 【 HTTP 代理】用于实现跨域；用于实现代理缓存，将资源缓存在代理服务器中；负载均衡，分流，按策略分发请求，让每台服务器的负载尽量平均、保障安全，避免单机故障导致的服务终止。
+
+【Nginx】Nginx中使用，使用`add_header`设置http的请求header，使用`proxy_set_header`设置响应header
 
 【http传输定长数据和不定长数据】对于定长包体而言，发送端在传输的时候一般会带上 `Content-Length`，来指明包体的长度；不定长包体则带上一个 http 头部字段：`Transfer-Encoding: chunked`，告诉浏览器会分块传输数据。
 
@@ -52,7 +54,7 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 【像素管道】执行JavaScript、样式计算、布局、绘制、合成。首先执行JS代码来实现一些视觉变化的效果，例如requestAnimationFrame钩子方法会在重排重绘前被执行。然后进行样式计算，根据css规则计算每个元素的样式。布局时计算元素占据的空间大小以及在屏幕的位置。然后根据布局，进行像素填充，使用多个图层来绘制，最后将图层进行合并。
 
-【requestAnimationFrame】属于宏任务。先执行微任务，然后执行requestAnimationFrame，然后开始计算样式和重排重绘
+【requestAnimationFrame】页面的渲染过程，就是像素管道，首先需要执行js，requestAnimationFrame中的回调就是在这个时候被执行的，然后再进行样式计算、重排重绘等。属于宏任务，先执行微任务，然后执行requestAnimationFrame，然后开始计算样式和重排重绘
 
 ---
 
@@ -62,7 +64,7 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 【cookie和session认证方式】服务端验证用户的账号密码后，在session中保存用户信息，然后向浏览器返回一个sessionId，写入用户的cookie中，保存在客户端。随后用户的每次请求都会自动携带这个cookie，将sessionId发送给服务端，服务端只要根据sessionId找到对应的session，就可以取出之前保存的信息，从而维持会话状态。这种方式的缺点是不能实现跨域，而且影响扩展性，因为如果session保存在内存中，那么每次只能由同一台服务器来处理，就不适用于分布式应用中的负载均衡。
 
-【token认证方式】服务端验证成功以后，会将登录凭证做数字签名，然后加密生成一个access token，并发送给客户端。客户端通过cookie或者是localStorage的方式将它保留在本地，以后每次请求都携带这个token。服务端验证token，验证通过时就会向客户端返回数据。当access token失效时，只需要将Refresh Token发送给服务端，而不用重新验证账号密码，就可以刷新 access token。与sessionId的认证方式有点接近，但不同点在于token不像cookie会被自动添加到请求头，token需要手动添加到header中，使用前后端协商以后的字段名称来传输。而且像JWT这样的token，可以在token中保存用户信息和加密的数据，而不需要服务端额外保存会话信息，并且还可以减少服务端对数据库的查询。
+【token认证方式】服务端验证成功以后，会将登录凭证做数字签名，然后加密生成一个access token，并发送给客户端。客户端通过cookie或者是localStorage的方式将它保留在本地，以后每次请求都携带这个token。服务端验证token，验证通过时就会向客户端返回数据。定时监测access token是否过期，当access token失效时，只需要将Refresh Token发送给服务端，而不用重新验证账号密码，就可以刷新 access token。与sessionId的认证方式有点接近，但不同点在于token不像cookie会被自动添加到请求头，token需要手动添加到header中，使用前后端协商以后的字段名称来传输。而且像JWT这样的token，可以在token中保存用户信息和加密的数据，而不需要服务端额外保存会话信息，并且还可以减少服务端对数据库的查询。
 
 【sessionStorage 和 localStorage】sessionStorage是会话级别的存储，浏览器窗口关闭时就会被清除。而localStorage是持久化数据，会被永久保存在本地，直到通过js代码清除或者用户清理浏览器缓存。页面点击或者js的页面跳转打开的新标签页，还是同一个session，因此可以共享sessionStorage，但新建浏览器标签页或窗口打开时则不是同一个session。而localStorage没有session的限制，和cookie一样可以在所有同源标签页和窗口之间共享。
 
@@ -72,7 +74,7 @@ http2中使用了多路复用和按帧传输，一个连接可以发送多个资
 
 浏览器缓存策略由服务器或代理服务器指定，分为强缓存策略和协商缓存策略。强缓存策略允许在缓存资源有效时直接使用缓存资源，而协商缓存则还需要每次发送请求给浏览器确认资源是否发生变化，如果资源未发生变化则返回304状态码，浏览器就可以使用缓存。
 
-​	使用强缓存策略时，如果缓存资源还有效，就直接使用缓存资源，不必再向浏览器发起请求。强缓存策略主要通过http headers中的 `Expires` 属性或者 `Cache-Control` 属性。Expires使用的是绝对时间，cache-control是HTTP1.1中新引入的，max-age值使用的是相对时间，比Expires更加准确，同时使用时后者的优先级也更高。浏览器中的缓存位置一共有四种，优先级最高的是Service Worker，然后从内存加载缓存(from cache)，如果没有则从磁盘中加载缓存(from disk)，最后的是http2的推送缓存 (push cache)
+​	使用强缓存策略时，如果缓存资源还有效，就直接使用缓存资源，不必再向浏览器发起请求。强缓存策略主要通过http headers中的 `Expires` 属性或者 `Cache-Control` 属性。Expires使用的是绝对时间，cache-control是HTTP1.1中新引入的，<u>max-age</u>值使用的是相对时间，比Expires更加准确，同时使用时优先级也更高。浏览器中的缓存位置一共有四种，优先级最高的是Service Worker，然后从内存加载缓存(from cache)，如果没有则从磁盘中加载缓存(from disk)，最后的是http2的推送缓存 (push cache)
 
 ​	如果缓存已经过期，那么就需要使用协商缓存。浏览器会向服务器发送一个请求，如果服务器确认资源没有发生修改，则返回一个304状态，让浏览器使用本地的缓存副本。如果资源发生变化，就返回修改后的资源给客户端。协商缓存的设置是通过http headers 中的 Last-Modified 属性和 Etag 属性。`Last-Modified`值表示资源上一次更改的时间，它只能精确到秒级。而 `Etag` 是资源的唯一标识符，资源变化时这个值也会变化，所以用Etag判断会更加准确，优先级更高，但是性能比前者稍差。浏览器为了让服务器判断资源是否做了修改，就将前一次请求的response header 中的 last-modified 值作为 `if-modified-since`，将 etag 值作为 `If-None-Match`，添加到request header中，发送给服务器校验。同时使用时，If-None-Match的优先级别更高。
 
@@ -82,9 +84,9 @@ Pragma字段是http1.0的产物，而从http1.1开始就使用Cache-Control
 
 ---
 
-【同源策略与跨域】浏览器的同源策略下，一个域下的js脚本不允许修改另一个域的内容。只允许URL路径不同，其它情况都算跨域。跨域实现方式中，`JSONP`利用的是img和script标签的src属性允许加载外域脚本；
+【同源策略与跨域】浏览器的同源策略下，一<u>个域下的js脚本不允许修改另一个域的内容</u>。只允许URL路径不同，其它情况都算跨域。跨域实现方式中，`JSONP`利用的是img和script标签的src属性允许加载外域脚本；
 
-【CORS】`CORS`跨域资源共享，本质上是浏览器与服务器的协商，从而允许使用跨域资源。CORS的配置方式只需要后端在response header上添加字段，而不需要前端再修改。CORS请求分为简单请求和复杂请求，复杂请求会多一次预检请求，服务器确认以后返回204状态码，然后就可以像简单请求一样正常访问。使用nginx反向代理，或者webpack的DevServer中使用的http-proxy-middleware中间件。可以通过 `<script>`、 `<link>`、`<audio>`、 `<img> `和 `<video>` 的 `crossorigin`属性，在请求头上携带Origin字段，开启CORS，得到允许后就可以访问和操作这份跨域脚本资源，onerror捕获脚本具体的错误信息。值为`anonymous`时在跨域的时候不会携带cookie，值为`use-credentials` 时会在跨域请求携带cookie，并且需要服务端开启CORS，否则就会跨域失败。
+【CORS】`CORS`跨域资源共享，本质上是浏览器与服务器的协商，从而允许使用跨域资源。CORS的配置方式只需要后端在<u>response header</u>上添加字段，而不需要前端再修改。CORS请求分为简单请求和复杂请求，复杂请求会多一次预检请求，服务器确认以后返回204状态码，然后就可以像简单请求一样正常访问。使用nginx反向代理，或者webpack的DevServer中使用的http-proxy-middleware中间件。可以通过 `<script>`、 `<link>`、`<audio>`、 `<img> `和 `<video>` 的 **`crossorigin`**属性，在请求头上携带Origin字段，开启CORS，得到允许后就可以访问和操作这份跨域脚本资源，onerror捕获脚本具体的错误信息。值为**`anonymous`**时在跨域的时候不会携带cookie，值为**`use-credentials`** 时会在跨域请求携带cookie，并且需要服务端开启CORS，否则就会跨域失败。
 
 【多标签页之间的通信】localStorage、WebSocket、ShareWorker、postMessage
 
@@ -94,9 +96,9 @@ Pragma字段是http1.0的产物，而从http1.1开始就使用Cache-Control
 
 网络攻击的类型有代码注入、钓鱼，以及DDOS。
 
-【XSS】XSS（Cross-site scripting, 跨站脚本攻击）是一种代码注入攻击，会在目标网站注入恶意脚本，当用户访问时就会执行恶意脚本，从而窃取敏感信息。可能通过表单提交让恶意代码被保存到数据库中，也可能构造一个包含恶意代码的URL，然后URL中的恶意脚本可能被服务端处理以后拼接到HTML中去，或者被JavaScript代码取出并执行。**防御策略**有，输入过滤，比如过滤掉script标签，或者通常做法是进行转义；前端开发谨慎使用innerHTML、document.write()这类动态修改DOM的方式；还可以给网站使用 `CSP` 策略，添加白名单，限制网站使用的资源和脚本的来源。
+【XSS】XSS（Cross-site scripting, 跨站脚本攻击）是一种代码注入攻击，会在目标网站注入恶意脚本，当用户访问时就会执行恶意脚本，从而窃取敏感信息。可能通过表单提交让恶意代码被保存到数据库中，也可能构造一个包含恶意代码的URL，然后URL中的恶意脚本可能被服务端处理以后拼接到HTML中去，或者被JavaScript代码取出并执行。**防御策略**有，输入过滤，比如过滤掉script标签，或者通常做法是进行<u>转义</u>；前端开发谨慎使用innerHTML、document.write()这类动态修改DOM的方式；还可以给网站使用 `CSP` 策略，添加白名单，<u>限制网站使用的资源和脚本的来源</u>。（CSP，Content-Security-Policy，可以在nginx中或者HTML的meta标签中配置）
 
-【CSRF】CSRF（Cross-site request forgery, 跨站点请求伪造）是设法伪造带有 cookie 的 HTTP 请求，比如骗取用户点击从而盗取用户的cookie。cookie本身不能跨域，但是CORS的请求会自动使用cookie，所以需要再额外限制外域对cookie的使用，比如同源检测，通过header中的`Referer`字段检测用户之前的位置是否是同源，还可以让服务器通过 `Set-Cookie` 字段，设置cookie的`samesite`属性限制第三方cookie。
+【CSRF】CSRF（Cross-site request forgery, 跨站点请求伪造）是设法伪造带有 cookie 的 HTTP 请求，比如骗取用户点击从而盗取用户的cookie。cookie本身不能跨域，但是CORS的请求会自动使用cookie，所以需要再额外限制外域对cookie的使用，比如同源检测，通过header中的`Referer`字段检测用户之前的位置是否是同源，还可以让服务器通过 `Set-Cookie` 字段，设置cookie的`samesite`属性限制第三方请求使用cookie。但是一般来讲现在很多项目都是通过token来鉴权的，像我们项目就用了两个token来实现的双重鉴权，CSRF的风险就降低了很多。
 
 - SameSite可以设置为三个值，`Strict` (浏览器完全禁止第三方请求携带Cookie，即完全禁止跨域)、`Lax` (只能在get方法提交表单的情况或者a 标签发送 get 请求的情况下可以携带Cookie，其他情况均不能) 和 `None` (默认模式，请求会自动携带上 Cookie，不过前提是设置了`Secure`属性，在https域名下使用)。
 
@@ -106,7 +108,7 @@ Pragma字段是http1.0的产物，而从http1.1开始就使用Cache-Control
 
 【DDOS】检测流量、封掉疯狂访问的IP；带宽扩容、部署CDN
 
-加密数据、防范XSS（后端会过滤script标签等等；前端则禁用innerHTML、v-html；在index.html文件的head中添加meta设置CSP策略，限制外部资源的来源；~~设置Cookie 的 HttpOnly 属性~~）、防范CSRF（主要是后端在做，后端设置cookie的samesite属性，前端有时候会用js修改cookie，然后尽量不在cookie中使用敏感信息）
+加密数据、防范XSS（后端会过滤script标签等等；前端则禁用innerHTML、v-html；在index.html文件的head中添加meta设置CSP策略，限制外部资源的来源；设置Cookie 的 secure 属性）、防范CSRF（服务器或者代理服务器设置cookie的samesite属性，前端有时候会用js修改cookie，然后尽量不在cookie中使用敏感信息）
 
 ## HTML
 

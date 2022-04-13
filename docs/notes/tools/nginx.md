@@ -155,7 +155,7 @@ http {
 }
 ```
 
-当客户端请求到服务端的时候，服务器解析请求头，如果客户端支持gzip压缩，响应时对请求的资源进行压缩并返回给客户端，浏览器按照自己的方式解析，在http响应头，我们可以看到content-encoding:gzip，这是指服务端使用了gzip的压缩方式。
+当客户端请求到服务端的时候，服务器解析请求头，如果客户端支持gzip压缩，响应时对请求的资源进行压缩并返回给客户端，浏览器按照自己的方式解析，在http响应头，我们可以看到`content-encoding:gzip`，这是指服务端使用了gzip的压缩方式。
 
 ### 静态资源服务器
 
@@ -336,6 +336,10 @@ server{
 }
 ```
 
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';">
+```
+
 ### 域名路径重写
 
 ```nginx
@@ -377,7 +381,7 @@ proxy_http_version    1.1;
 
 ### 设置代理缓存
 
-```
+```nginx
 proxy_cache_valid 168h;
 ```
 

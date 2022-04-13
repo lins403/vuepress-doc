@@ -154,11 +154,11 @@ s	dotAll	元字符`.`匹配任何字符(包括\n 或\r)
 
 ## DOM
 
-【DOM】Document Object Model，文档对象模型，是 HTML 和 XML 文档的编程接口。DOM 表示由多层节点构成的文档，可以使用 JavaScript 访问和操作存储在 DOM 中的内容，从而实现操作网页内容。DOM<u>由一系列节点类型构成</u>，Node基础节点、文档节点(Document)、元素节点(Element)、注释节点(Comment)、文本节点(Text)、文档片段节点(DocumentFragments)等等，其中所有节点类型都继承自 Node 类型，不同节点类型对应不同的nodeType。
+【DOM】Document Object Model，文档对象模型，是 HTML 和 XML 文档的编程接口。DOM 表示由多层节点构成的文档，可以使用 JavaScript 访问和操作存储在 DOM 中的内容，从而实现操作网页内容。DOM<u>由一系列节点类型构成</u>，Node基础节点、文档节点(Document)、元素节点(Element)、注释节点(Comment)、文本节点(Text)、文档片段节点(DocumentFragment)等等，其中所有节点类型都继承自 Node 类型，不同节点类型对应不同的nodeType。
 
 【document和element】document对象表示整个html文档，可以用于获取文档信息如document.title，定位元素如document.getElementById，文档写入操作如document.write。element节点表示文档中所有的HTML元素节点，可以通过document对象的方法定位到特定元素。element对象可以用来访问和操作节点的内容和属性，例如innerHTML、setAttribute等等。
 
-【DocumentFragments】表示文档片段，因为文档片段存在于内存中，并不在DOM树中，所以将子元素插入到文档片段时，不会引起页面的重排和重绘。通常的做法是创建文档片段，先将元素插入到文档片段中，然后将文档片段附加到DOM树上，就可以避免多次插入子元素带来的页面多次渲染的性能消耗。
+【DocumentFragment】表示文档片段，因为文档片段存在于内存中，并不在DOM树中，所以将子元素插入到文档片段时，不会引起页面的重排和重绘。通常的做法是创建文档片段，先将元素插入到文档片段中，然后将文档片段附加到DOM树上，就可以避免多次插入子元素带来的页面多次渲染的性能消耗。
 
 【HTMLCollection 与 NodeList】`NodeList` 是一个类数组对象，是静态的，不受 DOM 树元素变化的影响，相当于是一份 DOM 树的快照。`HTMLCollection` 是一个动态集合，每次访问它都会执行一次新的查询。常用的方法中，getElementsByClassName和querySelectorAll查询结果返回一个NodeList，而getElementsByName、getElementsByTagName则返回一个HTMLCollection。常用属性中，childNodes返回NodeList且包含空元素，children返回HTMLCollection且不包含空元素。
 

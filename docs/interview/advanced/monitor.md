@@ -7,15 +7,18 @@
 
 ### 监控工具
 
-LightHouse生成网站性能评测报告、JMeter测试http请求的并发效果，吞吐量等等，可以在控制台的network上看请求的大小和时间、使用Performance API，我们可以设置埋点，在页面 onload 以后利用 performance.getEntriesByType('resource') 获取所有资源加载时间，还可以用performance的mark()和measure()方法来计算时间差。
+LightHouse生成网站性能评测报告，会评测网站的性能、SEO评分，并且给出对应的优化建议。
+
+JMeter测试http请求的并发效果，吞吐量等等，可以在控制台的network上看请求的大小和时间、使用Performance API，我们可以设置埋点，在页面 onload 以后利用 performance.getEntriesByType('resource') 获取所有资源加载时间，还可以用performance的mark()和measure()方法来计算时间差。
 
 performance有一些属性可以用于数据采集，例如，performance.memory获取内存使用情况；在页面unload的时候通过浏览器navigator对象的beacon API发送给服务器。
 
-最后的优化效果是白屏时间很短，页面的load时间也变短了，这两个时间我们都可以通过在页面上设置埋点收集数据，结合performance的API去计算。我可以在head标签里面添加一个script脚本，脚本中手动去设置一个时间埋点，然后我们需要页面导航开始的时间，这个值通过performance的api去取，performance.timing.navigationStart属性，用我们在页面开始时设置的那个时间埋点这个减去这个navigationstart的时间，大致就是页面白屏的时间。
+最后的优化效果是白屏时间很短，页面的load时间也变短了，这两个时间我们都可以通过在页面上设置埋点收集数据，结合performance的API去计算。我可以在head标签里面添加一个script脚本，脚本中手动去设置一个时间埋点，然后我们需要页面导航开始的时间，这个值通过performance的api去取，performance.timing.navigationStart属性，用这个navigationstart的时间减去我们在页面开始时设置的那个时间埋点，这个时间差大致就是页面白屏的时间。
 
 也可以设置埋点，比如在DOM解析完成的DOMContentLoaded事件，或者页面解析完成的onload事件触发时，发送数据
 
 ```js
+// 获取img资源的加载时长
 performance.getEntriesByType('resource').filter(resource=> resource.initiatorType == 'img')
 ```
 
