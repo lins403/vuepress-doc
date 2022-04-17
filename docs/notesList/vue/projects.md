@@ -38,9 +38,9 @@ Vue3的响应式系统和渲染系统解耦的比较好
 
 ## Vite
 
-跟Vue没有强绑定，跨框架的工具。vite使用rollup来实现生产环境的打包，主要优势在开发阶段。
+跟Vue没有强绑定，跨框架的工具。vite使用<u>rollup</u>来实现生产环境的打包，主要优势在开发阶段。
 
-Vite 轻量，按需动态编译，HMR (热渲染依赖）
+Vite 轻量，<u>按需</u>动态编译，HMR (热渲染依赖）
 
 - 由于现代浏览器本身就支持ES Module，会自动向依赖的Module发出请求。vite充分利用这一点，将开发环境下的模块文件，就作为浏览器要执行的文件，而不是像webpack那样进行打包合并。
 - 利用的是ES Module，基于es新特性 Dynamic imports 实现的
@@ -51,6 +51,7 @@ Vite 轻量，按需动态编译，HMR (热渲染依赖）
 
 - Webpack Dev Server  在启动时需要先build一遍，编译所有代码文件，打包成bundle后再给dev server，所以冷启动时间会比较长
 - vite在启动的时候不需要打包，也就意味着不需要分析模块的依赖、不需要编译。而是直接启动dev server，当浏览器请求某个模块时，再对这个模块的内容进行实时编译，因此启动速度非常快。
+- express框架的dev server
 
 热更新
 

@@ -4,7 +4,7 @@
 
 <u>浏览器进程</u>。主要负责界面显示、用户交互、子进程管理，同时提供存储等功能。
 
-<u>渲染进程</u>。核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页，<u>排版引擎 Blink 和 JavaScript 引擎 V8</u> 都是运行在该进程中，默认情况下，Chrome 会为每个 Tab 标签创建一个渲染进程。出于安全考虑，渲染进程都是运行在<u>沙箱模式</u>下。
+<u>渲染进程</u>。核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页，<u>排版引擎 Blink 和 JavaScript 引擎 V8</u> 都是运行在该进程中，默认情况下，Chrome 会为每个 Tab 标签创建一个渲染进程。出于安全考虑，渲染进程都是运行在<u>沙箱模式</u>下。（如果一个页面的 iframe 里包含死循环，则整个标签都会卡死掉）
 
 <u>GPU 进程</u>。Chrome 刚开始发布的时候是没有 GPU 进程的。而 GPU 的使用初衷是为了实现 3D CSS 的效果，只是随后网页、Chrome 的 UI 界面都选择采用 GPU 来绘制，这使得 GPU 成为浏览器普遍的需求。最后，Chrome 在其多进程架构上也引入了 GPU 进程。
 
@@ -162,8 +162,6 @@ paint阶段就是将Layout tree上的每个box转换成页面上的实际像素�
 `<canvas>` 和 `<video>`，以及使用 `opacity` 和 `transform` 这些css属性的元素，可以实例化一个图层（instantiate a layer），这些元素和它们的后代节点，都会在这个图层上独立进行绘制，从而避开了主线程中的layout与paint环节。
 
 [Populating the page: how browsers work](https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work)
-
-requestAnimationFrame我看到别的博客提到节流效果，用节流解释太妙了。
 
 
 
