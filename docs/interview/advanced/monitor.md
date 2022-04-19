@@ -13,7 +13,7 @@ JMeter测试http请求的并发效果，吞吐量等等，可以在控制台的n
 
 performance有一些属性可以用于数据采集，例如，performance.memory获取内存使用情况；在页面unload的时候通过浏览器navigator对象的beacon API发送给服务器。
 
-最后的优化效果是白屏时间很短，页面的load时间也变短了，这两个时间我们都可以通过在页面上设置埋点收集数据，结合performance的API去计算。我可以在head标签里面添加一个script脚本，脚本中手动去设置一个时间埋点，然后我们需要页面导航开始的时间，这个值通过performance的api去取，performance.timing.navigationStart属性，用这个navigationstart的时间减去我们在页面开始时设置的那个时间埋点，这个时间差大致就是页面白屏的时间。
+~~最后的优化效果是白屏时间很短，页面的load时间也变短了，这两个时间我们都可以通过在页面上设置埋点收集数据，结合performance的API去计算。我可以在head标签里面添加一个script脚本，脚本中手动去设置一个时间埋点，然后我们需要页面导航开始的时间，这个值通过performance的api去取，performance.timing.navigationStart属性，用这个navigationstart的时间减去我们在页面开始时设置的那个时间埋点，这个时间差大致就是页面白屏的时间。~~
 
 也可以设置埋点，比如在DOM解析完成的DOMContentLoaded事件，或者页面解析完成的onload事件触发时，发送数据
 
@@ -22,7 +22,47 @@ performance有一些属性可以用于数据采集，例如，performance.memory
 performance.getEntriesByType('resource').filter(resource=> resource.initiatorType == 'img')
 ```
 
+### 白屏时间(FP)
+
+白屏时间(First Paint)：是指浏览器从响应用户输入网址地址，到浏览器开始显示内容的时间。
+
+- 白屏时间 = 页面开始展示的时间点 - 开始请求的时间点
+  - responseStart - navigationStart
+
+### 首屏时间(FCP)
+
+首屏时间(First Contentful Paint)：是指浏览器从响应用户输入网络地址，到首屏内容渲染完成的时间。
+
+- 首屏时间 = 首屏内容渲染结束时间点 - 开始请求的时间点
+  - loadEventEnd - navigationStart
+
+### 耗时统计
+
 > 通过这些优化，取得比较明显的提升效果，页面的加载效果也好了很多，我们通过埋点计算出来的，首页的白屏时间和页面加载时间都比较合理。通过这次实践，也是去完整的学习了nginx和webpack的构建和配置，加深了对语言和框架、http、以及浏览器的理解和应用
+
+```js
+重定向耗时：redirectEnd - redirectStart
+DNS查询耗时：domainLookupEnd - domainLookupStart
+TCP链接耗时：connectEnd - connectStart
+HTTP请求耗时：responseEnd - responseStart
+解析dom树耗时：domComplete - domInteractive
+白屏时间：responseStart - navigationStart
+DOM ready时间：domContentLoadedEventEnd - navigationStart
+onload时间：loadEventEnd - navigationStart
+```
+
+[前端性能指标：白屏和首屏时间的计算](https://zhuanlan.zhihu.com/p/344120636)
+
+### 计时工具
+
+1. Date.now
+   - 系统时间，有误差
+2. performance.now
+   - 更精确
+3. performance.mark 和 performance.measure
+   - 设置打点，计算埋点之间的时间差
+4. console.time 和 console.timeEnd
+   - 在控制台中输出，优点是易于使用
 
 
 
@@ -74,3 +114,8 @@ Vue.config.errorHandler = function (err, vm, info) {
 ```
 
 全局捕获错误，存储到vuex的store中，然后设计一个组件来展示，开发者可以选择清除日志，或者上传日志至服务器。
+
+
+
+## Performance
+

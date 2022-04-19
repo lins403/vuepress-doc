@@ -24,7 +24,7 @@ DNS，*Domain Name System*，基于 UDP 协议
 
 cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止跨域可以保证cookie与用户信息的相对安全性
 
-### JSONP
+### 1）JSONP
 
 - JSON with Padding
 
@@ -32,11 +32,11 @@ cookie只允许同源，浏览器会在http请求中带上cookie，所以禁止�
 
 - 只能是get请求
 
-### iframe
+### 2）iframe
 
 使用 <u>空的 iframe + form 表单</u> 实现 POST 请求
 
-### CORS
+### 3）CORS
 
 CORS，Cross-Origin Resource Sharing，<u>跨域资源共享</u>，定义了浏览器与服务器如何实现跨源通信。 
 
@@ -76,7 +76,7 @@ CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和
 - 返回状态码204，通过预检请求后就像简单请求一样正常访问。
 - 预检请求返回后，结果会按响应指定的时间缓存一段时间。换句话说，只有第一次发送这种类型的 请求时才会多发送一次额外的 HTTP 请求。
 
-### `crossorigin`
+#### `crossorigins`属性
 
 在 HTML5 中，一些 HTML 元素提供了对 CORS 的支持， 例如 `<audio>`、 `<img>`、 `<link>`、 `<script>`和 `<video>` 均有一个跨域属性 (`crossOrigin` property)，它允许你配置元素获取数据的 CORS 请求。 
 
@@ -89,7 +89,7 @@ script标签的src本就支持跨域，但设置 `crossorigin`属性后相当于
 
 设置了crossorigin以后，跨域脚本就允许被我们访问，当我们引用的资源在报错的时候，onerror事件就能得到完整的错误信息，而不只是一个script error。
 
-### 代理
+### 4）代理
 
 - nginx
 - webpack devserver 使用的nodejs中间件代理 http-proxy-middleware
@@ -101,7 +101,7 @@ script标签的src本就支持跨域，但设置 `crossorigin`属性后相当于
 - 反向代理：服务端的代理，隐藏服务器
   - 保证内网的安全（如果服务器部署在内网，则可以反向代理作为公网访问地址）、负载均衡
 
-### 其它
+### 5）其它
 
 - postMessage 跨域
 - WebSocket 协议跨域
@@ -116,7 +116,7 @@ script标签的src本就支持跨域，但设置 `crossorigin`属性后相当于
 
 - Asynchronous JavaScript And XML
   - 指的是通过javascript的异步通信，从服务器获取XML文档，并从中提取数据，通过DOM动态更新到当前网页上，只需要局部刷新而不用刷新整个页面
-- 基于XHR的技术实践
+- 基于 XHR 的技术实践
 
 ### jQuery ajax
 
@@ -183,9 +183,9 @@ fetch('/send-me-json', {
 
 1. 病毒
 2. 钓鱼
-3. DDOS（distributed denial-of-service attack），攻击目标网站至瘫痪、资源耗尽
+3. DDOS
 
-### XSS
+### 1. XSS
 
 xss（Cross-site scripting，跨站脚本攻击），是一种代码注入攻击。
 
@@ -230,7 +230,7 @@ xss（Cross-site scripting，跨站脚本攻击），是一种代码注入攻击
 
   
 
-### CSRF
+### 2. CSRF
 
 CSRF（Cross-site request forgery, 跨站点请求伪造），黑客可以设法伪造带有正确 Cookie 的 HTTP 请求，就是利用用户的cookie骗过目标网站，让网站以为是用户自己的操作。
 
@@ -248,11 +248,23 @@ cookie本身不能跨域，但是请求可能是CORS请求（Access-Control-Allo
 
 - 添加校验token
 
-### 点击劫持
+
+
+### 3. 点击劫持
 
 click Jacking，通常是用iframe或图片覆盖，伪造骗取用户点击
 
 防御：限制 iframe 的跨域；设置 cookie 的 samesite 属性
+
+
+
+### 4. DDOS
+
+distributed denial-of-service attack，攻击目标网站至瘫痪、资源耗尽
+
+防御：流量监测、封掉疯狂访问的IP；带宽扩容、部署CDN
+
+
 
 # 参考
 

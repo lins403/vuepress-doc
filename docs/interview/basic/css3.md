@@ -45,7 +45,7 @@ clamp(MIN, VAL, MAX) // 其实就是表示 max(MIN, min(VAL, MAX))
 
 ## 性能优化
 
-不建议用@import导入css，因为会增加http请求，但预处理器中使用会被先编译，所以使用@import没有副作用
+- 不建议用@import导入css
 
 ## 构建打包
 
@@ -59,7 +59,12 @@ Vendor prefixes
 - style-loader
   - dynamically inject CSS into the document as style tags. (in header tags)
   - 使用多个`<style>`将 CSS 插入到 DOM 中，反应会更快，适用于 `development` 模式。
-- vue-style-loader支持SSR，与style-loader功能一致
+- vue-style-loader支持SSR，与style-loader功能一致，但style-loader 支持的功能还是丰富些
+
+> 1. `vue-loader`解析.vue文件的style标签
+>
+> 2. `css-loader`会加载样式，处理过后会把样式都变成 module 的形式，然后直接导出这个模块，模块中包含了 css 的源码跟模块的 id（如果添加了scoped）。
+> 3. 处理过后会被 `vue-style-loader` 引用，与style-loader类似，主要是往DOM中插入一个 style 标签让样式生效。
 
 ### plugins
 

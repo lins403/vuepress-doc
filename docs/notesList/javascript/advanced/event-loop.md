@@ -154,7 +154,7 @@ Promise.resolve().then(function () {
 // timer1 timer2 promise1 promise2
 ```
 
-
+异步代码的执行间隔，最短也是两个事件循环之间的间隔。在浏览器中，两个事件循环之间的间隔一般来说是 4ms，换算成频率就是 250Hz。在 Node 中，两次事件循环的间隔是 1ms，也就是 1000Hz。
 
 # 参考
 

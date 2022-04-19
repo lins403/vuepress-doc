@@ -83,7 +83,7 @@
 
 ## More
 
-【window.performance】
+【window.performance】memory、navigation、timing、timeOrigin
 
 【RequestAnimationFrame】
 

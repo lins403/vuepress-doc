@@ -19,13 +19,34 @@
 
 
 
-### 2）Performance
+## 2）Performance
+
+```js
+console.log(window.performance)
+```
+
+### now
+
+`performance.now()`方法返回一个精确到毫秒的 DOMHighResTimeStamp 。
 
 High Resolution Time，高时间采样率，其精确度可达千分之一毫秒（受硬件或软件限制）
 
+这个时间戳实际上并不是高精度的。为了降低像Spectre这样的安全威胁，各类浏览器对该类型的值做了不同程度上的四舍五入处理。这是由于浏览器试图保护用户免受**时序攻击(timing attack)**和**指纹采集(Fingerprinting )**，如果时间戳过于准确，黑客可以使用它们来识别用户。例如，Firefox等浏览器试图通过将精度降低到2ms(版本60)来防止这种情况发生。
+
+```js
+const t0 = performance.now();
+for (let i = 0; i < array.length; i++) {
+  // some code
+}
+const t1 = performance.now();
+console.log(t1 - t0, 'milliseconds');
 ```
-console.log(window.performance)
-```
+
+#### 与Date.now的差异
+
+`Date.now`返回自Unix纪元（1970-01-01T 00:00:00Z）以来经过的时间（以毫秒为单位），并取决于系统时钟。 这不仅意味着它不够精确，而且还不总是递增。 WebKit工程师（Tony Gentilcore）的解释如下：
+
+> 基于系统时间的日期可能不太会被采用，对于实际的用户监视也不是理想的选择。 大多数系统运行一个守护程序，该守护程序定期同步时间。 通常每15至20分钟将时钟调整几毫秒。 以该速率，大约10秒间隔的1％将是不准确的。
 
 ```js
 // 只适用于日期时间相关操作，而且是不要求计时精度的操作
@@ -38,7 +59,7 @@ performance.now()
 performance.timeOrigin
 ```
 
-#### 使用mark()和measure()测量
+### 使用mark()和measure()测量
 
 - 度量数据进出的浏览器时间差（执行上下文）
 
@@ -68,6 +89,14 @@ setTimeout(function() {
 ```
 
 《高程4》20.10 计时API
+
+### 资源性能数据
+
+从 performance entry buffer 获取数据：
+
+1. performance.getEntries()
+2. performance.getEntriesByName()
+3. performance.getEntriesByType()
 
 
 
