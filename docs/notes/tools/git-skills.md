@@ -2,7 +2,7 @@
 
 🖖📔：[阮一峰 Git 教程](https://www.bookstack.cn/books/git-tutorial)
 
-## 一、Black-tech
+## 一、命令
 
 ### git log
 
@@ -201,7 +201,9 @@ git push --follow-tags		# 使得 commit 以及与之相关的 tag 一起推送
 
 ## 二、工具
 
-[commitlint、conventional-changelog](./git-application.md)
+- [commitlint、conventional-changelog](./git-application.md)
+- gitkeep
+  - 当需要 git 追踪(track)一个空的文件夹的时候，把一个称为`.gitkeep`的文件放在这些文件夹里
 
 ## 三、心得
 

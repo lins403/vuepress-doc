@@ -16,6 +16,7 @@
 6. **Husky**: Use git hooks easily
 7. **lint-staged**: Run linters on git staged files.
 8. **commitlint**: Lint commit messages.
+8. **jscpd**: Find duplicated blocks
 
 ## eslint & prettier
 
@@ -164,6 +165,39 @@ npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
 关于 changelog 与 release：[Git 应用 > conventional-changelog | 小眯嘻的文档博客](https://lins403.github.io/vuepress-doc/notes/tools/git-application.html#五、conventional-changelog)
+
+## jscpd
+
+[文档](https://github.com/kucherenko/jscpd/tree/master/packages/jscpd)
+
+```shell
+npm install -D jscpd
+```
+
+```shell
+npx jscpd src/utils
+
+npx jscpd -p "src/**/*.js"
+npx jscpd src/ -f 'javascript,scss'
+npx jscpd src/ --ignore-pattern "import.*from\s*'.*'"
+```
+
+```json
+// .jscpd.json
+{
+  // The threshold for duplication level
+  "threshold": 0.1,
+  "minLines": 5,
+  "minTokens": 25,
+  "format": "javascript,scss",
+  "reporters": ["html", "console"],
+  "ignore": ["**/__snapshots__/**", "**/*.min.js", "**/*.map"],
+  "absolute": true,
+  "gitignore": true
+}
+```
+
+
 
 ## VSCode
 

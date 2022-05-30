@@ -122,6 +122,47 @@ node -v        # v14.16.1
 npm -v        # 6.14.12
 ```
 
+### nvm
+
+```shell
+# 如果出现：Failed to connect to raw.githubusercontent.com:443
+# 就将DNS修改为8.8.8.8
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+```shell
+# 添加环境变量
+vim ~/.bashrc
+```
+
+```
+export NVM_DIR=~/.nvm
+source ~/.nvm/nvm.sh
+```
+
+```
+source ~/.bashrc
+nvm -v
+nvm ls
+nvm ls-remote
+nvm ls-remote --lts
+```
+
+#### 安装管理node
+
+```shell
+nvm install 14.17.6
+nvm install 16.15.0
+node -v
+which node
+nvm which 14.17.6
+nvm alias node@16 16.15.0
+nvm use node@16
+nvm use 14.17.6
+```
+
+
+
 ## 学习核心
 
 ### 异步流程控制

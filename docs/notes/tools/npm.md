@@ -2,6 +2,11 @@
 
 ## 命令
 
+```shell
+# 查看全局安装的包
+npm list -g --depth 0
+```
+
 ```bash
 # 列出所以可以更新的package
 npm outdated

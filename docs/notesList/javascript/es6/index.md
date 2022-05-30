@@ -12,7 +12,7 @@ ES6的更新主要是体现在以下方面：
 - 语句与运算：Class、Module、Iterator
 - 异步编程：Promise、Generator、Async。
 
-
+IE11市占率约12%但不支持ES6
 
 
 ## 箭头函数

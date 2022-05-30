@@ -139,7 +139,7 @@ function sort(item: string|Array<any>|plainObj): any{
     }else if(type==='Array'){
         return Array.prototype.sort.call(item)
     }else if(type==='Object'){
-        return (<any>Object).fromEntries(Object.entries(item).sort())
+        return (Object as any).fromEntries(Object.entries(item).sort())
     }
 }
 console.log(sort('typescript'))

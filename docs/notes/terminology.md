@@ -7,8 +7,6 @@
 - QA: Quality Assurance，品质保证
 - WLB: Work and Life Balance
 
-
-
 ### 幂等性
 
 表示执行相同的操作，结果也是相同的。例如 HTTP 中 GET 请求是幂等的，而 POST 请求不是
@@ -45,6 +43,10 @@
 - 低代码，是一种可以让开发者依托平台快速搭建企业信息化的系统，在这过程中，使用者只需要少量的代码编写，其他的大部分工作都是通过可视化的拖拽、点选完成。
 
 - 无代码，或称零代码，是一种完全不需要任何代码编程的开发方式，它主要是围绕企业数据和业务管理需求，通过可视化方式设计数据结构，用户交互形式、设置访问权限和定义工作流程的平台。
+
+### 技术负债
+
+Technical debt (also known as tech debt or code debt) describes what results when development teams take actions to expedite the delivery of a piece of functionality or a project which later needs to be refactored. In other words, it’s the result of prioritizing speedy delivery over perfect code.
 
 ### 基准测试
 

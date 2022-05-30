@@ -51,6 +51,13 @@ new Date(2021, 11, 1).toLocaleString()	// '2021/12/1 上午12:00:00'
 new Date(2021, 11, 1).toString()	// 'Wed Dec 01 2021 00:00:00 GMT+0800 (中国标准时间)'
 ```
 
+```js
+// 1 => 01
+("00" + minutes).slice(-2)
+```
+
+
+
 #### utility libraries
 
 [date-fns vs dayjs vs moment | npm trends](https://www.npmtrends.com/date-fns-vs-dayjs-vs-moment)

@@ -107,6 +107,7 @@ Code > 首选项 > 用户片段
 - Path Intellisense
 - **open in browser**
 - **Debugger for Chrome**
+- Codiga Code Snippets
 
 ### 代码规范工具
 

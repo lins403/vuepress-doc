@@ -92,7 +92,7 @@ dispatch和commit方法都是封装过的，被注入过store，所以可以使�
 
 【VNode】执行render function，调用createElement方法创建vnode。VNode是一个JavaScript对象，可以由一个普通DOM元素节点或者一个组件节点生成，整个页面的组件树就变成由一个个vnode组成的vnode树，把它称作虚拟DOM。vnode包含了创建DOM所需要的信息，vdom也是一个JavaScript对象，是对真实DOM的映射。
 
-【虚拟DOM】VirtualDOM是Vue2才被引进的，主要是两个用处，跨平台以及更好的更新性能。真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 也会造成很大的性能消耗。利用虚拟DOM的技术，大大提高了更新DOM时的性能。因为Virtual DOM只是一个JavaScript对象，创建它的资源消耗要比创建DOM低很多。而且页面需要更新并重新渲染的时候，会先<u>经过vnode的diff算法，尽量去复用旧的节点，找出变化的节点然后更新，从而减少操作DOM的次数</u>，所以执行效率更高。最后，vue内部的patch方法用于将虚拟DOM映射到真实DOM，针对不同平台实现不同的patch方法，从而可以实现服务端渲染，以及vue应用的跨平台。
+【虚拟DOM】VirtualDOM是Vue2才被引进的，主要是两个用处，跨平台以及更好的更新性能。真正的 DOM 节点非常庞大和复杂，频繁的更新 DOM 也会造成很大的性能消耗。利用虚拟DOM的技术，大大提高了更新DOM时的性能。因为Virtual DOM只是一个JavaScript对象，创建它的资源消耗要比创建DOM低很多。而且页面需要更新并重新渲染的时候，会先<u>经过vnode的diff算法，尽量去复用旧的节点，找出变化的节点然后更新，从而减少操作DOM的次数</u>，所以执行效率更高。最后，vue内部的patch方法用于将虚拟DOM映射到真实DOM，针对不同平台实现不同的patch方法，从而可以实现服务端渲染，以及vue应用的跨平台。虚拟DOM的缺陷是只能保证性能下限，而无法像操作真实DOM那样可以被针对性的极致优化。
 
 【实例挂载】挂载的目的就是<u>把模板渲染成最终的真实DOM</u>，发生在实例的初始化状态以后。判断如果实例的option中有`el`节点属性，就会将实例去挂载到这个DOM节点上，子组件的el属性就是根组件节点。如果没有el属性的话，可以在实例化以后去手动挂载。挂载入口是从`$mount`方法开始，它有两个版本，一个是带有编译的compiler版本，另一个则是没有编译的runtime版本。前者会现将模板编译成render function，再交由后者处理，触发生命周期的beforeMount钩子后，创建render watcher，并执行render函数创建VNode，最终patch方法中根据vnode的信息来创建和更新真实DOM。
 
