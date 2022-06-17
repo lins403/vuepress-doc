@@ -74,6 +74,7 @@ Code > 首选项 > 用户片段
 - **Material Icon Theme**
 - Indent Rainbow
 - IntelliJ IDEA Keybindings
+- GitHub Theme
 
 ### 语言
 
@@ -95,6 +96,8 @@ Code > 首选项 > 用户片段
 - Git History
 - **GitLens — Git supercharged**
 - Annotator
+- **Git Blame**
+- Git File History
 
 ### 代码辅助工具
 

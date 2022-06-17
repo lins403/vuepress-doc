@@ -186,6 +186,10 @@ https://img.shields.io/npm/v/vue/next
 
 ## 九、其它
 
+### submodule
+
+git submodule
+
 ### webhooks
 
 通过定制 Webhooks 来监测你在 Github.com 上的各种事件；

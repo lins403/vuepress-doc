@@ -2,14 +2,15 @@
 
 ## 常规快捷键
 
-| 操作        | 快捷键                |
-| --------- | ------------------ |
+| 操作               | 快捷键               |
+| ------------------ | -------------------- |
 | 打开应用的偏好设置 | Command-逗号 (,)     |
-| emoji     | Control-Command-空格 |
-| finder    | Option-Command-空格  |
-| 全屏        | Control-Command-F  |
-| 锁定屏幕🖥    | Control-Command-Q  |
-|           | Control–电源按钮       |
+| emoji              | Control-Command-空格 |
+| finder             | Option-Command-空格  |
+| 全屏               | Control-Command-F    |
+| 锁定屏幕🖥          | Control-Command-Q    |
+|                    | Control–电源按钮     |
+| 删除后面的字符     | fn-del               |
 
 ## 终端命令行
 

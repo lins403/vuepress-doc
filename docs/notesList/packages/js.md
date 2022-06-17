@@ -8,6 +8,14 @@
 
 [lodash vs ramda vs rxjs vs underscore | npm trends](https://www.npmtrends.com/lodash-vs-ramda-vs-underscore-vs-rxjs)
 
+### rxjs
+
+以流的形式进行控制，发布订阅的方式
+
+[RxJS：给你如丝一般顺滑的编程体验（建议收藏）](https://cloud.tencent.com/developer/article/1780453)
+
+# RxJS：给你如丝一般顺滑的编程体验
+
 ## Data
 
 deep equality check: [GitHub - epoberezkin/fast-deep-equal: The fastest deep equality check with Date, RegExp and ES6 Map, Set and typed arrays support](https://github.com/epoberezkin/fast-deep-equal)

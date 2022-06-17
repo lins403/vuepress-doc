@@ -4,14 +4,17 @@
 
 - PM: Product Manager，产品经理
 - RD: Research and Development engineer，研发工程师
-- QA: Quality Assurance，品质保证
-- WLB: Work and Life Balance
+- QA: Quality Assurance，品质保证，测试
 
 ### 幂等性
 
 表示执行相同的操作，结果也是相同的。例如 HTTP 中 GET 请求是幂等的，而 POST 请求不是
 
 ## 一、工程化
+
+### 物料
+
+基础组件--业务组件--区块--页面模板
 
 ### 前端工作流
 

@@ -61,11 +61,8 @@ console.log(memoFunc(5))
 
 function memoFunc(memo, formula){
   const recur = function(n){
-    if(memo[n]) return memo[n]
-    let res
-    res = formula(recur, n)
-    memo[n] = res
-    return res
+    if(!memo[n]) memo[n] = formula(recur, n)
+    return memo[n]
   }
   return recur
 }
@@ -132,4 +129,6 @@ const arr2tree = arr => {
 }
 console.log(arr2tree(arr))
 ```
+
+
 
