@@ -69,12 +69,17 @@ Code > 首选项 > 用户片段
 
 ## 插件库
 
+@popular
+
 ### 主题
 
 - **Material Icon Theme**
-- Indent Rainbow
+- **Peacock**
+- Indent-rainbow
+- **Indenticator**
 - IntelliJ IDEA Keybindings
 - GitHub Theme
+- **IKKI VSCode Light Theme**
 
 ### 语言
 
@@ -89,6 +94,8 @@ Code > 首选项 > 用户片段
 - Markdown Preview Enhanced
 - CSS Modules
 - **Jest Snippets**
+- Rainbow CSV
+- Edit csv
 
 ### Git
 
@@ -101,16 +108,27 @@ Code > 首选项 > 用户片段
 
 ### 代码辅助工具
 
+- Tabnine AI Autocomplete for Javascript, Python, Typescript, PHP, Go, Java, Ruby & more
+- GitHub Copilot
+
 - **npm Dependency Links**
 - npm Intellisense
 - Auto Rename Tag
+- Color Manager
 - **Color Highlight**
-- Sort lines
 - Turbo Console Log
 - Path Intellisense
 - **open in browser**
-- **Debugger for Chrome**
+- ~~**Debugger for Chrome**~~
 - Codiga Code Snippets
+- **Live Server**
+- Code Runner
+- Quokka.js
+- Rest Client
+- quotify
+- vscode-faker
+- Indent one space
+- Emoji
 
 ### 代码规范工具
 
@@ -119,16 +137,18 @@ Code > 首选项 > 用户片段
 - Version Lens
 - **ESLint**
 - **Prettier - Code formatter**
-- **TSLint**
+- ~~TSLint~~
 - **stylelint** (stylelint-plus supports auto fix on save)
-- **Complete JSDoc Tags**
+- Complete JSDoc Tags
 - **koroFileHeader**
+- Code Spell Checker
 
 ### 扩展
 
+- CodeSnap
 - Better Comments
-- **Window Colors**
 - Todo Tree
 - Dash
 - Sort lines
 - **WakaTime**
+- go-home

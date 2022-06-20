@@ -120,6 +120,81 @@ acronym：首字母缩略词
 | vulnerable                      | 脆弱的，易受攻击的 | visual clutter              | 视觉混乱             |
 | workaround                      | 应变方法，变通方法 |                             |                      |
 | workout                         | 制定，解决         | unidirectional              | 单向的               |
+|                        |                    |                             |                      |
+| ---------------------- | ------------------ | --------------------------- | -------------------- |
+| accountability         | 责任               | a brand new project         | 全新项目             |
+|                        |                    | a common convention         | 惯例                 |
+| adorable               | 可爱的，漂亮的     | a directory hierarchy       | 目录层次结构         |
+| alternate              | 另类的，备用的     | assembly language           | 汇编语言             |
+| arduous                | 艰难的             | a short-hand syntax         | 简写的语法           |
+| assorted               | 各种各样的         | available values            | 可选值               |
+| bespoke                | 定制的             | a hundred thousand          | 十万                 |
+|                        |                    | an abstract construct       | 抽象构造             |
+| braceless              | 没有括号的         | be tidied up                | 整理好               |
+| buzzword               | 时髦词语           | coined a new buzzword       | 创造一个流行词       |
+| a C-descended language | 类C语言            |                             |                      |
+| cascade                | 级联               |                             |                      |
+| circumvent             | 规避，绕开         | be geared towards           | 针对…                |
+| connoisseur            | 内行               |                             |                      |
+| contradictory          | 对立的             | decouple these processes    | 拆分这些流程         |
+| daunting               | 令人气馁的         | error-prone                 | 易于出错的           |
+| dogmatic               | 教条式的           |                             |                      |
+| efficacy               | 功效               | error resistance            | 容错性               |
+| elapse                 | （时间）流逝       |                             |                      |
+| emulated               | 模仿的             | firebase                    | 防火墙               |
+| encapsulation          | 封装               | fully-fledged               | 完善的               |
+| escaping               | 转义               | be part of a boot-camp      | 新兵训练营的一员     |
+| estimate               | 估算、约等         | free coupons                | 免费优惠券           |
+| expedite               | 加快               |                             |                      |
+| factorial              | 阶乘               | graceful degradation        | 功能退化             |
+| fancier                | 更高级的           | grunt work                  | 枯燥乏味的工作       |
+| fervor                 | 热情               |                             |                      |
+| flaky                  | 不可靠的           | enroll for                  | 参加，注册           |
+| foster                 | 促进               | Fully-Fledged Solutions     | 成熟的解决方案       |
+| gurus                  | 领袖，专家         |                             |                      |
+| gratis                 | 免费地，无偿地     |                             |                      |
+| hassle                 | 麻烦               |                             |                      |
+| inadvertent            | 无意的，粗心的     |                             |                      |
+| invocation             | 调用               |                             |                      |
+| instill                | 灌输               |                             |                      |
+| intrigued              | 好奇的             |                             |                      |
+| intrude                | 侵入               |                             |                      |
+| Kanji                  | 日本汉字           |                             |                      |
+| latency                | 延迟               |                             |                      |
+| laggy                  | 懒惰的、卡顿的     |                             |                      |
+| mandatory              | 强制的             | malicious scripts           | 恶意脚本             |
+| metaphor               | 隐喻，象征         |                             |                      |
+| minimalistic           | 极简的             | minor tweaks                | 小调整               |
+| minutiae               | 细节，细枝末节     |                             |                      |
+| mojibake               | 乱码               | non-optimal                 | 不理想               |
+| mnemonics              | 助记符             | pertinent factors           | 相关因素             |
+| momentum               | 动力               |                             |                      |
+| monolithic             | 巨大的             |                             |                      |
+| newcomers              | 新来的人，新手     |                             |                      |
+| opaque                 | 不透明的           | pays off                    | 得到回报             |
+| performant             | 高效的             | performance hit             | 性能消耗             |
+| palette                | 调色板，一组颜色   | requisites                  | 必需品               |
+| primer                 | 入门书             |                             |                      |
+| prioritization         | 优先考虑           | prerequisites               | 先决条件             |
+| prudent                | 小心的，慎重的     | pirated courses             | 盗版课程             |
+| Quartile               | 四分位数           | takes precedence            | 优先                 |
+| rookie, newbie, noob   | 菜鸟，新手         | the aggregated results      | 聚合结果             |
+| serially               | 按顺序，连续地     | retrofit all executed files | 改造所有执行过的文件 |
+| Recap                  | 重述要点           | replacer-reviver            | 替代函数-还原函数    |
+| reckless               | 鲁莽的，粗心大意的 |                             |                      |
+| Synopsis               | 概要，大纲         | Troubleshooting             | 发现并处理故障       |
+| scenario               | 场景               | stop-gap measures           | 权宜之计             |
+| scoff                  | 嘲笑               | succinct configuration.     | 简洁的配置           |
+| simultaneously         | 同时               | The guts of                 | 内部结构             |
+|                        |                    | sound ludicrous             | 听起来荒唐可笑       |
+| tarball                | 压缩包             | sustainable development     | 可持续发展           |
+| teardown               | 拆除，拆解         | to jot here                 | 在这里记下           |
+| terminology            | 术语               |                             |                      |
+| threshold              | 临界点，阈值       |                             |                      |
+| truthiness             | 真实性             |                             |                      |
+| vulnerable             | 脆弱的，易受攻击的 | visual clutter              | 视觉混乱             |
+| workaround             | 应变方法，变通方法 |                             |                      |
+| workout                | 制定，解决         | unidirectional              | 单向的               |
 
 ## 短语
 
